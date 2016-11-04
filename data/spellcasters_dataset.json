@@ -3,268 +3,658 @@
     "a_lot" : {
       "word": "a lot",
       "prompt": "A__OT",
-      "hint": "When you have many of something"},
+      "hint": "When you have many of something, you have..."},
     "accommodate": {
-      "word": "accommodate"},
+      "word": "accommodate",
+      "prompt": "AC______ATE",
+      "hint": ""
+    },
     "accidentally": {
-      "word": "accidentally"},
+      "word": "accidentally",
+      "prompt": "AC________LY",
+      "hint": "When you didn't do it on purpose, you did it..."
+    },
     "achieve": {
-      "word": "achieve"},
+      "word": "achieve",
+      "prompt": "ACH__VE",
+      "hint": "When you do well enough to be rewarded, you..."
+    },
     "acquire": {
-      "word": "acquire"},
+      "word": "acquire",
+      "prompt": "AC___RE",
+      "hint": "A fancy way of saying \"to get\" is to..."
+    },
     "amateur": {
-      "word": "amateur"},
+      "word": "amateur",
+      "prompt": "AMA____",
+      "hint": "Someone who does a job just for fun is called an..."
+    },
     "algorithm": {
-      "word": "algorithm"},
+      "word": "algorithm",
+      "prompt": "ALGO_____",
+      "hint": "A mathematical way of solving a problem is an..."
+    },
     "argument": {
-      "word": "argument"},
+      "word": "argument",
+      "prompt": "ARGU____",
+      "hint": "When two people argue, they are in an..."
+    },
     "believe": {
-      "word": "believe"},
+      "word": "believe",
+      "prompt": "BEL__VE",
+      "hint": "When you know something to be true, you..."
+    },
     "broccoli": {
-      "word": "broccoli"},
+      "word": "broccoli",
+      "prompt": "BROC____",
+      "hint": "A vegetable that looks like a little tree is called..."
+    },
     "calendar": {
-      "word": "calendar"},
+      "word": "calendar",
+      "prompt": "CAL____R",
+      "hint": "Something that tells what month and day it is is called a..."
+    },
     "caribbean": {
-      "word": "Caribbean"},
+      "word": "Caribbean",
+      "prompt": "CAR_____N",
+      "hint": "An ocean near the Gulf of Mexico that has many islands is the..."
+    },
     "category": {
-      "word": "category"},
+      "word": "category",
+      "prompt": "CAT___RY",
+      "hint": "A way of grouping things that are similar is a..."
+    },
     "cemetery": {
-      "word": "cemetery"},
+      "word": "cemetery",
+      "prompt": "CEM___RY",
+      "hint": "Another word for a graveyard is a..."
+    },
     "collectible": {
-      "word": "collectible"},
+      "word": "collectible",
+      "prompt": "COLLEC_____",
+      "hint": "Something you can collect is called a..."
+    },
     "colonel": {
-      "word": "colonel"},
+      "word": "colonel",
+      "prompt": "C____EL",
+      "hint": "A high ranking army official who might also make fried chicken is called..."
+    },
     "conscience": {
-      "word": "conscience"},
+      "word": "conscience",
+      "prompt": "CONS______",
+      "hint": "Your inner sense of right and wrong is called your..."
+    },
     "conscious": {
-      "word": "conscious"},
+      "word": "conscious",
+      "prompt": "CON_____S",
+      "hint": "When you are awake and aware, you are..."
+    },
     "definitely": {
-      "word": "definitely"},
+      "word": "definitely",
+      "prompt": "DEFI____LY",
+      "hint": "When you're sure it's there, you can say it's there, ..."
+    },
     "descendant": {
-      "word": "descendant"},
+      "word": "descendant",
+      "prompt": "",
+      "hint": ""
+    },
     "desert": {
-      "word": "desert"},
+      "word": "desert",
+      "prompt": "",
+      "hint": ""
+    },
     "dessert": {
-      "word": "dessert"},
+      "word": "dessert",
+      "prompt": "",
+      "hint": ""
+    },
     "discipline": {
-      "word": "discipline"},
+      "word": "discipline",
+      "prompt": "",
+      "hint": ""
+    },
     "embarrassing": {
-      "word": "embarrassing"},
+      "word": "embarrassing",
+      "prompt": "",
+      "hint": ""
+    },
     "exceed": {
-      "word": "exceed"},
+      "word": "exceed",
+      "prompt": "",
+      "hint": ""
+    },
     "existence": {
-      "word": "existence"},
+      "word": "existence",
+      "prompt": "",
+      "hint": ""
+    },
     "experience": {
-      "word": "experience"},
+      "word": "experience",
+      "prompt": "",
+      "hint": ""
+    },
     "fiery": {
-      "word": "fiery"},
+      "word": "fiery",
+      "prompt": "",
+      "hint": ""
+    },
     "foreign": {
-      "word": "foreign"},
+      "word": "foreign",
+      "prompt": "",
+      "hint": ""
+    },
     "fulfill": {
-      "word": "fulfill"},
+      "word": "fulfill",
+      "prompt": "",
+      "hint": ""
+    },
     "gauge": {
-      "word": "gauge"},
+      "word": "gauge",
+      "prompt": "",
+      "hint": ""
+    },
     "guarantee": {
-      "word": "guarantee"},
+      "word": "guarantee",
+      "prompt": "",
+      "hint": ""
+    },
     "height": {
-      "word": "height"},
+      "word": "height",
+      "prompt": "",
+      "hint": ""
+    },
     "hierarchy": {
-      "word": "hierarchy"},
+      "word": "hierarchy",
+      "prompt": "",
+      "hint": ""
+    },
     "humorous": {
-      "word": "humorous"},
+      "word": "humorous",
+      "prompt": "",
+      "hint": ""
+    },
     "hypocrisy": {
-      "word": "hypocrisy"},
+      "word": "hypocrisy",
+      "prompt": "",
+      "hint": ""
+    },
     "ignorance": {
-      "word": "ignorance"},
+      "word": "ignorance",
+      "prompt": "",
+      "hint": ""
+    },
     "imitate": {
-      "word": "imitate"},
+      "word": "imitate",
+      "prompt": "",
+      "hint": ""
+    },
     "immediate": {
-      "word": "immediate"},
+      "word": "immediate",
+      "prompt": "",
+      "hint": ""
+    },
     "incredible": {
-      "word": "incredible"},
+      "word": "incredible",
+      "prompt": "",
+      "hint": ""
+    },
     "independent": {
-      "word": "independent"},
+      "word": "independent",
+      "prompt": "",
+      "hint": ""
+    },
     "indispensable": {
-      "word": "indispensable"},
+      "word": "indispensable",
+      "prompt": "",
+      "hint": ""
+    },
     "intelligence": {
-      "word": "intelligence"},
+      "word": "intelligence",
+      "prompt": "",
+      "hint": ""
+    },
     "jewelry": {
-      "word": "jewelry"},
+      "word": "jewelry",
+      "prompt": "",
+      "hint": ""
+    },
     "just_deserts": {
-      "word": "just deserts"},
+      "word": "just deserts",
+      "prompt": "",
+      "hint": ""
+    },
     "leisure": {
-      "word": "leisure"},
+      "word": "leisure",
+      "prompt": "",
+      "hint": ""
+    },
     "library": {
-      "word": "library"},
+      "word": "library",
+      "prompt": "",
+      "hint": ""
+    },
     "license": {
-      "word": "license"},
+      "word": "license",
+      "prompt": "",
+      "hint": ""
+    },
     "maintenance": {
-      "word": "maintenance"},
+      "word": "maintenance",
+      "prompt": "",
+      "hint": ""
+    },
     "maneuver": {
-      "word": "maneuver"},
+      "word": "maneuver",
+      "prompt": "",
+      "hint": ""
+    },
     "marshmallow": {
-      "word": "marshmallow"},
+      "word": "marshmallow",
+      "prompt": "",
+      "hint": ""
+    },
     "medieval": {
-      "word": "medieval"},
+      "word": "medieval",
+      "prompt": "",
+      "hint": ""
+    },
     "millennium": {
-      "word": "millennium"},
+      "word": "millennium",
+      "prompt": "",
+      "hint": ""
+    },
     "miniature": {
-      "word": "miniature"},
+      "word": "miniature",
+      "prompt": "",
+      "hint": ""
+    },
     "minuscule": {
-      "word": "minuscule"},
+      "word": "minuscule",
+      "prompt": "",
+      "hint": ""
+    },
     "mischievous": {
-      "word": "mischievous"},
+      "word": "mischievous",
+      "prompt": "",
+      "hint": ""
+    },
     "nauseous": {
-      "word": "nauseous"},
+      "word": "nauseous",
+      "prompt": "",
+      "hint": ""
+    },
     "neighbor": {
-      "word": "neighbor"},
+      "word": "neighbor",
+      "prompt": "",
+      "hint": ""
+    },
     "necessary": {
-      "word": "necessary"},
+      "word": "necessary",
+      "prompt": "",
+      "hint": ""
+    },
     "no_one": {
-      "word": "no one"},
+      "word": "no one",
+      "prompt": "",
+      "hint": ""
+    },
     "noticeable": {
-      "word": "noticeable"},
+      "word": "noticeable",
+      "prompt": "",
+      "hint": ""
+    },
     "occasionally": {
-      "word": "occasionally"},
+      "word": "occasionally",
+      "prompt": "",
+      "hint": ""
+    },
     "occurrence": {
-      "word": "occurrence"},
+      "word": "occurrence",
+      "prompt": "",
+      "hint": ""
+    },
     "perseverance": {
-      "word": "perseverance"},
+      "word": "perseverance",
+      "prompt": "",
+      "hint": ""
+    },
     "personal": {
-      "word": "personal"},
+      "word": "personal",
+      "prompt": "",
+      "hint": ""
+    },
     "personnel": {
-      "word": "personnel"},
+      "word": "personnel",
+      "prompt": "",
+      "hint": ""
+    },
     "pigeon": {
-      "word": "pigeon"},
+      "word": "pigeon",
+      "prompt": "",
+      "hint": ""
+    },
     "playwright": {
-      "word": "playwright"},
+      "word": "playwright",
+      "prompt": "",
+      "hint": ""
+    },
     "possession": {
-      "word": "possession"},
+      "word": "possession",
+      "prompt": "",
+      "hint": ""
+    },
     "precede": {
-      "word": "precede"},
+      "word": "precede",
+      "prompt": "",
+      "hint": ""
+    },
     "principal": {
-      "word": "principal"},
+      "word": "principal",
+      "prompt": "",
+      "hint": ""
+    },
     "principle": {
-      "word": "principle"},
+      "word": "principle",
+      "prompt": "",
+      "hint": ""
+    },
     "privilege": {
-      "word": "privilege"},
+      "word": "privilege",
+      "prompt": "",
+      "hint": ""
+    },
     "pronunciation": {
-      "word": "pronunciation"},
+      "word": "pronunciation",
+      "prompt": "",
+      "hint": ""
+    },
     "publicly": {
-      "word": "publicly"},
+      "word": "publicly",
+      "prompt": "",
+      "hint": ""
+    },
     "queue": {
-      "word": "queue"},
+      "word": "queue",
+      "prompt": "",
+      "hint": ""
+    },
     "questionnaire": {
-      "word": "questionnaire"},
+      "word": "questionnaire",
+      "prompt": "",
+      "hint": ""
+    },
     "raspberry": {
-      "word": "raspberry"},
+      "word": "raspberry",
+      "prompt": "",
+      "hint": ""
+    },
     "receive": {
-      "word": "receive"},
+      "word": "receive",
+      "prompt": "",
+      "hint": ""
+    },
     "recommend": {
-      "word": "recommend"},
+      "word": "recommend",
+      "prompt": "",
+      "hint": ""
+    },
     "referred": {
-      "word": "referred"},
+      "word": "referred",
+      "prompt": "",
+      "hint": ""
+    },
     "reference": {
-      "word": "reference"},
+      "word": "reference",
+      "prompt": "",
+      "hint": ""
+    },
     "relevant": {
-      "word": "relevant"},
+      "word": "relevant",
+      "prompt": "",
+      "hint": ""
+    },
     "restaurant": {
-      "word": "restaurant"},
+      "word": "restaurant",
+      "prompt": "",
+      "hint": ""
+    },
     "rhyme": {
-      "word": "rhyme"},
+      "word": "rhyme",
+      "prompt": "",
+      "hint": ""
+    },
     "rhythm": {
-      "word": "rhythm"},
+      "word": "rhythm",
+      "prompt": "",
+      "hint": ""
+    },
     "schedule": {
-      "word": "schedule"},
+      "word": "schedule",
+      "prompt": "",
+      "hint": ""
+    },
     "seize": {
-      "word": "seize"},
+      "word": "seize",
+      "prompt": "",
+      "hint": ""
+    },
     "separate": {
-      "word": "separate"},
+      "word": "separate",
+      "prompt": "",
+      "hint": ""
+    },
     "sergeant": {
-      "word": "sergeant"},
+      "word": "sergeant",
+      "prompt": "",
+      "hint": ""
+    },
     "their": {
-      "word": "their"},
+      "word": "their",
+      "prompt": "",
+      "hint": ""
+    },
     "there": {
-      "word": "there"},
+      "word": "there",
+      "prompt": "",
+      "hint": ""
+    },
     "they're": {
-      "word": "they're"},
+      "word": "they're",
+      "prompt": "",
+      "hint": ""
+    },
     "threshold": {
-      "word": "threshold"},
+      "word": "threshold",
+      "prompt": "",
+      "hint": ""
+    },
     "tomorrow": {
-      "word": "tomorrow"},
+      "word": "tomorrow",
+      "prompt": "",
+      "hint": ""
+    },
     "twelfth": {
-      "word": "twelfth"},
+      "word": "twelfth",
+      "prompt": "",
+      "hint": ""
+    },
     "tyranny": {
-      "word": "tyranny"},
+      "word": "tyranny",
+      "prompt": "",
+      "hint": ""
+    },
     "until": {
-      "word": "until"},
+      "word": "until",
+      "prompt": "",
+      "hint": ""
+    },
     "vacuum": {
-      "word": "vacuum"},
+      "word": "vacuum",
+      "prompt": "",
+      "hint": ""
+    },
     "weather": {
-      "word": "weather"},
+      "word": "weather",
+      "prompt": "",
+      "hint": ""
+    },
     "whether": {
-      "word": "whether"},
+      "word": "whether",
+      "prompt": "",
+      "hint": ""
+    },
     "weird": {
-      "word": "weird"}
+      "word": "weird",
+      "prompt": "",
+      "hint": ""
+    }
   },
   "sat_words": {
     "acumen": {
-      "word": "acumen"},
+      "word": "acumen",
+      "prompt": "",
+      "hint": ""
+    },
     "ambivalent": {
-      "word": "ambivalent"},
+      "word": "ambivalent",
+      "prompt": "",
+      "hint": ""
+    },
     "antithesis": {
-      "word": "antithesis"},
+      "word": "antithesis",
+      "prompt": "",
+      "hint": ""
+    },
     "archetype": {
-      "word": "archetype"},
+      "word": "archetype",
+      "prompt": "",
+      "hint": ""
+    },
     "atrophy": {
-      "word": "atrophy"},
+      "word": "atrophy",
+      "prompt": "",
+      "hint": ""
+    },
     "callous": {
-      "word": "callous"},
+      "word": "callous",
+      "prompt": "",
+      "hint": ""
+    },
     "camaraderie": {
-      "word": "camaraderie"},
+      "word": "camaraderie",
+      "prompt": "",
+      "hint": ""
+    },
     "capitulation": {
-      "word": "capitulation"},
+      "word": "capitulation",
+      "prompt": "",
+      "hint": ""
+    },
     "circumlocution": {
-      "word": "circumlocution"},
+      "word": "circumlocution",
+      "prompt": "",
+      "hint": ""
+    },
     "cognizant": {
-      "word": "cognizant"},
+      "word": "cognizant",
+      "prompt": "",
+      "hint": ""
+    },
     "conflagration": {
-      "word": "conflagration"},
+      "word": "conflagration",
+      "prompt": "",
+      "hint": ""
+    },
     "diaphanous": {
-      "word": "diaphanous"},
+      "word": "diaphanous",
+      "prompt": "",
+      "hint": ""
+    },
     "egregious": {
-      "word": "egregious"},
+      "word": "egregious",
+      "prompt": "",
+      "hint": ""
+    },
     "fallacious": {
-      "word": "fallacious"},
+      "word": "fallacious",
+      "prompt": "",
+      "hint": ""
+    },
     "grandiloquent": {
-      "word": "grandiloquent"},
+      "word": "grandiloquent",
+      "prompt": "",
+      "hint": ""
+    },
     "hegemony": {
-      "word": "hegemony"},
+      "word": "hegemony",
+      "prompt": "",
+      "hint": ""
+    },
     "idiosyncratic": {
-      "word": "idiosyncratic"},
+      "word": "idiosyncratic",
+      "prompt": "",
+      "hint": ""
+    },
     "incontrovertible": {
-      "word": "incontrovertible"},
+      "word": "incontrovertible",
+      "prompt": "",
+      "hint": ""
+    },
     "laconic": {
-      "word": "laconic"},
+      "word": "laconic",
+      "prompt": "",
+      "hint": ""
+    },
     "legerdemain": {
-      "word": "legerdemain"},
+      "word": "legerdemain",
+      "prompt": "",
+      "hint": ""
+    },
     "modicum": {
-      "word": "modicum"},
+      "word": "modicum",
+      "prompt": "",
+      "hint": ""
+    },
     "obfuscate": {
-      "word": "obfuscate"},
+      "word": "obfuscate",
+      "prompt": "",
+      "hint": ""
+    },
     "plenitude": {
-      "word": "plenitude"},
+      "word": "plenitude",
+      "prompt": "",
+      "hint": ""
+    },
     "predilection": {
-      "word": "predilection"},
+      "word": "predilection",
+      "prompt": "",
+      "hint": ""
+    },
     "recalcitrant": {
-      "word": "recalcitrant"},
+      "word": "recalcitrant",
+      "prompt": "",
+      "hint": ""
+    },
     "sanctimonious": {
-      "word": "sanctimonious"},
+      "word": "sanctimonious",
+      "prompt": "",
+      "hint": ""
+    },
     "subjugate": {
-      "word": "subjugate"},
+      "word": "subjugate",
+      "prompt": "",
+      "hint": ""
+    },
     "ubiquitous": {
-      "word": "ubiquitous"},
+      "word": "ubiquitous",
+      "prompt": "",
+      "hint": ""
+    },
     "vestige": {
-      "word": "vestige"}
+      "word": "vestige",
+      "prompt": "",
+      "hint": ""
+    }
   }
 }
