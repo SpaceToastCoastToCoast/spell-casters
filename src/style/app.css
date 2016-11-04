@@ -8,7 +8,6 @@ $darkest-color: #222222;*/
 
 body {
   background-color: #222222;
-  background: radial-gradient(#644749, #644749, #222222);
   font-family: 'Anonymous Pro', monospace;
   font-size: 16px;
 }
