@@ -513,148 +513,148 @@
   "sat_words": {
     "acumen": {
       "word": "acumen",
-      "prompt": "",
-      "hint": ""
+      "prompt": "AC___N",
+      "hint": "Skill at making quick, good decisions is called..."
     },
     "ambivalent": {
       "word": "ambivalent",
-      "prompt": "",
-      "hint": ""
+      "prompt": "AMBI______",
+      "hint": "When you don't know how to feel about something, you are ____ towards it."
     },
     "antithesis": {
       "word": "antithesis",
-      "prompt": "",
-      "hint": ""
+      "prompt": "ANTI______",
+      "hint": "The complete opposite of something is its..."
     },
     "archetype": {
       "word": "archetype",
-      "prompt": "",
-      "hint": ""
+      "prompt": "AR_____PE",
+      "hint": "An original model that serves as an example and is often imitated."
     },
     "atrophy": {
       "word": "atrophy",
-      "prompt": "",
-      "hint": ""
+      "prompt": "AT____Y",
+      "hint": "To waste away from not being used often enough."
     },
     "callous": {
       "word": "callous",
-      "prompt": "",
-      "hint": ""
+      "prompt": "CAL___S",
+      "hint": "When you are hardened to other people's suffering, you are being..."
     },
     "camaraderie": {
       "word": "camaraderie",
-      "prompt": "",
-      "hint": ""
+      "prompt": "C______ERIE",
+      "hint": "The spirit of cooperation between people in the same group."
     },
     "capitulation": {
       "word": "capitulation",
-      "prompt": "",
-      "hint": ""
+      "prompt": "CAP______ION",
+      "hint": "The act of formal surrender."
     },
     "circumlocution": {
       "word": "circumlocution",
-      "prompt": "",
-      "hint": ""
+      "prompt": "CIRC_______ION",
+      "hint": "The act of talking in circles around something without actually saying what it is."
     },
     "cognizant": {
       "word": "cognizant",
-      "prompt": "",
-      "hint": ""
+      "prompt": "COG___ANT",
+      "hint": "When you are deeply aware of something, you are ____ of it."
     },
     "conflagration": {
       "word": "conflagration",
-      "prompt": "",
-      "hint": ""
+      "prompt": "CONF_____TION",
+      "hint": "A massive, uncontrollable fire is called a..."
     },
     "diaphanous": {
       "word": "diaphanous",
-      "prompt": "",
-      "hint": ""
+      "prompt": "DIA_____US",
+      "hint": "When a fabric is so thin, it's almost transparent, it is..."
     },
     "egregious": {
       "word": "egregious",
-      "prompt": "",
-      "hint": ""
+      "prompt": "EG______S",
+      "hint": "When something is outstandingly awful, it can be called..."
     },
     "fallacious": {
       "word": "fallacious",
-      "prompt": "",
-      "hint": ""
+      "prompt": "FAL______S",
+      "hint": "When you make an incorrect assumption, you are being..."
     },
     "grandiloquent": {
       "word": "grandiloquent",
-      "prompt": "",
-      "hint": ""
+      "prompt": "GRAND________",
+      "hint": "Someone who speaks in big words to sound impressive is..."
     },
     "hegemony": {
       "word": "hegemony",
-      "prompt": "",
-      "hint": ""
+      "prompt": "H____ONY",
+      "hint": "An unfair dominance of one way of doing things over another is a..."
     },
     "idiosyncratic": {
       "word": "idiosyncratic",
-      "prompt": "",
-      "hint": ""
+      "prompt": "ID_________IC",
+      "hint": "When something is unique to only one person or thing, it is..."
     },
     "incontrovertible": {
       "word": "incontrovertible",
-      "prompt": "",
-      "hint": ""
+      "prompt": "INCON________BLE",
+      "hint": "When there is absolutely no way to argue with a fact, it is..."
     },
     "laconic": {
       "word": "laconic",
-      "prompt": "",
-      "hint": ""
+      "prompt": "LAC____",
+      "hint": "To speak in as few words as possible is to be..."
     },
     "legerdemain": {
       "word": "legerdemain",
-      "prompt": "",
-      "hint": ""
+      "prompt": "LEG_______N",
+      "hint": "A fancy way of saying \"a magic trick.\""
     },
     "modicum": {
       "word": "modicum",
-      "prompt": "",
-      "hint": ""
+      "prompt": "MO___UM",
+      "hint": "The bare minimum you can have that still counts as having it."
     },
     "obfuscate": {
       "word": "obfuscate",
-      "prompt": "",
-      "hint": ""
+      "prompt": "OB____ATE",
+      "hint": "To make something unclear or confusing on purpose."
     },
     "plenitude": {
       "word": "plenitude",
-      "prompt": "",
-      "hint": ""
+      "prompt": "PLEN_____",
+      "hint": "When there is a great many of something, you have a..."
     },
     "predilection": {
       "word": "predilection",
-      "prompt": "",
-      "hint": ""
+      "prompt": "PRE_____TION",
+      "hint": "When you have a natural liking towards something, you have a..."
     },
     "recalcitrant": {
       "word": "recalcitrant",
-      "prompt": "",
-      "hint": ""
+      "prompt": "REC_______NT",
+      "hint": "When you refuse to obey rules, you're being..."
     },
     "sanctimonious": {
       "word": "sanctimonious",
-      "prompt": "",
-      "hint": ""
+      "prompt": "SA_______IOUS",
+      "hint": "When you make a big deal about being better than everyone, you're being..."
     },
     "subjugate": {
       "word": "subjugate",
-      "prompt": "",
-      "hint": ""
+      "prompt": "SUBJ_____",
+      "hint": "To make someone give in to your demands is to..."
     },
     "ubiquitous": {
       "word": "ubiquitous",
-      "prompt": "",
-      "hint": ""
+      "prompt": "UBI_______",
+      "hint": "When you see something everywhere you look, it's..."
     },
     "vestige": {
       "word": "vestige",
-      "prompt": "",
-      "hint": ""
+      "prompt": "VES____",
+      "hint": "The smallest remaining part of something is a..."
     }
   }
 }
