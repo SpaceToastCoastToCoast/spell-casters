@@ -21,17 +21,17 @@ function syllable_count(word) {
 //initialize full datasets
 (function () {
   for (var wordObj in base_spells) {
-    if (syllable_count(wordObj.word) > 3) {
-      hard.push(wordObj)
-    } else if (syllable_count(wordObj.word) > 2) {
-      medium.push(wordObj)
+    if (syllable_count(base_spells[wordObj].word) > 3) {
+      hard.push(base_spells[wordObj])
+    } else if (syllable_count(base_spells[wordObj].word) > 2) {
+      medium.push(base_spells[wordObj])
     } else {
-      easy.push(wordObj)
+      easy.push(base_spells[wordObj])
     }
   }
 
   for (var wordObj in sat_words) {
-    SAT.push(wordObj)
+    SAT.push(sat_words[wordObj])
   }
 })();
 
