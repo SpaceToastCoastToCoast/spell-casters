@@ -471,43 +471,43 @@
     },
     "tomorrow": {
       "word": "tomorrow",
-      "prompt": "",
-      "hint": ""
+      "prompt": "TO____OW",
+      "hint": "When you forgot to do something today, you must do it ____"
     },
     "twelfth": {
       "word": "twelfth",
-      "prompt": "",
-      "hint": ""
+      "prompt": "TW___TH",
+      "hint": "December is the ____ month of the year."
     },
     "tyranny": {
       "word": "tyranny",
-      "prompt": "",
-      "hint": ""
+      "prompt": "T___NY",
+      "hint": "Native Egyptians saw Alexander as their savor from the Persian ..."
     },
     "until": {
       "word": "until",
-      "prompt": "",
-      "hint": ""
+      "prompt": "UN__L",
+      "hint": "You will not pass this round ____ you correctly spell all the words."
     },
     "vacuum": {
       "word": "vacuum",
-      "prompt": "",
-      "hint": ""
+      "prompt": "VAC__M",
+      "hint": "When you clean the carpet, you must use a ..."
     },
     "weather": {
       "word": "weather",
-      "prompt": "",
-      "hint": ""
+      "prompt": "W__THER",
+      "hint": "You are not sure if the ____ will be cloudy or sunny today."
     },
     "whether": {
       "word": "whether",
-      "prompt": "",
-      "hint": ""
+      "prompt": "W__THER",
+      "hint": "You are not sure ____ you have spelled the word correctly."
     },
     "weird": {
       "word": "weird",
-      "prompt": "",
-      "hint": ""
+      "prompt": "W__RD",
+      "hint": "When something is strange or out of the ordinary, it is ..."
     }
   },
   "sat_words": {
