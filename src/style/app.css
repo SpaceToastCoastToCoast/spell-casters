@@ -6,6 +6,10 @@ $medium-color: #b1695a;
 $dark-color: #644749;
 $darkest-color: #222222;*/
 
+/*
+  Minimum width is 700px before showing "no mobile devices" page
+*/
+
 body {
   background-color: #222222;
   font-family: 'Anonymous Pro', monospace;
@@ -16,7 +20,7 @@ body {
   background-color: #db9864;
   width: 680px;
   margin: auto;
-  margin-top: 16px;
+  margin-top: 72px;
   margin-bottom: 16px;
   padding: 20px;
   box-sizing: border-box;
@@ -24,6 +28,7 @@ body {
 }
 
 h1 {
+  display: none;
   color: #b1695a;
   width: 680px;
   margin: auto;
@@ -48,7 +53,7 @@ canvas {
   z-index: 999;
   position: absolute;
   width: 320px;
-  top: 112px;
+  top: 104px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #db9864;
@@ -71,4 +76,12 @@ canvas {
   background-color: #e3bb88;
   border: none;
   box-shadow: 0px 2px 4px #b1695a inset;
+}
+
+#svgLogo {
+  width: 420px;
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-340px);
 }

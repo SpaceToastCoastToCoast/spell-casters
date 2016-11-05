@@ -1,9 +1,8 @@
 import angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
+import { WordsService, WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
 import '../style/app.css';
-import { ParsedWordCtrlState, ParsedWordCtrl, ParsedWordCtrlName } from './parsedWord';
 
-import { WordGuessedCtrlState, WordGuessedCtrl, WordGuessedCtrlName } from './wordGuessed';
 
 let app = () => {
   return {
@@ -23,11 +22,11 @@ class AppCtrl {
 angular.module(MODULE_NAME, ['ui.router'])
   .config(($stateProvider) => {
     $stateProvider
-      .state('parsedWord', ParsedWordCtrlState);
+      .state('wordsDataset', WordsDatasetCtrlState);
   })
   .directive('app', app)
+  .service('WordsService', WordsService)
   .controller('AppCtrl', AppCtrl)
-  .controller(ParsedWordCtrlName, ParsedWordCtrl)
-  .controller(WordGuessedCtrlName, WordGuessedCtrl);
+  .controller(WordsDatasetCtrlName, WordsDatasetCtrl);
 
 export default MODULE_NAME;
