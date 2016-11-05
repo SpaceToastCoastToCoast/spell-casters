@@ -1,9 +1,21 @@
-<main>
-  <h1 class="title">Hello from Angular !</h1>
+<!-- <main>
+  <h1 class="title">Hello from Angular !</h1> -->
+
+    <nav>
+      <ul>
+        <li><a ui-sref="inputblock">Input block</a></li>
+      </ul>
+    </nav>
+
 
   <!-- Images (and assets) are parsed and loaded from within the public directory -->
-  <img src="/img/logo.png">
+<!--
+  <img src="/img/logo.png" ng-show="showingLogo">
 </main>
 <footer>
   <a ng-href="{{app.url}}">Webpack Angular Starter</a>
-</footer>
+</footer> -->
+
+<section ui-view>
+  <!-- all the states will be rendered in here -->
+</section>
