@@ -1,3 +1,4 @@
+
 const {base_spells, sat_words} = require('./spellcasters_dataset');
 
 //words per level
@@ -19,18 +20,18 @@ function syllable_count(word) {
 
 //initialize full datasets
 (function () {
-  for (var word in base_spells) {
-    if (syllable_count(word) > 3) {
-      hard.push(word)
-    } else if (syllable_count(word) > 2) {
-      medium.push(word)
+  for (var wordObj in base_spells) {
+    if (syllable_count(base_spells[wordObj].word) > 3) {
+      hard.push(base_spells[wordObj])
+    } else if (syllable_count(base_spells[wordObj].word) > 2) {
+      medium.push(base_spells[wordObj])
     } else {
-      easy.push(word)
+      easy.push(base_spells[wordObj])
     }
   }
 
-  for (var word in sat_words) {
-    SAT.push(word)
+  for (var wordObj in sat_words) {
+    SAT.push(sat_words[wordObj])
   }
 })();
 
@@ -49,8 +50,6 @@ function getRandomWords(arr) {
   }
   return randomWords;
 }
-
-
 
 module.exports = {
   lvl1Words: getRandomWords(easy),

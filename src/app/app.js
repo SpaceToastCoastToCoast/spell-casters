@@ -19,7 +19,6 @@ class AppCtrl {
   }
 }
 
-const MODULE_NAME = 'app';
 
 angular.module(MODULE_NAME, ['ui.router'])
   .config(($stateProvider) => {
@@ -30,6 +29,5 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller('AppCtrl', AppCtrl)
   .controller(ParsedWordCtrlName, ParsedWordCtrl)
   .controller(WordGuessedCtrlName, WordGuessedCtrl);
-
 
 export default MODULE_NAME;
