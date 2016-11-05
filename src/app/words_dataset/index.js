@@ -1,4 +1,6 @@
 const template = require('./words_dataset.html');
+//const { lvl1Words, lvl2Words, lvl3Words, lvl4Words } = require('../../../data/spells');
+
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
@@ -24,22 +26,15 @@ export const WordsService = [
 
 
 export const WordsDatasetCtrl = [
-'WordsService',
+'WordsService','$scope',
 class WordsDatasetCtrl {
-  constructor(WordsService) {
-    this.words = [
-      { word: 'acquire',
-        prompt: 'AC___RE',
-        hint: 'A fancy way of saying "to get" is to...'
-      },
-      { word: 'exceed',
-        prompt: 'E___ED',
-        hint: 'Go beyond what is allowed by, be better than, surpass' }
-    ];
+  constructor(WordsService, $scope) {
     this.newWords = [];
     WordsService.getWords().success(words => {
+      //console.log('words: ', words);
       this.newWords = words;
     });
-    console.log('this.newWords', this.newWords);
+
+    $scope.test = "test";
   }
 }];
