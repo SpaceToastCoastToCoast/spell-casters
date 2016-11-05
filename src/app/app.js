@@ -1,6 +1,6 @@
 import angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
-import { InputBoxCtrlState, InputBoxCtrl, InputBoxCtrlName } from './inputbox';
+import { WordsService, WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
 import '../style/app.css';
 
 let app = () => {
@@ -22,10 +22,11 @@ const MODULE_NAME = 'app';
 angular.module(MODULE_NAME, ['ui.router'])
 .config(($stateProvider) => {
     $stateProvider
-      .state('inputbox', InputBoxCtrlState);
+      .state('wordsDataset', WordsDatasetCtrlState);
   })
   .directive('app', app)
+  .service('WordsService', WordsService)
   .controller('AppCtrl', AppCtrl)
-  .controller(InputBoxCtrlName, InputBoxCtrl);
+  .controller(WordsDatasetCtrlName, WordsDatasetCtrl);
 
 export default MODULE_NAME;
