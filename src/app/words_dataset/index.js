@@ -36,11 +36,20 @@ class WordsDatasetCtrl {
   constructor(WordsService, $scope) {
     this.newWords = [];
     this.newWords = WordsService.getWords2();
+
+    $scope.test = "Spell the word!";
+    $scope.feedback = 'good'
+    $scope.compare = () => {
+      if (this.newWords[1].word.includes($scope.test.toLowerCase()) ) {
+        $scope.feedback = 'good'
+      } else {
+        $scope.feedback = 'wrong'
+      }
+    };
     // WordsService.getWords2().success((words) => {
     //   console.log('words: ', words);
     //   this.newWords = words;
     // });
 
-    $scope.test = "test";
   }
 }];
