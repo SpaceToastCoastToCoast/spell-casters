@@ -1,5 +1,5 @@
 
-const {base_spells, sat_words} = require('./spellcasters_dataset');
+const {base_spells, sat_words} = require('./spellcasters_dataset.json');
 
 //words per level
 const randomDatasetLength = 5;

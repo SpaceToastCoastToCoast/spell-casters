@@ -3,11 +3,12 @@
     "a_lot" : {
       "word": "a lot",
       "prompt": "A__OT",
-      "hint": "When you have many of something, you have..."},
+      "hint": "When you have many of something, you have..."
+    },
     "accommodate": {
       "word": "accommodate",
       "prompt": "AC______ATE",
-      "hint": ""
+      "hint": "When you go out of your way to make someone comfortable."
     },
     "accidentally": {
       "word": "accidentally",
@@ -97,22 +98,22 @@
     "descendant": {
       "word": "descendant",
       "prompt": "DES___D_NT",
-      "hint": "The great King had many kid but only one ... would take the throne."
+      "hint": "Only a direct ____ of the king can inherit the throne."
     },
     "desert": {
       "word": "desert",
       "prompt": "DE_ERT",
-      "hint": "In the ... it is hot and dry you might want to bring a some water."
+      "hint": "A hot and dry place with lots of sand is a..."
     },
     "dessert": {
       "word": "dessert",
       "prompt": "DE__ERT",
-      "hint": "You can't any have ... unless you eat your dinner."
+      "hint": "You can't have any ____ unless you eat your dinner."
     },
     "discipline": {
       "word": "discipline",
       "prompt": "DIS__PLINE",
-      "hint": "Being a ninja isn't all about skill it is about hard work and ..."
+      "hint": "Training to obey a set of rules is called..."
     },
     "embarrassing": {
       "word": "embarrassing",
@@ -124,10 +125,15 @@
       "prompt": "E___ED",
       "hint": "If you ... the expecations of your parents they will be proud"
     },
+    "exceed": {
+      "word": "exceed",
+      "prompt": "EXC___",
+      "hint": "To do a lot better than people thought you could is to ____ their expectations."
+    },
     "existence": {
       "word": "existence",
       "prompt": "E___TENCE",
-      "hint": "In North America Lake Tahoe is the larget apline lake in ..."
+      "hint": "A state of being can also be called an..."
     },
     "experience": {
       "word": "experience",
@@ -137,7 +143,12 @@
     "fiery": {
       "word": "fiery",
       "prompt": "F__RY",
-      "hint": "The baseball player always came to practice with a ... passion"
+      "hint": "To take in something new is to ____ it."
+    },
+    "fiery": {
+      "word": "fiery",
+      "prompt": "F___Y",
+      "hint": "A burning hot blaze can be described as..."
     },
     "foreign": {
       "word": "foreign",
@@ -152,7 +163,17 @@
     "gauge": {
       "word": "gauge",
       "prompt": "GA__GE",
-      "hint": "It is hard to ... the distance of the of the jump form the top"
+      "hint": "A country that is not your own is a ____ country."
+    },
+    "fulfill": {
+      "word": "fulfill",
+      "prompt": "FU____L",
+      "hint": "You must ____ your destiny as the greatest SpellCaster!"
+    },
+    "gauge": {
+      "word": "gauge",
+      "prompt": "G__GE",
+      "hint": "You ____ a distance when you make a guess of how long it is."
     },
     "guarantee": {
       "word": "guarantee",
@@ -161,33 +182,33 @@
     },
     "height": {
       "word": "height",
-      "prompt": "H__GHT",
-      "hint": "The sheer ... of the redwood tree was astonishing"
+      "prompt": "H____T",
+      "hint": "How tall something is is its..."
     },
     "hierarchy": {
       "word": "hierarchy",
       "prompt": "H___ARCHY",
-      "hint": "In regards to political decisions, the prime minister sits at the top of British ..."
+      "hint": "The order of importance in a system is its..."
     },
     "humorous": {
       "word": "humorous",
       "prompt": "HU____US",
-      "hint": "Johnny was always a joy to be around very uplifting and ..."
+      "hint": "When something is funny, you could also call it..."
     },
     "hypocrisy": {
       "word": "hypocrisy",
       "prompt": "H_____ISY",
-      "hint": ""
+      "hint": "Saying one thing and doing the opposite is called..."
     },
     "ignorance": {
       "word": "ignorance",
       "prompt": "IGN___NCE",
-      "hint": "Fred showed complete ... and a lack of knowledge about other cultures"
+      "hint": "Having no knowledge of something is called..."
     },
     "imitate": {
       "word": "imitate",
       "prompt": "IM___TE",
-      "hint": "Being the bully he was everyday he would attempt to ... others"
+      "hint": "To try and act like someone else is to ____ them."
     },
     "immediate": {
       "word": "immediate",
@@ -197,57 +218,62 @@
     "incredible": {
       "word": "incredible",
       "prompt": "INCR___BLE",
-      "hint": "The fighter showed ... strength fighitng back with all his might"
+      "hint": "When something is happening right now, it is..."
+    },
+    "incredible": {
+      "word": "incredible",
+      "prompt": "INCR___B__",
+      "hint": "Amazing, awesome, or like nothing you've ever seen before."
     },
     "independent": {
       "word": "independent",
       "prompt": "INDEP____NT",
-      "hint": "Alex married an ... woman who enjoyed her own hobbies and interest"
+      "hint": "You are being ____ when you want to do things your own way."
     },
     "indispensable": {
       "word": "indispensable",
       "prompt": "INDI____ABLE",
-      "hint": "His cheerful attiude and hard wortk ethic proved to be ... to the company"
+      "hint": "Something you can't live without can be called..."
     },
     "intelligence": {
       "word": "intelligence",
       "prompt": "INTE___GENCE",
-      "hint": "She impressed us with her superior ... by sloving the puzzle very quickly"
+      "hint": "When you are very smart, you have..."
     },
     "jewelry": {
       "word": "jewelry",
       "prompt": "JE___RY",
-      "hint": "Pirates love searching for gold and ..."
+      "hint": "Shiny things you wear on your neck, wrist or ears."
     },
     "just_deserts": {
       "word": "just deserts",
       "prompt": "JUST DES__TS",
-      "hint": "It may appear that they're getting ahead by cheating , but they'll get their just ... in the end"
+      "hint": "When you get what you deserve, you get your..."
     },
     "leisure": {
       "word": "leisure",
       "prompt": "LE___RE",
-      "hint": "Bob was a miner had worked hard for many years and was looking forward to his ..."
+      "hint": "Free time where you can relax and do your own thing is called..."
     },
     "library": {
       "word": "library",
       "prompt": "LIB___Y",
-      "hint": "The grand ... had several floor filled with rows of books"
+       "hint": "A place you go to read a book without buying it."
     },
     "license": {
       "word": "license",
-      "prompt": "LI___SE",
-      "hint": "Teenagers can not wait to turn 16 and get their drivers ..."
+      "prompt": "LI____E",
+      "hint": "A card that allows you to do something, like a driver's..."
     },
     "maintenance": {
       "word": "maintenance",
       "prompt": "MA______NCE",
-      "hint": "Nancy had a big and wonderful yard however, it required lots of ..."
+      "hint": "The work you have to do to keep a building in good shape is called..."
     },
     "maneuver": {
       "word": "maneuver",
-      "prompt": "MAN__VER",
-      "hint": "The fighter pilot failed flight school because he was unable to master the advanced ..."
+      "prompt": "MAN_____",
+      "hint": "A complicated series of moves that requires skill and care is called a..."
     },
     "marshmallow": {
       "word": "marshmallow",
@@ -256,48 +282,48 @@
     },
     "medieval": {
       "word": "medieval",
-      "prompt": "MED__VAL",
+      "prompt": "MED____L",
       "hint": "His basement reminded his friends of a prison cell in some ... castle"
     },
     "millennium": {
       "word": "millennium",
       "prompt": "MIL____IUM",
-      "hint": "Han Solo's ... falcon is a very recongizable ship from the Star Wars franchise"
+      "hint": "A thousand years is called a..."
     },
     "miniature": {
       "word": "miniature",
       "prompt": "MIN____RE",
-      "hint": "During the summer me and friends love playing on the ... golf course"
+      "hint": "A tiny version of something is called a..."
     },
     "minuscule": {
       "word": "minuscule",
       "prompt": "MIN___ULE",
-      "hint": "Dorothy's problems seemed ... in comparsion to the troubles of her sister"
+      "hint": "Something that is extremely small could be called..."
     },
     "mischievous": {
       "word": "mischievous",
       "prompt": "MIS____VOUS",
-      "hint": "An idea had brough a .... smile to her lips"
+      "hint": "When you like to cause trouble in a playful way, you are..."
     },
     "nauseous": {
       "word": "nauseous",
       "prompt": "NA_____S",
-      "hint": "Trevor really enjoyed the roller coaster but his siter felt rather ..."
+      "hint": "When you feel like you're going to be sick to your stomach, you are..."
     },
     "neighbor": {
       "word": "neighbor",
       "prompt": "N____BOR",
-      "hint": "Ron was always a good ... and brought beef jerky over after his big hunt"
+      "hint": "Someone who lives next door to you is your..."
     },
     "necessary": {
       "word": "necessary",
-      "prompt": "NEC___ARY",
-      "hint": "Maybe it wasn't ... to do all that paperwork"
+      "prompt": "NEC____RY",
+      "hint": "Something you have no choice but to do is a ____ task."
     },
     "no_one": {
       "word": "no one",
       "prompt": "NO__NE",
-      "hint": "The gym teacher was amazed because ... had ever completed the challenge before"
+      "hint": "Another way to say \"nobody\" is..."
     },
     "noticeable": {
       "word": "noticeable",
@@ -314,30 +340,45 @@
       "prompt": "OC___RENCE",
       "hint": "The elderly lady on the farm heard a car stop which was an unusual ... in such a remote area"
     },
+    "noticeable": {
+      "word": "noticeable",
+      "prompt": "NOT____BLE",
+      "hint": "When you first start to notice something, that thing is..."
+    },
+    "occasionally": {
+      "word": "occasionally",
+      "prompt": "OC________LY",
+      "hint": "When something happens, but not often, it happens..."
+    },
+    "occurrence": {
+      "word": "occurrence",
+      "prompt": "OC_____NCE",
+      "hint": "A \"happening\" can also be called an..."
+    },
     "perseverance": {
       "word": "perseverance",
       "prompt": "PERS_____NCE",
-      "hint": "Starting at the bottom is not easy but through hard work and ... you can do anything you put your mind to"
+      "hint": "When you work really hard and never give up, you have..."
     },
     "personal": {
       "word": "personal",
       "prompt": "PERS___L",
-      "hint": "Separating your work life and ... life can be hard they often overlap"
+      "hint": "Something that belongs to a person."
     },
     "personnel": {
       "word": "personnel",
-      "prompt": "PERS___EL",
-      "hint": "Department ... operated only during the weekdays"
+      "prompt": "PERS____L",
+      "hint": "People who work for an organization are its..."
     },
     "pigeon": {
       "word": "pigeon",
       "prompt": "PI___N",
-      "hint": "Down in the plaza the child fed the ... bread"
+      "hint": "A common bird that eats food on city streets is called a..."
     },
     "playwright": {
       "word": "playwright",
-      "prompt": "PLAY_____T",
-      "hint": "Larry was a powerful comic ..., he was not a poet in the proper sense of the term"
+      "prompt": "PLAY______",
+      "hint": "Someone who writes stage plays is called a..."
     },
     "possession": {
       "word": "possession",
@@ -347,12 +388,13 @@
     "precede": {
       "word": "precede",
       "prompt": "PRE____",
-      "hint": "Rashes often ... serious allergic reactions"
+
+      "hint": "When A comes before B, you could say A ____s B."
     },
     "principal": {
       "word": "principal",
       "prompt": "PRINCI___",
-      "hint": "Billy was misbehaving and was sent to the ... office"
+      "hint": "The most powerful person in a school is the..."
     },
     "principle": {
       "word": "principle",
@@ -362,32 +404,37 @@
     "privilege": {
       "word": "privilege",
       "prompt": "PR___LEGE",
-      "hint": "The samurai felt it was a great honor and ... to be in the presence of the master"
+      "hint": "A basic truth, especially one that affects your beliefs."
+    },
+    "privilege": {
+      "word": "privilege",
+      "prompt": "PRIV____E",
+      "hint": "A special right that only certain people get to have is a..."
     },
     "pronunciation": {
       "word": "pronunciation",
       "prompt": "PRON_____TION",
-      "hint": "The foreign student ... of my name had a nice accent to it"
+      "hint": "The way you say a word out loud is its..."
     },
     "publicly": {
       "word": "publicly",
       "prompt": "PUB___LY",
-      "hint": "The mother ... stated her opinion on the matter"
+      "hint": "The opposite of privately is..."
     },
     "queue": {
       "word": "queue",
       "prompt": "QU___",
-      "hint": "The list was a scrolling queue of names"
+      "hint": "A line that moves first come, first serve is also called a..."
     },
     "questionnaire": {
       "word": "questionnaire",
-      "prompt": "QUEST______RE",
-      "hint": "No one likes filling out the ... at the end of their shopping experiencesa"
+      "prompt": "QUESTIO______",
+      "hint": "A series of questions is called a..."
     },
     "raspberry": {
       "word": "raspberry",
       "prompt": "RAS_____Y",
-      "hint": "A small red fruit the size of a marble is a ..."
+      "hint": "A red, seedy fruit that makes blue candy is called a..."
     },
     "receive": {
       "word": "receive",
@@ -417,7 +464,7 @@
     "restaurant": {
       "word": "restaurant",
       "prompt": "REST____NT",
-      "hint": "A place where many people sit down and eat at is called a ..."
+      "hint": "A place where people go to have someone else cook their food is called a ..."
     },
     "rhyme": {
       "word": "rhyme",
@@ -431,7 +478,7 @@
     },
     "schedule": {
       "word": "schedule",
-      "prompt": "S____ULE",
+      "prompt": "SCHE____",
       "hint": "The daily ____ of a Spellcaster is very intense. At least 11 hours each day is spent practicing."
     },
     "seize": {
@@ -457,7 +504,7 @@
     "there": {
       "word": "there",
       "prompt": "THE__",
-      "hint": "In Hawaii, ____ are many rainbows."
+      "hint": "Not over here, over _____!"
     },
     "they're": {
       "word": "they're",
@@ -481,8 +528,8 @@
     },
     "tyranny": {
       "word": "tyranny",
-      "prompt": "T___NY",
-      "hint": "Native Egyptians saw Alexander as their savor from the Persian ..."
+      "prompt": "T____NY",
+      "hint": "The unfair, cruel kingdom Lord Zett wants to create would be a..."
     },
     "until": {
       "word": "until",
@@ -507,7 +554,7 @@
     "weird": {
       "word": "weird",
       "prompt": "W__RD",
-      "hint": "When something is strange or out of the ordinary, it is ..."
+      "hint": "When something is strange or out of the ordinary, it is..."
     }
   },
   "sat_words": {
@@ -644,7 +691,7 @@
     "subjugate": {
       "word": "subjugate",
       "prompt": "SUBJ_____",
-      "hint": "To make someone give in to your demands is to..."
+      "hint": "To make someone give in to your demands is to ____ them."
     },
     "ubiquitous": {
       "word": "ubiquitous",
