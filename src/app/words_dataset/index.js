@@ -18,14 +18,10 @@ export const WordsService = [
       this.$http = $http;
       this.wordsData = [];
     }
-    getWords () {
-      return this.$http.get('./spells.js');  //'/api/...'
+    getWords (lvl) {
+      this.wordsData = spellWords[`lvl${lvl}Words`];
+      return spellWords[`lvl${lvl}Words`];
     }
-    getWords2 () {
-      this.wordsData = spellWords.lvl1Words;
-      return spellWords.lvl1Words;
-    }
-
   }
 ];
 
@@ -35,21 +31,36 @@ export const WordsDatasetCtrl = [
 class WordsDatasetCtrl {
   constructor(WordsService, $scope) {
     this.newWords = [];
-    this.newWords = WordsService.getWords2();
+    this.currentWord = 0;
+    this.lvl = 1;
+    this.newWords = WordsService.getWords(this.lvl);
+    this.increaseLvl = () => {
+      this.newWords = WordsService.getWords(++this.lvl);
+      this.currentWord = 0;
+      if (this.lvl === 5) {
+        $scope.completedGame = true;
+        $scope.showLevel = false;
+      }
+    }
 
     $scope.test = "Spell the word!";
     $scope.feedback = 'good'
+    $scope.showLevel = false;
+    $scope.completedGame = false;
     $scope.compare = () => {
-      if (this.newWords[1].word.includes($scope.test.toLowerCase()) ) {
+      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
         $scope.feedback = 'good'
       } else {
         $scope.feedback = 'wrong'
       }
+      if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
+        $scope.test = ""
+        this.currentWord++;
+        if (this.currentWord === this.newWords.length) {
+          $scope.showLevel = true;
+          this.increaseLvl();
+        }
+      }
     };
-    // WordsService.getWords2().success((words) => {
-    //   console.log('words: ', words);
-    //   this.newWords = words;
-    // });
-
   }
 }];
