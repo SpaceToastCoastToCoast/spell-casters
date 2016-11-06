@@ -17,13 +17,13 @@ export const WordsService = [
   '$http',
   class WordsService {
     constructor ($http) {
-      this.$http = $http;
       this.wordsData = [];
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
       return spellWords[`lvl${lvl}Words`];
     }
+
   }
 ];
 
@@ -47,17 +47,36 @@ class WordsDatasetCtrl {
     }
 
     $scope.test = "";
-    $scope.feedback = 'good'
+    $scope.feedback = 'good';
     $scope.showLevel = false;
     $scope.completedGame = false;
     $scope.lostGame = false;
     $scope.lives = true;
+    $scope.resetGame = () => {
+      this.hearts = maxHearts;
+      this.lvl = 1;
+      this.newWords = WordsService.getWords(this.lvl);
+      this.currentWord = 0;
+      $scope.test = "";
+      $scope.feedback = 'good';
+      $scope.showLevel = false;
+      $scope.completedGame = false;
+      $scope.lostGame = false;
+      $scope.lives = true;
+    }
 
     $scope.compare = () => {
       if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
         $scope.feedback = 'good'
-      } else {
+      } else if($scope.feedback === 'good') {
         this.hearts--;
+        if (this.hearts <= 0) {
+          $scope.lostGame = true;
+          $scope.showLevel = false;
+          $scope.lives = false;
+        }
+        $scope.feedback = 'wrong'
+      } else {
         if (this.hearts <= 0) {
           $scope.lostGame = true;
           $scope.showLevel = false;
