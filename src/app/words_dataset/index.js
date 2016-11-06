@@ -1,6 +1,5 @@
 const template = require('./words_dataset.html');
-//const { lvl1Words, lvl2Words, lvl3Words, lvl4Words } = require('../../../data/spells');
-
+const spellWords = require('../../public/spells.js');
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
@@ -17,10 +16,16 @@ export const WordsService = [
   class WordsService {
     constructor ($http) {
       this.$http = $http;
+      this.wordsData = [];
     }
     getWords () {
-      return this.$http.get('test.json');  //'/api/...'
+      return this.$http.get('./spells.js');  //'/api/...'
     }
+    getWords2 () {
+      this.wordsData = spellWords.lvl1Words;
+      return spellWords.lvl1Words;
+    }
+
   }
 ];
 
@@ -30,10 +35,11 @@ export const WordsDatasetCtrl = [
 class WordsDatasetCtrl {
   constructor(WordsService, $scope) {
     this.newWords = [];
-    WordsService.getWords().success(words => {
-      //console.log('words: ', words);
-      this.newWords = words;
-    });
+    this.newWords = WordsService.getWords2();
+    // WordsService.getWords2().success((words) => {
+    //   console.log('words: ', words);
+    //   this.newWords = words;
+    // });
 
     $scope.test = "test";
   }
