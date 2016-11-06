@@ -1,6 +1,8 @@
 const template = require('./words_dataset.html');
 const spellWords = require('../../public/spells.js');
 
+const maxHearts = 5;
+
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
 export const WordsDatasetCtrlState = {
@@ -25,7 +27,6 @@ export const WordsService = [
   }
 ];
 
-
 export const WordsDatasetCtrl = [
 'WordsService','$scope',
 class WordsDatasetCtrl {
@@ -34,6 +35,8 @@ class WordsDatasetCtrl {
     this.currentWord = 0;
     this.lvl = 1;
     this.newWords = WordsService.getWords(this.lvl);
+    this.hearts = maxHearts;
+
     this.increaseLvl = () => {
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
@@ -43,14 +46,23 @@ class WordsDatasetCtrl {
       }
     }
 
-    $scope.test = "Spell the word!";
+    $scope.test = "";
     $scope.feedback = 'good'
     $scope.showLevel = false;
     $scope.completedGame = false;
+    $scope.lostGame = false;
+    $scope.lives = true;
+
     $scope.compare = () => {
       if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
         $scope.feedback = 'good'
       } else {
+        this.hearts--;
+        if (this.hearts <= 0) {
+          $scope.lostGame = true;
+          $scope.showLevel = false;
+          $scope.lives = false;
+        }
         $scope.feedback = 'wrong'
       }
       if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {

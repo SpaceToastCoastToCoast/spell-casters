@@ -1,9 +1,11 @@
 <div id="playerInput">
   <h4 class="targetWord">{{ wordsDataset.newWords[wordsDataset.currentWord].prompt }}</h4>
   <p>{{ feedback }}</p>
-  <input ng-model="test" type="text" name="spellWord" ng-change="compare()">
+  <input ng-model="test" type="text" name="spellWord" ng-change="compare()" placeholder="Spell the word!">
 </div>
 <p>Spell the word in the box to charge your spell!</p>
 <h4 class="hint">HINT: {{ wordsDataset.newWords[wordsDataset.currentWord].hint }}</h4>
+<p ng-show="lives">You have {{wordsDataset.hearts}} hearts left!</p>
 <p ng-show="showLevel">You made it to lvl: {{wordsDataset.lvl}}</p>
 <p ng-show="completedGame">You have completed the game!</p>
+<p ng-show="lostGame">You ran out of hearts! Try again!</p>
