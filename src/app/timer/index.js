@@ -1,6 +1,5 @@
 const template = require('./timer.html');
 
-
 export const TimerCtrlName = 'TimerCtrl';
 
 export const TimerCtrlState = {
@@ -34,6 +33,5 @@ class TimerCtrl {
     $scope.killTimer = function() {
       $interval.cancel($scope.countDown);
     };
-
   }
 }];
