@@ -1,6 +1,7 @@
 import angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
 import { WordsService, WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
+import { TimerCtrlState, TimerCtrlName, TimerCtrl } from './timer';
 import '../style/app.css';
 
 
@@ -23,11 +24,13 @@ const MODULE_NAME = 'app';
 angular.module(MODULE_NAME, ['ui.router'])
   .config(($stateProvider) => {
     $stateProvider
-      .state('wordsDataset', WordsDatasetCtrlState);
+      .state('wordsDataset', WordsDatasetCtrlState)
+      .state('timer', TimerCtrlState);
   })
   .directive('app', app)
   .service('WordsService', WordsService)
   .controller('AppCtrl', AppCtrl)
-  .controller(WordsDatasetCtrlName, WordsDatasetCtrl);
+  .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
+  .controller(TimerCtrlName, TimerCtrl);
 
 export default MODULE_NAME;
