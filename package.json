@@ -25,6 +25,7 @@
     "babel-loader": "^6.2.7",
     "express": "^4.14.0",
     "json-loader": "^0.5.4",
+    "pg": "^6.1.0",
     "sequelize": "^3.24.8"
   },
   "devDependencies": {
