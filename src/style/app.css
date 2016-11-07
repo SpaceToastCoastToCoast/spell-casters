@@ -43,6 +43,17 @@ canvas {
   background-color: #222;
 }
 
+#gameInfo {
+  min-height: 64px;
+}
+
+#gameInfo p {
+  margin-top: 0px;
+}
+#gameInfo h4 {
+  margin-top: 0px;
+}
+
 #playerInput {
   box-sizing: border-box;
   margin: auto;
@@ -53,7 +64,7 @@ canvas {
   z-index: 999;
   position: absolute;
   width: 320px;
-  top: 104px;
+  top: 192px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #db9864;
@@ -76,6 +87,11 @@ canvas {
   background-color: #e3bb88;
   border: none;
   box-shadow: 0px 2px 4px #b1695a inset;
+}
+
+#playerInput #feedback {
+  margin-top: 0px;
+  margin: 8px;
 }
 
 #svgLogo {

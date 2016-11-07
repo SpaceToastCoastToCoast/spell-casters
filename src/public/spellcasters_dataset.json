@@ -118,7 +118,12 @@
     "embarrassing": {
       "word": "embarrassing",
       "prompt": "EMBA_____ING",
-      "hint": "Tripping flat on your face in front of everyone can be quite..."
+      "hint": "Tripping flat on your face in front of everyone can be quite ..."
+    },
+    "exceed": {
+      "word": "exceed",
+      "prompt": "E___ED",
+      "hint": "If you ... the expecations of your parents they will be proud"
     },
     "exceed": {
       "word": "exceed",
@@ -133,6 +138,11 @@
     "experience": {
       "word": "experience",
       "prompt": "EXP____NCE",
+      "hint": "The sounds and smells of the forest nearly caused them to lose focus and stop running to fully ... their surroundings"
+    },
+    "fiery": {
+      "word": "fiery",
+      "prompt": "F__RY",
       "hint": "To take in something new is to ____ it."
     },
     "fiery": {
@@ -143,6 +153,16 @@
     "foreign": {
       "word": "foreign",
       "prompt": "FOR___N",
+      "hint": "The alien had found itself on some ... deserted planet"
+    },
+    "fulfill": {
+      "word": "fulfill",
+      "prompt": "FU__ILL",
+      "hint": "You must ... your role, or humanity will be lost forever"
+    },
+    "gauge": {
+      "word": "gauge",
+      "prompt": "GA__GE",
       "hint": "A country that is not your own is a ____ country."
     },
     "fulfill": {
@@ -193,6 +213,11 @@
     "immediate": {
       "word": "immediate",
       "prompt": "IM_____TE",
+      "hint": "Her ... concern was the cut that was bleeding everywhere"
+    },
+    "incredible": {
+      "word": "incredible",
+      "prompt": "INCR___BLE",
       "hint": "When something is happening right now, it is..."
     },
     "incredible": {
@@ -233,7 +258,7 @@
     "library": {
       "word": "library",
       "prompt": "LIB___Y",
-      "hint": "A place you go to read a book without buying it."
+       "hint": "A place you go to read a book without buying it."
     },
     "license": {
       "word": "license",
@@ -253,7 +278,7 @@
     "marshmallow": {
       "word": "marshmallow",
       "prompt": "MARSHM__LOW",
-      "hint": "A squishy, sugary thing you might roast on a campfire."
+      "hint": "Camping by the fire and roasting a ... is everyone's favorite"
     },
     "medieval": {
       "word": "medieval",
@@ -302,6 +327,21 @@
     },
     "noticeable": {
       "word": "noticeable",
+      "prompt": "NOT___ABLE",
+      "hint": "It is mainly ... in the winter when the tempature drops"
+    },
+    "occasionally": {
+      "word": "occasionally",
+      "prompt": "OC_____NALLY",
+      "hint": "It didnt happen often but ... the dog would tear up old shoes"
+    },
+    "occurrence": {
+      "word": "occurrence",
+      "prompt": "OC___RENCE",
+      "hint": "The elderly lady on the farm heard a car stop which was an unusual ... in such a remote area"
+    },
+    "noticeable": {
+      "word": "noticeable",
       "prompt": "NOT____BLE",
       "hint": "When you first start to notice something, that thing is..."
     },
@@ -343,11 +383,12 @@
     "possession": {
       "word": "possession",
       "prompt": "PO_____ION",
-      "hint": ""
+      "hint": "The baseketball player rushed too fast and lost ... of the ball"
     },
     "precede": {
       "word": "precede",
       "prompt": "PRE____",
+
       "hint": "When A comes before B, you could say A ____s B."
     },
     "principal": {
@@ -358,6 +399,11 @@
     "principle": {
       "word": "principle",
       "prompt": "PRINCI___",
+      "hint": "It was the ... of the matter "
+    },
+    "privilege": {
+      "word": "privilege",
+      "prompt": "PR___LEGE",
       "hint": "A basic truth, especially one that affects your beliefs."
     },
     "privilege": {

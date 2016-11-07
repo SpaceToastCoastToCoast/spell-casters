@@ -4,6 +4,7 @@ import { WordsService, WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrl
 import { TimerCtrlState, TimerCtrlName, TimerCtrl } from './timer';
 import '../style/app.css';
 
+
 let app = () => {
   return {
     template: require('./app.html'),
@@ -18,11 +19,10 @@ class AppCtrl {
   }
 }
 
-
 const MODULE_NAME = 'app';
 
 angular.module(MODULE_NAME, ['ui.router'])
-.config(($stateProvider) => {
+  .config(($stateProvider) => {
     $stateProvider
       .state('wordsDataset', WordsDatasetCtrlState)
       .state('timer', TimerCtrlState);
