@@ -2,6 +2,7 @@ import angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
 import { WordsService, WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
+import { TimerCtrlState, TimerCtrlName, TimerCtrl } from './timer';
 import '../style/app.css';
 
 
@@ -26,11 +27,13 @@ angular.module(MODULE_NAME, ['ui.router'])
     $stateProvider
       .state('wordsDataset', WordsDatasetCtrlState)
       .state('instructions', InstructionsCtrlState)
+      .state('timer', TimerCtrlState);
   })
   .directive('app', app)
   .service('WordsService', WordsService)
   .controller('AppCtrl', AppCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
-  .controller(InstructionsCtrlName, InstructionsCtrl);
+  .controller(InstructionsCtrlName, InstructionsCtrl)
+  .controller(TimerCtrlName, TimerCtrl);
 
 export default MODULE_NAME;
