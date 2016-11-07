@@ -6,7 +6,7 @@ const maxHearts = 5;
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
 export const WordsDatasetCtrlState = {
-  url: '/',
+  url: '/active-game',
   template,
   controller: WordsDatasetCtrlName,
   controllerAs: 'wordsDataset'
