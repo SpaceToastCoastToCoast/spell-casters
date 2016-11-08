@@ -3,6 +3,7 @@ const app = express();
 const route = require('./routes/api.js');
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static('./src/public'));
 app.use('/api', route);
 app.get('/', (req,res) =>{
   res.send('hello public world');
