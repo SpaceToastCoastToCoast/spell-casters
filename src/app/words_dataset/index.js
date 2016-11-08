@@ -49,6 +49,12 @@ class WordsDatasetCtrl {
     $scope.timer = $scope.minutes*60;
     $scope.countDown;
 
+    //disable pasting into textbox
+    $scope.preventPaste = (e) => {
+      e.preventDefault();
+      return false;
+    }
+
     const startTimer = () => {
       $scope.countDown = $interval(function () {
         $scope.minutes = parseInt($scope.timer / 60, 10);

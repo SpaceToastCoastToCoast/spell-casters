@@ -12,7 +12,7 @@
   <div id="playerInput">
     <h4 class="targetWord">{{ wordsDataset.newWords[wordsDataset.currentWord].prompt }}</h4>
     <p id="feedback">{{ feedback }}</p>
-    <input ng-model="test" type="text" name="spellWord" ng-change="compare()" placeholder="Spell the word!">
+    <input ng-model="test" type="text" name="spellWord" ng-paste="preventPaste($event)" ng-change="compare()" placeholder="Spell the word!">
   </div>
   <div class="glow glowAnim"></div>
   <div class="alepha alephaIdle"></div>

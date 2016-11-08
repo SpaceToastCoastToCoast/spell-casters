@@ -21,7 +21,7 @@
       <div class="alepha alephaIdle"></div>
       <h4 class="targetWord">{{ instructions.testWords[instructions.currentWord].prompt }}</h4>
       <p id="feedback">{{ feedback }}</p>
-      <input ng-model="input" type="text" name="spellWord" ng-change="compare()" placeholder={{instructions.testWords[instructions.currentWord].word}}>
+      <input ng-model="input" type="text" name="spellWord" ng-paste="preventPaste($event)" ng-change="compare()" placeholder={{instructions.testWords[instructions.currentWord].word}}>
     </div>
     <div ng-show="finishedMessage">
       <h4>You Have Completed the Tutorial!</h4>
