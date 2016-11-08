@@ -22,6 +22,7 @@ module.exports = function makeWebpackConfig () {
    * This is the object where all configuration gets set
    */
   var config = {};
+  const proxy = 'localhost:3000';
 
   /**
    * Entry
@@ -168,7 +169,8 @@ module.exports = function makeWebpackConfig () {
     config.plugins.push(
       new HtmlWebpackPlugin({
         template: './src/public/index.html',
-        inject: 'body'
+        inject: 'body',
+        filename: 'index.html'
       }),
 
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
@@ -208,7 +210,10 @@ module.exports = function makeWebpackConfig () {
    */
   config.devServer = {
     contentBase: './src/public',
-    stats: 'minimal'
+    stats: 'minimal',
+    proxy: {
+      '/api/*': `http://${proxy}`
+    }
   };
 
   return config;
