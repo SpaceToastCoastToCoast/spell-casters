@@ -17,6 +17,7 @@
 
     </div>
     <div ng-show="example" id="exampleInput">
+      <div class="alepha alephaIdle"></div>
       <h4 class="targetWord">{{ instructions.testWords[instructions.currentWord].prompt }}</h4>
       <p id="feedback">{{ feedback }}</p>
       <input ng-model="input" type="text" name="spellWord" ng-change="compare()" placeholder={{instructions.testWords[instructions.currentWord].word}}>
