@@ -13,7 +13,7 @@ export const TimerCtrl = [
 '$scope','$interval',
 class TimerCtrl {
   constructor($scope, $interval) {
-    $scope.minutes = 5;
+    $scope.minutes = 2;
     $scope.seconds = 0;
     $scope.zero = '';
 
@@ -26,7 +26,7 @@ class TimerCtrl {
           $scope.zero = '0';
         } else {$scope.zero = ''}
         if (--$scope.timer < 0) {
-            $scope.timer = duration;
+          $scope.timer = duration;
         }
     }, 1000);
     };

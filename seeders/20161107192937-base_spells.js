@@ -483,7 +483,7 @@ module.exports = {
     { key_word: "possession",
       word: "possession",
       prompt: "PO_____ION",
-      hint: "The baseketball player rushed too fast and lost ... of the ball",
+      hint: "Another way to say that you have something is to say that it is in your ...",
       createdAt : new Date(),
       updatedAt : new Date(),
     },
@@ -624,7 +624,8 @@ module.exports = {
       word: "separate",
       prompt: "SEP___TE",
       hint: "There's no need to ____ fun and learning when you can do both with SPELLCASTERS.",
-
+      createdAt : new Date(),
+      updatedAt : new Date(),
     },
     { key_word: "sergeant",
       word: "sergeant",

@@ -38,19 +38,49 @@ h1 {
   text-shadow: 1px 2px 2px #644749, 2px 4px 4px #111;
 }
 
-canvas {
+#gameCanvas {
   position: relative;
   background-color: #222;
+  width: 640px;
+  height: 360px;
+  display: block;
 }
 
 #gameInfo {
   min-height: 64px;
 }
 
-#gameInfo p {
+.tutorialInfo p {
   margin-top: 0px;
 }
-#gameInfo h4 {
+.tutorialInfo h4 {
+  margin-top: 0px;
+}
+
+.tutorialInfo {
+  min-height: 160px;
+}
+
+#exampleInput {
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 8px;
+}
+
+#exampleInput p {
+  text-align: center;
+  margin-top: 0px;
+}
+#exampleInput h4 {
+  text-align: center;
+  margin-top: 0px;
+}
+
+#exampleInput input {
+  margin: auto;
   margin-top: 0px;
 }
 
@@ -62,11 +92,9 @@ canvas {
   align-items: center;
   padding: 8px;
   z-index: 999;
-  position: absolute;
+  position: relative;
+  top: 8px;
   width: 320px;
-  top: 192px;
-  left: 50%;
-  transform: translateX(-50%);
   background-color: #db9864;
   box-shadow: 1px 2px 2px #b1695a;
 }
@@ -101,3 +129,47 @@ canvas {
   left: 50%;
   transform: translateX(-340px);
 }
+
+/*Character sprites */
+/*Alepha*/
+
+.alepha {
+  position: absolute;
+  top: 144px;
+  left: 96px;
+  width: 128px;
+  height: 128px;
+  background-image: url("http://localhost:8080/img/alepha_idle_final.png");
+}
+
+.alephaIdle {
+  animation: alephaIdle steps(8) 0.64s infinite;
+}
+
+@keyframes alephaIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+
+/* Magic effects */
+
+.glow {
+  position: absolute;
+  top: 192px;
+  left: 172px;
+  width: 32px;
+  height: 32px;
+  background-image: url("http://localhost:8080/img/sparkle_placeholder.png");
+}
+
+.glowAnim {
+  animation: glowAnim steps(16) 0.64s infinite;
+}
+
+@keyframes glowAnim {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
+
+/* Alphagator */
+/* Lord Zett */

@@ -1,28 +1,31 @@
 <div ng-show="example">
-  <div id="gameInfo">
+  <div class="tutorialInfo">
     <h4>TUTORIAL</h4>
+    <p class="tutorial">Some letters from the word you must spell are provided below. Type the entire word in the input box.</p>
     <p class="tutorial">Use the hint below to figure out which word to spell</p>
     <h4 class="hint">HINT: {{ instructions.testWords[instructions.currentWord].hint }}</h4>
   </div>
 </div>
+<div id="gameCanvas">
+  <div id="playerInput">
+    <div ng-show="start">
+      <p>
+        Instructions: Defeat Lord Zett and the Alphagators by casting spells! Read the hint and the prompt in order to figure out what word you must spell. You have a total of 5 lives and a time limit on each level.  Each time you make a mistake, you will lose a life. Click START to begin the tutorial or BACK to return to the home page
+      </p>
+      <button ng-click="startTutorial()">START</button>
+      <button ng-click="back()">BACK</button>
 
-<div id="playerInput">
-  <div ng-show="start">
-    <p>
-      Instructions: Defeat Lord Zett and the Alphagators by casting spells! Read the hint and the prompt in order to figure out what word you must spell. You have a total of 5 lives and a time limit on each level.  Each time you make a mistake, you will lose a life. Click START to begin the tutorial or BACK to return to the home page
-    </p>
-    <button ng-click="startTutorial()">START</button>
-    <button ng-click="back()">BACK</button>
-
-  </div>
-  <div ng-show="example">
-    <p class="tutorial">Some letters from the word you must spell is provided below. Type the entire word in the input box</p>
-    <h4 class="targetWord">{{ instructions.testWords[instructions.currentWord].prompt }}</h4>
-    <p id="feedback">{{ feedback }}</p>
-    <input ng-model="input" type="text" name="spellWord" ng-change="compare()" placeholder={{instructions.testWords[instructions.currentWord].word}}>
-  </div>
-  <div ng-show="finishedMessage">
-    <h4>You Have Completed the Tutorial!</h4>
-    <button ng-click="back()">BACK</button>
+    </div>
+    <div ng-show="example" id="exampleInput">
+      <div class="glow glowAnim"></div>
+      <div class="alepha alephaIdle"></div>
+      <h4 class="targetWord">{{ instructions.testWords[instructions.currentWord].prompt }}</h4>
+      <p id="feedback">{{ feedback }}</p>
+      <input ng-model="input" type="text" name="spellWord" ng-change="compare()" placeholder={{instructions.testWords[instructions.currentWord].word}}>
+    </div>
+    <div ng-show="finishedMessage">
+      <h4>You Have Completed the Tutorial!</h4>
+      <button ng-click="back()">BACK</button>
+    </div>
   </div>
 </div>
