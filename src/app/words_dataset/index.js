@@ -79,13 +79,18 @@ class WordsDatasetCtrl {
     //start timer on load
     startTimer()
 
-    this.increaseLvl = () => {
+    const increaseLvl = () => {
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
+      if(this.lvl === 2) {
+        $state.go('won');
+      }
       if (this.lvl === 5) {
-        $scope.completedGame = true;
-        $scope.showLevel = false;
         killTimer();
+        saveTime($scope.timer)
+        resetTimer();
+        $state.go('won');
+        $scope.showLevel = false;
       }
       saveTime($scope.timer)
       resetTimer();
@@ -98,7 +103,6 @@ class WordsDatasetCtrl {
     $scope.test = "";
     $scope.feedback = 'good';
     $scope.showLevel = false;
-    $scope.completedGame = false;
     $scope.lostGame = false;
     $scope.lives = true;
     $scope.resetGame = () => {
@@ -139,7 +143,7 @@ class WordsDatasetCtrl {
         this.currentWord++;
         if (this.currentWord === this.newWords.length) {
           $scope.showLevel = true;
-          this.increaseLvl();
+          increaseLvl();
         }
       }
     };
