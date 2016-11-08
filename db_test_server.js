@@ -2,16 +2,17 @@ const express = require('express');
 const app = express();
 const db = require('./models');
 const baseSpells = db.base_spells;
+const bossSpells = db.boss_spells;
 
 app.get('/', (req,res)=>{
   baseSpells.findAll()
   .then((data =>{
-    let allSpells = { base_spells: { } };
+    let allBaseSpells = { base_spells: { } };
 
     data.forEach((dataSet) =>{
 
       let outerKeyWordObj = {};
-      allSpells.base_spells[dataSet.dataValues.key_word] = {
+      allBaseSpells.base_spells[dataSet.dataValues.key_word] = {
         word: dataSet.dataValues.word,
         prompt: dataSet.dataValues.prompt,
         hint: dataSet.dataValues.hint,
@@ -20,7 +21,31 @@ app.get('/', (req,res)=>{
 
     res.json({
       sucess: true,
-      allSpells,
+      allBaseSpells,
+    });
+  }));
+});
+
+
+app.get('/boss_spells', (req,res)=>{
+  bossSpells.findAll()
+  .then((data =>{
+    console.log('data: ', data);
+    let allBossSpells = { boss_spells: { } };
+
+    data.forEach((dataSet) =>{
+
+      let outerKeyWordObj = {};
+      allBossSpells.boss_spells[dataSet.dataValues.key_word] = {
+        word: dataSet.dataValues.word,
+        prompt: dataSet.dataValues.prompt,
+        hint: dataSet.dataValues.hint,
+      };
+    });
+
+    res.json({
+      sucess: true,
+      allBossSpells,
     });
   }));
 });
