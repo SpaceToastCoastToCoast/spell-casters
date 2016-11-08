@@ -1,4 +1,4 @@
-const template = require('./default.html');
+const template = require('./splash.html');
 
 export const DefaultCtrlName = 'DefaultCtrl';
 
@@ -9,8 +9,17 @@ export const DefaultCtrlState = {
   controllerAs: 'default'
 };
 
-export class DefaultCtrl {
-  constructor() {
+export const DefaultCtrl = [
+  '$scope','$state',
 
+  class DefaultCtrl {
+    constructor($scope,$state) {
+      $scope.goToInstructions = () => {
+        $state.go('instructions')
+      }
+      $scope.goToActiveGame = () => {
+        $state.go('active-game')
+      }
+    }
   }
-}
+]
