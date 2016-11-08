@@ -20,6 +20,9 @@ export const DefaultCtrl = [
       $scope.goToActiveGame = () => {
         $state.go('active-game')
       }
+      $scope.goToAbout = () => {
+        $state.go('about')
+      }
     }
   }
 ]

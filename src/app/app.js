@@ -5,6 +5,7 @@ import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from '.
 import { TimerCtrlState, TimerCtrlName, TimerCtrl } from './timer';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
+import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
 import '../style/app.css';
 
 
@@ -32,6 +33,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('splash',DefaultCtrlState)
       .state('instructions',InstructionsCtrlState)
       .state('game-over',GameOverCtrlState)
+      .state('about',AboutCtrlState)
 
     $urlRouterProvider.otherwise('/')
   })
@@ -43,6 +45,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(TimerCtrlName, TimerCtrl)
   .controller(InstructionsCtrlName, InstructionsCtrl)
   .controller(GameOverCtrlName, GameOverCtrl)
+  .controller(AboutCtrlName, AboutCtrl)
 
 
 export default MODULE_NAME;
