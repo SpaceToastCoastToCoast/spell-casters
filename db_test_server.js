@@ -30,7 +30,6 @@ app.get('/', (req,res)=>{
 app.get('/boss_spells', (req,res)=>{
   bossSpells.findAll()
   .then((data =>{
-    console.log('data: ', data);
     let allBossSpells = { boss_spells: { } };
 
     data.forEach((dataSet) =>{

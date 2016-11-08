@@ -140,8 +140,6 @@ module.exports = {
       word: "legerdemain",
       prompt: "LEG_______N",
       hint: "A fancy way of saying \"a magic trick.\"",
-      createdAt : new Date(),
-      updatedAt : new Date(),
     },
     { key_word: "modicum",
       word: "modicum",
