@@ -9,8 +9,25 @@ app.get('/', (req,res)=>{
   baseSpells.findAll()
   .then((data =>{
     console.log('data: ', data);
-    res.json({data,
-      sucess: true});
+
+    let allSpells = { base_spells: { } };
+
+    data.forEach((dataSet) =>{
+
+      let outerKeyWordObj = {};
+      allSpells.base_spells[dataSet.dataValues.key_word] = {
+        word: dataSet.dataValues.word,
+        prompt: dataSet.dataValues.prompt,
+        hint: dataSet.dataValues.hint,
+      };;
+      console.log('allSpells: ', allSpells);
+
+    });
+
+    res.json({
+      sucess: true,
+      allSpells,
+    });
   }));
 });
 
