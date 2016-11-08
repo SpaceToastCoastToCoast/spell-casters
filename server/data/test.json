@@ -1,0 +1,22 @@
+[
+  { "word": "acquire",
+    "prompt": "AC___RE",
+    "hint": "A fancy way of saying 'to get' is to..."
+  },
+  { "word": "exceed",
+    "prompt": "E___ED",
+    "hint": "The drummer is in charge of the"
+  },
+  { "word": "queue",
+    "prompt": "QU___",
+    "hint": ""
+  },
+  { "word": "seize",
+    "prompt": "S__ZE",
+    "hint": "Lord Zett's main goal is to ____ control of the entire Lexicon River."
+  },
+  { "word": "rhythm",
+    "prompt": "R____M",
+    "hint": "The drummer is in charge of the ____ and helps to keep all band members on beat."
+  }
+]
