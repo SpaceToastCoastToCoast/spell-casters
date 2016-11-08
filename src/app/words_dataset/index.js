@@ -2,6 +2,13 @@ const template = require('./words_dataset.html');
 const spellWords = require('../../public/spells.js');
 
 const maxHearts = 5;
+const minuteLimit = 2;
+const times = {
+  lvl1: 0,
+  lvl2: 0,
+  lvl3: 0,
+  lvl4: 0
+}
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
@@ -13,7 +20,6 @@ export const WordsDatasetCtrlState = {
 };
 
 export const WordsService = [
-
   '$http',
   class WordsService {
     constructor ($http) {
@@ -23,19 +29,55 @@ export const WordsService = [
       this.wordsData = spellWords[`lvl${lvl}Words`];
       return spellWords[`lvl${lvl}Words`];
     }
-
   }
 ];
 
 export const WordsDatasetCtrl = [
-'WordsService','$scope', '$state',
+'WordsService','$scope', '$state', '$interval',
 class WordsDatasetCtrl {
-  constructor(WordsService, $scope, $state) {
+  constructor(WordsService, $scope, $state, $interval) {
     this.newWords = [];
     this.currentWord = 0;
     this.lvl = 1;
     this.newWords = WordsService.getWords(this.lvl);
     this.hearts = maxHearts;
+
+    //timer controls
+    $scope.minutes = minuteLimit;
+    $scope.seconds = '00';
+    $scope.zero = '';
+    $scope.timer = $scope.minutes*60;
+    $scope.countDown;
+
+    const startTimer = () => {
+      $scope.countDown = $interval(function () {
+        $scope.minutes = parseInt($scope.timer / 60, 10);
+        $scope.seconds = parseInt($scope.timer % 60, 10);
+        if ( $scope.seconds < 10 ) {
+          $scope.zero = '0';
+        } else {
+          $scope.zero = ''
+        }
+        if (--$scope.timer < 0) {
+          resetTimer();
+          killTimer();
+          $state.go('game-over')
+        }
+      }, 1000);
+    }
+    const killTimer = () => {
+      $interval.cancel($scope.countDown);
+    }
+
+    const resetTimer = () => {
+      $scope.minutes = minuteLimit;
+      $scope.seconds = '00';
+      $scope.zero = '';
+      $scope.timer = $scope.minutes*60;
+    }
+
+    //start timer on load
+    startTimer()
 
     this.increaseLvl = () => {
       this.newWords = WordsService.getWords(++this.lvl);
@@ -43,7 +85,14 @@ class WordsDatasetCtrl {
       if (this.lvl === 5) {
         $scope.completedGame = true;
         $scope.showLevel = false;
+        killTimer();
       }
+      saveTime($scope.timer)
+      resetTimer();
+    }
+
+    const saveTime = (time) => {
+      times['lvl'+(this.lvl-1)] = time;
     }
 
     $scope.test = "";
