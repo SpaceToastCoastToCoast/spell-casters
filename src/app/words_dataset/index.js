@@ -28,9 +28,9 @@ export const WordsService = [
 ];
 
 export const WordsDatasetCtrl = [
-'WordsService','$scope',
+'WordsService','$scope', '$state',
 class WordsDatasetCtrl {
-  constructor(WordsService, $scope) {
+  constructor(WordsService, $scope, $state) {
     this.newWords = [];
     this.currentWord = 0;
     this.lvl = 1;
@@ -61,7 +61,6 @@ class WordsDatasetCtrl {
       $scope.feedback = 'good';
       $scope.showLevel = false;
       $scope.completedGame = false;
-      $scope.lostGame = false;
       $scope.lives = true;
     }
 
@@ -74,13 +73,15 @@ class WordsDatasetCtrl {
           $scope.lostGame = true;
           $scope.showLevel = false;
           $scope.lives = false;
+          $state.go('game-over')
         }
         $scope.feedback = 'wrong'
       } else {
         if (this.hearts <= 0) {
-          $scope.lostGame = true;
           $scope.showLevel = false;
           $scope.lives = false;
+          $scope.resetGame();
+          $state.go('game-over')
         }
         $scope.feedback = 'wrong'
       }
