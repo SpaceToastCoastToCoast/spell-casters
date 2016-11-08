@@ -134,9 +134,9 @@ h1 {
 /*Alepha*/
 
 .alepha {
-  position: relative;
-  top: 64px;
-  left: 64px;
+  position: absolute;
+  top: 144px;
+  left: 96px;
   width: 128px;
   height: 128px;
   background-image: url("http://localhost:8080/img/alepha_idle_final.png");
@@ -152,6 +152,24 @@ h1 {
 }
 
 /* Magic effects */
+
+.glow {
+  position: absolute;
+  top: 192px;
+  left: 172px;
+  width: 32px;
+  height: 32px;
+  background-image: url("http://localhost:8080/img/sparkle_placeholder.png");
+}
+
+.glowAnim {
+  animation: glowAnim steps(16) 0.64s infinite;
+}
+
+@keyframes glowAnim {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
 
 /* Alphagator */
 /* Lord Zett */
