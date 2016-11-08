@@ -624,7 +624,8 @@ module.exports = {
       word: "separate",
       prompt: "SEP___TE",
       hint: "There's no need to ____ fun and learning when you can do both with SPELLCASTERS.",
-
+      createdAt : new Date(),
+      updatedAt : new Date(),
     },
     { key_word: "sergeant",
       word: "sergeant",
