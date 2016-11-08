@@ -23,7 +23,6 @@ export const WordsService = [
       this.wordsData = spellWords[`lvl${lvl}Words`];
       return spellWords[`lvl${lvl}Words`];
     }
-
   }
 ];
 
@@ -41,7 +40,7 @@ class WordsDatasetCtrl {
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
       if (this.lvl === 5) {
-        $scope.completedGame = true;
+        $state.go('won');
         $scope.showLevel = false;
       }
     }
@@ -49,7 +48,6 @@ class WordsDatasetCtrl {
     $scope.test = "";
     $scope.feedback = 'good';
     $scope.showLevel = false;
-    $scope.completedGame = false;
     $scope.lostGame = false;
     $scope.lives = true;
     $scope.resetGame = () => {
