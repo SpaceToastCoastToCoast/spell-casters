@@ -20,7 +20,7 @@ app.get('/', (req,res)=>{
     });
 
     res.json({
-      sucess: true,
+      success: true,
       allBaseSpells,
     });
   }));
@@ -44,7 +44,7 @@ app.get('/boss_spells', (req,res)=>{
     });
 
     res.json({
-      sucess: true,
+      success: true,
       allBossSpells,
     });
   }));
