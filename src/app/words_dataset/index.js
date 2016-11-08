@@ -86,9 +86,11 @@ class WordsDatasetCtrl {
         $state.go('won');
       }
       if (this.lvl === 5) {
+        killTimer();
+        saveTime($scope.timer)
+        resetTimer();
         $state.go('won');
         $scope.showLevel = false;
-        killTimer();
       }
       saveTime($scope.timer)
       resetTimer();
