@@ -4,6 +4,7 @@ import { WordsService, WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrl
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { TimerCtrlState, TimerCtrlName, TimerCtrl } from './timer';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
+import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
 import '../style/app.css';
 
 
@@ -30,6 +31,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('timer', TimerCtrlState)
       .state('splash',DefaultCtrlState)
       .state('instructions',InstructionsCtrlState)
+      .state('game-over',GameOverCtrlState)
 
     $urlRouterProvider.otherwise('/')
   })
@@ -40,6 +42,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
   .controller(TimerCtrlName, TimerCtrl)
   .controller(InstructionsCtrlName, InstructionsCtrl)
+  .controller(GameOverCtrlName, GameOverCtrl)
 
 
 export default MODULE_NAME;
