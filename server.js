@@ -15,7 +15,7 @@ const config = require('./webpack.config.js');
 
 app.use(express.static('./src/public'));
 
-app.get('/api/', (req,res)=> {
+app.get('/api/base_spells', (req,res)=> {
   baseSpells.findAll()
   .then((data => {
     let allBaseSpells = { base_spells: { } };
