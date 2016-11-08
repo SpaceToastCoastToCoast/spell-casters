@@ -483,7 +483,7 @@ module.exports = {
     { key_word: "possession",
       word: "possession",
       prompt: "PO_____ION",
-      hint: "The baseketball player rushed too fast and lost ... of the ball",
+      hint: "Another way to say that you have something is to say that it is in your ...",
       createdAt : new Date(),
       updatedAt : new Date(),
     },

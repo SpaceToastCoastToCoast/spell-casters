@@ -6,6 +6,7 @@ import { TimerCtrlState, TimerCtrlName, TimerCtrl } from './timer';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
 import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
+import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { PictureToCanvasCtrlState, PictureToCanvasCtrlName, PictureToCanvasCtrl } from './pictureToCanvas';
 // import { LoadPicture } from './services/loadPicture';
 import '../style/app.css';
@@ -36,6 +37,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('instructions',InstructionsCtrlState)
       .state('game-over',GameOverCtrlState)
       .state('about',AboutCtrlState)
+      .state('won',WonCtrlState)
       .state('pictureToCanvas', PictureToCanvasCtrlState)
 
     $urlRouterProvider.otherwise('/')
@@ -50,6 +52,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(InstructionsCtrlName, InstructionsCtrl)
   .controller(GameOverCtrlName, GameOverCtrl)
   .controller(AboutCtrlName, AboutCtrl)
+  .controller(WonCtrlName, WonCtrl)
   .controller(PictureToCanvasCtrlName, PictureToCanvasCtrl)
 
 
