@@ -3,13 +3,9 @@ const app = express();
 const db = require('./models');
 const baseSpells = db.base_spells;
 
-// app.use(bp.urlencoded({extended : true}));
-
 app.get('/', (req,res)=>{
   baseSpells.findAll()
   .then((data =>{
-    console.log('data: ', data);
-
     let allSpells = { base_spells: { } };
 
     data.forEach((dataSet) =>{
@@ -19,9 +15,7 @@ app.get('/', (req,res)=>{
         word: dataSet.dataValues.word,
         prompt: dataSet.dataValues.prompt,
         hint: dataSet.dataValues.hint,
-      };;
-      console.log('allSpells: ', allSpells);
-
+      };
     });
 
     res.json({
