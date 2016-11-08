@@ -62,7 +62,7 @@ app.get('/api/boss_spells', (req, res) => {
 
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 3000 : process.env.PORT;
+const port = isDeveloping ? 8080 : process.env.PORT;
 
 if (isDeveloping) {
   app.set('host', 'http://localhost');
