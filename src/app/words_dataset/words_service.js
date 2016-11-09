@@ -114,13 +114,11 @@ export const WordsService = [
     }
     calculateTotalTime(times) {
       let totalTime = 0;
-      console.log('times',times)
       for (var lvlTime in times) {
         if (times[lvlTime] !== null) {
           totalTime += (secondsPerRound - times[lvlTime])
         }
       }
-      console.log('total Time',totalTime)
       return totalTime;
     }
   }
