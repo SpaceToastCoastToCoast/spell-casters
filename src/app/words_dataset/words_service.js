@@ -27,6 +27,7 @@ export const WordsService = [
       this.syllableCount = this.syllableCount.bind(this)
       this.getRandomWords = this.getRandomWords.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
+      this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
@@ -100,8 +101,9 @@ export const WordsService = [
       spellWords.lvl3Words = this.getRandomWords(this.hard)
       spellWords.lvl4Words = this.getRandomWords(this.boss)
     }
-    postStatistics(userId,percentComplete,totalWordsCompleted,gameMistakes,times) {
+    postStatistics(userId,totalWordsCompleted,gameMistakes,times) {
       const totalTime = this.calculateTotalTime(times);
+      const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
       const req = {
         method: 'POST',
         url: '/api/post-stats',
@@ -120,6 +122,9 @@ export const WordsService = [
         }
       }
       return totalTime;
+    }
+    calculatePercentComplete(totalWordsCompleted) {
+      return Math.round((totalWordsCompleted / (randomDatasetLength*4))*100)/100;
     }
   }
 
