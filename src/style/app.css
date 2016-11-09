@@ -130,8 +130,21 @@ h1 {
   transform: translateX(-340px);
 }
 
-/*Character sprites */
-/*Alepha*/
+/* Character sprites */
+
+/* UI Sprites */
+
+.alephaHealthbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 80px;
+  height: 16px;
+  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
+  background-repeat: repeat-x;
+}
+
+/* Alepha */
 
 .alepha {
   position: absolute;
