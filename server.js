@@ -65,8 +65,12 @@ app.get('/api/boss_spells', (req, res) => {
 
 //DB call for Login
 app.get('/api/login', (req,res) => {
-  users.findAll()
+  users.findAll({
+    limit: 1,
+    where: {userName: req.body.userName}
+  })
   .then((data) =>{
+
     res.json({
       success: true,
       data
