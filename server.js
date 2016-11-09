@@ -79,7 +79,6 @@ app.get('/api/login', (req,res) => {
 
 //Post game statistics
 app.post('/api/post-stats', (req,res) => {
-  console.log('req.body',req.body)
   gamestats.create({
     percentComplete: parseFloat(req.body.percentComplete),
     totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
