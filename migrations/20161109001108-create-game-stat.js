@@ -1,4 +1,4 @@
-git'use strict';
+'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
     return queryInterface.createTable('GameStats', {
