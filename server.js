@@ -4,6 +4,7 @@ const app = express();
 const db = require('./models');
 const baseSpells = db.base_spells;
 const bossSpells = db.boss_spells;
+const users = db.User;
 
 //Webpack materials
 const path = require('path');
@@ -60,6 +61,17 @@ app.get('/api/boss_spells', (req, res) => {
   }));
 });
 
+//DB call for Login
+app.get('/api/login', (req,res) => {
+  users.findAll()
+  .then((data) =>{
+    res.json({
+      success: true,
+      data
+    });
+  });
+});
+
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 8080 : process.env.PORT;
@@ -95,6 +107,8 @@ if (isDeveloping) {
     );
   });
 }
+
+
 
 const onStart = (err) => {
   if (err) {
