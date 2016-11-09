@@ -130,8 +130,21 @@ h1 {
   transform: translateX(-340px);
 }
 
-/*Character sprites */
-/*Alepha*/
+/* Character sprites */
+
+/* UI Sprites */
+
+.alephaHealthbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 80px;
+  height: 16px;
+  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
+  background-repeat: repeat-x;
+}
+
+/* Alepha */
 
 .alepha {
   position: absolute;
@@ -172,4 +185,24 @@ h1 {
 }
 
 /* Alphagator */
+
+.alphagator {
+  position: absolute;
+  top: 144px;
+  right: 96px;
+  width: 128px;
+  height: 128px;
+  background-image: url("http://localhost:8080/img/alphagator-static.png");
+}
+ /*
+.alphagatorIdle {
+  animation: alephaIdle steps(8) 0.64s infinite;
+}
+
+@keyframes alphagatorIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+*/
+
 /* Lord Zett */
