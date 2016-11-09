@@ -98,5 +98,8 @@ export const WordsService = [
       spellWords.lvl3Words = this.getRandomWords(this.hard)
       spellWords.lvl4Words = this.getRandomWords(this.boss)
     }
+    postStatistics(userId,times,lives,words) {
+
+    }
   }
 ];
