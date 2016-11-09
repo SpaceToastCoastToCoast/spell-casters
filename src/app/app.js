@@ -1,6 +1,7 @@
 import angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
-import { WordsService, WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
+import { WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
+import { WordsService } from './words_dataset/words_service'
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { TimerCtrlState, TimerCtrlName, TimerCtrl } from './timer';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
