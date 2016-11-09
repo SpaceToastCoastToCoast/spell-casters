@@ -18,12 +18,11 @@ app.use(express.static('./src/public'));
 app.get('/api/base_spells', (req,res)=> {
   baseSpells.findAll()
   .then((data => {
-    let allBaseSpells = { base_spells: { } };
+    let base_spells = {};
 
     data.forEach((dataSet) => {
 
-      let outerKeyWordObj = {};
-      allBaseSpells.base_spells[dataSet.dataValues.key_word] = {
+      base_spells[dataSet.dataValues.key_word] = {
         word: dataSet.dataValues.word,
         prompt: dataSet.dataValues.prompt,
         hint: dataSet.dataValues.hint,
@@ -32,7 +31,7 @@ app.get('/api/base_spells', (req,res)=> {
 
     res.json({
       success: true,
-      allBaseSpells,
+      base_spells,
     });
   }));
 });
@@ -41,12 +40,11 @@ app.get('/api/base_spells', (req,res)=> {
 app.get('/api/boss_spells', (req, res) => {
   bossSpells.findAll()
   .then((data => {
-    let allBossSpells = { boss_spells: { } };
+    let boss_spells = {};
 
     data.forEach((dataSet) => {
 
-      let outerKeyWordObj = {};
-      allBossSpells.boss_spells[dataSet.dataValues.key_word] = {
+      boss_spells[dataSet.dataValues.key_word] = {
         word: dataSet.dataValues.word,
         prompt: dataSet.dataValues.prompt,
         hint: dataSet.dataValues.hint,
@@ -55,7 +53,7 @@ app.get('/api/boss_spells', (req, res) => {
 
     res.json({
       success: true,
-      allBossSpells,
+      boss_spells,
     });
   }));
 });

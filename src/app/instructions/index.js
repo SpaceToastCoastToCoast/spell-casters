@@ -12,9 +12,9 @@ export const InstructionsCtrlState = {
 };
 
 export const InstructionsCtrl = [
-'$scope', '$location',
+'$scope', '$state',
 class InstructionsCtrl {
-  constructor($scope,$location) {
+  constructor($scope,$state) {
     this.testWords = [
       {
       "word": "a lot",
@@ -63,7 +63,7 @@ class InstructionsCtrl {
     }
 
     $scope.back = () => {
-      $location.path('/')
+      $state.go('splash')
     }
 
     $scope.finished = () => {
