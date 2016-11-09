@@ -9,7 +9,7 @@ module.exports = {
         totalTimeElapsed: 40,
         createdAt : new Date(),
         updatedAt : new Date(),
-        userId: 1,
+        UserId: 1,
       }], {});
   },
 

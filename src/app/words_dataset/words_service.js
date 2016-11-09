@@ -99,7 +99,7 @@ export const WordsService = [
       spellWords.lvl4Words = this.getRandomWords(this.boss)
     }
     postStatistics(userId,times,lives,words) {
-
+      $http.post()
     }
   }
 ];
