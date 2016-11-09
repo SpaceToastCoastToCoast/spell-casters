@@ -7,9 +7,9 @@ module.exports = {
         totalWordsCompleted: 35,
         gameMistakes: 12,
         totalTimeElapsed: 40,
-        userId: 1,
         createdAt : new Date(),
         updatedAt : new Date(),
+        UserId: 1,
       }], {});
   },
 
