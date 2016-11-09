@@ -135,7 +135,6 @@ class WordsDatasetCtrl {
           $scope.showLevel = false;
           $scope.lives = false;
           saveTime($scope.timer,this.lvl)
-          console.log('index hit ',$scope.timer)
           WordsService.postStatistics(1,.25,5,(maxHearts - this.hearts),times)
           $state.go('game-over')
         }
