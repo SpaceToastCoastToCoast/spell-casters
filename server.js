@@ -62,13 +62,14 @@ app.get('/api/boss_spells', (req, res) => {
 });
 
 //DB call for Login
-app.get('/api/login', (req,res) => {
+app.get('/api/login:userName', (req,res) => {
+  console.log('req.body: ', req.params.userName);
   users.findAll({
     limit: 1,
-    where: {userName: req.body.userName}
+    where: {username: req.params.userName}
   })
   .then((data) =>{
-
+    if()
     res.json({
       success: true,
       data
