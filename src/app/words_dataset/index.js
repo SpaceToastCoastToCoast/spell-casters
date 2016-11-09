@@ -88,9 +88,6 @@ class WordsDatasetCtrl {
     const increaseLvl = () => {
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
-      if(this.lvl === 2) {
-        $state.go('won');
-      }
       if (this.lvl === 5) {
         killTimer();
         saveTime($scope.timer)
