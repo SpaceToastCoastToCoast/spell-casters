@@ -36,6 +36,11 @@ class InstructionsCtrl {
     $scope.input = "";
     $scope.feedback = 'good';
 
+    //disable pasting into textbox
+    $scope.preventPaste = (e) => {
+      e.preventDefault();
+      return false;
+    }
 
     $scope.startTutorial = () => {
       $scope.example = true;

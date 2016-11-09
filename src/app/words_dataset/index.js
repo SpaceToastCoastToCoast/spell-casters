@@ -2,6 +2,13 @@ const template = require('./words_dataset.html');
 const spellWords = require('../../public/spells.js');
 
 const maxHearts = 5;
+const minuteLimit = 2;
+const times = {
+  lvl1: 0,
+  lvl2: 0,
+  lvl3: 0,
+  lvl4: 0
+}
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
@@ -13,7 +20,6 @@ export const WordsDatasetCtrlState = {
 };
 
 export const WordsService = [
-
   '$http',
   class WordsService {
     constructor ($http) {
@@ -23,33 +29,83 @@ export const WordsService = [
       this.wordsData = spellWords[`lvl${lvl}Words`];
       return spellWords[`lvl${lvl}Words`];
     }
-
   }
 ];
 
 export const WordsDatasetCtrl = [
-'WordsService','$scope', '$state',
+'WordsService','$scope', '$state', '$interval',
 class WordsDatasetCtrl {
-  constructor(WordsService, $scope, $state) {
+  constructor(WordsService, $scope, $state, $interval) {
     this.newWords = [];
     this.currentWord = 0;
     this.lvl = 1;
     this.newWords = WordsService.getWords(this.lvl);
     this.hearts = maxHearts;
 
-    this.increaseLvl = () => {
+    //timer controls
+    $scope.minutes = minuteLimit;
+    $scope.seconds = '00';
+    $scope.zero = '';
+    $scope.timer = $scope.minutes*60;
+    $scope.countDown;
+
+    //disable pasting into textbox
+    $scope.preventPaste = (e) => {
+      e.preventDefault();
+      return false;
+    }
+
+    const startTimer = () => {
+      $scope.countDown = $interval(function () {
+        $scope.minutes = parseInt($scope.timer / 60, 10);
+        $scope.seconds = parseInt($scope.timer % 60, 10);
+        if ( $scope.seconds < 10 ) {
+          $scope.zero = '0';
+        } else {
+          $scope.zero = ''
+        }
+        if (--$scope.timer < 0) {
+          resetTimer();
+          killTimer();
+          $state.go('game-over')
+        }
+      }, 1000);
+    }
+    const killTimer = () => {
+      $interval.cancel($scope.countDown);
+    }
+
+    const resetTimer = () => {
+      $scope.minutes = minuteLimit;
+      $scope.seconds = '00';
+      $scope.zero = '';
+      $scope.timer = $scope.minutes*60;
+    }
+
+    //start timer on load
+    startTimer()
+
+    const increaseLvl = () => {
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
       if (this.lvl === 5) {
-        $scope.completedGame = true;
+        killTimer();
+        saveTime($scope.timer)
+        resetTimer();
+        $state.go('won');
         $scope.showLevel = false;
       }
+      saveTime($scope.timer)
+      resetTimer();
+    }
+
+    const saveTime = (time) => {
+      times['lvl'+(this.lvl-1)] = time;
     }
 
     $scope.test = "";
     $scope.feedback = 'good';
     $scope.showLevel = false;
-    $scope.completedGame = false;
     $scope.lostGame = false;
     $scope.lives = true;
     $scope.resetGame = () => {
@@ -90,7 +146,7 @@ class WordsDatasetCtrl {
         this.currentWord++;
         if (this.currentWord === this.newWords.length) {
           $scope.showLevel = true;
-          this.increaseLvl();
+          increaseLvl();
         }
       }
     };
