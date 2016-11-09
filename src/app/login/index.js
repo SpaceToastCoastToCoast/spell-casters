@@ -21,7 +21,7 @@ export const UserServices = [
    getUsers (userData) {
      console.log('userData', userData);
      this.data = userData;
-     return this.$http.get(`/api/login${userData.username}`).success(response => {
+     return this.$http.get(`/api/login${userData.username}`, userData).success(response => {
         console.log('response: ', response);
        this.users = response.users;
        return response.users;
