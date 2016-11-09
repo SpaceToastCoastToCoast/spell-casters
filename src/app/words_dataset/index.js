@@ -24,10 +24,31 @@ export const WordsService = [
   class WordsService {
     constructor ($http) {
       this.wordsData = [];
+      this.bossSpells = {};
+      this.baseSpells = {};
+      this.$http = $http;
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
       return spellWords[`lvl${lvl}Words`];
+    }
+    initBossSpells() {
+      return this.$http.get('/api/boss_spells').success(response => {
+        this.bossSpells = response.boss_spells;
+        return response.boss_spells
+      })
+    }
+    getBossSpells() {
+      return this.bossSpells
+    }
+    initBaseSpells() {
+      return this.$http.get('/api/base_spells').success(response => {
+        this.baseSpells = response.base_spells;
+        return response.base_spells
+      })
+    }
+    getBaseSpells() {
+      return this.baseSpells;
     }
   }
 ];
@@ -41,6 +62,14 @@ class WordsDatasetCtrl {
     this.lvl = 1;
     this.newWords = WordsService.getWords(this.lvl);
     this.hearts = maxHearts;
+
+    WordsService.initBaseSpells().then(done => {
+      console.log('base_spells',WordsService.getBaseSpells());
+    })
+    WordsService.initBossSpells().then(done => {
+      console.log('boss_spells',WordsService.getBossSpells());
+    })
+
 
     //timer controls
     $scope.minutes = minuteLimit;
