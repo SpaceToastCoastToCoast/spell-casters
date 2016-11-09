@@ -1,7 +1,13 @@
 const template = require('./words_dataset.html');
-const spellWords = require('../../public/spells.js');
+const spellWords = {
+  lvl1Words: null,
+  lvl2Words: null,
+  lvl3Words: null,
+  lvl4Words: null
+}
 
-const maxHearts = 5;
+const randomDatasetLength = 5;
+const maxHearts = 10;
 const minuteLimit = 2;
 const times = {
   lvl1: 0,
@@ -20,13 +26,22 @@ export const WordsDatasetCtrlState = {
 };
 
 export const WordsService = [
-  '$http',
+  '$http', '$q',
   class WordsService {
-    constructor ($http) {
+    constructor ($http, $q) {
       this.wordsData = [];
       this.bossSpells = {};
       this.baseSpells = {};
+      this.easy = [];
+      this.medium = [];
+      this.hard = [];
+      this.boss = [];
       this.$http = $http;
+      this.$q = $q;
+      this.initBossSpells = this.initBossSpells.bind(this)
+      this.initBaseSpells = this.initBaseSpells.bind(this)
+      this.syllableCount = this.syllableCount.bind(this)
+      this.getRandomWords = this.getRandomWords.bind(this)
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
@@ -38,17 +53,67 @@ export const WordsService = [
         return response.boss_spells
       })
     }
-    getBossSpells() {
-      return this.bossSpells
-    }
     initBaseSpells() {
       return this.$http.get('/api/base_spells').success(response => {
         this.baseSpells = response.base_spells;
         return response.base_spells
       })
     }
+    getBossSpells() {
+      return this.bossSpells
+    }
     getBaseSpells() {
       return this.baseSpells;
+    }
+    initGame() {
+      const initSpells = [this.initBaseSpells(),this.initBossSpells()];
+      return this.$q.all(initSpells).then(values => {
+        this.baseSpells = values[0].data.base_spells
+        this.bossSpells = values[1].data.boss_spells
+      })
+    }
+    initSpellsByLvl () {
+      for (var wordObj in this.baseSpells) {
+        if (this.syllableCount(this.baseSpells[wordObj].word) > 3) {
+          this.hard.push(this.baseSpells[wordObj])
+        } else if (this.syllableCount(this.baseSpells[wordObj].word) > 2) {
+          this.medium.push(this.baseSpells[wordObj])
+        } else {
+          this.easy.push(this.baseSpells[wordObj])
+        }
+      }
+
+      for (var wordObj in this.bossSpells) {
+        this.boss.push(this.bossSpells[wordObj])
+      }
+    }
+    syllableCount(word) {
+      word = word.toLowerCase();                                     //word.downcase!
+      if(word.length <= 3) { return 1; }                             //return 1 if word.length <= 3
+      word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');   //word.sub!(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
+      word = word.replace(/^y/, '');                                 //word.sub!(/^y/, '')
+      return word.match(/[aeiouy]{1,2}/g).length;                    //word.scan(/[aeiouy]{1,2}/).size
+    }
+    getRandomWords(arr) {
+      const max = arr.length - 1;
+      const randomIndicies = [];
+      const randomWords = [];
+
+      while(randomWords.length < randomDatasetLength) {
+        const randomIndex = Math.floor(Math.random() * (max))
+
+        if (randomIndicies.indexOf(randomIndex) === -1) {
+          randomIndicies.push(randomIndex);
+          randomWords.push(arr[randomIndex]);
+        }
+      }
+      return randomWords;
+    }
+    initRandomWords() {
+      spellWords.lvl1Words = this.getRandomWords(this.easy)
+      spellWords.lvl2Words = this.getRandomWords(this.medium)
+      spellWords.lvl3Words = this.getRandomWords(this.hard)
+      spellWords.lvl4Words = this.getRandomWords(this.boss)
     }
   }
 ];
@@ -60,16 +125,14 @@ class WordsDatasetCtrl {
     this.newWords = [];
     this.currentWord = 0;
     this.lvl = 1;
-    this.newWords = WordsService.getWords(this.lvl);
+
     this.hearts = maxHearts;
 
-    WordsService.initBaseSpells().then(done => {
-      console.log('base_spells',WordsService.getBaseSpells());
+    WordsService.initGame().then(_ => {
+      WordsService.initSpellsByLvl();
+      WordsService.initRandomWords();
+      this.newWords = WordsService.getWords(this.lvl);
     })
-    WordsService.initBossSpells().then(done => {
-      console.log('boss_spells',WordsService.getBossSpells());
-    })
-
 
     //timer controls
     $scope.minutes = minuteLimit;
@@ -135,7 +198,6 @@ class WordsDatasetCtrl {
     $scope.test = "";
     $scope.feedback = 'good';
     $scope.showLevel = false;
-    $scope.lostGame = false;
     $scope.lives = true;
     $scope.resetGame = () => {
       this.hearts = maxHearts;
@@ -145,7 +207,6 @@ class WordsDatasetCtrl {
       $scope.test = "";
       $scope.feedback = 'good';
       $scope.showLevel = false;
-      $scope.completedGame = false;
       $scope.lives = true;
     }
 
@@ -155,7 +216,6 @@ class WordsDatasetCtrl {
       } else if($scope.feedback === 'good') {
         this.hearts--;
         if (this.hearts <= 0) {
-          $scope.lostGame = true;
           $scope.showLevel = false;
           $scope.lives = false;
           $state.go('game-over')
