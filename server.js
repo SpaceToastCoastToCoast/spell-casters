@@ -4,7 +4,8 @@ const app = express();
 const db = require('./models');
 const baseSpells = db.base_spells;
 const bossSpells = db.boss_spells;
-
+const users = db.User;
+const bp = require('body-parser');
 //Webpack materials
 const path = require('path');
 const fs = require('fs');
@@ -14,6 +15,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 
 app.use(express.static('./src/public'));
+
+app.use(bp.urlencoded({extended : true}));
 
 app.get('/api/base_spells', (req,res)=> {
   baseSpells.findAll()
@@ -58,6 +61,21 @@ app.get('/api/boss_spells', (req, res) => {
   }));
 });
 
+//DB call for Login
+app.get('/api/login', (req,res) => {
+  users.findAll({
+    limit: 1,
+    where: {userName: req.body.userName}
+  })
+  .then((data) =>{
+
+    res.json({
+      success: true,
+      data
+    });
+  });
+});
+
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 8080 : process.env.PORT;
@@ -93,6 +111,8 @@ if (isDeveloping) {
     );
   });
 }
+
+
 
 const onStart = (err) => {
   if (err) {
