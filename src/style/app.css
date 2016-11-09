@@ -47,7 +47,11 @@ h1 {
 }
 
 #gameInfo {
-  min-height: 64px;
+  height: 96px;
+}
+
+#info {
+  margin-top: 0px;
 }
 
 .tutorialInfo p {
