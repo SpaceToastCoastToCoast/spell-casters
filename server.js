@@ -5,7 +5,7 @@ const db = require('./models');
 const baseSpells = db.base_spells;
 const bossSpells = db.boss_spells;
 const users = db.User;
-
+const bp = require('body-parser');
 //Webpack materials
 const path = require('path');
 const fs = require('fs');
@@ -15,6 +15,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 
 app.use(express.static('./src/public'));
+
+app.use(bp.urlencoded({extended : true}));
 
 app.get('/api/base_spells', (req,res)=> {
   baseSpells.findAll()
