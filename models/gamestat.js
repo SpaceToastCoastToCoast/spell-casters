@@ -5,17 +5,10 @@ module.exports = function(sequelize, DataTypes) {
     totalWordsCompleted: DataTypes.INTEGER,
     gameMistakes: DataTypes.INTEGER,
     totalTimeElapsed: DataTypes.INTEGER,
-    userId: {
-       type: DataTypes.INTEGER,
-       references: {
-        model: 'User',
-        key: 'id'
-       }
-    }
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        GameStat.belongsTo(models.User);
       }
     }
   });
