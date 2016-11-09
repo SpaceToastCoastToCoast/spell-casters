@@ -229,6 +229,14 @@ button:active {
   margin: 8px;
 }
 
+#playerInput .good {
+  background-color: #e3bb88;
+}
+
+#playerInput .wrong {
+  background-color: #b1695a;
+}
+
 #svgLogo {
   width: 420px;
   position: absolute;
@@ -241,14 +249,47 @@ button:active {
 
 /* UI Sprites */
 
-.alephaHealthbar {
+#alephaHealthbar {
   position: absolute;
   top: 8px;
   left: 8px;
-  width: 80px;
   height: 16px;
   background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
   background-repeat: repeat-x;
+}
+
+#gatorBar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 16px;
+  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
+  background-position: 0px -16px;
+  background-repeat: repeat-x;
+}
+
+.fiveHearts {
+  width: 80px;
+}
+
+.fourHearts {
+  width: 64px;
+}
+
+.threeHearts {
+  width: 48px;
+}
+
+.twoHearts {
+  width: 32px;
+}
+
+.oneHearts {
+  width: 16px;
+}
+
+.noHearts {
+  width: 0px;
 }
 
 /* Alepha */

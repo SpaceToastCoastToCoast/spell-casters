@@ -1,6 +1,6 @@
 const template = require('./words_dataset.html');
 
-const maxHearts = 10;
+const maxHearts = 5;
 const minuteLimit = 2;
 const times = {
   lvl1: 0,
@@ -8,6 +8,15 @@ const times = {
   lvl3: 0,
   lvl4: 0
 }
+
+const numberToString = [
+  'no',
+  'one',
+  'two',
+  'three',
+  'four',
+  'five'
+]
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
@@ -27,6 +36,13 @@ class WordsDatasetCtrl {
     this.lvl = 1;
 
     this.hearts = maxHearts;
+    $scope.playerHealth = "fiveHearts";
+    $scope.enemyHealth = "fiveHearts";
+
+    $scope.takeDamage = () => {
+      this.hearts--;
+      $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
+    }
 
     WordsService.initGame().then(_ => {
       WordsService.initSpellsByLvl();
@@ -38,7 +54,7 @@ class WordsDatasetCtrl {
     $scope.minutes = minuteLimit;
     $scope.seconds = '00';
     $scope.zero = '';
-    $scope.timer = $scope.minutes*60;
+    $scope.timer = $scope.minutes * 60;
     $scope.countDown;
 
     //disable pasting into textbox
@@ -114,7 +130,8 @@ class WordsDatasetCtrl {
       if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
         $scope.feedback = 'good'
       } else if($scope.feedback === 'good') {
-        this.hearts--;
+        //subtract hearts from healthbar
+        $scope.takeDamage();
         if (this.hearts <= 0) {
           $scope.showLevel = false;
           $scope.lives = false;
