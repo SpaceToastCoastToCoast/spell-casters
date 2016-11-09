@@ -5,6 +5,7 @@ const db = require('./models');
 const baseSpells = db.base_spells;
 const bossSpells = db.boss_spells;
 const users = db.User;
+const gamestats = db.GameStat;
 const bp = require('body-parser');
 //Webpack materials
 const path = require('path');
@@ -75,6 +76,23 @@ app.get('/api/login', (req,res) => {
     });
   });
 });
+
+//Post game statistics
+app.post('/api/post-stats', (req,res) => {
+  console.log('req.body',req.body)
+  gamestats.create({
+    percentComplete: parseFloat(req.body.percentComplete),
+    totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
+    gameMistakes: parseInt(req.body.gameMistakes),
+    totalTimeElapsed: parseInt(req.body.totalTimeElapsed),
+    UserId: parseInt(req.body.UserId)
+  })
+  .then(_ => {
+    res.json({
+      success:true
+    })
+  })
+})
 
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';

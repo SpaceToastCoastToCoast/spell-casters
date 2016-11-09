@@ -3,10 +3,10 @@ const template = require('./words_dataset.html');
 const maxHearts = 10;
 const minuteLimit = 2;
 const times = {
-  lvl1: 0,
-  lvl2: 0,
-  lvl3: 0,
-  lvl4: 0
+  lvl1: null,
+  lvl2: null,
+  lvl3: null,
+  lvl4: null
 }
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
@@ -78,21 +78,20 @@ class WordsDatasetCtrl {
     startTimer()
 
     const increaseLvl = () => {
+      saveTime($scope.timer,this.lvl)
+      resetTimer();
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
       if (this.lvl === 5) {
         killTimer();
-        saveTime($scope.timer)
-        resetTimer();
+        WordsService.postStatistics(1,1,20,(maxHearts - this.hearts),times)
         $state.go('won');
         $scope.showLevel = false;
       }
-      saveTime($scope.timer)
-      resetTimer();
     }
 
-    const saveTime = (time) => {
-      times['lvl'+(this.lvl-1)] = time;
+    const saveTime = (time,lvl) => {
+      times['lvl'+lvl] = time;
     }
 
     $scope.test = "";
@@ -118,6 +117,9 @@ class WordsDatasetCtrl {
         if (this.hearts <= 0) {
           $scope.showLevel = false;
           $scope.lives = false;
+          saveTime($scope.timer,this.lvl)
+          console.log('index hit ',$scope.timer)
+          WordsService.postStatistics(1,.25,5,(maxHearts - this.hearts),times)
           $state.go('game-over')
         }
         $scope.feedback = 'wrong'
