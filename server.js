@@ -76,6 +76,31 @@ app.post('/api/login', (req,res) => {
   });
 });
 
+//registration route
+app.post('/api/register', (req, res) =>{
+  users.findAll({
+    where: {username: req.body.username}
+  })
+  .then((data)=>{
+    if(data.length === 0){
+      users.create({
+        username: req.body.username,
+        password: req.body.password
+      });
+      res.json({
+        success: true,
+        registrationMessage: 'User successfully created'
+      });
+    }else{
+      res.json({
+        success: false,
+        registrationMessage: 'Please select another username'
+      });
+    }
+  });
+
+});
+
 //Post game statistics
 app.post('/api/post-stats', (req,res) => {
   users.findOne({

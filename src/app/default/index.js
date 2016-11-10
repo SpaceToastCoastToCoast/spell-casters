@@ -11,7 +11,9 @@ export const DefaultCtrlState = {
   //   user: null
   // }
   params: {
-    visible: false
+    user: null,
+    visible: false,
+    registrationMessage: null
   }
 };
 
@@ -21,14 +23,14 @@ export const DefaultCtrl = [
   class DefaultCtrl {
     constructor($scope,$state,$stateParams,$rootScope) {
       $scope.goToInstructions = () => {
-        $state.go('instructions')
-      }
+        $state.go('instructions');
+      };
       $scope.goToActiveGame = () => {
-        $state.go('active-game')
-      }
+        $state.go('active-game');
+      };
       $scope.goToAbout = () => {
-        $state.go('about')
-      }
+        $state.go('about');
+      };
       $scope.goToLogIn = () => {
         $state.go('login')
       }
@@ -37,7 +39,9 @@ export const DefaultCtrl = [
         $rootScope.user = 'Guest';
         $rootScope.visible = false;
         $state.go('splash')
-      }
+      };
+      $scope.registrationMessage = $stateParams.registrationMessage;
+
     }
   }
 ]
