@@ -4,12 +4,14 @@ import { WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from '.
 import { WordsService } from './words_dataset/words_service';
 import { TimerService } from './words_dataset/timer_service';
 import { numberToString } from './constants/numberToString';
+import { GameOverService } from './gameOver/game_over_service';
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
 import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
+import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import '../style/app.css';
 
 
@@ -39,14 +41,17 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('about',AboutCtrlState)
       .state('won',WonCtrlState)
       .state('login', LoginCtrlState)
+      .state('registration', RegistrationCtrlState)
 
-    $urlRouterProvider.otherwise('/')
+    $urlRouterProvider.otherwise('/');
   })
   .directive('app', app)
   .constant('numberToString', numberToString)
   .service('WordsService', WordsService)
   .service('TimerService', TimerService)
   .service('UserServices', UserServices)
+  .service('GameOverService', GameOverService)
+  .service('RegistrationServices', RegistrationServices)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
@@ -58,6 +63,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(AboutCtrlName, AboutCtrl)
   .controller(WonCtrlName, WonCtrl)
   .controller(LoginCtrlName, LoginCtrl)
+  .controller(RegistrationCtrlName, RegistrationCtrl);
 
 
 export default MODULE_NAME;

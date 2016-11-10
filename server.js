@@ -76,6 +76,31 @@ app.post('/api/login', (req,res) => {
   });
 });
 
+//registration route
+app.post('/api/register', (req, res) =>{
+  users.findAll({
+    where: {username: req.body.username}
+  })
+  .then((data)=>{
+    if(data.length === 0){
+      users.create({
+        username: req.body.username,
+        password: req.body.password
+      });
+      res.json({
+        success: true,
+        registrationMessage: 'User successfully created'
+      });
+    }else{
+      res.json({
+        success: false,
+        registrationMessage: 'Please select another username'
+      });
+    }
+  });
+
+});
+
 //Post game statistics
 app.post('/api/post-stats', (req,res) => {
   users.findOne({
@@ -96,6 +121,30 @@ app.post('/api/post-stats', (req,res) => {
     })
   })
 })
+
+//Get all past game statics by username
+app.get('/api/game-stats/:username',(req,res) => {
+  users.findOne({
+    where: {username: req.params.username}
+  })
+  .then((user) => {
+    gamestats.findAll({
+      where: { UserId: user.dataValues.id},
+      order: '"createdAt" DESC',
+    })
+    .then((stats) => {
+      //node-postgres returns decimal datatypes as strings
+      //parse value back to a decimal before serving it on the api
+      stats.forEach(stat => {
+        stat.percentComplete = parseFloat(stat.percentComplete);
+      })
+      res.json({
+        stats
+      })
+    })
+  })
+})
+
 
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';

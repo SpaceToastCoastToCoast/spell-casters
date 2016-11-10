@@ -102,15 +102,23 @@ export const WordsService = [
     postStatistics(totalWordsCompleted,gameMistakes,times) {
       const totalTime = this.calculateTotalTime(times);
       const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
-      const req = {
-        method: 'POST',
-        url: '/api/post-stats',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
+
+      //save stats to rootScope for access in gameOver page
+      this.$rootScope.totalWordsCompleted = totalWordsCompleted;
+      this.$rootScope.percentCompleted = percentComplete
+      this.$rootScope.totalTimeElapsed = totalTime;
+
+      if (this.$rootScope.user !== 'Guest') {
+        const req = {
+          method: 'POST',
+          url: '/api/post-stats',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
+        }
+        return this.$http(req)
       }
-      return this.$http(req)
     }
 
     calculateTotalTime(times) {

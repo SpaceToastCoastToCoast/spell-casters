@@ -10,6 +10,11 @@ $darkest-color: #222222;*/
   Minimum width is 700px before showing "no mobile devices" page
 */
 
+/*stats for gameOver page*/
+.stats {
+  color: white;
+}
+
 body {
   background-color: #222222;
   font-family: 'Anonymous Pro', monospace;

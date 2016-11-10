@@ -9,17 +9,23 @@ export const GameOverCtrlState = {
   controllerAs: 'gameOver'
 };
 
+
 export const GameOverCtrl = [
-  '$scope','$state',
+  '$scope','$state', '$rootScope', 'GameOverService',
 
   class GameOverCtrl {
-    constructor($scope,$state) {
+    constructor($scope,$state,$rootScope, GameOverService) {
       $scope.goToSplash = () => {
         $state.go('splash')
       }
       $scope.goToActiveGame = () => {
         $state.go('active-game')
       }
+
+      $scope.username = $rootScope.user;
+      $scope.totalTime = $rootScope.totalTimeElapsed;
+      $scope.totalWordsCompleted = $rootScope.totalWordsCompleted;
+      $scope.percentCompleted = $rootScope.percentCompleted;
     }
   }
 ]
