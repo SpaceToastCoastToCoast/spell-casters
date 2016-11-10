@@ -85,6 +85,31 @@ app.get('/api/login:userName', (req,res) => {
   });
 });
 
+app.post('/api/login', (req,res) => {
+  users.findAll({
+    limit: 1,
+    where: {username: req.body.username}
+  })
+  .then((data) =>{
+    if(data.length === 0){
+      res.json({
+        success: false
+      });
+    }
+    else{
+      if(data[0].dataValues.password === req.body.password){
+          res.json({
+            success: true
+        });
+      }else{
+        res.json({
+          success: false
+        });
+      }
+    }
+  });
+});
+
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 8080 : process.env.PORT;

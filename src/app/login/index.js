@@ -21,11 +21,19 @@ export const UserServices = [
    getUsers (userData) {
      console.log('userData', userData);
      this.data = userData;
-     return this.$http.get(`/api/login${userData.username}`, userData).success(response => {
+     const req ={
+      method: 'POST',
+      url: `/api/login`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: `username=${userData.username}&password=${userData.password}&=`
+     };
+
+     return this.$http(req).success(response => {
         console.log('response: ', response);
-       this.users = response.users;
-       return response.users;
-     })
+       return
+     });
    }
  }
 ];
