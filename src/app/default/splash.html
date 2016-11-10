@@ -1,11 +1,11 @@
 <div id="gameInfo">
-  <p>{{ user }}</p>
   <h2>Welcome to Spellcasters!</h2>
   <div class="buttonDiv">
     <button ng-click="goToInstructions()">Instructions</button>
     <button ng-click="goToActiveGame()">Start</button>
     <button ng-click="goToAbout()">About</button>
-    <button ng-click="goToLogIn()">Log In</button>
+    <button ng-Show="!visible" ng-click="goToLogIn()">Log In</button>
+    <button ng-Show="visible" ng-click="LogOut()">Log Out</button>
   </div>
 </div>
 <div class="musicPlayer">
@@ -15,4 +15,5 @@
   <div id="gameCanvas" class="splashImage">
     <!-- Splash image goes here -->
   </div>
+  <p>{{ user }}</p>
 </div>

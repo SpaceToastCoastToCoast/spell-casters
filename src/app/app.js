@@ -44,6 +44,9 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('WordsService', WordsService)
   .service('UserServices', UserServices)
   .controller('AppCtrl', AppCtrl)
+  .run(($rootScope) => {
+    $rootScope.user = "Guest";
+  })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
   .controller(InstructionsCtrlName, InstructionsCtrl)
