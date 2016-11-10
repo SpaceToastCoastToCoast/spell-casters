@@ -47,13 +47,13 @@ app.post('/login', (req,res) => {
         success: false
       });
     }
-    else{
+    else {
       if(data[0].dataValues.password === req.body.password){
-          res.json({
-            success: true,
-            username: data[0].dataValues.username
+        res.json({
+          success: true,
+          username: data[0].dataValues.username
         });
-      }else{
+      } else {
         res.json({
           success: false
         });
@@ -77,7 +77,7 @@ app.post('/register', (req, res) =>{
         success: true,
         registrationMessage: 'User successfully created'
       });
-    }else{
+    } else {
       res.json({
         success: false,
         registrationMessage: 'Please select another username'
