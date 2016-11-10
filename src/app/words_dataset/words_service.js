@@ -22,8 +22,6 @@ export const WordsService = [
       this.boss = [];
       this.$http = $http;
       this.$q = $q;
-      this.initBossSpells = this.initBossSpells.bind(this)
-      this.initBaseSpells = this.initBaseSpells.bind(this)
       this.syllableCount = this.syllableCount.bind(this)
       this.getRandomWords = this.getRandomWords.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
@@ -33,16 +31,11 @@ export const WordsService = [
       this.wordsData = spellWords[`lvl${lvl}Words`];
       return spellWords[`lvl${lvl}Words`];
     }
-    initBossSpells() {
-      return this.$http.get('/api/boss_spells').success(response => {
-        this.bossSpells = response.boss_spells;
-        return response.boss_spells
-      })
-    }
-    initBaseSpells() {
-      return this.$http.get('/api/base_spells').success(response => {
+
+    initSpells() {
+      return this.$http.get('/api/spells').success(response => {
         this.baseSpells = response.base_spells;
-        return response.base_spells
+        this.bossSpells = response.boss_spells;
       })
     }
     getBossSpells() {
@@ -51,13 +44,7 @@ export const WordsService = [
     getBaseSpells() {
       return this.baseSpells;
     }
-    initGame() {
-      const initSpells = [this.initBaseSpells(),this.initBossSpells()];
-      return this.$q.all(initSpells).then(values => {
-        this.baseSpells = values[0].data.base_spells
-        this.bossSpells = values[1].data.boss_spells
-      })
-    }
+
     initSpellsByLvl () {
       for (var wordObj in this.baseSpells) {
         if (this.syllableCount(this.baseSpells[wordObj].word) > 3) {
@@ -73,6 +60,7 @@ export const WordsService = [
         this.boss.push(this.bossSpells[wordObj])
       }
     }
+
     syllableCount(word) {
       word = word.toLowerCase();                                     //word.downcase!
       if(word.length <= 3) { return 1; }                             //return 1 if word.length <= 3
