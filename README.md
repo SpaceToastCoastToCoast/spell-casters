@@ -1,6 +1,8 @@
 # spell-casters
 An educational game to teach proper spelling
 
+* [Game Information](https://github.com/SpaceToastCoastToCoast/spell-casters/wiki/Game-Information)
+
 ##Project setup
 
 - create a database and a database owner like in config/sample.config.json
