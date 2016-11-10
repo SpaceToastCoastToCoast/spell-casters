@@ -8,7 +8,8 @@ export const DefaultCtrlState = {
   controller: DefaultCtrlName,
   controllerAs: 'default',
   params: {
-    user: null
+    user: null,
+    registrationMessage: null
   }
 };
 
@@ -29,7 +30,10 @@ export const DefaultCtrl = [
       $scope.goToLogIn = () => {
         $state.go('login')
       }
+      console.log('$scoperegistrationMessage: ', $scope.registrationMessage);
+      console.log('$state.Params.registrationMessage: ', $stateParams.registrationMessage);
       $scope.user = $stateParams.user;
+      $scope.registrationMessage = $stateParams.registrationMessage;
     }
   }
 ]

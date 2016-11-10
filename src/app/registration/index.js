@@ -6,7 +6,10 @@ export const RegistrationCtrlState ={
   url:'/registration',
   template,
   controller: RegistrationCtrlName,
-  controllerAs: 'registration'
+  controllerAs: 'registration',
+  params: {
+    registrationMessage: null
+  }
 };
 
 export const RegistrationServices = [
@@ -33,10 +36,11 @@ export const RegistrationServices = [
      };
      console.log('req: ', req);
      return this.$http(req).success(response => {
+        console.log('response.registrationMessage: ', response.registrationMessage);
         if(response.success === true){
-
+          this.$state.go('splash', {registrationMessage: response.registrationMessage});
         }else{
-
+          this.$state.go('registration', {registrationMessage: response.registrationMessage});
         }
        return response;
      });
@@ -46,10 +50,10 @@ export const RegistrationServices = [
 ];
 
 export const RegistrationCtrl = [
-  '$scope', '$state', 'RegistrationServices',
+  '$scope', '$state', '$stateParams', 'RegistrationServices',
 
   class RegistrationCtrl {
-    constructor($scope, $state, RegistrationServices) {
+    constructor($scope, $state, $stateParams, RegistrationServices) {
       this.registerData ={
         username: '',
         password: ''
@@ -64,6 +68,7 @@ export const RegistrationCtrl = [
         this.registerData.password = $scope.password;
         RegistrationServices.registerUser(this.registerData);
       };
+      $scope.registrationMessage = $stateParams.registrationMessage;
     }
   }
 ];

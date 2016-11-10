@@ -91,11 +91,12 @@ app.post('/api/register', (req, res) =>{
       });
       res.json({
         success: true,
+        registrationMessage: 'User successfully created'
       });
     }else{
       res.json({
         success: false,
-        errormessage: 'Please select another user'
+        registrationMessage: 'Please select another username'
       });
     }
   });
