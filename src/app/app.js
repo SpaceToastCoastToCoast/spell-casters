@@ -1,8 +1,10 @@
 import angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
 import { WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
-import { WordsService } from './words_dataset/words_service'
-import { GameOverService } from './gameOver/game_over_service'
+import { WordsService } from './words_dataset/words_service';
+import { TimerService } from './words_dataset/timer_service';
+import { numberToString } from './constants/numberToString';
+import { GameOverService } from './gameOver/game_over_service';
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
@@ -44,7 +46,9 @@ angular.module(MODULE_NAME, ['ui.router'])
     $urlRouterProvider.otherwise('/');
   })
   .directive('app', app)
+  .constant('numberToString', numberToString)
   .service('WordsService', WordsService)
+  .service('TimerService', TimerService)
   .service('UserServices', UserServices)
   .service('GameOverService', GameOverService)
   .service('RegistrationServices', RegistrationServices)
