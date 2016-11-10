@@ -8,12 +8,14 @@
 </div>
 <div id="gameCanvas">
   <div id="playerInput">
-    <div ng-show="start">
-      <p>
+    <div ng-show="start" id="instructionsDiv">
+      <p id="instructions">
         Instructions: Defeat Lord Zett and the Alphagators by casting spells! Read the hint and the prompt in order to figure out what word you must spell. You have a total of 5 lives and a time limit on each level.  Each time you make a mistake, you will lose a life. Click START to begin the tutorial or BACK to return to the home page
       </p>
-      <button ng-click="startTutorial()">START</button>
-      <button ng-click="back()">BACK</button>
+      <div class="buttonDiv">
+        <button ng-click="startTutorial()">START</button>
+        <button ng-click="back()">BACK</button>
+      </div>
 
     </div>
     <div ng-show="example" id="exampleInput">

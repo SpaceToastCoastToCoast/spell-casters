@@ -1,15 +1,18 @@
-<div>
-  <h4>Welcome to Spellcasters!</h4>
-  <p>{{ user }}</p>
-  <button ng-click="goToInstructions()">Instructions</button>
-  <button ng-click="goToActiveGame()">Start</button>
-  <button ng-click="goToAbout()">About</button>
-  <button ng-click="goToLogIn()">Log In</button>
+  <div id="gameInfo">
+    <h2>Welcome to Spellcasters!</h2>
+    <p>{{ user }}</p>
+    <div class="buttonDiv">
+      <button ng-click="goToInstructions()">Instructions</button>
+      <button ng-click="goToActiveGame()">Start</button>
+      <button ng-click="goToAbout()">About</button>
+      <button ng-click="goToLogIn()">Log In</button>
+    </div>
+  </div>
   <div class="musicPlayer">
   <!-- <audio autoplay="autoplay" loop >
     <source src="music/Spellcasters_short_theme.ogg" type="audio/ogg" >
   </audio> -->
-  <div id="gameCanvas">
+  <div id="gameCanvas" class="splashImage">
     <!-- Splash image goes here -->
   </div>
 </div>

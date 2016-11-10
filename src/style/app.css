@@ -38,12 +38,115 @@ h1 {
   text-shadow: 1px 2px 2px #644749, 2px 4px 4px #111;
 }
 
+h2 {
+  color: #b1695a;
+  margin: auto;
+  margin-bottom: 8px;
+  font-family: 'Ruslan Display', cursive;
+  font-size: 40px;
+  text-align: center;
+  font-weight: lighter;
+  text-shadow: 1px 2px 2px #644749, 2px 4px 4px #111;
+}
+
+button {
+  flex-grow: 1;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
+  color: #db9864;
+  text-shadow: 1px 1px 1px #644749, 2px 2px 2px #111, 0px 0px 2px #e3bb88;
+  padding: 4px;
+  padding-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: none;
+  border-top: 1px solid #e3bb88;
+  border-left: 1px solid #e3bb88;
+  background-color: #db9864;
+  background: linear-gradient(#b1695a, #644749);
+  box-sizing: border-box;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+}
+
+button:active {
+  background: linear-gradient(#644749, #b1695a);
+}
+
+.buttonDiv {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login {
+  box-shadow: 2px 2px 2px #644749, -1px -1px 2px #e3bb88;
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+.login p {
+  margin: 0px;
+}
+
+.login input {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 2px;
+  padding-top: 4px;
+  flex-shrink: 1;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e3bb88;
+  border: none;
+  box-shadow: 0px 2px 4px #b1695a inset;
+}
+
+.login h2 {
+  text-align: left;
+  margin-left: 0px;
+}
+
+.login button {
+  margin-top: 8px;
+  margin-left: 0px;
+}
+
+#instructionsDiv {
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+
+#instructions {
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 #gameCanvas {
   position: relative;
   background-color: #222;
   width: 640px;
   height: 360px;
   display: block;
+}
+
+.splashImage {
+  /*
+  background-image: url("http://localhost:8080/img/splash.png");
+  */
 }
 
 #gameInfo {
@@ -126,6 +229,14 @@ h1 {
   margin: 8px;
 }
 
+#playerInput .good {
+  background-color: #e3bb88;
+}
+
+#playerInput .wrong {
+  background-color: #b1695a;
+}
+
 #svgLogo {
   width: 420px;
   position: absolute;
@@ -138,14 +249,47 @@ h1 {
 
 /* UI Sprites */
 
-.alephaHealthbar {
+#alephaHealthbar {
   position: absolute;
   top: 8px;
   left: 8px;
-  width: 80px;
   height: 16px;
   background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
   background-repeat: repeat-x;
+}
+
+#gatorBar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 16px;
+  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
+  background-position: 0px -16px;
+  background-repeat: repeat-x;
+}
+
+.fiveHearts {
+  width: 80px;
+}
+
+.fourHearts {
+  width: 64px;
+}
+
+.threeHearts {
+  width: 48px;
+}
+
+.twoHearts {
+  width: 32px;
+}
+
+.oneHearts {
+  width: 16px;
+}
+
+.noHearts {
+  width: 0px;
 }
 
 /* Alepha */
@@ -179,13 +323,77 @@ h1 {
   background-image: url("http://localhost:8080/img/sparkle_placeholder.png");
 }
 
-.glowAnim {
-  animation: glowAnim steps(16) 0.64s infinite;
+.noCharge {
+  animation: noCharge steps(16) 0.64s infinite;
 }
 
-@keyframes glowAnim {
+@keyframes noCharge {
   from {background-position: 0px 0px;}
   to {background-position: -512px 0px;}
+}
+
+.oneCharge {
+  animation: oneCharge steps(16) 0.64s infinite;
+}
+
+@keyframes oneCharge {
+  from {background-position: 0px -32px;}
+  to {background-position: -512px -32px;}
+}
+
+.twoCharge {
+  animation: twoCharge steps(16) 0.64s infinite;
+}
+
+@keyframes twoCharge {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
+
+.threeCharge {
+  animation: threeCharge steps(16) 0.64s infinite;
+}
+
+@keyframes threeCharge {
+  from {background-position: 0px -32px;}
+  to {background-position: -512px -32px;}
+}
+
+.fourCharge {
+  animation: fourCharge steps(16) 0.64s infinite;
+}
+
+@keyframes fourCharge {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
+
+.fiveCharge {
+  animation: fiveCharge steps(16) 0.64s infinite;
+}
+
+@keyframes fiveCharge {
+  from {background-position: 0px -32px;}
+  to {background-position: -512px -32px;}
+}
+
+.beam {
+  position: absolute;
+  z-index: 999;
+  top: 176px;
+  left: 184px;
+  width: 288px;
+  height: 64px;
+  background-image: url("http://localhost:8080/img/beam_placeholder.png");
+}
+
+.beamBlast {
+  animation: beamBlast steps(2) 0.1s infinite;
+}
+
+@keyframes beamBlast {
+  from {background-position: 0px 0px;}
+  to {background-position: 0px -128px;}
 }
 
 /* Alphagator */
@@ -199,14 +407,19 @@ h1 {
   background-image: url("http://localhost:8080/img/alphagator-static.png");
 }
  /*
-.alphagatorIdle {
+.gatorIdle {
   animation: alephaIdle steps(8) 0.64s infinite;
 }
 
-@keyframes alphagatorIdle {
+@keyframes gatorIdle {
   from {background-position: 0px 0px;}
   to {background-position: -1024px 0px;}
 }
 */
+
+.gatorDie {
+  /*Debug*/
+  display: none;
+}
 
 /* Lord Zett */
