@@ -50,7 +50,7 @@ export const TimerService = [
       this.minutes = 0;
       this.seconds = minuteLimit * 60;
       this.zero = '';
-      this.timer = $scope.seconds;
+      this.timer = this.seconds;
     }
 
     saveTime(time, lvl) {
