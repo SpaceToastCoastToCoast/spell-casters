@@ -41,11 +41,20 @@ class WordsDatasetCtrl {
     $scope.zero = TimerService.zero;
 
     TimerService.tick = function() {
-      console.log('tick');
       $scope.timer = TimerService.timer;
       $scope.minutes = TimerService.minutes;
       $scope.seconds = TimerService.seconds;
       $scope.zero = TimerService.zero;
+      if ($scope.timer <= 0) {
+        if($scope.spellsCast === 0) {
+          $scope.takeDamage();
+        } else {
+          $scope.giveDamage($scope.spellsCast);
+          $scope.spellsCast = 0;
+          $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
+        }
+        TimerService.resetTimer();
+      }
       $scope.$digest();
     }
 
@@ -177,16 +186,6 @@ class WordsDatasetCtrl {
           $scope.showLevel = true;
           increaseLvl();
         }
-      }
-      if ($scope.timer <= 0) {
-        if($scope.spellsCast === 0) {
-          $scope.takeDamage();
-        } else {
-          $scope.giveDamage($scope.spellsCast);
-          $scope.spellsCast = 0;
-          $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
-        }
-        TimerService.resetTimer();
       }
     };
   }
