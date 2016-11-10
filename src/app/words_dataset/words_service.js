@@ -23,7 +23,7 @@ export const WordsService = [
       this.$http = $http;
       this.$q = $q;
       this.syllableCount = this.syllableCount.bind(this)
-      this.getRandomWords = this.getRandomWords.bind(this)
+      this.randomize = this.randomize.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
       this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
     }
@@ -68,26 +68,32 @@ export const WordsService = [
       word = word.replace(/^y/, '');                                 //word.sub!(/^y/, '')
       return word.match(/[aeiouy]{1,2}/g).length;                    //word.scan(/[aeiouy]{1,2}/).size
     }
-    getRandomWords(arr) {
-      const max = arr.length - 1;
-      const randomIndicies = [];
-      const randomWords = [];
 
-      while(randomWords.length < randomDatasetLength) {
-        const randomIndex = Math.floor(Math.random() * (max))
-
-        if (randomIndicies.indexOf(randomIndex) === -1) {
-          randomIndicies.push(randomIndex);
-          randomWords.push(arr[randomIndex]);
+    randomize(arr) {
+      let currentIndex = arr.length, temporaryValue, randomIndex;
+      let randomArr = arr.map(wordObj => {
+        return {
+          word: wordObj.word,
+          prompt: wordObj.prompt,
+          hint: wordObj.hint
         }
+      })
+      while(currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        --currentIndex;
+
+        temporaryValue = randomArr[currentIndex];
+        randomArr[currentIndex] = randomArr[randomIndex];
+        randomArr[randomIndex] = temporaryValue;
       }
-      return randomWords;
+      return randomArr;
     }
+
     initRandomWords() {
-      spellWords.lvl1Words = this.getRandomWords(this.easy)
-      spellWords.lvl2Words = this.getRandomWords(this.medium)
-      spellWords.lvl3Words = this.getRandomWords(this.hard)
-      spellWords.lvl4Words = this.getRandomWords(this.boss)
+      spellWords.lvl1Words = this.randomize(this.easy)
+      spellWords.lvl2Words = this.randomize(this.medium)
+      spellWords.lvl3Words = this.randomize(this.hard)
+      spellWords.lvl4Words = this.randomize(this.boss)
     }
     postStatistics(userId,totalWordsCompleted,gameMistakes,times) {
       const totalTime = this.calculateTotalTime(times);
