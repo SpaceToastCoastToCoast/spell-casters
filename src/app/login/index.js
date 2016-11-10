@@ -10,10 +10,10 @@ export const LoginCtrlState = {
 };
 
 export const LoginCtrl = [
-  '$scope',
+  '$scope', '$state',
 
   class LoginCtrl {
-    constructor($scope) {
+    constructor($scope, $state) {
       this.userData = {
         username: '',
         password: ''
@@ -21,12 +21,15 @@ export const LoginCtrl = [
       $scope.userName = '';
       $scope.password = '';
 
-    $scope.checkCreditinals = () =>{
-      this.userData.username = $scope.userName;
-      this.userData.password = $scope.password;
-      console.log('userData: ', this.userData);
-    };
+      $scope.checkCreditinals = () => {
+        this.userData.username = $scope.userName;
+        this.userData.password = $scope.password;
+        console.log('userData: ', this.userData);
+      };
+
+      $scope.goToRegistration = () => {
+        $state.go('registration');
+      };
     }
   }
-]
-
+];

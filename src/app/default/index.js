@@ -15,17 +15,17 @@ export const DefaultCtrl = [
   class DefaultCtrl {
     constructor($scope,$state) {
       $scope.goToInstructions = () => {
-        $state.go('instructions')
-      }
+        $state.go('instructions');
+      };
       $scope.goToActiveGame = () => {
-        $state.go('active-game')
-      }
+        $state.go('active-game');
+      };
       $scope.goToAbout = () => {
-        $state.go('about')
-      }
+        $state.go('about');
+      };
       $scope.goToLogIn = () => {
-        $state.go('login')
-      }
+        $state.go('login');
+      };
     }
   }
 ]
