@@ -67,6 +67,8 @@ class WordsDatasetCtrl {
 
     //is the enemy a gator or the boss?
     $scope.isGator = true;
+    $scope.isBoss = false;
+    $scope.showBossText = false;
 
     this.hearts = maxHearts;
     $scope.playerHealth = "fiveHearts";
@@ -81,7 +83,13 @@ class WordsDatasetCtrl {
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
       $timeout(() => {$scope.showBeam = false;}, 500)
-      this.enemyHearts -= hits;
+      if(!$scope.isBoss) {
+        this.enemyHearts -= hits;
+      } else {
+        if(hits >= 4) {
+          this.enemyHearts--;
+        }
+      }
       $scope.enemyHealth = `${numberToString[this.enemyHearts]}Hearts`;
       if(this.enemyHearts <= 0) {
         $scope.enemyHealth = "noHearts";
@@ -111,6 +119,13 @@ class WordsDatasetCtrl {
       this.currentWord = 0;
       this.hearts = maxHearts;
       $scope.playerHealth = 'fiveHearts';
+      if (this.lvl === 4) {
+        $scope.isGator = false;
+        $scope.isBoss = true;
+        this.enemyHearts = maxHearts;
+        this.enemyHealth = 'fiveHearts';
+        $scope.showBossText = true;
+      }
       if (this.lvl === 5) {
         TimerService.killTimer();
         WordsService.postStatistics(20,(maxHearts - this.hearts),times)
@@ -120,16 +135,22 @@ class WordsDatasetCtrl {
     }
 
     const killEnemy = () => {
-      this.spellsCast = 0;
+      $scope.spellsCast = 0;
       $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
       $scope.enemyAnimState = "gatorDie";
       TimerService.resetTimer();
-      //load a new enemy
-      $timeout(() => {
-        this.enemyHearts = maxHearts;
-        $scope.enemyHealth = "fiveHearts";
-        $scope.enemyAnimState = "gatorIdle";
-      }, 500);
+
+      if(!$scope.isBoss) {
+        //load a new enemy if this is not the boss
+        $timeout(() => {
+          this.enemyHearts = maxHearts;
+          $scope.enemyHealth = "fiveHearts";
+          $scope.enemyAnimState = "gatorIdle";
+        }, 500);
+      } else {
+        //killed boss
+        increaseLvl();
+      }
     }
 
     $scope.test = "";
