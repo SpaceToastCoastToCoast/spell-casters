@@ -80,13 +80,24 @@ app.post('/api/login', (req,res) => {
 
 //registration route
 app.post('/api/register', (req, res) =>{
-  users.findAll()
+  users.findAll({
+    where: {username: req.body.username}
+  })
   .then((data)=>{
-    console.log('data: ', data);
-    res.json({
-    success: true,
-    data
-    });
+    if(data.length === 0){
+      users.create({
+        username: req.body.username,
+        password: req.body.password
+      });
+      res.json({
+        success: true,
+      });
+    }else{
+      res.json({
+        success: false,
+        errormessage: 'Please select another user'
+      });
+    }
   });
 
 });
