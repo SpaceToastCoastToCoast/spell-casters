@@ -35,19 +35,19 @@ class WordsDatasetCtrl {
     this.currentWord = 0;
     this.lvl = 1;
 
-    $scope.timer = null;
-    $scope.TimerService = TimerService;
+    $scope.timer = TimerService.timer;
+    $scope.minutes = TimerService.minutes;
+    $scope.seconds = TimerService.seconds;
+    $scope.zero = TimerService.zero;
 
-    (function () {
-      $scope.$watch(() => {
-          return TimerService.timer;
-      }, function (newValue, oldValue, scope) {
-          console.log(scope);
-          if ( newValue !== oldValue ) {
-            scope.timer = newValue;
-          }
-      });
-    }());
+    TimerService.tick = function() {
+      console.log('tick');
+      $scope.timer = TimerService.timer;
+      $scope.minutes = TimerService.minutes;
+      $scope.seconds = TimerService.seconds;
+      $scope.zero = TimerService.zero;
+      $scope.$digest();
+    }
 
     $scope.spellsCast = 0;
     $scope.chargeLevel = "noCharge";
