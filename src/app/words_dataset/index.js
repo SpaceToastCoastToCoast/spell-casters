@@ -37,7 +37,7 @@ class WordsDatasetCtrl {
     this.currentWord = 0;
     this.lvl = 1;
 
-    this.spellsCast = 0;
+    $scope.spellsCast = 0;
 
     $scope.playerAnimState = "alephaIdle";
     $scope.enemyAnimState = "gatorIdle";
@@ -90,12 +90,13 @@ class WordsDatasetCtrl {
           $scope.zero = ''
         }
         if (--$scope.timer < 0) {
-          resetTimer();
-          if(this.spellsCast === 0) {
+          if($scope.spellsCast === 0) {
             $scope.takeDamage();
           } else {
-            $scope.giveDamage(this.spellsCast);
+            $scope.giveDamage($scope.spellsCast);
+            $scope.spellsCast = 0;
           }
+          resetTimer();
         }
       }, 1000);
     }
@@ -131,10 +132,12 @@ class WordsDatasetCtrl {
       this.spellsCast = 0;
       $scope.enemyAnimState = "gatorDie";
       resetTimer();
+      WordsService.initRandomWords();
       this.newWords = WordsService.getWords(this.lvl);
       this.currentWord = 0;
       //load a new enemy
       $timeout(() => {
+        this.enemyHearts = maxHearts;
         $scope.enemyHealth = "fiveHearts";
         $scope.enemyAnimState = "gatorIdle";
       }, 500);
@@ -174,7 +177,7 @@ class WordsDatasetCtrl {
           $scope.showLevel = false;
           $scope.lives = false;
           saveTime($scope.timer,this.lvl)
-          WordsService.postStatistics(1,((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times)
+          WordsService.postStatistics(1,((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times);
           $state.go('game-over')
         }
         $scope.feedback = 'wrong'
@@ -189,10 +192,11 @@ class WordsDatasetCtrl {
       }
       if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
         //successful spell, enemy takes damage
-        this.spellsCast++;
-        if($scope.timer <= 1 || this.spellsCast >= 5) {
-          $scope.giveDamage(this.spellsCast);
-          this.spellsCast = 0;
+        $scope.spellsCast++;
+        if($scope.spellsCast >= 5) {
+          resetTimer();
+          $scope.giveDamage($scope.spellsCast);
+          $scope.spellsCast = 0;
         }
         $scope.test = "";
         this.currentWord++;
