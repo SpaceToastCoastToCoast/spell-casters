@@ -24,7 +24,6 @@ export const RegistrationServices = [
   }
 
   registerUser (registerData) {
-    console.log('registerData: ', registerData);
     this.data = registerData;
     const req ={
       method: 'POST',
@@ -36,7 +35,6 @@ export const RegistrationServices = [
      };
      console.log('req: ', req);
      return this.$http(req).success(response => {
-        console.log('response.registrationMessage: ', response.registrationMessage);
         if(response.success === true){
           this.$state.go('splash', {registrationMessage: response.registrationMessage});
         }else{

@@ -30,24 +30,28 @@ export const UserServices = [
       },
       data: `username=${userData.username}&password=${userData.password}&=`
      };
-
-     return this.$http(req).success(response => {
-        if(response.success === true){
-          this.$state.go('splash', { user: response.username});
-        }else{
-          this.$state.go('login');
-        }
-       return response.username;
-     });
+     return this.$http(req);
+     // .success(response => {
+     //    console.log('response: ', response);
+     //    if(response.success === true){
+     //        this.$rootScope.user = response.username;
+     //        this.$rootScope.visible = true;
+     //        console.log('this.$rootScope', this.$rootScope);
+     //        this.$state.go('splash'); //this.$state.go('splash', { user: response.username});
+     //    }else{
+     //      this.$state.go('login');
+     //    }
+     //   return;
+     // });
    }
  }
 ];
 
 export const LoginCtrl = [
-  '$scope', '$state', 'UserServices',
+  '$scope', 'UserServices', '$state', '$rootScope',
 
   class LoginCtrl {
-    constructor($scope, $state, UserServices) {
+    constructor($scope, UserServices, $state, $rootScope) {
       this.userData = {
         username: '',
         password: ''
@@ -55,16 +59,31 @@ export const LoginCtrl = [
       $scope.userName = '';
       $scope.password = '';
       $scope.UserServices = UserServices;
+      this.$state = $state;
+      this.$rootScope = $rootScope;
+
 
     $scope.checkCreditinals = () =>{
       this.userData.username = $scope.userName;
       this.userData.password = $scope.password;
-      UserServices.getUsers(this.userData);
+      console.log('userData: ', this.userData);
+      UserServices.getUsers(this.userData)
+        .success(response => {
+          if(response.success === true){
+            this.$rootScope.user = response.username;
+            this.$rootScope.visible = true;
+            console.log('this.$rootScope', this.$rootScope);
+            this.$state.go('splash'); //this.$state.go('splash', { user: response.username});
+          }else{
+            this.$state.go('login');
+          }
+         return response.username;
+        });
     };
 
     $scope.goToRegistration = () => {
         $state.go('registration');
       };
-    }
   }
-];
+}
+]

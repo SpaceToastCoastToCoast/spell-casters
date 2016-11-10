@@ -2,8 +2,6 @@
 const express = require('express');
 const app = express();
 const db = require('./models');
-const baseSpells = db.base_spells;
-const bossSpells = db.boss_spells;
 const spells = db.Spell;
 const users = db.User;
 const gamestats = db.GameStat;
@@ -105,16 +103,21 @@ app.post('/api/register', (req, res) =>{
 
 //Post game statistics
 app.post('/api/post-stats', (req,res) => {
-  gamestats.create({
-    percentComplete: parseFloat(req.body.percentComplete),
-    totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
-    gameMistakes: parseInt(req.body.gameMistakes),
-    totalTimeElapsed: parseInt(req.body.totalTimeElapsed),
-    UserId: parseInt(req.body.UserId)
+  users.findOne({
+    where: {username: req.body.username}
   })
-  .then(_ => {
-    res.json({
-      success:true
+  .then((user) => {
+    gamestats.create({
+      percentComplete: parseFloat(req.body.percentComplete),
+      totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
+      gameMistakes: parseInt(req.body.gameMistakes),
+      totalTimeElapsed: parseInt(req.body.totalTimeElapsed),
+      UserId: user.dataValues.id
+    })
+    .then(_ => {
+      res.json({
+        success:true
+      })
     })
   })
 })

@@ -10,9 +10,9 @@ const randomDatasetLength = 5;
 const secondsPerRound = 120;
 
 export const WordsService = [
-  '$http', '$q',
+  '$http', '$q', '$rootScope',
   class WordsService {
-    constructor ($http, $q) {
+    constructor ($http, $q, $rootScope) {
       this.wordsData = [];
       this.bossSpells = {};
       this.baseSpells = {};
@@ -23,9 +23,11 @@ export const WordsService = [
       this.$http = $http;
       this.$q = $q;
       this.syllableCount = this.syllableCount.bind(this)
-      this.getRandomWords = this.getRandomWords.bind(this)
+      this.randomize = this.randomize.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
       this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
+      this.totalWords = null;
+      this.$rootScope = $rootScope;
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
@@ -36,6 +38,7 @@ export const WordsService = [
       return this.$http.get('/api/spells').success(response => {
         this.baseSpells = response.base_spells;
         this.bossSpells = response.boss_spells;
+        this.totalWords = Object.keys(response.base_spells).length + Object.keys(response.boss_spells).length
       })
     }
     getBossSpells() {
@@ -68,28 +71,35 @@ export const WordsService = [
       word = word.replace(/^y/, '');                                 //word.sub!(/^y/, '')
       return word.match(/[aeiouy]{1,2}/g).length;                    //word.scan(/[aeiouy]{1,2}/).size
     }
-    getRandomWords(arr) {
-      const max = arr.length - 1;
-      const randomIndicies = [];
-      const randomWords = [];
 
-      while(randomWords.length < randomDatasetLength) {
-        const randomIndex = Math.floor(Math.random() * (max))
-
-        if (randomIndicies.indexOf(randomIndex) === -1) {
-          randomIndicies.push(randomIndex);
-          randomWords.push(arr[randomIndex]);
+    randomize(arr) {
+      let currentIndex = arr.length, temporaryValue, randomIndex;
+      let randomArr = arr.map(wordObj => {
+        return {
+          word: wordObj.word,
+          prompt: wordObj.prompt,
+          hint: wordObj.hint
         }
+      })
+      while(currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        --currentIndex;
+
+        temporaryValue = randomArr[currentIndex];
+        randomArr[currentIndex] = randomArr[randomIndex];
+        randomArr[randomIndex] = temporaryValue;
       }
-      return randomWords;
+      return randomArr;
     }
+
     initRandomWords() {
-      spellWords.lvl1Words = this.getRandomWords(this.easy)
-      spellWords.lvl2Words = this.getRandomWords(this.medium)
-      spellWords.lvl3Words = this.getRandomWords(this.hard)
-      spellWords.lvl4Words = this.getRandomWords(this.boss)
+      spellWords.lvl1Words = this.randomize(this.easy)
+      spellWords.lvl2Words = this.randomize(this.medium)
+      spellWords.lvl3Words = this.randomize(this.hard)
+      spellWords.lvl4Words = this.randomize(this.boss)
     }
-    postStatistics(userId,totalWordsCompleted,gameMistakes,times) {
+
+    postStatistics(totalWordsCompleted,gameMistakes,times) {
       const totalTime = this.calculateTotalTime(times);
       const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
       const req = {
@@ -98,10 +108,11 @@ export const WordsService = [
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&UserId=${userId}`
+        data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
       }
       return this.$http(req)
     }
+
     calculateTotalTime(times) {
       let totalTime = 0;
       for (var lvlTime in times) {
@@ -111,8 +122,9 @@ export const WordsService = [
       }
       return totalTime;
     }
+
     calculatePercentComplete(totalWordsCompleted) {
-      return Math.round((totalWordsCompleted / (randomDatasetLength*4))*100)/100;
+      return Math.round((totalWordsCompleted / (this.totalWords))*100)/100;
     }
   }
 
