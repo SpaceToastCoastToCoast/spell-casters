@@ -24,7 +24,6 @@ export const LoginCtrl = [
       $scope.checkCreditinals = () => {
         this.userData.username = $scope.userName;
         this.userData.password = $scope.password;
-        console.log('userData: ', this.userData);
       };
 
       $scope.goToRegistration = () => {
