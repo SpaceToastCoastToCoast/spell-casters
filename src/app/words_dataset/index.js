@@ -129,7 +129,7 @@ class WordsDatasetCtrl {
       $scope.playerHealth = 'fiveHearts';
       if (this.lvl === 5) {
         killTimer();
-        WordsService.postStatistics(1,20,(maxHearts - this.hearts),times)
+        WordsService.postStatistics(20,(maxHearts - this.hearts),times)
         $state.go('won');
         $scope.showLevel = false;
       }
@@ -182,7 +182,7 @@ class WordsDatasetCtrl {
           $scope.showLevel = false;
           $scope.lives = false;
           saveTime($scope.timer,this.lvl)
-          WordsService.postStatistics(1,((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times);
+          WordsService.postStatistics(((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times);
           $state.go('game-over')
         }
         $scope.feedback = 'wrong'

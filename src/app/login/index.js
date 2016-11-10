@@ -81,8 +81,8 @@ export const LoginCtrl = [
             this.$state.go('login');
           }
          return response.username;
-       });
-    };
+        });
+      };
     }
   }
 ]
