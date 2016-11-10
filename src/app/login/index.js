@@ -11,14 +11,16 @@ export const LoginCtrlState = {
 
 export const UserServices = [
 
- '$q', '$http',
+ '$q', '$http', '$location', '$state',
  class UserServices {
-   constructor ($q, $http, users) {
+   constructor ($q, $http, $location, $state, users) {
      this.$http = $http;
      this.users = users;
+     this.$location = $location;
+     this.$state= $state;
    }
 
-   getUsers (userData) {
+   getUsers (userData, $location, $state) {
      console.log('userData', userData);
      this.data = userData;
      const req ={
@@ -32,7 +34,12 @@ export const UserServices = [
 
      return this.$http(req).success(response => {
         console.log('response: ', response);
-       return
+        if(response.success === true){
+          this.$state.go('splash', {user: response.username});
+        }else{
+          this.$state.go('login');
+        }
+       return response.username;
      });
    }
  }

@@ -6,14 +6,15 @@ export const DefaultCtrlState = {
   url: '/',
   template,
   controller: DefaultCtrlName,
-  controllerAs: 'default'
+  controllerAs: 'default',
+  params: {user: null}
 };
 
 export const DefaultCtrl = [
-  '$scope','$state',
+  '$scope','$state', '$stateParams',
 
   class DefaultCtrl {
-    constructor($scope,$state) {
+    constructor($scope,$state, $stateParams) {
       $scope.goToInstructions = () => {
         $state.go('instructions')
       }
@@ -25,7 +26,8 @@ export const DefaultCtrl = [
       }
       $scope.goToLogIn = () => {
         $state.go('login')
-      }
+      },
+      $scope.user = $stateParams.user;
     }
   }
 ]
