@@ -1,12 +1,15 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('boss_spells', {
+    return queryInterface.createTable('Spells', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      type: {
+        type: Sequelize.TEXT
       },
       key_word: {
         type: Sequelize.TEXT
@@ -31,6 +34,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('boss_spells');
+    return queryInterface.dropTable('Spells');
   }
 };

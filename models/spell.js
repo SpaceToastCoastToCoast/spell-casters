@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var boss_spells = sequelize.define('boss_spells', {
+  var Spell = sequelize.define('Spell', {
+    type: DataTypes.TEXT,
     key_word: DataTypes.TEXT,
     word: DataTypes.TEXT,
     prompt: DataTypes.TEXT,
@@ -12,5 +13,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return boss_spells;
+  return Spell;
 };
