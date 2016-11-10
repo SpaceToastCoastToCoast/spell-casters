@@ -1,22 +1,6 @@
 const template = require('./words_dataset.html');
 
 const maxHearts = 5;
-const minuteLimit = 0.5;
-const times = {
-  lvl1: null,
-  lvl2: null,
-  lvl3: null,
-  lvl4: null
-}
-
-const numberToString = [
-  'no',
-  'one',
-  'two',
-  'three',
-  'four',
-  'five'
-]
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
@@ -30,12 +14,40 @@ export const WordsDatasetCtrlState = {
 //Separate into services!!!
 
 export const WordsDatasetCtrl = [
-'WordsService','$scope', '$state', '$interval', '$timeout',
+'WordsService',
+'TimerService',
+'numberToString',
+'$scope',
+'$state',
+'$interval',
+'$timeout',
 class WordsDatasetCtrl {
-  constructor(WordsService, $scope, $state, $interval, $timeout) {
+  constructor(
+    WordsService,
+    TimerService,
+    numberToString,
+    $scope,
+    $state,
+    $interval,
+    $timeout) {
+
     this.newWords = [];
     this.currentWord = 0;
     this.lvl = 1;
+
+    $scope.timer = null;
+    $scope.TimerService = TimerService;
+
+    (function () {
+      $scope.$watch(() => {
+          return TimerService.timer;
+      }, function (newValue, oldValue, scope) {
+          console.log(scope);
+          if ( newValue !== oldValue ) {
+            scope.timer = newValue;
+          }
+      });
+    }());
 
     $scope.spellsCast = 0;
     $scope.chargeLevel = "noCharge";
@@ -43,6 +55,9 @@ class WordsDatasetCtrl {
 
     $scope.playerAnimState = "alephaIdle";
     $scope.enemyAnimState = "gatorIdle";
+
+    //is the enemy a gator or the boss?
+    $scope.isGator = true;
 
     this.hearts = maxHearts;
     $scope.playerHealth = "fiveHearts";
@@ -71,64 +86,24 @@ class WordsDatasetCtrl {
       this.newWords = WordsService.getWords(this.lvl);
     })
 
-    //timer controls
-    $scope.minutes = 0;
-    $scope.seconds = '30';
-    $scope.zero = '';
-    $scope.timer = minuteLimit * 60;
-    $scope.countDown;
-
     //disable pasting into textbox
     $scope.preventPaste = (e) => {
       e.preventDefault();
       return false;
     }
 
-    const startTimer = () => {
-      $scope.countDown = $interval(function () {
-        $scope.minutes = parseInt($scope.timer / 60, 10);
-        $scope.seconds = parseInt($scope.timer % 60, 10);
-        if ( $scope.seconds < 10 ) {
-          $scope.zero = '0';
-        } else {
-          $scope.zero = ''
-        }
-        if (--$scope.timer < 0) {
-          if($scope.spellsCast === 0) {
-            $scope.takeDamage();
-          } else {
-            $scope.giveDamage($scope.spellsCast);
-            $scope.spellsCast = 0;
-            $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
-          }
-          resetTimer();
-        }
-      }, 1000);
-    }
-
-    const killTimer = () => {
-      $interval.cancel($scope.countDown);
-    }
-
-    const resetTimer = () => {
-      $scope.minutes = 0;
-      $scope.seconds = minuteLimit * 60;
-      $scope.zero = '';
-      $scope.timer = $scope.seconds;
-    }
-
     //start timer on load
-    startTimer();
+    TimerService.startTimer();
 
     const increaseLvl = () => {
-      saveTime($scope.timer,this.lvl)
-      resetTimer();
+      TimerService.saveTime($scope.timer,this.lvl)
+      TimerService.resetTimer();
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
       this.hearts = maxHearts;
       $scope.playerHealth = 'fiveHearts';
       if (this.lvl === 5) {
-        killTimer();
+        TimerService.killTimer();
         WordsService.postStatistics(20,(maxHearts - this.hearts),times)
         $state.go('won');
         $scope.showLevel = false;
@@ -139,22 +114,13 @@ class WordsDatasetCtrl {
       this.spellsCast = 0;
       $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
       $scope.enemyAnimState = "gatorDie";
-      resetTimer();
+      TimerService.resetTimer();
       //load a new enemy
       $timeout(() => {
         this.enemyHearts = maxHearts;
         $scope.enemyHealth = "fiveHearts";
         $scope.enemyAnimState = "gatorIdle";
       }, 500);
-
-      // //Debug
-      // killTimer();
-      // $state.go('won');
-      // $scope.showLevel = false;
-    }
-
-    const saveTime = (time,lvl) => {
-      times['lvl'+lvl] = time;
     }
 
     $scope.test = "";
@@ -181,7 +147,7 @@ class WordsDatasetCtrl {
         if (this.hearts <= 0) {
           $scope.showLevel = false;
           $scope.lives = false;
-          saveTime($scope.timer,this.lvl)
+          TimerService.saveTime($scope.timer,this.lvl)
           WordsService.postStatistics(((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times);
           $state.go('game-over')
         }
@@ -200,7 +166,7 @@ class WordsDatasetCtrl {
         $scope.spellsCast++;
         $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
         if($scope.spellsCast >= 5) {
-          resetTimer();
+          TimerService.resetTimer();
           $scope.giveDamage($scope.spellsCast);
           $scope.spellsCast = 0;
           $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
@@ -211,6 +177,16 @@ class WordsDatasetCtrl {
           $scope.showLevel = true;
           increaseLvl();
         }
+      }
+      if ($scope.timer <= 0) {
+        if($scope.spellsCast === 0) {
+          $scope.takeDamage();
+        } else {
+          $scope.giveDamage($scope.spellsCast);
+          $scope.spellsCast = 0;
+          $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
+        }
+        TimerService.resetTimer();
       }
     };
   }
