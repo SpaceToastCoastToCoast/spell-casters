@@ -2,5 +2,12 @@
   <h4>Game Over!</h4>
   <button ng-click="goToSplash()">Home</button>
   <button ng-click="goToActiveGame()">Try Again</button>
-
+  <div id="gameCanvas">
+    <div id="gameStats">
+      <p id="username" class="stats">{{username}}</p>
+      <p id="totalTime" class="stats">Total Time:{{totalTime}}</p>
+      <p id="totalWordsCompleted" class="stats">Total Words Completed: {{totalWordsCompleted}}</p>
+      <p id="percentCompleted" class="stats">Percent Completed: {{percentCompleted}}</p>
+    </div>
+  </div>
 </div>

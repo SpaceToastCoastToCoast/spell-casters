@@ -122,6 +122,25 @@ app.post('/api/post-stats', (req,res) => {
   })
 })
 
+//Get all past game statics by username
+app.get('/api/game-stats/:username',(req,res) => {
+  users.findOne({
+    where: {username: req.params.username}
+  })
+  .then((user) => {
+    gamestats.findAll({
+      where: { UserId: user.dataValues.id},
+      order: '"createdAt" DESC',
+    })
+    .then((stats) => {
+      res.json({
+        stats
+      })
+    })
+  })
+})
+
+
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 8080 : process.env.PORT;
