@@ -15,7 +15,24 @@
     <!-- <p>Spell the word in the box to charge your spell!</p>
     <h4 class="hint">HINT:</h4>
     <p>When you know something is true.</p> -->
+
   </div>
   <img src="/img/spellcasters_titletext.svg" id="svgLogo">
-
+  <button id='play'>Play</button>
+  <button id='pause'>Pause</button>
+  <script>
+    var sound = new Howl({
+      src: ['music/Spellcasters_short_theme.ogg'],
+      autoplay: true,
+      loop: true
+    })
+    var playButton = document.getElementById('play')
+    playButton.onclick = function() {
+      sound.play();
+    }
+    var pauseButton = document.getElementById('pause')
+    pauseButton.onclick = function() {
+      sound.pause();
+    }
+  </script>
 </main>

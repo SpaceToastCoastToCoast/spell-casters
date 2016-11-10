@@ -13,3 +13,5 @@ var sound = new Howl({
   autoplay: true,
   loop: true
 });
+
+console.log('hello')
