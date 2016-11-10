@@ -21,9 +21,7 @@ export const UserServices = [
    }
 
    getUsers (userData) {
-     console.log('userData', userData);
      this.data = userData;
-     console.log('userData: ', userData);
      const req ={
       method: 'POST',
       url: `/api/login`,
@@ -32,7 +30,6 @@ export const UserServices = [
       },
       data: `username=${userData.username}&password=${userData.password}&=`
      };
-
      return this.$http(req);
      // .success(response => {
      //    console.log('response: ', response);
@@ -89,8 +86,11 @@ export const LoginCtrl = [
           }
          return response.username;
         });
-      };
-    }
-  }
-]
+    };
 
+    $scope.goToRegistration = () => {
+        $state.go('registration');
+      };
+  }
+}
+]
