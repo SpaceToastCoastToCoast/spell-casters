@@ -8,7 +8,7 @@ import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
 import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
-import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
+import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import '../style/app.css';
 
 
@@ -45,6 +45,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .directive('app', app)
   .service('WordsService', WordsService)
   .service('UserServices', UserServices)
+  .service('RegistrationServices', RegistrationServices)
   .controller('AppCtrl', AppCtrl)
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)

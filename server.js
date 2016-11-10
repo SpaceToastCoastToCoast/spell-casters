@@ -78,6 +78,19 @@ app.post('/api/login', (req,res) => {
   });
 });
 
+//registration route
+app.post('/api/register', (req, res) =>{
+  users.findAll()
+  .then((data)=>{
+    console.log('data: ', data);
+    res.json({
+    success: true,
+    data
+    });
+  });
+
+});
+
 //Post game statistics
 app.post('/api/post-stats', (req,res) => {
   gamestats.create({

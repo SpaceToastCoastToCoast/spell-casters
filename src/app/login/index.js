@@ -21,9 +21,7 @@ export const UserServices = [
    }
 
    getUsers (userData) {
-     console.log('userData', userData);
      this.data = userData;
-     console.log('userData: ', userData);
      const req ={
       method: 'POST',
       url: `/api/login`,
@@ -34,13 +32,12 @@ export const UserServices = [
      };
 
      return this.$http(req).success(response => {
-        console.log('response: ', response);
         if(response.success === true){
           this.$state.go('splash', { user: response.username});
         }else{
           this.$state.go('login');
         }
-       return
+       return response.username;
      });
    }
  }
@@ -62,7 +59,6 @@ export const LoginCtrl = [
     $scope.checkCreditinals = () =>{
       this.userData.username = $scope.userName;
       this.userData.password = $scope.password;
-      console.log('userData: ', this.userData);
       UserServices.getUsers(this.userData);
     };
 
