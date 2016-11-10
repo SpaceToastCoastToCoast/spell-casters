@@ -133,6 +133,11 @@ app.get('/api/game-stats/:username',(req,res) => {
       order: '"createdAt" DESC',
     })
     .then((stats) => {
+      //node-postgres returns decimal datatypes as strings
+      //parse value back to a decimal before serving it on the api
+      stats.forEach(stat => {
+        stat.percentComplete = parseFloat(stat.percentComplete);
+      })
       res.json({
         stats
       })
