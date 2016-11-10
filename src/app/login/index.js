@@ -47,10 +47,10 @@ export const UserServices = [
 ];
 
 export const LoginCtrl = [
-  '$scope', 'UserServices',
+  '$scope', '$state', 'UserServices',
 
   class LoginCtrl {
-    constructor($scope, UserServices) {
+    constructor($scope, $state, UserServices) {
       this.userData = {
         username: '',
         password: ''
