@@ -32,6 +32,7 @@ export const GameOverCtrl = [
       // })
 
       $scope.username = $rootScope.user;
+      console.log('index ',$rootScope.totalTimeElapsed);
       $scope.totalTime = $rootScope.totalTimeElapsed;
       $scope.totalWordsCompleted = $rootScope.totalWordsCompleted;
       $scope.percentCompleted = $rootScope.percentCompleted;

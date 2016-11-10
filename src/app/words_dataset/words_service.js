@@ -104,9 +104,10 @@ export const WordsService = [
       const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
 
       //save stats to rootScope for access in gameOver page
-      $rootScope.totalWordsCompleted = totalWordsCompleted;
-      $rootScope.percentCompleted = perecentComplete
-      $rootScope.totalTimeElapsed = totalTime;
+      this.$rootScope.totalWordsCompleted = totalWordsCompleted;
+      this.$rootScope.percentCompleted = percentComplete
+      this.$rootScope.totalTimeElapsed = totalTime;
+
       const req = {
         method: 'POST',
         url: '/api/post-stats',
