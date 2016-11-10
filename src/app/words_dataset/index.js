@@ -38,6 +38,8 @@ class WordsDatasetCtrl {
     this.lvl = 1;
 
     $scope.spellsCast = 0;
+    $scope.chargeLevel = "noCharge";
+    $scope.showBeam = false;
 
     $scope.playerAnimState = "alephaIdle";
     $scope.enemyAnimState = "gatorIdle";
@@ -53,6 +55,8 @@ class WordsDatasetCtrl {
     }
 
     $scope.giveDamage = (hits) => {
+      $scope.showBeam = true;
+      $timeout(() => {$scope.showBeam = false;}, 500)
       this.enemyHearts -= hits;
       $scope.enemyHealth = `${numberToString[this.enemyHearts]}Hearts`;
       if(this.enemyHearts <= 0) {
@@ -95,6 +99,7 @@ class WordsDatasetCtrl {
           } else {
             $scope.giveDamage($scope.spellsCast);
             $scope.spellsCast = 0;
+            $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
           }
           resetTimer();
         }
@@ -130,6 +135,7 @@ class WordsDatasetCtrl {
 
     const killEnemy = () => {
       this.spellsCast = 0;
+      $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
       $scope.enemyAnimState = "gatorDie";
       resetTimer();
       WordsService.initRandomWords();
@@ -193,10 +199,12 @@ class WordsDatasetCtrl {
       if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
+        $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
         if($scope.spellsCast >= 5) {
           resetTimer();
           $scope.giveDamage($scope.spellsCast);
           $scope.spellsCast = 0;
+          $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
         }
         $scope.test = "";
         this.currentWord++;

@@ -323,13 +323,77 @@ button:active {
   background-image: url("http://localhost:8080/img/sparkle_placeholder.png");
 }
 
-.glowAnim {
-  animation: glowAnim steps(16) 0.64s infinite;
+.noCharge {
+  animation: noCharge steps(16) 0.64s infinite;
 }
 
-@keyframes glowAnim {
+@keyframes noCharge {
   from {background-position: 0px 0px;}
   to {background-position: -512px 0px;}
+}
+
+.oneCharge {
+  animation: oneCharge steps(16) 0.64s infinite;
+}
+
+@keyframes oneCharge {
+  from {background-position: 0px -32px;}
+  to {background-position: -512px -32px;}
+}
+
+.twoCharge {
+  animation: twoCharge steps(16) 0.64s infinite;
+}
+
+@keyframes twoCharge {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
+
+.threeCharge {
+  animation: threeCharge steps(16) 0.64s infinite;
+}
+
+@keyframes threeCharge {
+  from {background-position: 0px -32px;}
+  to {background-position: -512px -32px;}
+}
+
+.fourCharge {
+  animation: fourCharge steps(16) 0.64s infinite;
+}
+
+@keyframes fourCharge {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
+
+.fiveCharge {
+  animation: fiveCharge steps(16) 0.64s infinite;
+}
+
+@keyframes fiveCharge {
+  from {background-position: 0px -32px;}
+  to {background-position: -512px -32px;}
+}
+
+.beam {
+  position: absolute;
+  z-index: 999;
+  top: 176px;
+  left: 184px;
+  width: 288px;
+  height: 64px;
+  background-image: url("http://localhost:8080/img/beam_placeholder.png");
+}
+
+.beamBlast {
+  animation: beamBlast steps(2) 0.1s infinite;
+}
+
+@keyframes beamBlast {
+  from {background-position: 0px 0px;}
+  to {background-position: 0px -128px;}
 }
 
 /* Alphagator */
