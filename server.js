@@ -4,6 +4,7 @@ const app = express();
 const db = require('./models');
 const baseSpells = db.base_spells;
 const bossSpells = db.boss_spells;
+const spells = db.Spell;
 const users = db.User;
 const gamestats = db.GameStat;
 const bp = require('body-parser');
@@ -19,48 +20,38 @@ app.use(express.static('./src/public'));
 
 app.use(bp.urlencoded({extended : true}));
 
-app.get('/api/base_spells', (req,res)=> {
-  baseSpells.findAll()
+
+//DB call for Spells table
+app.get('/api/spells', (req, res) => {
+  spells.findAll()
   .then((data => {
+    let boss_spells = {};
     let base_spells = {};
 
     data.forEach((dataSet) => {
-
-      base_spells[dataSet.dataValues.key_word] = {
-        word: dataSet.dataValues.word,
-        prompt: dataSet.dataValues.prompt,
-        hint: dataSet.dataValues.hint,
-      };
-    });
-
-    res.json({
-      success: true,
-      base_spells,
-    });
-  }));
-});
-
-
-app.get('/api/boss_spells', (req, res) => {
-  bossSpells.findAll()
-  .then((data => {
-    let boss_spells = {};
-
-    data.forEach((dataSet) => {
-
-      boss_spells[dataSet.dataValues.key_word] = {
-        word: dataSet.dataValues.word,
-        prompt: dataSet.dataValues.prompt,
-        hint: dataSet.dataValues.hint,
-      };
+      if (dataSet.dataValues.type === 'boss') {
+        boss_spells[dataSet.dataValues.key_word] = {
+          word: dataSet.dataValues.word,
+          prompt: dataSet.dataValues.prompt,
+          hint: dataSet.dataValues.hint,
+        };
+      } else {
+        base_spells[dataSet.dataValues.key_word] = {
+          word: dataSet.dataValues.word,
+          prompt: dataSet.dataValues.prompt,
+          hint: dataSet.dataValues.hint,
+        };
+      }
     });
 
     res.json({
       success: true,
       boss_spells,
+      base_spells
     });
   }));
 });
+
 
 //DB call for Login
 app.get('/api/login', (req,res) => {

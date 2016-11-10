@@ -65,7 +65,7 @@ class WordsDatasetCtrl {
       }
     }
 
-    WordsService.initGame().then(_ => {
+    WordsService.initSpells().then(_ => {
       WordsService.initSpellsByLvl();
       WordsService.initRandomWords();
       this.newWords = WordsService.getWords(this.lvl);
