@@ -26,6 +26,7 @@ export const WordsService = [
       this.randomize = this.randomize.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
       this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
+      this.totalWords = null;
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
@@ -36,6 +37,7 @@ export const WordsService = [
       return this.$http.get('/api/spells').success(response => {
         this.baseSpells = response.base_spells;
         this.bossSpells = response.boss_spells;
+        this.totalWords = Object.keys(response.base_spells).length + Object.keys(response.boss_spells).length
       })
     }
     getBossSpells() {
@@ -95,6 +97,7 @@ export const WordsService = [
       spellWords.lvl3Words = this.randomize(this.hard)
       spellWords.lvl4Words = this.randomize(this.boss)
     }
+
     postStatistics(userId,totalWordsCompleted,gameMistakes,times) {
       const totalTime = this.calculateTotalTime(times);
       const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
@@ -108,6 +111,7 @@ export const WordsService = [
       }
       return this.$http(req)
     }
+
     calculateTotalTime(times) {
       let totalTime = 0;
       for (var lvlTime in times) {
@@ -117,8 +121,9 @@ export const WordsService = [
       }
       return totalTime;
     }
+
     calculatePercentComplete(totalWordsCompleted) {
-      return Math.round((totalWordsCompleted / (randomDatasetLength*4))*100)/100;
+      return Math.round((totalWordsCompleted / (this.totalWords))*100)/100;
     }
   }
 
