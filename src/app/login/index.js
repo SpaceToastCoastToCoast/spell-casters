@@ -11,16 +11,19 @@ export const LoginCtrlState = {
 
 export const UserServices = [
 
- '$q', '$http',
+ '$http', '$state',
+
  class UserServices {
-   constructor ($q, $http, users) {
+   constructor ($http, $state, users) {
      this.$http = $http;
+     this.$state = $state;
      this.users = users;
    }
 
    getUsers (userData) {
      console.log('userData', userData);
      this.data = userData;
+     console.log('userData: ', userData);
      const req ={
       method: 'POST',
       url: `/api/login`,
@@ -32,6 +35,11 @@ export const UserServices = [
 
      return this.$http(req).success(response => {
         console.log('response: ', response);
+        if(response.success === true){
+          this.$state.go('splash', { user: response.username});
+        }else{
+          this.$state.go('login');
+        }
        return
      });
    }
