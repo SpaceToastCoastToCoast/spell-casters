@@ -21,9 +21,7 @@ export const UserServices = [
    }
 
    getUsers (userData) {
-     console.log('userData', userData);
      this.data = userData;
-     console.log('userData: ', userData);
      const req ={
       method: 'POST',
       url: `/api/login`,
@@ -32,40 +30,67 @@ export const UserServices = [
       },
       data: `username=${userData.username}&password=${userData.password}&=`
      };
-
-     return this.$http(req).success(response => {
-        console.log('response: ', response);
-        if(response.success === true){
-          this.$state.go('splash', { user: response.username});
-        }else{
-          this.$state.go('login');
-        }
-       return
-     });
+     return this.$http(req);
+     // .success(response => {
+     //    console.log('response: ', response);
+     //    if(response.success === true){
+     //        this.$rootScope.user = response.username;
+     //        this.$rootScope.visible = true;
+     //        console.log('this.$rootScope', this.$rootScope);
+     //        this.$state.go('splash'); //this.$state.go('splash', { user: response.username});
+     //    }else{
+     //      this.$state.go('login');
+     //    }
+     //   return;
+     // });
    }
  }
 ];
 
 export const LoginCtrl = [
-  '$scope', 'UserServices',
+  '$scope', 'UserServices', '$state', '$rootScope',
 
   class LoginCtrl {
-    constructor($scope, UserServices) {
+    constructor($scope, UserServices, $state, $rootScope) {
       this.userData = {
         username: '',
         password: ''
       };
+      $scope.inputType = 'password';
       $scope.userName = '';
       $scope.password = '';
       $scope.UserServices = UserServices;
+      this.$state = $state;
+      this.$rootScope = $rootScope;
+
+    $scope.hideShowPassword = () =>{
+      if ($scope.inputType === 'password'){
+        $scope.inputType = 'text';
+      }else{
+      $scope.inputType = 'password';}
+    };
 
     $scope.checkCreditinals = () =>{
       this.userData.username = $scope.userName;
       this.userData.password = $scope.password;
       console.log('userData: ', this.userData);
-      UserServices.getUsers(this.userData);
+      UserServices.getUsers(this.userData)
+        .success(response => {
+          if(response.success === true){
+            this.$rootScope.user = response.username;
+            this.$rootScope.visible = true;
+            console.log('this.$rootScope', this.$rootScope);
+            this.$state.go('splash'); //this.$state.go('splash', { user: response.username});
+          }else{
+            this.$state.go('login');
+          }
+         return response.username;
+        });
     };
-    }
-  }
-]
 
+    $scope.goToRegistration = () => {
+        $state.go('registration');
+      };
+  }
+}
+]

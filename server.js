@@ -1,9 +1,8 @@
 //Essentials
 const express = require('express');
 const app = express();
+const api = require('./routes/api');
 const db = require('./models');
-const baseSpells = db.base_spells;
-const bossSpells = db.boss_spells;
 const spells = db.Spell;
 const users = db.User;
 const gamestats = db.GameStat;
@@ -21,78 +20,8 @@ app.use(express.static('./src/public'));
 app.use(bp.urlencoded({extended : true}));
 
 
-//DB call for Spells table
-app.get('/api/spells', (req, res) => {
-  spells.findAll()
-  .then((data => {
-    let boss_spells = {};
-    let base_spells = {};
+app.use('/api',api);
 
-    data.forEach((dataSet) => {
-      if (dataSet.dataValues.type === 'boss') {
-        boss_spells[dataSet.dataValues.key_word] = {
-          word: dataSet.dataValues.word,
-          prompt: dataSet.dataValues.prompt,
-          hint: dataSet.dataValues.hint,
-        };
-      } else {
-        base_spells[dataSet.dataValues.key_word] = {
-          word: dataSet.dataValues.word,
-          prompt: dataSet.dataValues.prompt,
-          hint: dataSet.dataValues.hint,
-        };
-      }
-    });
-
-    res.json({
-      success: true,
-      boss_spells,
-      base_spells
-    });
-  }));
-});
-
-app.post('/api/login', (req,res) => {
-  users.findAll({
-    limit: 1,
-    where: {username: req.body.username}
-  })
-  .then((data) =>{
-    if(data.length === 0){
-      res.json({
-        success: false
-      });
-    }
-    else{
-      if(data[0].dataValues.password === req.body.password){
-          res.json({
-            success: true,
-            username: data[0].dataValues.username
-        });
-      }else{
-        res.json({
-          success: false
-        });
-      }
-    }
-  });
-});
-
-//Post game statistics
-app.post('/api/post-stats', (req,res) => {
-  gamestats.create({
-    percentComplete: parseFloat(req.body.percentComplete),
-    totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
-    gameMistakes: parseInt(req.body.gameMistakes),
-    totalTimeElapsed: parseInt(req.body.totalTimeElapsed),
-    UserId: parseInt(req.body.UserId)
-  })
-  .then(_ => {
-    res.json({
-      success:true
-    })
-  })
-})
 
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';

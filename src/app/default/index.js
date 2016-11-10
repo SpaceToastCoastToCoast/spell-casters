@@ -7,29 +7,41 @@ export const DefaultCtrlState = {
   template,
   controller: DefaultCtrlName,
   controllerAs: 'default',
+  // params: {
+  //   user: null
+  // }
   params: {
-    user: null
+    user: null,
+    visible: false,
+    registrationMessage: null
   }
 };
 
 export const DefaultCtrl = [
-  '$scope','$state', '$stateParams',
+  '$scope','$state', '$stateParams', '$rootScope',
 
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams) {
+    constructor($scope,$state,$stateParams,$rootScope) {
       $scope.goToInstructions = () => {
-        $state.go('instructions')
-      }
+        $state.go('instructions');
+      };
       $scope.goToActiveGame = () => {
-        $state.go('active-game')
-      }
+        $state.go('active-game');
+      };
       $scope.goToAbout = () => {
-        $state.go('about')
-      }
+        $state.go('about');
+      };
       $scope.goToLogIn = () => {
         $state.go('login')
       }
-      $scope.user = $stateParams.user;
+      //$scope.user = $stateParams.user;
+      $scope.LogOut = () => {
+        $rootScope.user = 'Guest';
+        $rootScope.visible = false;
+        $state.go('splash')
+      };
+      $scope.registrationMessage = $stateParams.registrationMessage;
+
     }
   }
 ]

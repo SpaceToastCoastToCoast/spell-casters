@@ -10,9 +10,9 @@ const randomDatasetLength = 5;
 const secondsPerRound = 120;
 
 export const WordsService = [
-  '$http', '$q',
+  '$http', '$q', '$rootScope',
   class WordsService {
-    constructor ($http, $q) {
+    constructor ($http, $q, $rootScope) {
       this.wordsData = [];
       this.bossSpells = {};
       this.baseSpells = {};
@@ -27,6 +27,7 @@ export const WordsService = [
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
       this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
       this.totalWords = null;
+      this.$rootScope = $rootScope;
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
@@ -98,18 +99,26 @@ export const WordsService = [
       spellWords.lvl4Words = this.randomize(this.boss)
     }
 
-    postStatistics(userId,totalWordsCompleted,gameMistakes,times) {
+    postStatistics(totalWordsCompleted,gameMistakes,times) {
       const totalTime = this.calculateTotalTime(times);
       const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
-      const req = {
-        method: 'POST',
-        url: '/api/post-stats',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&UserId=${userId}`
+
+      //save stats to rootScope for access in gameOver page
+      this.$rootScope.totalWordsCompleted = totalWordsCompleted;
+      this.$rootScope.percentCompleted = percentComplete
+      this.$rootScope.totalTimeElapsed = totalTime;
+
+      if (this.$rootScope.user !== 'Guest') {
+        const req = {
+          method: 'POST',
+          url: '/api/post-stats',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
+        }
+        return this.$http(req)
       }
-      return this.$http(req)
     }
 
     calculateTotalTime(times) {
