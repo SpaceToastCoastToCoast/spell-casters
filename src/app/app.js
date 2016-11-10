@@ -2,6 +2,7 @@ import angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
 import { WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
 import { WordsService } from './words_dataset/words_service'
+import { GameOverService } from './gameOver/game_over_service'
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
@@ -43,6 +44,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .directive('app', app)
   .service('WordsService', WordsService)
   .service('UserServices', UserServices)
+  .service('GameOverService', GameOverService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
