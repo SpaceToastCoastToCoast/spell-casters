@@ -22,17 +22,7 @@ export const GameOverCtrl = [
         $state.go('active-game')
       }
 
-      // GameOverService.setLatestStats().then(_ =>{
-      //   $scope.username = $rootScope.user;
-      //   const stats = GameOverService.getLatestStats()
-      //   $scope.totalTime = stats.totalTimeElapsed
-      //   $scope.totalWordsCompleted = stats.totalWordsCompleted
-      //   $scope.percentCompleted = stats.percentCompleted
-
-      // })
-
       $scope.username = $rootScope.user;
-      console.log('index ',$rootScope.totalTimeElapsed);
       $scope.totalTime = $rootScope.totalTimeElapsed;
       $scope.totalWordsCompleted = $rootScope.totalWordsCompleted;
       $scope.percentCompleted = $rootScope.percentCompleted;

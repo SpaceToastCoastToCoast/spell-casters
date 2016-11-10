@@ -108,15 +108,17 @@ export const WordsService = [
       this.$rootScope.percentCompleted = percentComplete
       this.$rootScope.totalTimeElapsed = totalTime;
 
-      const req = {
-        method: 'POST',
-        url: '/api/post-stats',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
+      if (this.$rootScope.user !== 'Guest') {
+        const req = {
+          method: 'POST',
+          url: '/api/post-stats',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
+        }
+        return this.$http(req)
       }
-      return this.$http(req)
     }
 
     calculateTotalTime(times) {
