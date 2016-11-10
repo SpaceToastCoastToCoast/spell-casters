@@ -377,6 +377,25 @@ button:active {
   to {background-position: -512px -32px;}
 }
 
+.beam {
+  position: absolute;
+  z-index: 999;
+  top: 176px;
+  left: 184px;
+  width: 288px;
+  height: 64px;
+  background-image: url("http://localhost:8080/img/beam_placeholder.png");
+}
+
+.beamBlast {
+  animation: beamBlast steps(2) 0.1s infinite;
+}
+
+@keyframes beamBlast {
+  from {background-position: 0px 0px;}
+  to {background-position: 0px -128px;}
+}
+
 /* Alphagator */
 
 .alphagator {
