@@ -52,19 +52,29 @@ app.get('/api/spells', (req, res) => {
   }));
 });
 
-
-//DB call for Login
-app.get('/api/login', (req,res) => {
+app.post('/api/login', (req,res) => {
   users.findAll({
     limit: 1,
-    where: {userName: req.body.userName}
+    where: {username: req.body.username}
   })
   .then((data) =>{
-
-    res.json({
-      success: true,
-      data
-    });
+    if(data.length === 0){
+      res.json({
+        success: false
+      });
+    }
+    else{
+      if(data[0].dataValues.password === req.body.password){
+          res.json({
+            success: true,
+            username: data[0].dataValues.username
+        });
+      }else{
+        res.json({
+          success: false
+        });
+      }
+    }
   });
 });
 
