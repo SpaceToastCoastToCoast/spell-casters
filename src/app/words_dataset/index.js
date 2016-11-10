@@ -1,40 +1,217 @@
 const template = require('./words_dataset.html');
-//const { lvl1Words, lvl2Words, lvl3Words, lvl4Words } = require('../../../data/spells');
 
+const maxHearts = 5;
+const minuteLimit = 0.5;
+const times = {
+  lvl1: null,
+  lvl2: null,
+  lvl3: null,
+  lvl4: null
+}
+
+const numberToString = [
+  'no',
+  'one',
+  'two',
+  'three',
+  'four',
+  'five'
+]
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
 
 export const WordsDatasetCtrlState = {
-  url: '/',
+  url: '/active-game',
   template,
   controller: WordsDatasetCtrlName,
   controllerAs: 'wordsDataset'
 };
 
-export const WordsService = [
-
-  '$http',
-  class WordsService {
-    constructor ($http) {
-      this.$http = $http;
-    }
-    getWords () {
-      return this.$http.get('test.json');  //'/api/...'
-    }
-  }
-];
-
+//Separate into services!!!
 
 export const WordsDatasetCtrl = [
-'WordsService','$scope',
+'WordsService','$scope', '$state', '$interval', '$timeout',
 class WordsDatasetCtrl {
-  constructor(WordsService, $scope) {
+  constructor(WordsService, $scope, $state, $interval, $timeout) {
     this.newWords = [];
-    WordsService.getWords().success(words => {
-      //console.log('words: ', words);
-      this.newWords = words;
-    });
+    this.currentWord = 0;
+    this.lvl = 1;
 
-    $scope.test = "test";
+    $scope.spellsCast = 0;
+    $scope.chargeLevel = "noCharge";
+    $scope.showBeam = false;
+
+    $scope.playerAnimState = "alephaIdle";
+    $scope.enemyAnimState = "gatorIdle";
+
+    this.hearts = maxHearts;
+    $scope.playerHealth = "fiveHearts";
+    this.enemyHearts = maxHearts;
+    $scope.enemyHealth = "fiveHearts";
+
+    $scope.takeDamage = () => {
+      this.hearts--;
+      $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
+    }
+
+    $scope.giveDamage = (hits) => {
+      $scope.showBeam = true;
+      $timeout(() => {$scope.showBeam = false;}, 500)
+      this.enemyHearts -= hits;
+      $scope.enemyHealth = `${numberToString[this.enemyHearts]}Hearts`;
+      if(this.enemyHearts <= 0) {
+        $scope.enemyHealth = "noHearts";
+        killEnemy();
+      }
+    }
+
+    WordsService.initSpells().then(_ => {
+      WordsService.initSpellsByLvl();
+      WordsService.initRandomWords();
+      this.newWords = WordsService.getWords(this.lvl);
+    })
+
+    //timer controls
+    $scope.minutes = 0;
+    $scope.seconds = '30';
+    $scope.zero = '';
+    $scope.timer = minuteLimit * 60;
+    $scope.countDown;
+
+    //disable pasting into textbox
+    $scope.preventPaste = (e) => {
+      e.preventDefault();
+      return false;
+    }
+
+    const startTimer = () => {
+      $scope.countDown = $interval(function () {
+        $scope.minutes = parseInt($scope.timer / 60, 10);
+        $scope.seconds = parseInt($scope.timer % 60, 10);
+        if ( $scope.seconds < 10 ) {
+          $scope.zero = '0';
+        } else {
+          $scope.zero = ''
+        }
+        if (--$scope.timer < 0) {
+          if($scope.spellsCast === 0) {
+            $scope.takeDamage();
+          } else {
+            $scope.giveDamage($scope.spellsCast);
+            $scope.spellsCast = 0;
+            $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
+          }
+          resetTimer();
+        }
+      }, 1000);
+    }
+
+    const killTimer = () => {
+      $interval.cancel($scope.countDown);
+    }
+
+    const resetTimer = () => {
+      $scope.minutes = 0;
+      $scope.seconds = minuteLimit * 60;
+      $scope.zero = '';
+      $scope.timer = $scope.seconds;
+    }
+
+    //start timer on load
+    startTimer();
+
+    const increaseLvl = () => {
+      saveTime($scope.timer,this.lvl)
+      resetTimer();
+      this.newWords = WordsService.getWords(++this.lvl);
+      this.currentWord = 0;
+      this.hearts = maxHearts;
+      $scope.playerHealth = 'fiveHearts';
+      if (this.lvl === 5) {
+        killTimer();
+        WordsService.postStatistics(20,(maxHearts - this.hearts),times)
+        $state.go('won');
+        $scope.showLevel = false;
+      }
+    }
+
+    const killEnemy = () => {
+      this.spellsCast = 0;
+      $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
+      $scope.enemyAnimState = "gatorDie";
+      resetTimer();
+      //load a new enemy
+      $timeout(() => {
+        this.enemyHearts = maxHearts;
+        $scope.enemyHealth = "fiveHearts";
+        $scope.enemyAnimState = "gatorIdle";
+      }, 500);
+
+      // //Debug
+      // killTimer();
+      // $state.go('won');
+      // $scope.showLevel = false;
+    }
+
+    const saveTime = (time,lvl) => {
+      times['lvl'+lvl] = time;
+    }
+
+    $scope.test = "";
+    $scope.feedback = 'good';
+    $scope.showLevel = false;
+    $scope.lives = true;
+    $scope.resetGame = () => {
+      this.hearts = maxHearts;
+      this.lvl = 1;
+      this.newWords = WordsService.getWords(this.lvl);
+      this.currentWord = 0;
+      $scope.test = "";
+      $scope.feedback = 'good';
+      $scope.showLevel = false;
+      $scope.lives = true;
+    }
+
+    $scope.compare = () => {
+      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
+        $scope.feedback = 'good'
+      } else if($scope.feedback === 'good') {
+        //subtract hearts from healthbar
+        $scope.takeDamage();
+        if (this.hearts <= 0) {
+          $scope.showLevel = false;
+          $scope.lives = false;
+          saveTime($scope.timer,this.lvl)
+          WordsService.postStatistics(((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times);
+          $state.go('game-over')
+        }
+        $scope.feedback = 'wrong'
+      } else {
+        if (this.hearts <= 0) {
+          $scope.showLevel = false;
+          $scope.lives = false;
+          $scope.resetGame();
+          $state.go('game-over')
+        }
+        $scope.feedback = 'wrong'
+      }
+      if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
+        //successful spell, enemy takes damage
+        $scope.spellsCast++;
+        $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
+        if($scope.spellsCast >= 5) {
+          resetTimer();
+          $scope.giveDamage($scope.spellsCast);
+          $scope.spellsCast = 0;
+          $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
+        }
+        $scope.test = "";
+        this.currentWord++;
+        if (this.currentWord === this.newWords.length) {
+          $scope.showLevel = true;
+          increaseLvl();
+        }
+      }
+    };
   }
 }];

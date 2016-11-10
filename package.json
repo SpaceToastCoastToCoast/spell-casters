@@ -22,8 +22,20 @@
   "dependencies": {
     "angular": "^1.5.0",
     "angular-ui-router": "^0.3.2",
+    "autoprefixer": "^6.5.2",
     "babel-loader": "^6.2.7",
-    "express": "^4.14.0"
+    "body-parser": "^1.15.2",
+    "copy-webpack-plugin": "^3.0.1",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "howler": "^2.0.1",
+    "html-webpack-plugin": "^2.24.1",
+    "json-loader": "^0.5.4",
+    "pg": "^6.1.0",
+    "sequelize": "^3.24.8",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",

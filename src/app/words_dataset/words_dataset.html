@@ -1,8 +1,20 @@
-<div id="playerInput">
-  <h4 class="targetWord">{{ wordsDataset.newWords[1].prompt }}</h4>
-  <p>{{ test }}</p>
-  <input ng-model="test" type="text" name="spellWord">
+<div id="gameInfo">
+  <p id="info">Spell the word in the box to charge your spell!</p>
+  <h4 class="hint">HINT: {{ wordsDataset.newWords[wordsDataset.currentWord].hint }}</h4>
+
+  <!-- <p ng-show="lives">You have {{wordsDataset.hearts}} hearts left!</p> -->
+  <!-- <p ng-show="showLevel">You made it to lvl: {{wordsDataset.lvl}}</p> -->
 </div>
-<p>Spell the word in the box to charge your spell!</p>
-<h4 class="hint">HINT: {{ wordsDataset.newWords[1].hint }}</h4>
-<p>When you know something is true.</p>
+<div id="gameCanvas">
+  <div id="playerInput">
+    <h4 class="targetWord">{{ wordsDataset.newWords[wordsDataset.currentWord].prompt }}</h4>
+    <p id="timer">Time Remaining: {{ minutes }}:{{ zero }}{{ seconds }}</p>
+    <input ng-model="test" ng-class="feedback" type="text" name="spellWord" ng-paste="preventPaste($event)" ng-change="compare()" placeholder="Spell the word!">
+  </div>
+  <div id="alephaHealthbar" ng-class="playerHealth"></div>
+  <div id="gatorBar" ng-class="enemyHealth"></div>
+  <div class="glow" ng-class="chargeLevel"></div>
+  <div class="alepha" ng-class="playerAnimState"></div>
+  <div class="alphagator" ng-class="enemyAnimState"></div>
+  <div class="beam beamBlast" ng-show="showBeam"></div>
+</div>
