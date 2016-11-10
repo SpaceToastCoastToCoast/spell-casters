@@ -48,10 +48,10 @@ export const RegistrationServices = [
 ];
 
 export const RegistrationCtrl = [
-  '$scope', '$state', '$stateParams', 'RegistrationServices',
+  '$scope', '$state', '$stateParams', 'RegistrationServices', '$rootScope',
 
   class RegistrationCtrl {
-    constructor($scope, $state, $stateParams, RegistrationServices) {
+    constructor($scope, $state, $stateParams, RegistrationServices, $rootScope) {
       this.registerData ={
         username: '',
         password: ''
@@ -64,7 +64,12 @@ export const RegistrationCtrl = [
       $scope.registerUser = () => {
         this.registerData.username = $scope.userName;
         this.registerData.password = $scope.password;
-        RegistrationServices.registerUser(this.registerData);
+        RegistrationServices.registerUser(this.registerData)
+          .success(response =>{
+            console.log('response: ', response);
+            $rootScope.user = response.username;
+            $rootScope.visible = true;
+        });
       };
       $scope.registrationMessage = $stateParams.registrationMessage;
     }
