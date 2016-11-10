@@ -62,7 +62,29 @@ app.get('/api/boss_spells', (req, res) => {
   }));
 });
 
-
+//DB call for Login
+app.get('/api/login:userName', (req,res) => {
+  console.log('req.body: ', req.params.userName);
+  console.log('req.body: ', req.body);
+  users.findAll({
+    limit: 1,
+    where: {username: req.params.userName}
+  })
+  .then((data) =>{
+    console.log('data: ', data);
+    if(data.length === 0){
+      res.json({
+        success: false
+      });
+    }
+    else{
+      res.json({
+        success: true,
+        data
+      });
+    }
+  });
+});
 
 app.post('/api/login', (req,res) => {
   users.findAll({
@@ -78,8 +100,7 @@ app.post('/api/login', (req,res) => {
     else{
       if(data[0].dataValues.password === req.body.password){
           res.json({
-            success: true,
-            username: data[0].dataValues.username
+            success: true
         });
       }else{
         res.json({
