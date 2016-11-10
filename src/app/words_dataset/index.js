@@ -125,6 +125,8 @@ class WordsDatasetCtrl {
       resetTimer();
       this.newWords = WordsService.getWords(++this.lvl);
       this.currentWord = 0;
+      this.hearts = maxHearts;
+      $scope.playerHealth = 'fiveHearts';
       if (this.lvl === 5) {
         killTimer();
         WordsService.postStatistics(1,20,(maxHearts - this.hearts),times)
@@ -138,9 +140,6 @@ class WordsDatasetCtrl {
       $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
       $scope.enemyAnimState = "gatorDie";
       resetTimer();
-      WordsService.initRandomWords();
-      this.newWords = WordsService.getWords(this.lvl);
-      this.currentWord = 0;
       //load a new enemy
       $timeout(() => {
         this.enemyHearts = maxHearts;
