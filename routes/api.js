@@ -128,11 +128,13 @@ app.post('/post-stats', (req,res) => {
     where: {username: req.body.username}
   })
   .then((user) => {
+    const misspelledWordsArr = req.body.misspelledWords.split(',');
+    const timeElapsedArr = req.body.timeElapsed.split(',').map(time => {return parseInt(time)})
     gamestats.create({
-      percentComplete: parseFloat(req.body.percentComplete),
+      percentCompleted: parseFloat(req.body.percentCompleted),
       totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
-      gameMistakes: parseInt(req.body.gameMistakes),
-      totalTimeElapsed: parseInt(req.body.totalTimeElapsed),
+      misspelledWords: misspelledWordsArr,
+      timeElapsed: timeElapsedArr,
       UserId: user.dataValues.id
     })
     .then(_ => {
@@ -157,7 +159,7 @@ app.get('/game-stats/:username',(req,res) => {
       //node-postgres returns decimal datatypes as strings
       //parse value back to a decimal before serving it on the api
       stats.forEach(stat => {
-        stat.percentComplete = parseFloat(stat.percentComplete);
+        stat.percentCompleted = parseFloat(stat.percentCompleted);
       })
       res.json({
         stats

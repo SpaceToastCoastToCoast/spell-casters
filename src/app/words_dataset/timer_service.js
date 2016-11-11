@@ -42,7 +42,6 @@ export const TimerService = [
           this.zero = ''
         }
         this.timer--;
-        this.seconds--;
         this.tick();
       }, 1000);
     }

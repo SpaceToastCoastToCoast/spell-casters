@@ -34,6 +34,7 @@ class WordsDatasetCtrl {
     this.newWords = [];
     this.currentWord = 0;
     $scope.lvl = 1;
+    this.misspelledWords = '';
 
     TimerService.resetGame();
 
@@ -82,7 +83,8 @@ class WordsDatasetCtrl {
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
       if (this.hearts <= 0) {
-        WordsService.postStatistics($scope.lvl,this.currentWord,(maxHearts - this.hearts),TimerService.times);
+        TimerService.saveTime((30 - $scope.timer),$scope.lvl)
+        WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times);
         TimerService.killTimer();
         $scope.resetGame();
         $state.go('game-over')
@@ -139,7 +141,7 @@ class WordsDatasetCtrl {
       }
       if ($scope.lvl === 5) {
         TimerService.killTimer();
-        WordsService.postStatistics(5,0,(maxHearts - this.hearts),TimerService.times)
+        WordsService.postStatistics(5,0,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
         $state.go('won');
         $scope.showLevel = false;
       }
@@ -176,6 +178,7 @@ class WordsDatasetCtrl {
       $scope.test = "";
       $scope.feedback = 'good';
       $scope.showLevel = false;
+      this.misspelledWords = '';
     }
 
 
@@ -202,6 +205,9 @@ class WordsDatasetCtrl {
       if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
         $scope.feedback = 'good'
       } else if($scope.feedback === 'good') {
+        if (this.misspelledWords.indexOf(this.newWords[this.currentWord].word.toLowerCase()) === -1) {
+          this.misspelledWords += `${this.newWords[this.currentWord].word.toLowerCase()}, `
+        }
         //subtract hearts from healthbar
         $scope.takeDamage();
         $scope.feedback = 'wrong'
