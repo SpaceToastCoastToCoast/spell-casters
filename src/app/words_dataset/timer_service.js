@@ -1,9 +1,3 @@
-const times = {
-  lvl1: null,
-  lvl2: null,
-  lvl3: null,
-  lvl4: null
-}
 
 const minuteLimit = 0.5;
 
@@ -18,6 +12,13 @@ export const TimerService = [
       this.zero = '';
       this.timer = minuteLimit * 60;
       this.countDown;
+
+      this.times = {
+        lvl1: 0,
+        lvl2: 0,
+        lvl3: 0,
+        lvl4: 0
+      }
 
       // this.startTimer = this.startTimer.bind(this);
       // this.killTimer = this.killTimer.bind(this);
@@ -54,7 +55,7 @@ export const TimerService = [
     }
 
     saveTime(time, lvl) {
-      times['lvl'+lvl] = time;
+      this.times['lvl'+lvl] += time;
     }
   }
 ];
