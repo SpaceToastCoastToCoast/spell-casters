@@ -99,7 +99,14 @@ export const WordsService = [
       spellWords.lvl4Words = this.randomize(this.boss)
     }
 
-    postStatistics(totalWordsCompleted,gameMistakes,times) {
+    postStatistics(totalWordsCompleted,gameMistakes) {
+      //dummy data until timer service provides correct times per level
+      const times = {
+        lvl1Time: 20,
+        lvl2Time: 20,
+        lvl3Time: 20,
+        lvl4Time: 20
+      }
       const totalTime = this.calculateTotalTime(times);
       const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
 

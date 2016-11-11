@@ -113,7 +113,7 @@ class WordsDatasetCtrl {
       $scope.playerHealth = 'fiveHearts';
       if (this.lvl === 5) {
         TimerService.killTimer();
-        WordsService.postStatistics(20,(maxHearts - this.hearts),times)
+        WordsService.postStatistics(20,(maxHearts - this.hearts))
         $state.go('won');
         $scope.showLevel = false;
       }
@@ -135,7 +135,6 @@ class WordsDatasetCtrl {
     $scope.test = "";
     $scope.feedback = 'good';
     $scope.showLevel = false;
-    $scope.lives = true;
     $scope.resetGame = () => {
       this.hearts = maxHearts;
       this.lvl = 1;
@@ -144,7 +143,6 @@ class WordsDatasetCtrl {
       $scope.test = "";
       $scope.feedback = 'good';
       $scope.showLevel = false;
-      $scope.lives = true;
     }
 
     $scope.compare = () => {
@@ -155,21 +153,13 @@ class WordsDatasetCtrl {
         $scope.takeDamage();
         if (this.hearts <= 0) {
           $scope.showLevel = false;
-          $scope.lives = false;
           TimerService.saveTime($scope.timer,this.lvl)
-          WordsService.postStatistics(((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times);
-          $state.go('game-over')
-        }
-        $scope.feedback = 'wrong'
-      } else {
-        if (this.hearts <= 0) {
-          $scope.showLevel = false;
-          $scope.lives = false;
-          $scope.resetGame();
+          WordsService.postStatistics(((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts));
           $state.go('game-over')
         }
         $scope.feedback = 'wrong'
       }
+
       if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
