@@ -60,9 +60,6 @@ export const LoginCtrl = [
       $scope.password = '';
       $scope.UserServices = UserServices;
 
-      this.$state = $state;
-      this.$rootScope = $rootScope;
-
     $scope.checkCredentials = () =>{
       this.userData.username = $scope.userName;
       this.userData.password = $scope.password;
