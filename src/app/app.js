@@ -13,6 +13,7 @@ import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
+import { UserProfileServices } from './userProfile/user_profile_service';
 import '../style/app.css';
 
 
@@ -52,6 +53,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('WordsService', WordsService)
   .service('TimerService', TimerService)
   .service('UserServices', UserServices)
+  .service('UserProfileServices', UserProfileServices)
   .service('GameOverService', GameOverService)
   .service('RegistrationServices', RegistrationServices)
   .controller('AppCtrl', AppCtrl)

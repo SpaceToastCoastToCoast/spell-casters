@@ -10,19 +10,20 @@ export const UserProfileCtrlState ={
 };
 
 
-
 export const UserProfileCtrl = [
-  '$scope', '$state', '$rootScope',
+  '$scope', '$state', '$rootScope', 'UserProfileServices',
 
   class UserProfileCtrl {
-    constructor($scope, $state, $rootScope) {
+    constructor($scope, $state, $rootScope, UserProfileServices) {
       $scope.state = $state;
+      console.log('UserProfileServices',UserProfileServices)
+      UserProfileServices.userDataQuery();
 
       console.log('$rootScope.user: ', $rootScope.user);
       if($rootScope.user === 'Guest'){
-        console.log('foo: ');
         $state.go('splash');
       }
+
 
     }
   }
