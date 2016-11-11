@@ -1,8 +1,8 @@
-export const GameOverService = [
+export const UserStatsService = [
 
  '$http', '$rootScope',
 
-  class GameOverService {
+  class UserStatsService {
     constructor ($http, $rootScope) {
       this.$http = $http;
       this.$rootScope = $rootScope;

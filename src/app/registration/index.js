@@ -25,7 +25,7 @@ export const RegistrationServices = [
 
   registerUser (registerData) {
     this.data = registerData;
-    const req ={
+    const req = {
       method: 'POST',
       url: `/api/register`,
       headers: {
@@ -42,10 +42,8 @@ export const RegistrationServices = [
         }
        return response;
      });
-
   }
- }
-];
+}];
 
 export const RegistrationCtrl = [
   '$scope', '$state', '$stateParams', 'RegistrationServices', '$rootScope',

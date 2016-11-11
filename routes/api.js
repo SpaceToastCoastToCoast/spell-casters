@@ -44,6 +44,7 @@ app.post('/login', (req,res) => {
     });
   } else if (req.body.password === '') {
       res.json({
+<<<<<<< HEAD
       success: false,
       errorMessage: 'Please enter a password, it was empty'
     });
@@ -74,16 +75,51 @@ app.post('/login', (req,res) => {
         }
       });
   }
+=======
+        success: false
+      });
+    }
+    else {
+      if(data[0].dataValues.password === req.body.password){
+        res.json({
+          success: true,
+          username: data[0].dataValues.username
+        });
+      } else {
+        res.json({
+          success: false
+        });
+      }
+    }
+  });
+>>>>>>> develop
 });
 
 //registration route
 app.post('/register', (req, res) =>{
+<<<<<<< HEAD
   if (req.body.username === '') {
     res.json({
       success: false,
       errorMessage: 'Please enter a username, it was empty'
     });
   } else if (req.body.password === '') {
+=======
+  users.findAll({
+    where: {username: req.body.username}
+  })
+  .then((data)=>{
+    if(data.length === 0){
+      users.create({
+        username: req.body.username,
+        password: req.body.password
+      });
+      res.json({
+        success: true,
+        registrationMessage: 'User successfully created'
+      });
+    } else {
+>>>>>>> develop
       res.json({
       success: false,
       errorMessage: 'Please enter a password, it was empty'
