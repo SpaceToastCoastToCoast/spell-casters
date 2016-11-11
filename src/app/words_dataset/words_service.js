@@ -28,6 +28,16 @@ export const WordsService = [
       this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
       this.totalWords = null;
       this.$rootScope = $rootScope;
+      this.resetGame = this.resetGame.bind(this)
+    }
+    resetGame() {
+      this.wordsData = [];
+      this.bossSpells = {};
+      this.baseSpells = {};
+      this.easy = [];
+      this.medium = [];
+      this.hard = [];
+      this.boss = [];
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
@@ -35,6 +45,7 @@ export const WordsService = [
     }
 
     initSpells() {
+      this.resetGame();
       return this.$http.get('/api/spells').success(response => {
         this.baseSpells = response.base_spells;
         this.bossSpells = response.boss_spells;
@@ -119,6 +130,7 @@ export const WordsService = [
         }
         return this.$http(req)
       }
+      this.resetGame();
     }
 
     calculateTotalTime(times) {

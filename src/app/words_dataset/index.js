@@ -102,6 +102,10 @@ class WordsDatasetCtrl {
       WordsService.initSpellsByLvl();
       WordsService.initRandomWords();
       this.newWords = WordsService.getWords($scope.lvl);
+      this.newWords.forEach(wordObj => {
+        console.log('init, level 1', wordObj.word);
+      })
+
     })
 
     //disable pasting into textbox
@@ -163,7 +167,7 @@ class WordsDatasetCtrl {
     $scope.resetGame = () => {
       this.hearts = maxHearts;
       $scope.lvl = 1;
-      this.newWords = WordsService.getWords($scope.lvl);
+      this.newWords = []
       this.currentWord = 0;
       $scope.test = "";
       $scope.feedback = 'good';
@@ -171,6 +175,7 @@ class WordsDatasetCtrl {
     }
 
     $scope.compare = () => {
+
       if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
         $scope.feedback = 'good'
       } else if($scope.feedback === 'good') {
@@ -181,7 +186,9 @@ class WordsDatasetCtrl {
           TimerService.saveTime((30 - $scope.timer),$scope.lvl)
           WordsService.postStatistics((($scope.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),TimerService.times);
           TimerService.killTimer();
+          $scope.resetGame();
           $state.go('game-over')
+          return
         }
         $scope.feedback = 'wrong'
       }
