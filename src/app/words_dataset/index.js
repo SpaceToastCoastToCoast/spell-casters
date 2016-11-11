@@ -81,6 +81,12 @@ class WordsDatasetCtrl {
     $scope.takeDamage = () => {
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
+      if (this.hearts <= 0) {
+        WordsService.postStatistics($scope.lvl,this.currentWord,(maxHearts - this.hearts),TimerService.times);
+        TimerService.killTimer();
+        $scope.resetGame();
+        $state.go('game-over')
+      }
     }
 
     $scope.giveDamage = (hits) => {
@@ -181,18 +187,6 @@ class WordsDatasetCtrl {
       } else if($scope.feedback === 'good') {
         //subtract hearts from healthbar
         $scope.takeDamage();
-        if (this.hearts <= 0) {
-          $scope.showLevel = false;
-          TimerService.saveTime((30 - $scope.timer),$scope.lvl)
-          console.log('level',$scope.lvl);
-          console.log('currentWordIndex',this.currentWord);
-
-          WordsService.postStatistics($scope.lvl,this.currentWord,(maxHearts - this.hearts),TimerService.times);
-          TimerService.killTimer();
-          $scope.resetGame();
-          $state.go('game-over')
-          return
-        }
         $scope.feedback = 'wrong'
       }
 
