@@ -81,6 +81,12 @@ class WordsDatasetCtrl {
     $scope.takeDamage = () => {
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
+      if (this.hearts <= 0) {
+        WordsService.postStatistics($scope.lvl,this.currentWord,(maxHearts - this.hearts),TimerService.times);
+        TimerService.killTimer();
+        $scope.resetGame();
+        $state.go('game-over')
+      }
     }
 
     $scope.giveDamage = (hits) => {
@@ -133,7 +139,7 @@ class WordsDatasetCtrl {
       }
       if ($scope.lvl === 5) {
         TimerService.killTimer();
-        WordsService.postStatistics(20,(maxHearts - this.hearts),TimerService.times)
+        WordsService.postStatistics(5,0,(maxHearts - this.hearts),TimerService.times)
         $state.go('won');
         $scope.showLevel = false;
       }
@@ -172,25 +178,9 @@ class WordsDatasetCtrl {
       $scope.showLevel = false;
     }
 
+
+
     $scope.compare = () => {
-
-      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
-        $scope.feedback = 'good'
-      } else if($scope.feedback === 'good') {
-        //subtract hearts from healthbar
-        $scope.takeDamage();
-        if (this.hearts <= 0) {
-          $scope.showLevel = false;
-          TimerService.saveTime((30 - $scope.timer),$scope.lvl)
-          WordsService.postStatistics((($scope.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),TimerService.times);
-          TimerService.killTimer();
-          $scope.resetGame();
-          $state.go('game-over')
-          return
-        }
-        $scope.feedback = 'wrong'
-      }
-
       if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
@@ -207,6 +197,14 @@ class WordsDatasetCtrl {
           $scope.showLevel = true;
           increaseLvl();
         }
+      }
+
+      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
+        $scope.feedback = 'good'
+      } else if($scope.feedback === 'good') {
+        //subtract hearts from healthbar
+        $scope.takeDamage();
+        $scope.feedback = 'wrong'
       }
     };
   }
