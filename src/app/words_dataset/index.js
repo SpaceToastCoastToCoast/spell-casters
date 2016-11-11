@@ -35,6 +35,8 @@ class WordsDatasetCtrl {
     this.currentWord = 0;
     $scope.lvl = 1;
 
+    TimerService.resetGame();
+
     $scope.timer = TimerService.timer;
     $scope.minutes = TimerService.minutes;
     $scope.seconds = TimerService.seconds;
@@ -102,10 +104,6 @@ class WordsDatasetCtrl {
       WordsService.initSpellsByLvl();
       WordsService.initRandomWords();
       this.newWords = WordsService.getWords($scope.lvl);
-      this.newWords.forEach(wordObj => {
-        console.log('init, level 1', wordObj.word);
-      })
-
     })
 
     //disable pasting into textbox
