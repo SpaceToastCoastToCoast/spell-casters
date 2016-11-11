@@ -181,15 +181,6 @@ class WordsDatasetCtrl {
 
 
     $scope.compare = () => {
-
-      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
-        $scope.feedback = 'good'
-      } else if($scope.feedback === 'good') {
-        //subtract hearts from healthbar
-        $scope.takeDamage();
-        $scope.feedback = 'wrong'
-      }
-
       if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
@@ -206,6 +197,14 @@ class WordsDatasetCtrl {
           $scope.showLevel = true;
           increaseLvl();
         }
+      }
+
+      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
+        $scope.feedback = 'good'
+      } else if($scope.feedback === 'good') {
+        //subtract hearts from healthbar
+        $scope.takeDamage();
+        $scope.feedback = 'wrong'
       }
     };
   }
