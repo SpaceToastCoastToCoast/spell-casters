@@ -1,13 +1,15 @@
 <div>
-  <h4>Game Over!</h4>
-  <button ng-click="goToSplash()">Home</button>
-  <button ng-click="goToActiveGame()">Try Again</button>
+  <h2>Game Over!</h2>
   <div id="gameCanvas">
     <div id="gameStats">
-      <p id="username" class="stats">{{username}}</p>
-      <p id="totalTime" class="stats">Total Time:{{totalTime}}</p>
+      <h3 id="username" class="stats">{{username}}</h3>
+      <p id="totalTime" class="stats">Total Time: {{totalTime}}</p>
       <p id="totalWordsCompleted" class="stats">Total Words Completed: {{totalWordsCompleted}}</p>
       <p id="percentCompleted" class="stats">Percent Completed: {{percentCompleted}}</p>
+      <div class="buttonDiv">
+        <button ng-click="goToSplash()">Home</button>
+        <button ng-click="goToActiveGame()">Try Again</button>
+      </div>
     </div>
   </div>
 </div>
