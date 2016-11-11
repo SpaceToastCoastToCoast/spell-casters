@@ -323,6 +323,31 @@ button:active {
   margin-right: 6px;
 }
 
+/* Misc. Animation */
+
+.shake {
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 /* Character sprites */
 
 /* UI Sprites */
@@ -332,8 +357,8 @@ button:active {
   top: 8px;
   left: 8px;
   height: 16px;
-  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
-  background-repeat: repeat-x;
+  background: url("http://localhost:8080/img/ui_sprites_heart.png") repeat-x top left;
+  transition: width 0.5s ease;
 }
 
 #gatorBar {
@@ -341,9 +366,8 @@ button:active {
   top: 8px;
   right: 8px;
   height: 16px;
-  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
-  background-position: 0px -16px;
-  background-repeat: repeat-x;
+  background: url("http://localhost:8080/img/ui_sprites_heart.png") repeat-x bottom right;
+  transition: width 0.5s ease;
 }
 
 .fiveHearts {
@@ -486,7 +510,7 @@ button:active {
 }
  /*
 .gatorIdle {
-  animation: alephaIdle steps(8) 0.64s infinite;
+  animation: gatorIdle steps(8) 0.64s infinite;
 }
 
 @keyframes gatorIdle {
@@ -501,3 +525,23 @@ button:active {
 }
 
 /* Lord Zett */
+
+.lordZett {
+  position: absolute;
+  top: 144px;
+  right: 96px;
+  width: 128px;
+  height: 128px;
+  background-image: url("http://localhost:8080/img/zett-static.png");
+}
+
+/*
+.zettIdle {
+  animation: zettIdle steps(8) 0.64s infinite;
+}
+
+@keyframes zettIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+*/

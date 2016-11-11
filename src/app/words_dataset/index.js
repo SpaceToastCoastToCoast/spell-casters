@@ -48,7 +48,7 @@ class WordsDatasetCtrl {
       $scope.minutes = TimerService.minutes;
       $scope.seconds = TimerService.seconds;
       $scope.zero = TimerService.zero;
-      if ($scope.timer <= 0) {
+      if ($scope.timer < 0) {
         TimerService.saveTime(30,$scope.lvl);
         if($scope.spellsCast === 0) {
           $scope.takeDamage();
@@ -66,8 +66,12 @@ class WordsDatasetCtrl {
     $scope.chargeLevel = "noCharge";
     $scope.showBeam = false;
 
+    //animation variables
     $scope.playerAnimState = "alephaIdle";
     $scope.enemyAnimState = "gatorIdle";
+    $scope.bossAnimState = "noAnim";
+    $scope.playerHealthShake = "noShake";
+    $scope.shakeCanvas = "noShake";
 
     //is the enemy a gator or the boss?
     $scope.isGator = true;
@@ -88,12 +92,18 @@ class WordsDatasetCtrl {
         TimerService.killTimer();
         $scope.resetGame();
         $state.go('game-over')
+      } else {
+        $scope.playerHealthShake = "shake";
+        $timeout(() => {
+          $scope.playerHealthShake = "noShake";
+        }, 500);
       }
     }
 
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
-      $timeout(() => {$scope.showBeam = false;}, 500)
+      $scope.shakeCanvas = "shake";
+      $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"}, 500)
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
       } else {
@@ -135,6 +145,7 @@ class WordsDatasetCtrl {
       if ($scope.lvl === 4) {
         $scope.isGator = false;
         $scope.isBoss = true;
+        $scope.bossAnimState = "zettIdle"
         this.enemyHearts = maxHearts;
         this.enemyHealth = 'fiveHearts';
         $scope.showBossText = true;
