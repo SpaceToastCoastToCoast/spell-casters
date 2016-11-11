@@ -12,6 +12,7 @@ import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
+import { LocalStorageService } from './services/localStorage_service';
 import '../style/app.css';
 
 
@@ -52,6 +53,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('UserServices', UserServices)
   .service('UserStatsService', UserStatsService)
   .service('RegistrationServices', RegistrationServices)
+  .service('LocalStorageService', LocalStorageService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";

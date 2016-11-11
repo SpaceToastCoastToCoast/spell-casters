@@ -47,28 +47,40 @@ export const UserServices = [
 ];
 
 export const LoginCtrl = [
-  '$scope', 'UserServices', '$state', '$stateParams', '$rootScope',
+  '$scope', 'UserServices', '$state', '$stateParams',
+  '$rootScope', 'LocalStorageService', '$q',
 
   class LoginCtrl {
-    constructor($scope, UserServices, $state, $stateParams, $rootScope) {
+    constructor($scope, UserServices, $state, $stateParams,
+      $rootScope, LocalStorageService, $q) {
       this.userData = {
         username: '',
         password: ''
+      };
+      this.loggedUser = {
+        userId: null,
+        userName: ''
       };
 
       $scope.userName = '';
       $scope.password = '';
       $scope.UserServices = UserServices;
 
+
+
     $scope.checkCredentials = () =>{
       this.userData.username = $scope.userName;
       this.userData.password = $scope.password;
       UserServices.getUsers(this.userData)
         .success(response =>{
+          this.loggedUser.userId = response.userid;
+          this.loggedUser.userName = response.username;
           $rootScope.user = response.username;
           $rootScope.visible = true;
+          LocalStorageService.setData('user',this.loggedUser);
         });
     };
+
     $scope.errorMessage = $stateParams.errorMessage;
 
     $scope.goToRegistration = () => {
