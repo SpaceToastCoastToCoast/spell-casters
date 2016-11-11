@@ -63,14 +63,7 @@ export const LoginCtrl = [
       this.$state = $state;
       this.$rootScope = $rootScope;
 
-    $scope.hideShowPassword = () =>{
-      if ($scope.inputType === 'password'){
-        $scope.inputType = 'text';
-      }else{
-      $scope.inputType = 'password';}
-    };
-
-    $scope.checkCreditinals = () =>{
+    $scope.checkCredentials = () =>{
       this.userData.username = $scope.userName;
       this.userData.password = $scope.password;
       console.log('userData: ', this.userData);

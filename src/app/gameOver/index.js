@@ -11,10 +11,10 @@ export const GameOverCtrlState = {
 
 
 export const GameOverCtrl = [
-  '$scope','$state', '$rootScope', 'GameOverService',
+  '$scope','$state', '$rootScope', 'UserStatsService',
 
   class GameOverCtrl {
-    constructor($scope,$state,$rootScope, GameOverService) {
+    constructor($scope,$state,$rootScope, UserStatsService) {
       $scope.goToSplash = () => {
         $state.go('splash')
       }
