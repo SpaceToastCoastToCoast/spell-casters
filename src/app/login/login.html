@@ -1,14 +1,13 @@
 <div class="login">
   <h2>Log In</h2>
-  <p>User Name</p>
+  <p class="userName">You are logged in as {{ user }}.</p>
+  <p>Username</p>
   <input ng-model='userName' type="text" name="User name">
   <p>Password</p>
-  <input ng-model='password' type="{{inputType}}" name="Password" placeholder="Put your password">
-  <button ng-click='checkCreditinals()'>Login</button>
-  <button ng-click='goToRegistration()'>Register</button>
+  <input ng-model='password' type="{{inputType}}" name="Password" placeholder="Type your password">
+  <button ng-click='checkCreditinals()'>Login</button><button ng-click='goToRegistration()'>Register</button>
   <input type="checkbox" id="checkbox" ng-click="hideShowPassword()">
   <label for="checkbox" ng-if="passwordCheckbox">Hide password</label>
   <label for="checkbox" ng-if="!passwordCheckbox">Show password</label>
 </div>
-</div>
-<p>{{ user }}</p>
+

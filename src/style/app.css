@@ -107,6 +107,10 @@ button:active {
   margin: 0px;
 }
 
+.login .userName {
+  margin-bottom: 16px;
+}
+
 .login input {
   margin-top: 8px;
   margin-bottom: 8px;
