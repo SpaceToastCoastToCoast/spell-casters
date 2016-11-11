@@ -115,7 +115,9 @@ class WordsDatasetCtrl {
     const increaseLvl = () => {
       TimerService.saveTime($scope.timer,this.lvl)
       TimerService.resetTimer();
-      this.newWords = WordsService.getWords(++this.lvl);
+      if (this.lvl < 4) {
+        this.newWords = WordsService.getWords(++this.lvl);
+      }
       this.currentWord = 0;
       this.hearts = maxHearts;
       $scope.playerHealth = 'fiveHearts';
