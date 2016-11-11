@@ -26,6 +26,7 @@ export const GameOverCtrl = [
       $scope.totalTime = $rootScope.totalTimeElapsed;
       $scope.totalWordsCompleted = $rootScope.totalWordsCompleted;
       $scope.percentCompleted = $rootScope.percentCompleted;
+      $scope.misspelledWords = $rootScope.misspelledWords;
     }
   }
 ]

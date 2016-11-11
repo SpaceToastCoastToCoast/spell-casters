@@ -25,8 +25,8 @@ export const WordsService = [
       this.syllableCount = this.syllableCount.bind(this)
       this.randomize = this.randomize.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
-      this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
-      this.calculateTotalWordsComplete = this.calculateTotalWordsComplete.bind(this)
+      this.calculatePercentCompleted = this.calculatePercentCompleted.bind(this)
+      this.calculateTotalWordsCompleted = this.calculateTotalWordsCompleted.bind(this)
       this.totalWords = null;
       this.$rootScope = $rootScope;
       this.resetGame = this.resetGame.bind(this)
@@ -111,15 +111,20 @@ export const WordsService = [
       spellWords.lvl4Words = this.randomize(this.boss)
     }
 
-    postStatistics(lvl,currentIndex,gameMistakes,times) {
-      const totalTime = this.calculateTotalTime(times);
-      const totalWordsCompleted = this.calculateTotalWordsComplete(lvl, currentIndex);
-      const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
+    postStatistics(lvl,currentIndex,misspelledWords,times) {
+      let timeElapsed = '';
+      for (var time in times) {
+        timeElapsed += `${times[time]},`
+      }
+      timeElapsed = timeElapsed.substring(0,timeElapsed.length - 1);
+      const totalWordsCompleted = this.calculateTotalWordsCompleted(lvl, currentIndex);
+      const percentCompleted = this.calculatePercentCompleted(totalWordsCompleted);
 
       //save stats to rootScope for access in gameOver page
       this.$rootScope.totalWordsCompleted = totalWordsCompleted;
-      this.$rootScope.percentCompleted = percentComplete
-      this.$rootScope.totalTimeElapsed = totalTime;
+      this.$rootScope.percentCompleted = percentCompleted
+      this.$rootScope.totalTimeElapsed = this.calculateTotalTime(times);
+      this.$rootScope.misspelledWords = misspelledWords;
 
       if (this.$rootScope.user !== 'Guest') {
         const req = {
@@ -128,7 +133,7 @@ export const WordsService = [
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
+          data: `percentCompleted=${percentCompleted}&totalWordsCompleted=${totalWordsCompleted}&misspelledWords=${misspelledWords}&timeElapsed=${timeElapsed}&username=${this.$rootScope.user}`
         }
         return this.$http(req)
       }
@@ -143,11 +148,11 @@ export const WordsService = [
       return totalTime;
     }
 
-    calculatePercentComplete(totalWordsCompleted) {
+    calculatePercentCompleted(totalWordsCompleted) {
       return Math.round((totalWordsCompleted / (this.totalWords))*100)/100;
     }
 
-    calculateTotalWordsComplete(lvl,currentIndex) {
+    calculateTotalWordsCompleted(lvl,currentIndex) {
       switch(lvl) {
         case 1:
           return currentIndex;

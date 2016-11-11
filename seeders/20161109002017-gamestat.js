@@ -3,10 +3,10 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
       return queryInterface.bulkInsert('GameStats', [{
-        percentComplete: 34.5,
-        totalWordsCompleted: 35,
-        gameMistakes: 12,
-        totalTimeElapsed: 40,
+        percentCompleted: 0.02,
+        totalWordsCompleted: 2,
+        misspelledWords: ['accommodate','a lot','occurrence'],
+        timeElapsed: [5, 0, 0, 0],
         createdAt : new Date(),
         updatedAt : new Date(),
         UserId: 1,

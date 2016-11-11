@@ -8,20 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      percentComplete: {
+      percentCompleted: {
         type: Sequelize.DECIMAL
       },
       totalWordsCompleted: {
         type: Sequelize.INTEGER
       },
-      gameMistakes: {
-        type: Sequelize.INTEGER
+      misspelledWords: {
+        type: Sequelize.ARRAY(Sequelize.TEXT)
       },
-      totalTimeElapsed: {
-        type: Sequelize.INTEGER
-      },
-      userId: {
-        type: Sequelize.INTEGER
+      timeElapsed: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
       createdAt: {
         allowNull: false,
