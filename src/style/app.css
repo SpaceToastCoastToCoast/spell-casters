@@ -382,61 +382,61 @@ button:active {
   left: 172px;
   width: 32px;
   height: 32px;
-  background-image: url("http://localhost:8080/img/sparkle_placeholder.png");
+  background-image: url("http://localhost:8080/img/spell-sprites-alpha.png");
 }
 
 .noCharge {
-  animation: noCharge steps(16) 0.64s infinite;
+  animation: noCharge steps(4) 0.32s infinite;
 }
 
 @keyframes noCharge {
-  from {background-position: 0px 0px;}
-  to {background-position: -512px 0px;}
+  from {background-position: 0px -32px;}
+  to {background-position: -128px -32px;}
 }
 
 .oneCharge {
-  animation: oneCharge steps(16) 0.64s infinite;
+  animation: oneCharge steps(4) 0.32s infinite;
 }
 
 @keyframes oneCharge {
-  from {background-position: 0px -32px;}
-  to {background-position: -512px -32px;}
+  from {background-position: 0px -64px;}
+  to {background-position: -128px -64px;}
 }
 
 .twoCharge {
-  animation: twoCharge steps(16) 0.64s infinite;
+  animation: twoCharge steps(4) 0.32s infinite;
 }
 
 @keyframes twoCharge {
-  from {background-position: 0px 0px;}
-  to {background-position: -512px 0px;}
+  from {background-position: 0px -96px;}
+  to {background-position: -128px -96px;}
 }
 
 .threeCharge {
-  animation: threeCharge steps(16) 0.64s infinite;
+  animation: threeCharge steps(4) 0.32s infinite;
 }
 
 @keyframes threeCharge {
-  from {background-position: 0px -32px;}
-  to {background-position: -512px -32px;}
+  from {background-position: 0px -128px;}
+  to {background-position: -128px -128px;}
 }
 
 .fourCharge {
-  animation: fourCharge steps(16) 0.64s infinite;
+  animation: fourCharge steps(4) 0.32s infinite;
 }
 
 @keyframes fourCharge {
-  from {background-position: 0px 0px;}
-  to {background-position: -512px 0px;}
+  from {background-position: 0px -160px;}
+  to {background-position: -128px -160px;}
 }
 
 .fiveCharge {
-  animation: fiveCharge steps(16) 0.64s infinite;
+  animation: fiveCharge steps(4) 0.32s infinite;
 }
 
 @keyframes fiveCharge {
-  from {background-position: 0px -32px;}
-  to {background-position: -512px -32px;}
+  from {background-position: 0px -192px;}
+  to {background-position: -128px -192px;}
 }
 
 .beam {
