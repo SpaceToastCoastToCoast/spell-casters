@@ -26,6 +26,7 @@ export const WordsService = [
       this.randomize = this.randomize.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
       this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
+      this.calculateTotalWordsComplete = this.calculateTotalWordsComplete.bind(this)
       this.totalWords = null;
       this.$rootScope = $rootScope;
       this.resetGame = this.resetGame.bind(this)
@@ -110,8 +111,9 @@ export const WordsService = [
       spellWords.lvl4Words = this.randomize(this.boss)
     }
 
-    postStatistics(totalWordsCompleted,gameMistakes,times) {
+    postStatistics(lvl,currentIndex,gameMistakes,times) {
       const totalTime = this.calculateTotalTime(times);
+      const totalWordsCompleted = this.calculateTotalWordsComplete(lvl, currentIndex);
       const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
 
       //save stats to rootScope for access in gameOver page
@@ -143,6 +145,26 @@ export const WordsService = [
 
     calculatePercentComplete(totalWordsCompleted) {
       return Math.round((totalWordsCompleted / (this.totalWords))*100)/100;
+    }
+
+    calculateTotalWordsComplete(lvl,currentIndex) {
+      switch(lvl) {
+        case 1:
+          return currentIndex;
+          break;
+        case 2:
+          return this.easy.length + currentIndex;
+          break;
+        case 3:
+          return this.easy.length + this.medium.length + currentIndex;
+          break;
+        case 4:
+          return this.easy.length + this.medium.length + this.hard.length + currentIndex;
+          break;
+        default:
+          return this.easy.length + this.medium.length + this.hard.length + this.boss.length;
+          break;
+      }
     }
   }
 

@@ -133,7 +133,7 @@ class WordsDatasetCtrl {
       }
       if ($scope.lvl === 5) {
         TimerService.killTimer();
-        WordsService.postStatistics(20,(maxHearts - this.hearts),TimerService.times)
+        WordsService.postStatistics(5,0,(maxHearts - this.hearts),TimerService.times)
         $state.go('won');
         $scope.showLevel = false;
       }
@@ -172,6 +172,8 @@ class WordsDatasetCtrl {
       $scope.showLevel = false;
     }
 
+
+
     $scope.compare = () => {
 
       if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
@@ -182,7 +184,10 @@ class WordsDatasetCtrl {
         if (this.hearts <= 0) {
           $scope.showLevel = false;
           TimerService.saveTime((30 - $scope.timer),$scope.lvl)
-          WordsService.postStatistics((($scope.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),TimerService.times);
+          console.log('level',$scope.lvl);
+          console.log('currentWordIndex',this.currentWord);
+
+          WordsService.postStatistics($scope.lvl,this.currentWord,(maxHearts - this.hearts),TimerService.times);
           TimerService.killTimer();
           $scope.resetGame();
           $state.go('game-over')
