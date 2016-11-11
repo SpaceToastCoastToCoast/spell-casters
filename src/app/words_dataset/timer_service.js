@@ -21,7 +21,7 @@ export const TimerService = [
       }
 
       // this.startTimer = this.startTimer.bind(this);
-      // this.killTimer = this.killTimer.bind(this);
+      this.killTimer = this.killTimer.bind(this);
       // this.resetTimer = this.resetTimer.bind(this);
       // this.saveTime = this.saveTime.bind(this);
       this.numberToString = numberToString;
@@ -42,6 +42,7 @@ export const TimerService = [
           this.zero = ''
         }
         this.timer--;
+        this.seconds--;
         this.tick();
       }, 1000);
     }
@@ -65,7 +66,7 @@ export const TimerService = [
       this.seconds = '30';
       this.zero = '';
       this.timer = minuteLimit * 60;
-      this.countDown = null;
+      this.killTimer();
 
       this.times = {
         lvl1: 0,
