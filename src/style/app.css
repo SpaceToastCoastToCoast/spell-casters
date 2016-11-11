@@ -87,6 +87,21 @@ button:active {
   justify-content: space-between;
 }
 
+.loggedInAs {
+  margin: 0px;
+  padding: 12px;
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  transform: translateX(320px);
+  color: #e3bb88;
+  font-size: 12px;
+}
+
+.registrationMsg {
+  margin: 0px;
+}
+
 .login {
   box-shadow: 2px 2px 2px #644749, -1px -1px 2px #e3bb88;
   border-radius: 4px;
@@ -155,6 +170,7 @@ button:active {
   /*
   background-image: url("http://localhost:8080/img/splash.png");
   */
+  margin-top: 8px;
 }
 
 #gameInfo {
