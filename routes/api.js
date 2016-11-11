@@ -35,15 +35,47 @@ app.get('/spells', (req, res) => {
     });
   }));
 });
-
+//login route
 app.post('/login', (req,res) => {
-  users.findAll({
-    limit: 1,
-    where: {username: req.body.username}
-  })
-  .then((data) =>{
-    if(data.length === 0){
+   if (req.body.username === '') {
+    res.json({
+      success: false,
+      errorMessage: 'Please enter a username, it was empty'
+    });
+  } else if (req.body.password === '') {
       res.json({
+<<<<<<< HEAD
+      success: false,
+      errorMessage: 'Please enter a password, it was empty'
+    });
+  } else {
+      users.findAll({
+        limit: 1,
+        where: {username: req.body.username}
+      })
+      .then((data) =>{
+        if(data.length === 0){
+          res.json({
+            success: false,
+            errorMessage: 'Please enter a valid username'
+          });
+        } else {
+          if(data[0].dataValues.password !== req.body.password){
+            res.json({
+              success: false,
+              errorMessage: 'Please enter a valid password'
+            });
+          }else{
+            res.json({
+              success: true,
+              userid: data[0].dataValues.id,
+              username: data[0].dataValues.username
+            });
+          }
+        }
+      });
+  }
+=======
         success: false
       });
     }
@@ -60,10 +92,19 @@ app.post('/login', (req,res) => {
       }
     }
   });
+>>>>>>> develop
 });
 
 //registration route
 app.post('/register', (req, res) =>{
+<<<<<<< HEAD
+  if (req.body.username === '') {
+    res.json({
+      success: false,
+      errorMessage: 'Please enter a username, it was empty'
+    });
+  } else if (req.body.password === '') {
+=======
   users.findAll({
     where: {username: req.body.username}
   })
@@ -78,13 +119,43 @@ app.post('/register', (req, res) =>{
         registrationMessage: 'User successfully created'
       });
     } else {
+>>>>>>> develop
       res.json({
-        success: false,
-        registrationMessage: 'Please select another username'
-      });
-    }
-  });
+      success: false,
+      errorMessage: 'Please enter a password, it was empty'
+    });
+  } else {
+    users.findAll({
+      where: {username: req.body.username}
+    })
+    .then((data)=>{
+      console.log('data', data);
+      if (data.length !== 0) {
+        res.json({
+          success: false,
+          errorMessage: 'Please select another username, it is already exist'
+        });
+      } else {
+          users.create({
+            username: req.body.username,
+            password: req.body.password
+          })
+          .then(() =>{
+            users.findAll({
+              where: {username: req.body.username}
+            })
+            .then((data) =>{
+              res.json({
+                success: true,
+                userid: data[0].dataValues.id,
+                username: data[0].dataValues.username
 
+              });
+            });
+          });
+      }
+    });
+  }
 });
 
 //Post game statistics
