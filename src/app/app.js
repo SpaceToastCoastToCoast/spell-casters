@@ -12,6 +12,7 @@ import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
+import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import '../style/app.css';
 
 
@@ -42,6 +43,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('won',WonCtrlState)
       .state('login', LoginCtrlState)
       .state('registration', RegistrationCtrlState)
+      .state('userProfile', UserProfileCtrlState)
 
     $urlRouterProvider.otherwise('/');
   })
@@ -63,7 +65,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(AboutCtrlName, AboutCtrl)
   .controller(WonCtrlName, WonCtrl)
   .controller(LoginCtrlName, LoginCtrl)
-  .controller(RegistrationCtrlName, RegistrationCtrl);
+  .controller(RegistrationCtrlName, RegistrationCtrl)
+  .controller(UserProfileCtrlName, UserProfileCtrl);
 
 
 export default MODULE_NAME;

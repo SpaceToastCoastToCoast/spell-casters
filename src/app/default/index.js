@@ -42,6 +42,9 @@ export const DefaultCtrl = [
       };
       $scope.registrationMessage = $stateParams.registrationMessage;
 
+      $scope.goToUserProfile = () => {
+        $state.go('userProfile')
+      }
     }
   }
 ]
