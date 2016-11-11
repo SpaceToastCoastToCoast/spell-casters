@@ -45,6 +45,7 @@ export const WordsService = [
     }
 
     initSpells() {
+      this.resetGame();
       return this.$http.get('/api/spells').success(response => {
         this.baseSpells = response.base_spells;
         this.bossSpells = response.boss_spells;
