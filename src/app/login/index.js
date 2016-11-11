@@ -6,7 +6,10 @@ export const LoginCtrlState = {
   url: '/login',
   template,
   controller: LoginCtrlName,
-  controllerAs: 'login'
+  controllerAs: 'login',
+  params: {
+    errorMessage: null
+  }
 };
 
 export const UserServices = [
@@ -35,7 +38,7 @@ export const UserServices = [
           if(response.success === true){
               this.$state.go('splash');
           }else{
-            this.$state.go('login');
+            this.$state.go('login', {errorMessage: response.errorMessage});
           }
          return;
        });
@@ -44,27 +47,18 @@ export const UserServices = [
 ];
 
 export const LoginCtrl = [
-  '$scope', 'UserServices', '$state', '$rootScope',
+  '$scope', 'UserServices', '$state', '$stateParams', '$rootScope',
 
   class LoginCtrl {
-    constructor($scope, UserServices, $state, $rootScope) {
+    constructor($scope, UserServices, $state, $stateParams, $rootScope) {
       this.userData = {
         username: '',
         password: ''
       };
-      $scope.inputType = 'password';
+
       $scope.userName = '';
       $scope.password = '';
       $scope.UserServices = UserServices;
-      this.$state = $state;
-      this.$rootScope = $rootScope;
-
-    $scope.hideShowPassword = () =>{
-      if ($scope.inputType === 'password'){
-        $scope.inputType = 'text';
-      }else{
-      $scope.inputType = 'password';}
-    };
 
     $scope.checkCreditinals = () =>{
       this.userData.username = $scope.userName;
@@ -74,22 +68,12 @@ export const LoginCtrl = [
           $rootScope.user = response.username;
           $rootScope.visible = true;
         });
-          // .success(response => {
-          //   if(response.success === true){
-          //     this.$rootScope.user = response.username;
-          //     this.$rootScope.visible = true;
-          //     console.log('this.$rootScope', this.$rootScope);
-          //     this.$state.go('splash'); //this.$state.go('splash', { user: response.username});
-          //   }else{
-          //     this.$state.go('login');
-          //   }
-          //  return response.username;
-          // });
     };
+    $scope.errorMessage = $stateParams.errorMessage;
 
     $scope.goToRegistration = () => {
-        $state.go('registration');
-      };
+      $state.go('registration');
+    };
   }
 }
-]
+];

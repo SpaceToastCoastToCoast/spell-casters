@@ -8,7 +8,7 @@ export const RegistrationCtrlState ={
   controller: RegistrationCtrlName,
   controllerAs: 'registration',
   params: {
-    registrationMessage: null
+    errorMessage: null
   }
 };
 
@@ -38,7 +38,7 @@ export const RegistrationServices = [
         if(response.success === true){
           this.$state.go('splash', {registrationMessage: response.registrationMessage});
         }else{
-          this.$state.go('registration', {registrationMessage: response.registrationMessage});
+          this.$state.go('registration', {errorMessage: response.errorMessage});
         }
        return response;
      });
@@ -60,18 +60,19 @@ export const RegistrationCtrl = [
       $scope.userName = '';
       $scope.password = '';
       $scope.RegistrationServices = RegistrationServices;
+      $scope.registrationMessage = '';
 
       $scope.registerUser = () => {
         this.registerData.username = $scope.userName;
         this.registerData.password = $scope.password;
         RegistrationServices.registerUser(this.registerData)
           .success(response =>{
-            console.log('response: ', response);
             $rootScope.user = response.username;
             $rootScope.visible = true;
+            $scope.registrationMessage = 'User successfully created';
         });
       };
-      $scope.registrationMessage = $stateParams.registrationMessage;
+      $scope.errorMessage = $stateParams.errorMessage;
     }
   }
 ];
