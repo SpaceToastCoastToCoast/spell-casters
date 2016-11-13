@@ -7,21 +7,20 @@ export const DefaultCtrlState = {
   template,
   controller: DefaultCtrlName,
   controllerAs: 'default',
-  // params: {
-  //   user: null
-  // }
   params: {
-    user: null,
     visible: false,
     registrationMessage: null
   }
 };
 
 export const DefaultCtrl = [
-  '$scope','$state', '$stateParams', '$rootScope',
+  '$scope','$state','$stateParams','$rootScope','LocalStorageService',
 
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,$rootScope) {
+    constructor($scope,$state,$stateParams,$rootScope,LocalStorageService) {
+      // $scope.ezmiez = LocalStorageService.getData('user');
+      // console.log('ezmiez', $scope.ezmiez);
+
       $scope.goToInstructions = () => {
         $state.go('instructions');
       };
@@ -34,8 +33,9 @@ export const DefaultCtrl = [
       $scope.goToLogIn = () => {
         $state.go('login')
       }
-      //$scope.user = $stateParams.user;
+
       $scope.LogOut = () => {
+        LocalStorageService.resetData('user');
         $rootScope.user = 'Guest';
         $rootScope.visible = false;
         $state.go('splash')

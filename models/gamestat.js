@@ -1,14 +1,14 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var GameStat = sequelize.define('GameStat', {
-    percentComplete: DataTypes.DECIMAL,
+    percentCompleted: DataTypes.DECIMAL,
     totalWordsCompleted: DataTypes.INTEGER,
-    gameMistakes: DataTypes.INTEGER,
-    totalTimeElapsed: DataTypes.INTEGER,
+    misspelledWords: DataTypes.ARRAY(DataTypes.TEXT),
+    timeElapsed: DataTypes.ARRAY(DataTypes.INTEGER)
   }, {
     classMethods: {
       associate: function(models) {
-        GameStat.belongsTo(models.User);
+        GameStat.belongsTo(models.User)
       }
     }
   });

@@ -10,11 +10,6 @@ $darkest-color: #222222;*/
   Minimum width is 700px before showing "no mobile devices" page
 */
 
-/*stats for gameOver page*/
-.stats {
-  color: white;
-}
-
 body {
   background-color: #222222;
   font-family: 'Anonymous Pro', monospace;
@@ -92,6 +87,21 @@ button:active {
   justify-content: space-between;
 }
 
+.loggedInAs {
+  margin: 0px;
+  padding: 12px;
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  transform: translateX(320px);
+  color: #e3bb88;
+  font-size: 12px;
+}
+
+.registrationMsg {
+  margin: 0px;
+}
+
 .login {
   box-shadow: 2px 2px 2px #644749, -1px -1px 2px #e3bb88;
   border-radius: 4px;
@@ -160,6 +170,7 @@ button:active {
   /*
   background-image: url("http://localhost:8080/img/splash.png");
   */
+  margin-top: 8px;
 }
 
 #gameInfo {
@@ -205,6 +216,8 @@ button:active {
 }
 
 #playerInput {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
   box-sizing: border-box;
   margin: auto;
   display: flex;
@@ -250,6 +263,32 @@ button:active {
   background-color: #b1695a;
 }
 
+#gameStats {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 8px;
+  z-index: 999;
+  position: relative;
+  top: 8px;
+  width: 320px;
+  background-color: #db9864;
+  box-shadow: 1px 2px 2px #b1695a;
+}
+
+#gameStats div {
+  width: 100%;
+}
+
+#gameStats p, h3 {
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
 /* Header elements */
 
 #svgLogo {
@@ -261,8 +300,8 @@ button:active {
 }
 
 #musicControls {
+  border-top: 1px solid #e3bb88;
   border-radius: 2px;
-  border-top: 1px solid white;
   box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
   background-color: #db9864;
   background: linear-gradient(#db9864, #b1695a);
@@ -284,6 +323,31 @@ button:active {
   margin-right: 6px;
 }
 
+/* Misc. Animation */
+
+.shake {
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 /* Character sprites */
 
 /* UI Sprites */
@@ -293,8 +357,8 @@ button:active {
   top: 8px;
   left: 8px;
   height: 16px;
-  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
-  background-repeat: repeat-x;
+  background: url("http://localhost:8080/img/ui_sprites_heart.png") repeat-x top left;
+  transition: width 0.5s ease;
 }
 
 #gatorBar {
@@ -302,9 +366,8 @@ button:active {
   top: 8px;
   right: 8px;
   height: 16px;
-  background-image: url("http://localhost:8080/img/ui_sprites_heart.png");
-  background-position: 0px -16px;
-  background-repeat: repeat-x;
+  background: url("http://localhost:8080/img/ui_sprites_heart.png") repeat-x bottom right;
+  transition: width 0.5s ease;
 }
 
 .fiveHearts {
@@ -359,61 +422,61 @@ button:active {
   left: 172px;
   width: 32px;
   height: 32px;
-  background-image: url("http://localhost:8080/img/sparkle_placeholder.png");
+  background-image: url("http://localhost:8080/img/spell-sprites-alpha.png");
 }
 
 .noCharge {
-  animation: noCharge steps(16) 0.64s infinite;
+  animation: noCharge steps(4) 0.32s infinite;
 }
 
 @keyframes noCharge {
-  from {background-position: 0px 0px;}
-  to {background-position: -512px 0px;}
+  from {background-position: 0px -32px;}
+  to {background-position: -128px -32px;}
 }
 
 .oneCharge {
-  animation: oneCharge steps(16) 0.64s infinite;
+  animation: oneCharge steps(4) 0.32s infinite;
 }
 
 @keyframes oneCharge {
-  from {background-position: 0px -32px;}
-  to {background-position: -512px -32px;}
+  from {background-position: 0px -64px;}
+  to {background-position: -128px -64px;}
 }
 
 .twoCharge {
-  animation: twoCharge steps(16) 0.64s infinite;
+  animation: twoCharge steps(4) 0.32s infinite;
 }
 
 @keyframes twoCharge {
-  from {background-position: 0px 0px;}
-  to {background-position: -512px 0px;}
+  from {background-position: 0px -96px;}
+  to {background-position: -128px -96px;}
 }
 
 .threeCharge {
-  animation: threeCharge steps(16) 0.64s infinite;
+  animation: threeCharge steps(4) 0.32s infinite;
 }
 
 @keyframes threeCharge {
-  from {background-position: 0px -32px;}
-  to {background-position: -512px -32px;}
+  from {background-position: 0px -128px;}
+  to {background-position: -128px -128px;}
 }
 
 .fourCharge {
-  animation: fourCharge steps(16) 0.64s infinite;
+  animation: fourCharge steps(4) 0.32s infinite;
 }
 
 @keyframes fourCharge {
-  from {background-position: 0px 0px;}
-  to {background-position: -512px 0px;}
+  from {background-position: 0px -160px;}
+  to {background-position: -128px -160px;}
 }
 
 .fiveCharge {
-  animation: fiveCharge steps(16) 0.64s infinite;
+  animation: fiveCharge steps(4) 0.32s infinite;
 }
 
 @keyframes fiveCharge {
-  from {background-position: 0px -32px;}
-  to {background-position: -512px -32px;}
+  from {background-position: 0px -192px;}
+  to {background-position: -128px -192px;}
 }
 
 .beam {
@@ -447,7 +510,7 @@ button:active {
 }
  /*
 .gatorIdle {
-  animation: alephaIdle steps(8) 0.64s infinite;
+  animation: gatorIdle steps(8) 0.64s infinite;
 }
 
 @keyframes gatorIdle {
@@ -462,3 +525,23 @@ button:active {
 }
 
 /* Lord Zett */
+
+.lordZett {
+  position: absolute;
+  top: 144px;
+  right: 96px;
+  width: 128px;
+  height: 128px;
+  background-image: url("http://localhost:8080/img/zett-static.png");
+}
+
+/*
+.zettIdle {
+  animation: zettIdle steps(8) 0.64s infinite;
+}
+
+@keyframes zettIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+*/

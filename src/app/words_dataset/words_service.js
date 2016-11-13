@@ -25,9 +25,20 @@ export const WordsService = [
       this.syllableCount = this.syllableCount.bind(this)
       this.randomize = this.randomize.bind(this)
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
-      this.calculatePercentComplete = this.calculatePercentComplete.bind(this)
+      this.calculatePercentCompleted = this.calculatePercentCompleted.bind(this)
+      this.calculateTotalWordsCompleted = this.calculateTotalWordsCompleted.bind(this)
       this.totalWords = null;
       this.$rootScope = $rootScope;
+      this.resetGame = this.resetGame.bind(this)
+    }
+    resetGame() {
+      this.wordsData = [];
+      this.bossSpells = {};
+      this.baseSpells = {};
+      this.easy = [];
+      this.medium = [];
+      this.hard = [];
+      this.boss = [];
     }
     getWords (lvl) {
       this.wordsData = spellWords[`lvl${lvl}Words`];
@@ -35,6 +46,7 @@ export const WordsService = [
     }
 
     initSpells() {
+      this.resetGame();
       return this.$http.get('/api/spells').success(response => {
         this.baseSpells = response.base_spells;
         this.bossSpells = response.boss_spells;
@@ -99,21 +111,20 @@ export const WordsService = [
       spellWords.lvl4Words = this.randomize(this.boss)
     }
 
-    postStatistics(totalWordsCompleted,gameMistakes) {
-      //dummy data until timer service provides correct times per level
-      const times = {
-        lvl1Time: 20,
-        lvl2Time: 20,
-        lvl3Time: 20,
-        lvl4Time: 20
+    postStatistics(lvl,currentIndex,misspelledWords,times) {
+      let timeElapsed = '';
+      for (var time in times) {
+        timeElapsed += `${times[time]},`
       }
-      const totalTime = this.calculateTotalTime(times);
-      const percentComplete = this.calculatePercentComplete(totalWordsCompleted);
+      timeElapsed = timeElapsed.substring(0,timeElapsed.length - 1);
+      const totalWordsCompleted = this.calculateTotalWordsCompleted(lvl, currentIndex);
+      const percentCompleted = this.calculatePercentCompleted(totalWordsCompleted);
 
       //save stats to rootScope for access in gameOver page
       this.$rootScope.totalWordsCompleted = totalWordsCompleted;
-      this.$rootScope.percentCompleted = percentComplete
-      this.$rootScope.totalTimeElapsed = totalTime;
+      this.$rootScope.percentCompleted = percentCompleted
+      this.$rootScope.totalTimeElapsed = this.calculateTotalTime(times);
+      this.$rootScope.misspelledWords = misspelledWords;
 
       if (this.$rootScope.user !== 'Guest') {
         const req = {
@@ -122,24 +133,43 @@ export const WordsService = [
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          data: `percentComplete=${percentComplete}&totalWordsCompleted=${totalWordsCompleted}&gameMistakes=${gameMistakes}&totalTimeElapsed=${totalTime}&username=${this.$rootScope.user}`
+          data: `percentCompleted=${percentCompleted}&totalWordsCompleted=${totalWordsCompleted}&misspelledWords=${misspelledWords}&timeElapsed=${timeElapsed}&username=${this.$rootScope.user}`
         }
         return this.$http(req)
       }
+      this.resetGame();
     }
 
     calculateTotalTime(times) {
       let totalTime = 0;
       for (var lvlTime in times) {
-        if (times[lvlTime] !== null) {
-          totalTime += (secondsPerRound - times[lvlTime])
-        }
+        totalTime += times[lvlTime]
       }
       return totalTime;
     }
 
-    calculatePercentComplete(totalWordsCompleted) {
+    calculatePercentCompleted(totalWordsCompleted) {
       return Math.round((totalWordsCompleted / (this.totalWords))*100)/100;
+    }
+
+    calculateTotalWordsCompleted(lvl,currentIndex) {
+      switch(lvl) {
+        case 1:
+          return currentIndex;
+          break;
+        case 2:
+          return this.easy.length + currentIndex;
+          break;
+        case 3:
+          return this.easy.length + this.medium.length + currentIndex;
+          break;
+        case 4:
+          return this.easy.length + this.medium.length + this.hard.length + currentIndex;
+          break;
+        default:
+          return this.easy.length + this.medium.length + this.hard.length + this.boss.length;
+          break;
+      }
     }
   }
 

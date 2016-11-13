@@ -4,10 +4,8 @@
   <p>Username</p>
   <input ng-model='userName' type="text" name="User name">
   <p>Password</p>
-  <input ng-model='password' type="{{inputType}}" name="Password" placeholder="Type your password">
-  <button ng-click='checkCreditinals()'>Login</button><button ng-click='goToRegistration()'>Register</button>
-  <input type="checkbox" id="checkbox" ng-click="hideShowPassword()">
-  <label for="checkbox" ng-if="passwordCheckbox">Hide password</label>
-  <label for="checkbox" ng-if="!passwordCheckbox">Show password</label>
+  <input ng-model='password' type="password" name="Password" placeholder="Type your password">
+  <button ng-click='checkCredentials()'>Login</button><button ng-click='goToRegistration()'>Register</button>
+  <p>{{ errorMessage }}</p>
 </div>
 

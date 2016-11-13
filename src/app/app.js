@@ -4,7 +4,7 @@ import { WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from '.
 import { WordsService } from './words_dataset/words_service';
 import { TimerService } from './words_dataset/timer_service';
 import { numberToString } from './constants/numberToString';
-import { GameOverService } from './gameOver/game_over_service';
+import { UserStatsService } from './gameOver/game_over_service';
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
@@ -12,6 +12,7 @@ import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
+import { LocalStorageService } from './services/localStorage_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import '../style/app.css';
@@ -53,9 +54,14 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('WordsService', WordsService)
   .service('TimerService', TimerService)
   .service('UserServices', UserServices)
+<<<<<<< HEAD
   .service('UserProfileServices', UserProfileServices)
   .service('GameOverService', GameOverService)
+=======
+  .service('UserStatsService', UserStatsService)
+>>>>>>> 3c4542d7cab014ad819e9b155f722dbb73604f3f
   .service('RegistrationServices', RegistrationServices)
+  .service('LocalStorageService', LocalStorageService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
