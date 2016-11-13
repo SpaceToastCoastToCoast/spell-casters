@@ -54,12 +54,9 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('WordsService', WordsService)
   .service('TimerService', TimerService)
   .service('UserServices', UserServices)
-<<<<<<< HEAD
+  .service('UserStatsService', UserStatsService)
   .service('UserProfileServices', UserProfileServices)
   .service('GameOverService', GameOverService)
-=======
-  .service('UserStatsService', UserStatsService)
->>>>>>> 3c4542d7cab014ad819e9b155f722dbb73604f3f
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
   .controller('AppCtrl', AppCtrl)
