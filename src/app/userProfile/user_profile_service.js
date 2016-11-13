@@ -24,7 +24,12 @@ export const UserProfileServices = [
       };
        return this.$http(req).success(response => {
          console.log('response: ', response.stats);
-        this.highestPercentComplete = response.stats
+        let allHighestPercent = response.stats.filter((percent) =>{
+          console.log('percent: ', percent.percentComplete);
+
+          return percent.percentComplete;
+        });
+
        });
     }
 
