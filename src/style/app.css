@@ -532,10 +532,9 @@ button:active {
   right: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("http://localhost:8080/img/zett-static.png");
+  background-image: url("http://localhost:8080/img/zett_idle_final.png");
 }
 
-/*
 .zettIdle {
   animation: zettIdle steps(8) 0.64s infinite;
 }
@@ -544,4 +543,3 @@ button:active {
   from {background-position: 0px 0px;}
   to {background-position: -1024px 0px;}
 }
-*/

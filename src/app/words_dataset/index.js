@@ -153,7 +153,7 @@ class WordsDatasetCtrl {
       if ($scope.lvl === 4) {
         $scope.isGator = false;
         $scope.isBoss = true;
-        $scope.bossAnimState = "zettIdle"
+        $scope.bossAnimState = "zettIdle";
         this.enemyHearts = maxHearts;
         this.enemyHealth = 'fiveHearts';
         $scope.showBossText = true;
