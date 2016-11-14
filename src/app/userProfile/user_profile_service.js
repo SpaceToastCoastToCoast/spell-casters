@@ -22,14 +22,27 @@ export const UserProfileServices = [
       method: 'GET',
       url: `/api/game-stats/${this.$rootScope.user}`,
       };
+      console.log('req: ', req);
        return this.$http(req).success(response => {
-         console.log('response: ', response.stats);
-        let allHighestPercent = response.stats.filter((percent) =>{
-          console.log('percent: ', percent.percentComplete);
 
-          return percent.percentComplete;
-        });
+        //MaxPercentCompleted
+        let percentArr = [];
 
+        for(let x = 0; x<response.stats.length; x++){
+          percentArr.push(response.stats[x].percentCompleted);
+        }
+
+        //AveragePercentCompleted
+        let totalGamesPlayed = percentArr.length;
+
+        this.highestPercentComplete = Math.max(...percentArr);
+        console.log('this.highestPercentComplete: ', this.highestPercentComplete);
+
+        let percentSum = percentArr.reduce((a, b) => a + b, 0);
+        console.log('percentSum: ', percentSum);
+
+        this.averagePercentComplete =  ((percentSum / totalGamesPlayed) *100);
+        console.log('this.averagePercentComplete: ', this.averagePercentComplete);
        });
     }
 

@@ -43,6 +43,7 @@ export const DefaultCtrl = [
       $scope.registrationMessage = $stateParams.registrationMessage;
 
       $scope.goToUserProfile = () => {
+        console.log('food: ');
         $state.go('userProfile')
       }
     }
