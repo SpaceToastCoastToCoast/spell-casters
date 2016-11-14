@@ -36,6 +36,10 @@ class WordsDatasetCtrl {
     $scope.lvl = 1;
     this.misspelledWords = '';
 
+    //debug
+    //$scope.lvl = 3;
+    //end debug
+
     TimerService.resetGame();
 
     $scope.timer = TimerService.timer;
@@ -107,8 +111,11 @@ class WordsDatasetCtrl {
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
       } else {
+        //if is boss
+        console.log('hits on boss', hits)
         if(hits >= 4) {
           this.enemyHearts--;
+          console.log(this.enemyHearts);
         }
       }
       $scope.enemyHealth = `${numberToString[this.enemyHearts]}Hearts`;
@@ -134,10 +141,11 @@ class WordsDatasetCtrl {
     TimerService.startTimer();
 
     const increaseLvl = () => {
+      $scope.lvl++;
       TimerService.saveTime((30 - $scope.timer),$scope.lvl)
       TimerService.resetTimer();
-      if ($scope.lvl < 4) {
-        this.newWords = WordsService.getWords(++$scope.lvl);
+      if ($scope.lvl <= 4) {
+        this.newWords = WordsService.getWords($scope.lvl);
       }
       this.currentWord = 0;
       this.hearts = maxHearts;
@@ -161,12 +169,13 @@ class WordsDatasetCtrl {
     const killEnemy = () => {
       $scope.spellsCast = 0;
       $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
-      $scope.enemyAnimState = "gatorDie";
+
       TimerService.saveTime((30-$scope.timer),$scope.lvl);
       TimerService.resetTimer();
 
       if(!$scope.isBoss) {
         //load a new enemy if this is not the boss
+        $scope.enemyAnimState = "gatorDie";
         $timeout(() => {
           this.enemyHearts = maxHearts;
           $scope.enemyHealth = "fiveHearts";
@@ -174,7 +183,11 @@ class WordsDatasetCtrl {
         }, 500);
       } else {
         //killed boss
-        increaseLvl();
+        //$scope.bossAnimState = "bossDie";
+        console.log('killed boss');
+        $timeout(() => {
+          increaseLvl();
+        }, 1000);
       }
     }
 
