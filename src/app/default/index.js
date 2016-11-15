@@ -22,7 +22,9 @@ export const DefaultCtrl = [
       // $scope.ezmiez = LocalStorageService.getData('user');
       // console.log('ezmiez', $scope.ezmiez);
 
-      if ($rootScope.currentSong._src !== mainSong) {
+      if($rootScope.currentSong === undefined) {
+        $rootScope.setCurrentSong(mainSong);
+      } else if ($rootScope.currentSong._src !== mainSong) {
         $rootScope.setCurrentSong(mainSong);
       }
 
