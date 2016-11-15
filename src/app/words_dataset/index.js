@@ -80,6 +80,7 @@ class WordsDatasetCtrl {
     $scope.spellsCast = 0;
     $scope.chargeLevel = "noCharge";
     $scope.showBeam = false;
+    $scope.showSwipe = false;
     $scope.hidePlayerInput = false;
 
     //animation variables
@@ -102,6 +103,7 @@ class WordsDatasetCtrl {
     $scope.enemyHealth = "fiveHearts";
 
     $scope.takeDamage = () => {
+      $scope.showSwipe = true;
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
       if (this.hearts <= 0) {
@@ -114,6 +116,7 @@ class WordsDatasetCtrl {
         $scope.playerHealthShake = "shake";
         $timeout(() => {
           $scope.playerHealthShake = "noShake";
+          $scope.showSwipe = false;
         }, 500);
       }
     }
