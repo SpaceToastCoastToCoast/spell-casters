@@ -14,10 +14,14 @@ export const DefaultCtrlState = {
 };
 
 export const DefaultCtrl = [
-  '$scope','$state','$stateParams','$rootScope','LocalStorageService',
-
+  '$scope',
+  '$state',
+  '$stateParams',
+  '$rootScope',
+  'LocalStorageService',
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,$rootScope,LocalStorageService) {
+    constructor($scope,$state,$stateParams,
+      $rootScope,LocalStorageService) {
       if($rootScope.currentSong === undefined) {
         $rootScope.setCurrentSong(mainSong);
       } else if ($rootScope.currentSong._src !== mainSong) {
@@ -38,6 +42,7 @@ export const DefaultCtrl = [
       }
 
       $scope.LogOut = () => {
+
         LocalStorageService.resetData('user');
         $rootScope.user = 'Guest';
         $rootScope.visible = false;
