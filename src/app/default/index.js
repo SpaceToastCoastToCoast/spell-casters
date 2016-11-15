@@ -1,5 +1,5 @@
 const template = require('./splash.html');
-const mainSong = require('file!../../public/music/Main.ogg');
+const mainSong = require('../../public/music/Main.ogg');
 
 export const DefaultCtrlName = 'DefaultCtrl';
 
@@ -49,6 +49,10 @@ export const DefaultCtrl = [
       };
       $scope.registrationMessage = $stateParams.registrationMessage;
 
+      $scope.goToUserProfile = () => {
+        console.log('food: ');
+        $state.go('userProfile')
+      }
     }
   }
 ]
