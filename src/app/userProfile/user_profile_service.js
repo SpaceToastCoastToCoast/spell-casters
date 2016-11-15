@@ -22,7 +22,7 @@ export const UserProfileServices = [
     this.averageTimeLevel4 = null;
     this.totalTimePlayed = null;
     this.averageGameTime = null;
-    this.topThreeMissedWords = null;
+    this.topMissedWords = [];
   }
 
   userDataQuery() {
@@ -30,7 +30,6 @@ export const UserProfileServices = [
       method: 'GET',
       url: `/api/game-stats/${this.$rootScope.user}`,
       };
-      console.log('req: ', req);
        return this.$http(req).success(response => {
 
         //HighestPercentCompleted
@@ -49,18 +48,7 @@ export const UserProfileServices = [
 
         this.averagePercentComplete =  ((percentSum / this.totalGamesPlayed) *100);
 
-        //Total Word Completed
-        let totalWordsArr = [];
-
-        for(let x = 0; x<response.stats.length; x++){
-          totalWordsArr.push(response.stats[x].totalWordsCompleted);
-        }
-
-        this.totalWordsCompleted = totalWordsArr.reduce((a, b) => a + b, 0);
-
-        //AverageWordsCompleted
-        this.averageWordsCompleted = ((this.totalWordsCompleted / this.totalGamesPlayed));
-
+        //Total Time per Level
         //TotalTimeLevel1
         let timeLevelOneArr = [];
         for(let x = 0; x<response.stats.length; x++){
@@ -105,14 +93,39 @@ export const UserProfileServices = [
 
         this.totalTimeLevel4 = timeLevelFourArr.reduce((a, b) => a + b, 0);
 
-        //TotalGameTime
-        this.totalGameTime = this.totalTimeLevel1 + this.totalTimeLevel2 + this.totalTimeLevel3 + this.totalTimeLevel4;
 
         //AverageTimeLevel4
         this.averageTimeLevel4 = (this.totalTimeLevel4 / this.totalGamesPlayed);
 
+        //TotalGameTime
+        this.totalTimePlayed = this.totalTimeLevel1 + this.totalTimeLevel2 + this.totalTimeLevel3 + this.totalTimeLevel4;
+        //Top missSpelled words
+        //Combines all the word Objects misspelled into a single array
+        let combinedMisspelledArr = [];
+        for(let x = 0; x<response.stats.length; x++){
+          combinedMisspelledArr.push(response.stats[x].misspelledWords);
+         }
+        //breaks each object containing words into a single array
+         let word = [];
+         combinedMisspelledArr.forEach(function(x) {
+          word = word.concat(x);
+         });
+         //Trim out the white spacing from data set
+         console.log('word: ', word);
+         let trimmedWordSet = word.map(entry => entry.trim());
 
+         //Count the repeated words
+         var wordCount = [];
+         trimmedWordSet.forEach((x) => {
+          wordCount[x] = (wordCount[x] || 0) +1;
+         });
+         console.log('wordCount: ', wordCount);
 
+         let finalWords = wordCount.reduce((a,b) =>{
+
+          return wordCount[a] > wordCount[b];
+        });
+         console.log('finalWords: ', finalWords);
        });
     }
 
