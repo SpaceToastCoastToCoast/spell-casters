@@ -1,9 +1,19 @@
 <p>User Profile</p>
 <p>{{ user }}</p>
 <div>
-  <p>Highest Precentage of Game Completed: {{highestPercentComplete}} </p>
-  <p>Average of Game Completed: {{averagePercentComplete}} </p>
-  <p>Total Words Completed: {{totalWordsCompleted}}</p>
-  <p>Total Game Mistakes: </p>
-  <p>Total Time Elapsed: {{totalTime}}</p>
+  <p>Total Games Played {{ UserProfileServices.totalGamesPlayed }}</p>
+  <p>Highest Precentage of Game Completed: {{UserProfileServices.highestPercentComplete}} </p>
+  <p>Average of Game Completed: {{UserProfileServices.averagePercentComplete}} </p>
+  <p>Total Words Completed: {{UserProfileServices.totalWordsCompleted}}</p>
+  <p>Average Words Completed: {{UserProfileServices.averageWordsCompleted}}</p>
+  <p>Total Time Level 1: {{UserProfileServices.totalTimeLevel1}}</p>
+  <p>Total Time Level 2: {{UserProfileServices.totalTimeLevel2}}</p>
+  <p>Total Time Level 3: {{UserProfileServices.totalTimeLevel3}}</p>
+  <p>Total Time Level 4: {{UserProfileServices.totalTimeLevel4}}</p>
+  <p>Average Time Level 1: {{UserProfileServices.averageTimeLevel1}}</p>
+  <p>Average Time Level 2: {{UserProfileServices.averageTimeLevel2}}</p>
+  <p>Average Time Level 3: {{UserProfileServices.averageTimeLevel3}}</p>
+  <p>Average Time Level 4: {{UserProfileServices.averageTimeLevel4}}</p>
+  <p>Total Time Elapsed: {{UserProfileServices.totalTimePlayed}}</p>
+  <p>Top Three missed Words: {{ UserProfileServices.topThreeMissedWords}} </p>
 </div>
