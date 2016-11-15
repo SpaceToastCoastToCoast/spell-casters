@@ -1,12 +1,20 @@
 <div id="gameInfo">
-  <p id="info">Spell the word in the box to charge your spell!</p>
-  <h4 class="hint">HINT: {{ wordsDataset.newWords[wordsDataset.currentWord].hint }}</h4>
+  <div ng-show="showBossText" class="dialogBox">
+    <p>{{bossMessage}}</p>
+    <div class="portraitContainer">
+      <div class="bossPortrait"></div>
+    </div>
+  </div>
+  <div ng-hide="showBossText">
+    <p id="info">Spell the word in the box to charge your spell!</p>
+    <h4 class="hint">HINT: {{ wordsDataset.newWords[wordsDataset.currentWord].hint }}</h4>
+  </div>
 
 
   <!-- <p ng-show="showLevel">You made it to lvl: {{wordsDataset.lvl}}</p> -->
 </div>
-<div id="gameCanvas" ng-class="shakeCanvas">
-  <div id="playerInput">
+<div id="gameCanvas" ng-class="[shakeCanvas, levelBackground]">
+  <div id="playerInput" ng-hide="hidePlayerInput">
     <h4 class="targetWord">{{ wordsDataset.newWords[wordsDataset.currentWord].prompt }}</h4>
     <p id="timer">Time Remaining: {{ minutes }}:{{ zero }}{{ seconds }}</p>
     <input ng-model="test" ng-class="feedback" type="text" name="spellWord" ng-paste="preventPaste($event)" ng-change="compare()" placeholder="Spell the word!">
