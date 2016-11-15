@@ -121,6 +121,9 @@ module.exports = function makeWebpackConfig () {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       loader: 'file'
     }, {
+      test: /\.(mp4|webm|ogg)$/,
+      loader: 'file'
+    }, {
       // HTML LOADER
       // Reference: https://github.com/webpack/raw-loader
       // Allow loading html through js

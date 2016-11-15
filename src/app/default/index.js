@@ -1,4 +1,5 @@
 const template = require('./splash.html');
+const mainSong = require('file!../../public/music/Main.ogg');
 
 export const DefaultCtrlName = 'DefaultCtrl';
 
@@ -20,6 +21,10 @@ export const DefaultCtrl = [
     constructor($scope,$state,$stateParams,$rootScope,LocalStorageService) {
       // $scope.ezmiez = LocalStorageService.getData('user');
       // console.log('ezmiez', $scope.ezmiez);
+
+      if ($rootScope.currentSong._src !== mainSong) {
+        $rootScope.setCurrentSong(mainSong);
+      }
 
       $scope.goToInstructions = () => {
         $state.go('instructions');

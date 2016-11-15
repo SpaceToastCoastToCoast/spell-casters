@@ -15,7 +15,7 @@ import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login'
 import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import { LocalStorageService } from './services/localStorage_service';
 import '../style/app.css';
-
+const mainSong = require('file!../public/music/Main.ogg');
 
 let app = () => {
   return {
@@ -25,11 +25,21 @@ let app = () => {
   }
 };
 
-class AppCtrl {
-  constructor() {
-    this.url = 'https://github.com/preboot/angular-webpack';
+export const AppCtrl = [
+  '$scope', '$rootScope',
+  class AppCtrl {
+    constructor($scope, $rootScope) {
+
+      $scope.playMusic = () => {
+        $rootScope.currentSong.play();
+      }
+      $scope.pauseMusic = () => {
+        $rootScope.currentSong.pause();
+      }
+    }
   }
-}
+]
+
 
 const MODULE_NAME = 'app';
 
@@ -58,6 +68,16 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
+    $rootScope.setCurrentSong = (songPath) => {
+      if ($rootScope.currentSong) {
+        $rootScope.currentSong.pause();
+      }
+      $rootScope.currentSong = new Howl({
+        src: [songPath],
+        autoplay: true,
+        loop: true
+      })
+    }
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
