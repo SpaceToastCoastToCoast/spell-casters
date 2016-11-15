@@ -1,5 +1,5 @@
 const template = require('./login.html');
-const mainSong = require('file!../../public/music/Main.ogg');
+const mainSong = require('../../public/music/Main.ogg');
 
 export const LoginCtrlName = 'LoginCtrl';
 
