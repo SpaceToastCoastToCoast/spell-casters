@@ -57,10 +57,6 @@ export const LoginCtrl = [
         username: '',
         password: ''
       };
-      this.loggedUser = {
-        userId: null,
-        userName: ''
-      };
 
       $scope.userName = '';
       $scope.password = '';
@@ -73,14 +69,15 @@ export const LoginCtrl = [
       this.userData.password = $scope.password;
       UserServices.getUsers(this.userData)
         .success(response =>{
-          this.loggedUser.userId = response.userid;
-          this.loggedUser.userName = response.username;
+          console.log('response', response);
           $rootScope.user = response.username;
           $rootScope.visible = true;
-          LocalStorageService.setData('user',this.loggedUser);
-        });
+          LocalStorageService.setData('user', {userId: response.userid, userName: response.username});
+        })
+        .then(()=> {
+          console.log('what is in the localStorage', LocalStorageService.getData('user'));
+        })
     };
-
     $scope.errorMessage = $stateParams.errorMessage;
 
     $scope.goToRegistration = () => {
