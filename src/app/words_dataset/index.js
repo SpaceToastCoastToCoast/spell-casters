@@ -18,6 +18,7 @@ export const WordsDatasetCtrl = [
 'TimerService',
 'numberToString',
 '$scope',
+'$rootScope',
 '$state',
 '$interval',
 '$timeout',
@@ -27,13 +28,24 @@ class WordsDatasetCtrl {
     TimerService,
     numberToString,
     $scope,
+    $rootScope,
     $state,
     $interval,
     $timeout) {
 
     this.newWords = [];
     this.currentWord = 0;
-    this.lvl = 1;
+    $scope.lvl = 1;
+    this.misspelledWords = '';
+
+    //set current song to short theme
+
+
+    //debug
+    //$scope.lvl = 3;
+    //end debug
+
+    TimerService.resetGame();
 
     $scope.timer = TimerService.timer;
     $scope.minutes = TimerService.minutes;
@@ -45,7 +57,8 @@ class WordsDatasetCtrl {
       $scope.minutes = TimerService.minutes;
       $scope.seconds = TimerService.seconds;
       $scope.zero = TimerService.zero;
-      if ($scope.timer <= 0) {
+      if ($scope.timer < 0) {
+        TimerService.saveTime(30,$scope.lvl);
         if($scope.spellsCast === 0) {
           $scope.takeDamage();
         } else {
@@ -62,11 +75,17 @@ class WordsDatasetCtrl {
     $scope.chargeLevel = "noCharge";
     $scope.showBeam = false;
 
+    //animation variables
     $scope.playerAnimState = "alephaIdle";
     $scope.enemyAnimState = "gatorIdle";
+    $scope.bossAnimState = "noAnim";
+    $scope.playerHealthShake = "noShake";
+    $scope.shakeCanvas = "noShake";
 
     //is the enemy a gator or the boss?
     $scope.isGator = true;
+    $scope.isBoss = false;
+    $scope.showBossText = false;
 
     this.hearts = maxHearts;
     $scope.playerHealth = "fiveHearts";
@@ -76,12 +95,34 @@ class WordsDatasetCtrl {
     $scope.takeDamage = () => {
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
+      if (this.hearts <= 0) {
+        TimerService.saveTime((30 - $scope.timer),$scope.lvl)
+        WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times);
+        TimerService.killTimer();
+        $scope.resetGame();
+        $state.go('game-over')
+      } else {
+        $scope.playerHealthShake = "shake";
+        $timeout(() => {
+          $scope.playerHealthShake = "noShake";
+        }, 500);
+      }
     }
 
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
-      $timeout(() => {$scope.showBeam = false;}, 500)
-      this.enemyHearts -= hits;
+      $scope.shakeCanvas = "shake";
+      $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"}, 500)
+      if(!$scope.isBoss) {
+        this.enemyHearts -= hits;
+      } else {
+        //if is boss
+        console.log('hits on boss', hits)
+        if(hits >= 4) {
+          this.enemyHearts--;
+          console.log(this.enemyHearts);
+        }
+      }
       $scope.enemyHealth = `${numberToString[this.enemyHearts]}Hearts`;
       if(this.enemyHearts <= 0) {
         $scope.enemyHealth = "noHearts";
@@ -92,7 +133,7 @@ class WordsDatasetCtrl {
     WordsService.initSpells().then(_ => {
       WordsService.initSpellsByLvl();
       WordsService.initRandomWords();
-      this.newWords = WordsService.getWords(this.lvl);
+      this.newWords = WordsService.getWords($scope.lvl);
     })
 
     //disable pasting into textbox
@@ -105,71 +146,73 @@ class WordsDatasetCtrl {
     TimerService.startTimer();
 
     const increaseLvl = () => {
-      TimerService.saveTime($scope.timer,this.lvl)
+      $scope.lvl++;
+      TimerService.saveTime((30 - $scope.timer),$scope.lvl)
       TimerService.resetTimer();
-      this.newWords = WordsService.getWords(++this.lvl);
+      if ($scope.lvl <= 4) {
+        this.newWords = WordsService.getWords($scope.lvl);
+      }
       this.currentWord = 0;
       this.hearts = maxHearts;
       $scope.playerHealth = 'fiveHearts';
-      if (this.lvl === 5) {
+      if ($scope.lvl === 4) {
+        $scope.isGator = false;
+        $scope.isBoss = true;
+        $scope.bossAnimState = "zettIdle"
+        this.enemyHearts = maxHearts;
+        this.enemyHealth = 'fiveHearts';
+        $scope.showBossText = true;
+      }
+      if ($scope.lvl === 5) {
         TimerService.killTimer();
-        WordsService.postStatistics(20,(maxHearts - this.hearts),times)
+        WordsService.postStatistics(5,0,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
         $state.go('won');
         $scope.showLevel = false;
       }
     }
 
     const killEnemy = () => {
-      this.spellsCast = 0;
+      $scope.spellsCast = 0;
       $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
-      $scope.enemyAnimState = "gatorDie";
+
+      TimerService.saveTime((30-$scope.timer),$scope.lvl);
       TimerService.resetTimer();
-      //load a new enemy
-      $timeout(() => {
-        this.enemyHearts = maxHearts;
-        $scope.enemyHealth = "fiveHearts";
-        $scope.enemyAnimState = "gatorIdle";
-      }, 500);
+
+      if(!$scope.isBoss) {
+        //load a new enemy if this is not the boss
+        $scope.enemyAnimState = "gatorDie";
+        $timeout(() => {
+          this.enemyHearts = maxHearts;
+          $scope.enemyHealth = "fiveHearts";
+          $scope.enemyAnimState = "gatorIdle";
+        }, 500);
+      } else {
+        //killed boss
+        //$scope.bossAnimState = "bossDie";
+        console.log('killed boss');
+        $timeout(() => {
+          increaseLvl();
+        }, 1000);
+      }
     }
 
     $scope.test = "";
     $scope.feedback = 'good';
     $scope.showLevel = false;
-    $scope.lives = true;
     $scope.resetGame = () => {
       this.hearts = maxHearts;
-      this.lvl = 1;
-      this.newWords = WordsService.getWords(this.lvl);
+      $scope.lvl = 1;
+      this.newWords = []
       this.currentWord = 0;
       $scope.test = "";
       $scope.feedback = 'good';
       $scope.showLevel = false;
-      $scope.lives = true;
+      this.misspelledWords = '';
     }
 
+
+
     $scope.compare = () => {
-      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
-        $scope.feedback = 'good'
-      } else if($scope.feedback === 'good') {
-        //subtract hearts from healthbar
-        $scope.takeDamage();
-        if (this.hearts <= 0) {
-          $scope.showLevel = false;
-          $scope.lives = false;
-          TimerService.saveTime($scope.timer,this.lvl)
-          WordsService.postStatistics(((this.lvl-1)*5 + this.currentWord),(maxHearts - this.hearts),times);
-          $state.go('game-over')
-        }
-        $scope.feedback = 'wrong'
-      } else {
-        if (this.hearts <= 0) {
-          $scope.showLevel = false;
-          $scope.lives = false;
-          $scope.resetGame();
-          $state.go('game-over')
-        }
-        $scope.feedback = 'wrong'
-      }
       if(this.newWords[this.currentWord].word.toLowerCase() === $scope.test.toLowerCase()) {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
@@ -186,6 +229,17 @@ class WordsDatasetCtrl {
           $scope.showLevel = true;
           increaseLvl();
         }
+      }
+
+      if (this.newWords[this.currentWord].word.toLowerCase().includes($scope.test.toLowerCase()) ) {
+        $scope.feedback = 'good'
+      } else if($scope.feedback === 'good') {
+        if (this.misspelledWords.indexOf(this.newWords[this.currentWord].word.toLowerCase()) === -1) {
+          this.misspelledWords += `${this.newWords[this.currentWord].word.toLowerCase()}, `
+        }
+        //subtract hearts from healthbar
+        $scope.takeDamage();
+        $scope.feedback = 'wrong'
       }
     };
   }

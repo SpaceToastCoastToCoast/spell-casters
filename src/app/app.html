@@ -1,21 +1,13 @@
 <main>
-  <h1 class="title">SpellCasters</h1>
-
-  <!-- Images (and assets) are parsed and loaded from within the public directory -->
-
   <div id="main">
     <section ui-view>
       <!-- all the states will be rendered in here -->
     </section>
-    <!-- <div id="playerInput">
-      <h4 class="targetWord">BEL__VE</h4>
-      <input type="text" name="spellWord" value="BELIEVE">
-    </div> -->
-
-    <!-- <p>Spell the word in the box to charge your spell!</p>
-    <h4 class="hint">HINT:</h4>
-    <p>When you know something is true.</p> -->
-
   </div>
-  <img src="/img/spellcasters_titletext.svg" id="svgLogo">
+  <a ui-sref="splash"><img src="/img/spellcasters_titletext.svg" id="svgLogo"></a>
+
+  <div id="musicControls" class="buttonDiv">
+    <button id='play' ng-click="playMusic()">♫ Play</button>
+    <button id='pause' ng-click="pauseMusic()">♫ Pause</button>
+  </div>
 </main>

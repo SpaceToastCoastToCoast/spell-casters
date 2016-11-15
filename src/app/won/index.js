@@ -10,14 +10,21 @@ export const WonCtrlState = {
 };
 
 export const WonCtrl = [
-  '$scope','$state',
+  '$scope','$state', '$rootScope', 'UserStatsService',
 
   class WonCtrl {
-    constructor($scope,$state) {
+    constructor($scope,$state,$rootScope, UserStatsService) {
       $scope.goToSplash = () => {
-
         $state.go('splash')
       }
+      $scope.goToActiveGame = () => {
+        $state.go('active-game')
+      }
+
+      $scope.username = $rootScope.user;
+      $scope.totalTime = $rootScope.totalTimeElapsed;
+      $scope.totalWordsCompleted = $rootScope.totalWordsCompleted;
+      $scope.percentCompleted = $rootScope.percentCompleted;
     }
   }
 ]

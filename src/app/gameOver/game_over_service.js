@@ -1,8 +1,8 @@
-export const GameOverService = [
+export const UserStatsService = [
 
  '$http', '$rootScope',
 
-  class GameOverService {
+  class UserStatsService {
     constructor ($http, $rootScope) {
       this.$http = $http;
       this.$rootScope = $rootScope;
@@ -23,9 +23,6 @@ export const GameOverService = [
         this.totalWordsCompleted = response.stats[0].totalWordsCompleted
         this.percentCompleted = response.stats[0].percentComplete
         this.totalTimeElapsed = response.stats[0].totalTimeElapsed
-        console.log('words',this.totalWordsCompleted)
-        console.log('percent',this.percentCompleted)
-        console.log('time',this.totalTimeElapsed)
       })
     }
 
