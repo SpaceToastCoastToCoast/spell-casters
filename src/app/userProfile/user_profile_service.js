@@ -112,20 +112,20 @@ export const UserProfileServices = [
          });
          //Trim out the white spacing from data set
          console.log('word: ', word);
-         let trimmedWordSet = word.map(entry => entry.trim());
+         let trimmedWordSet = {word}.map(entry => entry.trim());
 
          //Count the repeated words
-         var wordCount = [];
+         var repeatedWords = [];
          trimmedWordSet.forEach((x) => {
-          wordCount[x] = (wordCount[x] || 0) +1;
+          repeatedWords[x] = (repeatedWords[x] || 0) +1;
          });
-         console.log('wordCount: ', wordCount);
+         console.log('repeatedWords: ', repeatedWords);
 
-         let finalWords = wordCount.reduce((a,b) =>{
+       //   let finalWords = repeatedWords.reduce((a,b) =>{
 
-          return wordCount[a] > wordCount[b];
-        });
-         console.log('finalWords: ', finalWords);
+       //    return repeatedWords[a] > repeatedWords[b];
+       //  });
+       //   console.log('finalWords: ', finalWords);
        });
     }
 
