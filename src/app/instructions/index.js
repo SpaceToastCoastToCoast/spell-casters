@@ -1,5 +1,5 @@
 const template = require('./instructions.html');
-
+const mainSong = require('../../public/music/Main.ogg');
 
 
 export const InstructionsCtrlName = 'InstructionsCtrl';
@@ -12,9 +12,9 @@ export const InstructionsCtrlState = {
 };
 
 export const InstructionsCtrl = [
-'$scope', '$state',
+'$scope', '$state', '$rootScope',
 class InstructionsCtrl {
-  constructor($scope,$state) {
+  constructor($scope,$state,$rootScope) {
     this.testWords = [
       {
       "word": "a lot",
@@ -36,6 +36,9 @@ class InstructionsCtrl {
     $scope.input = "";
     $scope.feedback = 'good';
 
+    if ($rootScope.currentSong._src !== mainSong) {
+      $rootScope.setCurrentSong(mainSong);
+    }
     //disable pasting into textbox
     $scope.preventPaste = (e) => {
       e.preventDefault();
