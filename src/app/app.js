@@ -5,18 +5,19 @@ import { WordsService } from './words_dataset/words_service';
 import { TimerService } from './words_dataset/timer_service';
 import { numberToString } from './constants/numberToString';
 import { UserStatsService } from './gameOver/game_over_service';
+import { RegistrationServices } from './registration/registration_service';
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
 import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
-import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
+import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import { LocalStorageService } from './services/localStorage_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import '../style/app.css';
-
+const mainSong = require('file!../public/music/Main.ogg');
 
 let app = () => {
   return {
@@ -26,11 +27,21 @@ let app = () => {
   }
 };
 
-class AppCtrl {
-  constructor() {
-    this.url = 'https://github.com/preboot/angular-webpack';
+export const AppCtrl = [
+  '$scope', '$rootScope',
+  class AppCtrl {
+    constructor($scope, $rootScope) {
+
+      $scope.playMusic = () => {
+        $rootScope.currentSong.play();
+      }
+      $scope.pauseMusic = () => {
+        $rootScope.currentSong.pause();
+      }
+    }
   }
-}
+]
+
 
 const MODULE_NAME = 'app';
 
@@ -61,6 +72,16 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
+    $rootScope.setCurrentSong = (songPath) => {
+      if ($rootScope.currentSong) {
+        $rootScope.currentSong.pause();
+      }
+      $rootScope.currentSong = new Howl({
+        src: [songPath],
+        autoplay: true,
+        loop: true
+      })
+    }
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)

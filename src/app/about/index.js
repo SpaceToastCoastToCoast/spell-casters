@@ -1,4 +1,5 @@
 const template = require('./about.html');
+const mainSong = require('file!../../public/music/Main.ogg');
 
 export const AboutCtrlName = 'AboutCtrl';
 
@@ -10,10 +11,13 @@ export const AboutCtrlState = {
 };
 
 export const AboutCtrl = [
-  '$scope','$state',
+  '$scope','$state','$rootScope',
 
   class AboutCtrl {
-    constructor($scope,$state) {
+    constructor($scope,$state,$rootScope) {
+      if ($rootScope.currentSong._src !== mainSong) {
+        $rootScope.setCurrentSong(mainSong);
+      }
       $scope.goToInstructions = () => {
         $state.go('instructions')
       }
