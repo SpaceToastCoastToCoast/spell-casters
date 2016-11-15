@@ -527,6 +527,16 @@ button:active {
   to {background-position: -128px -192px;}
 }
 
+.swipe {
+  background-image: url("http://localhost:8080/img/swipe.png");
+  animation: swipe steps(4) 0.16s infinite;
+}
+
+@keyframes swipe {
+  from {background-position: 0px 0px;}
+  to {background-position: 0px -256px;}
+}
+
 .beam {
   position: absolute;
   z-index: 999;
@@ -534,10 +544,10 @@ button:active {
   left: 184px;
   width: 288px;
   height: 64px;
-  background-image: url("http://localhost:8080/img/beam_placeholder.png");
 }
 
 .beamBlast {
+  background-image: url("http://localhost:8080/img/beam_placeholder.png");
   animation: beamBlast steps(2) 0.1s infinite;
 }
 
