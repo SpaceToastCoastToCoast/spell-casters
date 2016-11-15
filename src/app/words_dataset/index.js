@@ -34,11 +34,11 @@ class WordsDatasetCtrl {
     //Init variables
     this.newWords = [];
     this.currentWord = 0;
-    //$scope.lvl = 1;
+    $scope.lvl = 1;
     this.misspelledWords = '';
 
     //debug
-    $scope.lvl = 3;
+    //$scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
