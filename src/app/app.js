@@ -14,10 +14,7 @@ import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login'
 import { RegistrationServices, RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import { LocalStorageService } from './services/localStorage_service';
 import '../style/app.css';
-const bossSong = require('file!../public/music/Boss_fight.ogg');
-const testpic = require('file!../public/img/favicon.ico');
-console.log('testpic',testpic)
-console.log('bossSong',bossSong)
+const mainSong = require('file!../public/music/Main.ogg');
 
 let app = () => {
   return {
@@ -31,20 +28,13 @@ export const AppCtrl = [
   '$scope', '$rootScope',
   class AppCtrl {
     constructor($scope, $rootScope) {
-      // $rootScope.currentSong = new Howl({
-      //   src: ['music/Spellcasters_short_theme.ogg'],
-      //   autoplay: true
-      // })
-      this.song = new Howl({
-        src: [bossSong],
-        autoplay: true
-      })
-      // console.log($rootScope.currentSong);
+      $rootScope.setCurrentSong(mainSong)
+
       $scope.playMusic = () => {
-        // $rootScope.currentSong.play();
+        $rootScope.currentSong.play();
       }
       $scope.pauseMusic = () => {
-        // $rootScope.currentSong.pause();
+        $rootScope.currentSong.pause();
       }
     }
   }
@@ -78,7 +68,16 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
-
+    $rootScope.setCurrentSong = (songPath) => {
+      if ($rootScope.currentSong) {
+        $rootScope.currentSong.pause();
+      }
+      $rootScope.currentSong = new Howl({
+        src: [songPath],
+        autoplay: true,
+        loop: true
+      })
+    }
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)

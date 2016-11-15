@@ -1,4 +1,5 @@
 const template = require('./registration.html');
+const mainSong = require('file!../../public/music/Main.ogg');
 
 export const RegistrationCtrlName = 'RegistrationCtrl';
 
@@ -54,6 +55,10 @@ export const RegistrationCtrl = [
         username: '',
         password: ''
       };
+
+      if ($rootScope.currentSong._src !== mainSong) {
+        $rootScope.setCurrentSong(mainSong);
+      }
 
       $scope.userName = '';
       $scope.password = '';

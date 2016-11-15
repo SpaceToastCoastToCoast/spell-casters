@@ -1,4 +1,5 @@
 const template = require('./won.html');
+const mainSong = require('file!../../public/music/Main.ogg');
 
 export const WonCtrlName = 'WonCtrl';
 
@@ -14,6 +15,10 @@ export const WonCtrl = [
 
   class WonCtrl {
     constructor($scope,$state,$rootScope, UserStatsService) {
+      if ($rootScope.currentSong._src !== mainSong) {
+        $rootScope.setCurrentSong(mainSong);
+      }
+
       $scope.goToSplash = () => {
         $state.go('splash')
       }

@@ -1,4 +1,5 @@
 const template = require('./game_over.html');
+const mainSong = require('file!../../public/music/Main.ogg');
 
 export const GameOverCtrlName = 'GameOverCtrl';
 
@@ -15,6 +16,10 @@ export const GameOverCtrl = [
 
   class GameOverCtrl {
     constructor($scope,$state,$rootScope, UserStatsService) {
+      if ($rootScope.currentSong._src !== mainSong) {
+        $rootScope.setCurrentSong(mainSong);
+      }
+
       $scope.goToSplash = () => {
         $state.go('splash')
       }

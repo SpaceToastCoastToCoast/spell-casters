@@ -1,5 +1,5 @@
 const template = require('./words_dataset.html');
-
+const shortTheme = require('file!../../public/music/short_theme.ogg')
 const maxHearts = 5;
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
@@ -39,7 +39,7 @@ class WordsDatasetCtrl {
     this.misspelledWords = '';
 
     //set current song to short theme
-
+    $rootScope.setCurrentSong(shortTheme);
 
     //debug
     //$scope.lvl = 3;
