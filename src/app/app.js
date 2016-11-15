@@ -29,7 +29,6 @@ export const AppCtrl = [
   '$scope', '$rootScope',
   class AppCtrl {
     constructor($scope, $rootScope) {
-      $rootScope.setCurrentSong(mainSong)
 
       $scope.playMusic = () => {
         $rootScope.currentSong.play();

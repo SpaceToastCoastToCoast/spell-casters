@@ -1,5 +1,6 @@
 const template = require('./words_dataset.html');
 const shortTheme = require('file!../../public/music/short_theme.ogg')
+const bossTheme = require('file!../../public/music/boss_theme.ogg')
 const maxHearts = 5;
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
@@ -36,14 +37,14 @@ class WordsDatasetCtrl {
     //Init variables
     this.newWords = [];
     this.currentWord = 0;
-    $scope.lvl = 1;
+    // $scope.lvl = 1;
     this.misspelledWords = '';
 
     //set current song to short theme
     $rootScope.setCurrentSong(shortTheme);
 
     //debug
-    //$scope.lvl = 3;
+    $scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
@@ -165,6 +166,10 @@ class WordsDatasetCtrl {
       this.enemyHealth = 'fiveHearts';
       $scope.bossMessage = "I should congratulate you, young sorceror, for having lasted this long against my Alphagators. But I shall personally see to it that your journey ends here.";
       $scope.showBossText = true;
+      //set boss music
+      if ($rootScope.currentSong._src !== bossTheme) {
+        $rootScope.setCurrentSong(bossTheme);
+      }
 
       $timeout(() => {
         $scope.bossMessage = "You are merely an amateur--I could subjugate you with only a fraction of my true power. Consider it an honor to see even this much!";
