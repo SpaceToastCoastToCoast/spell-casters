@@ -354,6 +354,8 @@ button:active {
 /* Portrait sprites */
 
 .dialogBox {
+  width: 640px;
+  height: 96px;
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
@@ -367,21 +369,23 @@ button:active {
 .portraitContainer {
   flex-grow: 0;
   box-sizing: border-box;
-  width: 88px;
-  height: 88px;
+  width: 72px;
+  height: 72px;
   padding: 4px;
   background-color: #db9864;
   box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
   border-top: 1px solid #e3bb88;
   border-radius: 2px;
+  margin-bottom: 24px;
+  margin-right: 4px;
 }
 
 .bossPortrait {
   box-sizing: border-box;
   margin: auto;
-  width: 80px;
-  height: 80px;
-  background-color: black;
+  width: 64px;
+  height: 64px;
+  background: url("http://localhost:8080/img/zett-talk.png");
 }
 
 /* UI Sprites */
