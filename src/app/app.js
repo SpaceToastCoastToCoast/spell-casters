@@ -17,7 +17,7 @@ import { LocalStorageService } from './services/localStorage_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import '../style/app.css';
-const mainSong = require('file!../public/music/Main.ogg');
+const mainSong = require('../public/music/Main.ogg');
 
 let app = () => {
   return {
@@ -72,6 +72,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
+
     $rootScope.setCurrentSong = (songPath) => {
       if ($rootScope.currentSong) {
         $rootScope.currentSong.pause();
@@ -82,6 +83,7 @@ angular.module(MODULE_NAME, ['ui.router'])
         loop: true
       })
     }
+    $rootScope.setCurrentSong(mainSong);
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
