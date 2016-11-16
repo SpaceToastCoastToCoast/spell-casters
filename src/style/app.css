@@ -237,11 +237,12 @@ button:active {
   margin-top: 0px;
 }
 .tutorialInfo h4 {
-  margin-top: 0px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .tutorialInfo {
-  min-height: 160px;
+  min-height: 128px;
 }
 
 #exampleInput {
@@ -250,7 +251,6 @@ button:active {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  padding: 8px;
 }
 
 #exampleInput p {
@@ -303,8 +303,8 @@ button:active {
 }
 
 #playerInput #feedback {
-  margin-top: 0px;
   margin: 8px;
+  margin-top: 0px;
 }
 
 #playerInput .good {
