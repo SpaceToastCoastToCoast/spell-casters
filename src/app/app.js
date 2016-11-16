@@ -81,6 +81,9 @@ angular.module(MODULE_NAME, ['ui.router'])
         autoplay: true
       })
     }
+    $rootScope.currentSong = new Howl({
+      src: [mainSong]
+    })
     $rootScope.setCurrentSong = (songPath) => {
       if ($rootScope.currentSong) {
         $rootScope.currentSong.pause();
@@ -91,7 +94,7 @@ angular.module(MODULE_NAME, ['ui.router'])
         loop: true
       })
     }
-    $rootScope.setCurrentSong(mainSong);
+
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
