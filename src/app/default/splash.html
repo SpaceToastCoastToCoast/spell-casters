@@ -16,7 +16,5 @@
     <!-- Splash image goes here -->
   </div>
   <p>{{ user }}</p>
-  <p>{{ registrationMessage }}</p>
-  <button ng-click="goToUserProfile()">userprofile</button>
-  <p class="registrationMsg">{{ registrationMessage }}</p>
+  <button ng-if="visible" ng-click="goToUserProfile()">userprofile</button>
 </div>

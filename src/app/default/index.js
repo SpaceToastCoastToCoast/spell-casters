@@ -9,8 +9,7 @@ export const DefaultCtrlState = {
   controller: DefaultCtrlName,
   controllerAs: 'default',
   params: {
-    visible: false,
-    registrationMessage: null
+    visible: false
   }
 };
 
@@ -19,9 +18,6 @@ export const DefaultCtrl = [
 
   class DefaultCtrl {
     constructor($scope,$state,$stateParams,$rootScope,LocalStorageService) {
-      // $scope.ezmiez = LocalStorageService.getData('user');
-      // console.log('ezmiez', $scope.ezmiez);
-
       if($rootScope.currentSong === undefined) {
         $rootScope.setCurrentSong(mainSong);
       } else if ($rootScope.currentSong._src !== mainSong) {
@@ -47,7 +43,6 @@ export const DefaultCtrl = [
         $rootScope.visible = false;
         $state.go('splash')
       };
-      $scope.registrationMessage = $stateParams.registrationMessage;
 
       $scope.goToUserProfile = () => {
         console.log('food: ');

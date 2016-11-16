@@ -164,6 +164,7 @@ button:active {
   width: 640px;
   height: 360px;
   display: block;
+  background: url("http://localhost:8080/img/bg1.PNG");
 }
 
 .splashImage {
