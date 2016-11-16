@@ -1,6 +1,6 @@
 const template = require('./words_dataset.html');
-const shortTheme = require('file!../../public/music/short_theme.ogg')
-const bossTheme = require('file!../../public/music/boss_theme.ogg')
+const shortTheme = require('../../public/music/short_theme.ogg')
+const bossTheme = require('../../public/music/boss_theme.ogg')
 const maxHearts = 5;
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';

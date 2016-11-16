@@ -14,8 +14,10 @@ import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import { LocalStorageService } from './services/localStorage_service';
+import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
+import { UserProfileServices } from './userProfile/user_profile_service';
 import '../style/app.css';
-const mainSong = require('file!../public/music/Main.ogg');
+const mainSong = require('../public/music/Main.ogg');
 
 let app = () => {
   return {
@@ -54,6 +56,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('won',WonCtrlState)
       .state('login', LoginCtrlState)
       .state('registration', RegistrationCtrlState)
+      .state('userProfile', UserProfileCtrlState)
 
     $urlRouterProvider.otherwise('/');
   })
@@ -63,11 +66,13 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('TimerService', TimerService)
   .service('UserServices', UserServices)
   .service('UserStatsService', UserStatsService)
+  .service('UserProfileServices', UserProfileServices)
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
+
     $rootScope.setCurrentSong = (songPath) => {
       if ($rootScope.currentSong) {
         $rootScope.currentSong.pause();
@@ -78,6 +83,7 @@ angular.module(MODULE_NAME, ['ui.router'])
         loop: true
       })
     }
+    $rootScope.setCurrentSong(mainSong);
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
@@ -86,7 +92,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(AboutCtrlName, AboutCtrl)
   .controller(WonCtrlName, WonCtrl)
   .controller(LoginCtrlName, LoginCtrl)
-  .controller(RegistrationCtrlName, RegistrationCtrl);
+  .controller(RegistrationCtrlName, RegistrationCtrl)
+  .controller(UserProfileCtrlName, UserProfileCtrl);
 
 
 export default MODULE_NAME;

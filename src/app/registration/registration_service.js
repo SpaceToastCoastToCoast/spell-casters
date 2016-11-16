@@ -21,7 +21,7 @@ export const RegistrationServices = [
      };
      return this.$http(req).success(response => {
         if(response.success === true){
-          this.$state.go('registration', {errorMessage: 'User successfully created'}); // {registrationMessage: response.registrationMessage});
+          this.$state.go('registration', {errorMessage: 'User successfully created'});
         }else{
           this.$state.go('registration', {errorMessage: response.errorMessage});
         }
