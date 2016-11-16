@@ -72,7 +72,18 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
-
+    $rootScope.playSoundEffect = (soundPath) => {
+      if($rootScope.currentSound) {
+        $rootScope.currentSound.pause();
+      }
+      $rootScope.currentSound = new Howl({
+        src: [soundPath],
+        autoplay: true
+      })
+    }
+    $rootScope.currentSong = new Howl({
+      src: [mainSong]
+    })
     $rootScope.setCurrentSong = (songPath) => {
       if ($rootScope.currentSong) {
         $rootScope.currentSong.pause();
@@ -83,7 +94,7 @@ angular.module(MODULE_NAME, ['ui.router'])
         loop: true
       })
     }
-    $rootScope.setCurrentSong(mainSong);
+
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)

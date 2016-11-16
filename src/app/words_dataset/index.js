@@ -1,6 +1,10 @@
 const template = require('./words_dataset.html');
 const shortTheme = require('../../public/music/short_theme.ogg')
 const bossTheme = require('../../public/music/boss_theme.ogg')
+const alephaSpell = require('../../public/assets/alepha-spell.ogg')
+const correctSpell = require('../../public/assets/correct.ogg')
+const incorrectSpell = require('../../public/assets/spell-impact.ogg')
+const zettSpell = require('../../public/assets/zett-spell.ogg')
 const maxHearts = 5;
 
 export const WordsDatasetCtrlName = 'WordsDatasetCtrl';
@@ -106,6 +110,11 @@ class WordsDatasetCtrl {
       $scope.showSwipe = true;
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
+      if ($scope.isBoss) {
+        $rootScope.playSoundEffect(zettSpell);
+      } else {
+        $rootScope.playSoundEffect(incorrectSpell)
+      }
       if (this.hearts <= 0) {
         TimerService.saveTime((30 - $scope.timer),$scope.lvl)
         WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times);
@@ -124,6 +133,7 @@ class WordsDatasetCtrl {
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
       $scope.shakeCanvas = "shake";
+      $rootScope.playSoundEffect(alephaSpell)
       $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"}, 500)
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
@@ -289,6 +299,7 @@ class WordsDatasetCtrl {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
         $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
+        $rootScope.playSoundEffect(correctSpell)
         if($scope.spellsCast >= 5) {
           TimerService.resetTimer();
           $scope.giveDamage($scope.spellsCast);
