@@ -108,7 +108,7 @@ button {
   font-weight: bold;
   color: #db9864;
   text-shadow: 1px 1px 1px #644749, 2px 2px 2px #111, 0px 0px 2px #e3bb88;
-  padding: 4px;
+  padding-bottom: 8px;
   padding-top: 8px;
   padding-left: 16px;
   padding-right: 16px;
@@ -153,12 +153,16 @@ button:active {
   margin: 0px;
 }
 
+.loginContainer {
+  margin: auto;
+}
+
 .login {
   box-shadow: 2px 2px 2px #644749, -1px -1px 2px #e3bb88;
   border-radius: 4px;
   padding: 8px;
+  width: 288px;
   box-sizing: border-box;
-  margin: auto;
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
@@ -166,17 +170,22 @@ button:active {
 
 .login p {
   margin: 0px;
+  margin-left: 2px;
 }
 
 .login .userName {
+  margin-left: 2px;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .login input {
   margin-top: 8px;
   margin-bottom: 8px;
+  box-sizing: border-box;
   padding: 2px;
   padding-top: 4px;
+  padding-left: 4px;
   flex-shrink: 1;
   font-family: 'Anonymous Pro', monospace;
   font-size: 16px;
@@ -184,16 +193,23 @@ button:active {
   background-color: #e3bb88;
   border: none;
   box-shadow: 0px 2px 4px #b1695a inset;
+  width: 100%;
 }
 
 .login h2 {
   text-align: left;
   margin-left: 0px;
+  font-size: 36px;
 }
 
 .login button {
   margin-top: 8px;
   margin-left: 0px;
+  margin-right: 8px;
+}
+
+.login .buttonDiv {
+  width: 100%;
 }
 
 #instructionsDiv {
@@ -222,11 +238,24 @@ button:active {
   /*
   background-image: url("http://localhost:8080/img/splash.png");
   */
-  margin-top: 8px;
 }
 
 #gameInfo {
   height: 96px;
+  width: 640px;
+  position: absolute;
+  top: 220px;
+  z-index: 786;
+}
+
+#gameInfo h2 {
+  color: #db9864;
+  margin-bottom: 0px;
+}
+
+#gameInfo .buttonDiv {
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 #info {
