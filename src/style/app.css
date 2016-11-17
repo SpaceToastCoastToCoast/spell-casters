@@ -6,14 +6,63 @@ $medium-color: #b1695a;
 $dark-color: #644749;
 $darkest-color: #222222;*/
 
-/*
-  Minimum width is 700px before showing "no mobile devices" page
-*/
+html, body, div, span, object, iframe, h1, h2, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul,
+li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
 
 body {
   background-color: #222222;
   font-family: 'Anonymous Pro', monospace;
   font-size: 16px;
+}
+
+p {
+  margin-bottom: 8px;
+}
+
+.sizing {
+  display: none;
+  margin: auto;
+  margin-top: 24px;
+  width: 288px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  background-color: #db9864;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+}
+
+.sizing h3 {
+  text-align: center;
+}
+
+@media (max-width:719px) {
+  .container {
+    display: none;
+  }
+  .sizing {
+    display: block;
+  }
+}
+
+@media (orientation:portrait) {
+  .container {
+    display: none;
+  }
+  .sizing {
+    display: block;
+  }
 }
 
 #main {
@@ -59,10 +108,12 @@ button {
   font-weight: bold;
   color: #db9864;
   text-shadow: 1px 1px 1px #644749, 2px 2px 2px #111, 0px 0px 2px #e3bb88;
-  padding: 4px;
+  padding-bottom: 8px;
   padding-top: 8px;
   padding-left: 16px;
   padding-right: 16px;
+  line-height: 1;
+  letter-spacing: -1px;
   margin-left: 4px;
   margin-right: 4px;
   margin-bottom: 8px;
@@ -102,12 +153,16 @@ button:active {
   margin: 0px;
 }
 
+.loginContainer {
+  margin: auto;
+}
+
 .login {
   box-shadow: 2px 2px 2px #644749, -1px -1px 2px #e3bb88;
   border-radius: 4px;
   padding: 8px;
+  width: 288px;
   box-sizing: border-box;
-  margin: auto;
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
@@ -115,17 +170,22 @@ button:active {
 
 .login p {
   margin: 0px;
+  margin-left: 2px;
 }
 
 .login .userName {
+  margin-left: 2px;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .login input {
   margin-top: 8px;
   margin-bottom: 8px;
+  box-sizing: border-box;
   padding: 2px;
   padding-top: 4px;
+  padding-left: 4px;
   flex-shrink: 1;
   font-family: 'Anonymous Pro', monospace;
   font-size: 16px;
@@ -133,16 +193,23 @@ button:active {
   background-color: #e3bb88;
   border: none;
   box-shadow: 0px 2px 4px #b1695a inset;
+  width: 100%;
 }
 
 .login h2 {
   text-align: left;
   margin-left: 0px;
+  font-size: 36px;
 }
 
 .login button {
   margin-top: 8px;
   margin-left: 0px;
+  margin-right: 8px;
+}
+
+.login .buttonDiv {
+  width: 100%;
 }
 
 #instructionsDiv {
@@ -171,11 +238,24 @@ button:active {
   /*
   background-image: url("http://localhost:8080/img/splash.png");
   */
-  margin-top: 8px;
 }
 
 #gameInfo {
   height: 96px;
+  width: 640px;
+  position: absolute;
+  top: 220px;
+  z-index: 786;
+}
+
+#gameInfo h2 {
+  color: #db9864;
+  margin-bottom: 0px;
+}
+
+#gameInfo .buttonDiv {
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 #info {
@@ -186,11 +266,12 @@ button:active {
   margin-top: 0px;
 }
 .tutorialInfo h4 {
-  margin-top: 0px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .tutorialInfo {
-  min-height: 160px;
+  min-height: 128px;
 }
 
 #exampleInput {
@@ -199,7 +280,6 @@ button:active {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  padding: 8px;
 }
 
 #exampleInput p {
@@ -252,8 +332,8 @@ button:active {
 }
 
 #playerInput #feedback {
-  margin-top: 0px;
   margin: 8px;
+  margin-top: 0px;
 }
 
 #playerInput .good {
@@ -298,6 +378,7 @@ button:active {
   top: 16px;
   left: 50%;
   transform: translateX(-340px);
+  cursor: pointer;
 }
 
 #musicControls {

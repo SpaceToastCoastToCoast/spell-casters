@@ -1,8 +1,8 @@
 export const UserProfileServices = [
 
- '$http', '$rootScope',
+'$http', '$rootScope',
 
- class UserProfileServices {
+class UserProfileServices {
   constructor ($http, $rootScope) {
     this.$http = $http;
     this.$rootScope = $rootScope;
@@ -29,8 +29,8 @@ export const UserProfileServices = [
     const req ={
       method: 'GET',
       url: `/api/game-stats/${this.$rootScope.user}`,
-      };
-       return this.$http(req).success(response => {
+    };
+    return this.$http(req).success(response => {
 
         //HighestPercentCompleted
         let percentArr = [];
@@ -53,7 +53,7 @@ export const UserProfileServices = [
         let timeLevelOneArr = [];
         for(let x = 0; x<response.stats.length; x++){
           timeLevelOneArr.push(response.stats[x].timeElapsed[0]);
-         }
+        }
 
         this.totalTimeLevel1 = timeLevelOneArr.reduce((a, b) => a + b, 0);
 
@@ -64,7 +64,7 @@ export const UserProfileServices = [
         let timeLevelTwoArr = [];
         for(let x = 0; x<response.stats.length; x++){
           timeLevelTwoArr.push(response.stats[x].timeElapsed[1]);
-         }
+        }
 
         this.totalTimeLevel2 = timeLevelTwoArr.reduce((a, b) => a + b, 0);
 
@@ -75,7 +75,7 @@ export const UserProfileServices = [
         let timeLevelThreeArr = [];
         for(let x = 0; x<response.stats.length; x++){
           timeLevelThreeArr.push(response.stats[x].timeElapsed[2]);
-         }
+        }
 
         this.totalTimeLevel3 = timeLevelThreeArr.reduce((a, b) => a + b, 0);
 
@@ -89,7 +89,7 @@ export const UserProfileServices = [
         let timeLevelFourArr = [];
         for(let x = 0; x<response.stats.length; x++){
           timeLevelFourArr.push(response.stats[x].timeElapsed[3]);
-         }
+        }
 
         this.totalTimeLevel4 = timeLevelFourArr.reduce((a, b) => a + b, 0);
 
@@ -99,36 +99,49 @@ export const UserProfileServices = [
 
         //TotalGameTime
         this.totalTimePlayed = this.totalTimeLevel1 + this.totalTimeLevel2 + this.totalTimeLevel3 + this.totalTimeLevel4;
+
         //Top missSpelled words
         //Combines all the word Objects misspelled into a single array
         let combinedMisspelledArr = [];
         for(let x = 0; x<response.stats.length; x++){
           combinedMisspelledArr.push(response.stats[x].misspelledWords);
-         }
+        }
+
         //breaks each object containing words into a single array
-         let word = [];
-         combinedMisspelledArr.forEach(function(x) {
+        let word = [];
+        combinedMisspelledArr.forEach(function(x) {
           word = word.concat(x);
-         });
+        });
+
          //Trim out the white spacing from data set
-         console.log('word: ', word);
-         let trimmedWordSet = {word}.map(entry => entry.trim());
+        let trimmedWordSet = word.map(entry => entry.trim());
 
-         //Count the repeated words
-         var repeatedWords = [];
-         trimmedWordSet.forEach((x) => {
-          repeatedWords[x] = (repeatedWords[x] || 0) +1;
-         });
-         console.log('repeatedWords: ', repeatedWords);
+        console.log('trimmedWordSet: ', trimmedWordSet);
 
-       //   let finalWords = repeatedWords.reduce((a,b) =>{
+        let count = {};
 
-       //    return repeatedWords[a] > repeatedWords[b];
-       //  });
-       //   console.log('finalWords: ', finalWords);
-       });
-    }
+        trimmedWordSet.forEach((word) => {
+          if (!count.hasOwnProperty(word)){
+            count[word] = 0;
+          }
+          count[word] += 1;
+        });
 
+        console.log('count: ', count);
 
- }
-]
+        let highestCount = 0;
+        for (let word in count) {
+          console.log('word: ', word);
+          console.log('count[x]: ', count[word]);
+          if ( count[word] > highestCount ){
+            this.topMissedWords = [];
+            highestCount = count[word];
+            this.topMissedWords.push(word);
+          }else if( count[word] === highestCount ){
+            this.topMissedWords.push(word);
+          }
+        }
+        console.log('this.topMissedWords: ', this.topMissedWords);
+    });
+  }
+}];

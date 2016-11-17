@@ -3,6 +3,7 @@ import * as uiRouter from 'angular-ui-router';
 import { WordsDatasetCtrlState, WordsDatasetCtrl, WordsDatasetCtrlName } from './words_dataset';
 import { WordsService } from './words_dataset/words_service';
 import { TimerService } from './words_dataset/timer_service';
+import { focusMe } from './words_dataset/autoFocus';
 import { numberToString } from './constants/numberToString';
 import { UserStatsService } from './gameOver/game_over_service';
 import { RegistrationServices } from './registration/registration_service';
@@ -61,6 +62,7 @@ angular.module(MODULE_NAME, ['ui.router'])
     $urlRouterProvider.otherwise('/');
   })
   .directive('app', app)
+  .directive('focusMe', focusMe)
   .constant('numberToString', numberToString)
   .service('WordsService', WordsService)
   .service('TimerService', TimerService)

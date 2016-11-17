@@ -33,6 +33,7 @@ class InstructionsCtrl {
     $scope.example = false;
     $scope.finished = false;
     $scope.finishedMessage = false;
+    $scope.focusOnInput = false;
     $scope.input = "";
     $scope.feedback = 'good';
 
@@ -48,6 +49,7 @@ class InstructionsCtrl {
     $scope.startTutorial = () => {
       $scope.example = true;
       $scope.start = false;
+      $scope.focusOnInput = true;
     }
 
     $scope.compare = () => {

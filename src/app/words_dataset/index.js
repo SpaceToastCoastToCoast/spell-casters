@@ -48,7 +48,7 @@ class WordsDatasetCtrl {
     $rootScope.setCurrentSong(shortTheme);
 
     //debug
-    // $scope.lvl = 3;
+    //$scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
@@ -86,6 +86,7 @@ class WordsDatasetCtrl {
     $scope.showBeam = false;
     $scope.showSwipe = false;
     $scope.hidePlayerInput = false;
+    $scope.focusOnInput = true;
 
     //animation variables
     $scope.playerAnimState = "alephaIdle";
@@ -139,10 +140,8 @@ class WordsDatasetCtrl {
         this.enemyHearts -= hits;
       } else {
         //if is boss
-        console.log('hits on boss', hits)
         if(hits >= 4) {
           this.enemyHearts--;
-          console.log(this.enemyHearts);
         }
       }
       $scope.enemyHealth = `${numberToString[this.enemyHearts]}Hearts`;
@@ -190,6 +189,9 @@ class WordsDatasetCtrl {
           $scope.hidePlayerInput = false;
           $scope.showBossText = false;
           TimerService.resumeTimer();
+          $timeout(() => {
+            $scope.focusOnInput = true;
+          }, 50);
         }, 5000);
       }, 5000);
     }

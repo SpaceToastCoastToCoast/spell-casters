@@ -1,11 +1,16 @@
-<div class="login">
-  <h2>Log In</h2>
-  <p class="userName">You are logged in as {{ user }}.</p>
-  <p>Username</p>
-  <input ng-model='userName' type="text" name="User name">
-  <p>Password</p>
-  <input ng-model='password' type="password" name="Password" placeholder="Type your password">
-  <button ng-click='checkCredentials()'>Login</button><button ng-click='goToRegistration()'>Register</button>
-  <p>{{ errorMessage }}</p>
+<div class="loginContainer">
+  <div class="login">
+    <h2>Log In</h2>
+    <h5 class="userName">You are logged in as {{ user }}.</h5>
+    <p>Username</p>
+    <input ng-model='userName' type="text" name="User name">
+    <p>Password</p>
+    <input ng-model='password' type="password" name="Password" placeholder="Type your password">
+    <div class="buttonDiv">
+      <button ng-click='checkCredentials()'>Login</button>
+      <button ng-click='goToRegistration()'>Register</button>
+    </div>
+    <p>{{ errorMessage }}</p>
+  </div>
 </div>
 
