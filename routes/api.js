@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const db = require('../models');
+const bcrypt = require('bcrypt');
 const spells = db.Spell;
 const users = db.User;
 const gamestats = db.GameStat;
@@ -35,6 +36,7 @@ app.get('/spells', (req, res) => {
     });
   }));
 });
+
 //login route
 app.post('/login', (req,res) => {
    if (req.body.username === '') {
@@ -48,36 +50,37 @@ app.post('/login', (req,res) => {
       errorMessage: 'Please enter a password, it was empty'
     });
   } else {
-      users.findAll({
-        limit: 1,
-        where: {username: req.body.username}
-      })
-      .then((data) =>{
-        if(data.length === 0){
+    users.findAll({
+      limit: 1,
+      where: {username: req.body.username}
+    })
+    .then((data) => {
+      if(data.length === 0){
+        res.json({
+          success: false,
+          errorMessage: 'Please enter a valid username'
+        });
+      } else {
+        let pwCheck = bcrypt.compareSync(req.body.password, data[0].dataValues.password);
+        if(!pwCheck) {
           res.json({
             success: false,
-            errorMessage: 'Please enter a valid username'
+            errorMessage: 'Please enter a valid password'
           });
         } else {
-          if(data[0].dataValues.password !== req.body.password){
-            res.json({
-              success: false,
-              errorMessage: 'Please enter a valid password'
-            });
-          }else{
-            res.json({
-              success: true,
-              userid: data[0].dataValues.id,
-              username: data[0].dataValues.username
-            });
-          }
+          res.json({
+            success: true,
+            userid: data[0].dataValues.id,
+            username: data[0].dataValues.username
+          });
         }
-      });
+      }
+    });
   }
 });
 
 //registration route
-app.post('/register', (req, res) =>{
+app.post('/register', (req, res) => {
   if (req.body.username === '') {
     res.json({
       success: false,
@@ -89,36 +92,39 @@ app.post('/register', (req, res) =>{
       errorMessage: 'Please enter a password, it was empty'
     });
   } else {
-    users.findAll({
-      where: {username: req.body.username}
-    })
-    .then((data)=>{
-      console.log('data', data);
-      if (data.length !== 0) {
-        res.json({
-          success: false,
-          errorMessage: 'Please select another username, it is already exist'
-        });
-      } else {
-          users.create({
-            username: req.body.username,
-            password: req.body.password
-          })
-          .then(() =>{
-            users.findAll({
-              where: {username: req.body.username}
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
+        users.findAll({
+          where: {username: req.body.username}
+        })
+        .then((data)=>{
+          if (data.length !== 0) {
+            res.json({
+              success: false,
+              errorMessage: 'Please select another username, it is already exist'
+            });
+          } else {
+            users.create({
+              username: req.body.username,
+              password: hash,
+              role: 'student'
             })
-            .then((data) =>{
-              res.json({
-                success: true,
-                userid: data[0].dataValues.id,
-                username: data[0].dataValues.username
-
+            .then(() => {
+              users.findAll({
+                where: {username: req.body.username}
+              })
+              .then((data) => {
+                res.json({
+                  success: true,
+                  userid: data[0].dataValues.id,
+                  username: data[0].dataValues.username
+                });
               });
             });
-          });
-      }
-    });
+          }
+        });
+      })
+    })
   }
 });
 
