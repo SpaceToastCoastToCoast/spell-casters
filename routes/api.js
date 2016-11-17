@@ -187,9 +187,7 @@ app.get('/leaderboard',(req,res) => {
         sum += next
         return sum;
       }, 0)
-      console.log('totalTime',totalTime);
       let subscore = Math.round((stat.dataValues.percentCompleted *200) - (stat.dataValues.misspelledWords.length) - (totalTime * 0.01))
-      console.log('subscores',subscore + ' ' + stat.dataValues.UserId);
       if (scores[stat.dataValues.UserId]) {
         if (scores[stat.dataValues.UserId] < subscore) {
           scores[stat.dataValues.UserId] = subscore
@@ -199,35 +197,29 @@ app.get('/leaderboard',(req,res) => {
       }
       return scores;
     }, {})
-    console.log('allScores',allScores);
-    res.json({
-      temp: 'temp'
+
+    return allScores;
+  })
+  .then((allScores) => {
+    users.findAll({
+      attributes: ['id','username']
+    })
+    .then(allUsers => {
+      let highScores = Object.keys(allScores).map(playerId =>{
+        let username = allUsers.find(user => {
+          return parseInt(user.dataValues.id) === parseInt(playerId)
+        })
+        username = username.username;
+        let score = allScores[playerId];
+        return {
+          username,
+          score
+        }
+      })
+      res.json({
+        highScores
+      })
     })
   })
-  // .then((allScores) => {
-  //   let leaderboard = [];
-  //   console.log('allScores',allScores)
-
-  //   // for (var userId in allScores) {
-  //   //   userId = parseInt(userId);
-  //   //   users.findOne({
-  //   //     where: {id: userId}
-  //   //   })
-  //   //   .then((user) => {
-  //   //     let username = Object.keys(allScores).map(score => {
-  //   //       return user.dataValues.username
-  //   //     })
-  //   //     username = username[0]
-  //   //     console.log('username',username)
-  //   //     console.log('allScores',allScores)
-  //   //     leaderboard.push({
-  //   //       username
-  //   //     })
-  //   //   })
-  //   // }
-  //   res.json({
-  //     temp: 'temp'
-  //   })
-  // })
 })
 module.exports = app;
