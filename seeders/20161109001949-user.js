@@ -8,6 +8,13 @@ module.exports = {
         role: 'student',
         createdAt : new Date(),
         updatedAt : new Date(),
+      },
+      {
+        username: 'highScoreMan',
+        password: 'password',
+        role: 'student',
+        createdAt : new Date(),
+        updatedAt : new Date(),
       }], {});
   },
 
