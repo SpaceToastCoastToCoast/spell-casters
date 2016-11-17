@@ -12,7 +12,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 4.02,
+        percentCompleted: 0.4,
         totalWordsCompleted: 8,
         misspelledWords: ["receive"," referred"," whether"," twelfth"," foreign"],
         timeElapsed: [16, 110, 61, 0],
@@ -21,7 +21,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 8.02,
+        percentCompleted: 0.8,
         totalWordsCompleted: 22,
         misspelledWords: ["leisure"," conscience"," gauge"," receive"," license"],
         timeElapsed: [17, 65, 70, 0],
@@ -30,7 +30,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 13.02,
+        percentCompleted: 0.13,
         totalWordsCompleted: 12,
         misspelledWords: ["fulfill"," seize"," conscience"," playwright"],
         timeElapsed: [21, 78, 78, 0],
@@ -39,7 +39,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 10.02,
+        percentCompleted: 0.1,
         totalWordsCompleted: 14,
         misspelledWords: ["receive"," referred"," whether"," twelfth"," foreign"],
         timeElapsed: [12, 122, 81, 0],
@@ -48,7 +48,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 8.02,
+        percentCompleted: 0.8,
         totalWordsCompleted: 24,
         misspelledWords: ["foreign"," referred"," leisure"],
         timeElapsed: [29, 110, 88, 0],
@@ -57,7 +57,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 8.02,
+        percentCompleted: 0.8,
         totalWordsCompleted: 24,
         misspelledWords: ['accommodate','a lot','occurrence'],
         timeElapsed: [5, 100, 91, 0],
@@ -66,7 +66,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 14.02,
+        percentCompleted: 0.14,
         totalWordsCompleted: 18,
         misspelledWords: ["receive"," referred"," whether"," twelfth"," foreign"],
         timeElapsed: [11, 110, 72, 0],
@@ -75,7 +75,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 18.02,
+        percentCompleted: 0.18,
         totalWordsCompleted: 32,
         misspelledWords: ["leisure"," conscience"," gauge"," receive"," license"],
         timeElapsed: [14, 65, 63, 0],
@@ -84,7 +84,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 13.02,
+        percentCompleted: 0.13,
         totalWordsCompleted: 15,
         misspelledWords: ["fulfill"," seize"," conscience"," playwright"],
         timeElapsed: [27, 78, 60, 0],
@@ -93,7 +93,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 10.02,
+        percentCompleted: 0.1,
         totalWordsCompleted: 14,
         misspelledWords: ["receive"," referred"," whether"," twelfth"," foreign"],
         timeElapsed: [7, 122, 85, 0],
@@ -102,7 +102,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 8.02,
+        percentCompleted: 0.08,
         totalWordsCompleted: 24,
         misspelledWords: ["foreign"," referred"," leisure"],
         timeElapsed: [18, 110, 74, 0],
@@ -111,7 +111,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 16.02,
+        percentCompleted: 0.16,
         totalWordsCompleted: 21,
         misspelledWords: ['accommodate','a lot','occurrence'],
         timeElapsed: [14, 100, 77, 0],
@@ -120,7 +120,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 54.02,
+        percentCompleted: 0.54,
         totalWordsCompleted: 68,
         misspelledWords: ["receive"," referred"," whether"," twelfth"," foreign"],
         timeElapsed: [22, 110, 71, 0],
@@ -129,7 +129,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 68.02,
+        percentCompleted: 0.68,
         totalWordsCompleted: 76,
         misspelledWords: ["leisure"," conscience"," gauge"," receive"," license"],
         timeElapsed: [23, 65, 81, 0],
@@ -138,7 +138,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 51.02,
+        percentCompleted: 0.51,
         totalWordsCompleted: 62,
         misspelledWords: ["fulfill"," seize"," conscience"," playwright"],
         timeElapsed: [21, 78, 88, 0],
@@ -147,7 +147,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 64,
+        percentCompleted: 0.64,
         totalWordsCompleted: 78,
         misspelledWords: ["receive"," referred"," whether"," twelfth"," foreign"],
         timeElapsed: [18, 122, 92, 0],
@@ -156,7 +156,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 18.02,
+        percentCompleted: 0.18,
         totalWordsCompleted: 24,
         misspelledWords: ["foreign"," referred"," leisure"],
         timeElapsed: [22, 110, 105, 0],
@@ -165,7 +165,7 @@ module.exports = {
         UserId: 1,
       },
       {
-        percentCompleted: 92.02,
+        percentCompleted: 0.92,
         totalWordsCompleted: 250,
         misspelledWords: ['accommodate','a lot','occurrence'],
         timeElapsed: [15, 100, 12, 11],
