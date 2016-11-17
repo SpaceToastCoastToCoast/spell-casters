@@ -216,6 +216,10 @@ app.get('/leaderboard',(req,res) => {
           score
         }
       })
+      //sort highscores in order of highest to lowest
+      highScores.sort((a,b) => {
+        return b.score - a.score
+      })
       res.json({
         highScores
       })

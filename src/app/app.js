@@ -18,6 +18,8 @@ import { LocalStorageService } from './services/localStorage_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import { GraphStatsServices } from './userProfile/graph_stats_service';
+import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
+import { LeaderboardService } from './leaderboard/leaderboard_service';
 import '../style/app.css';
 const mainSong = require('../public/music/Main.ogg');
 
@@ -59,6 +61,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('login', LoginCtrlState)
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
+      .state('leaderboard', LeaderboardCtrlState)
 
 
     $urlRouterProvider.otherwise('/');
@@ -74,6 +77,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('GraphStatsServices', GraphStatsServices)
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
+  .service('LeaderboardService', LeaderboardService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";
@@ -109,7 +113,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(WonCtrlName, WonCtrl)
   .controller(LoginCtrlName, LoginCtrl)
   .controller(RegistrationCtrlName, RegistrationCtrl)
-  .controller(UserProfileCtrlName, UserProfileCtrl);
+  .controller(UserProfileCtrlName, UserProfileCtrl)
+  .controller(LeaderboardCtrlName, LeaderboardCtrl);
 
 
 export default MODULE_NAME;
