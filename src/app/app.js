@@ -17,6 +17,7 @@ import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from '.
 import { LocalStorageService } from './services/localStorage_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
+import { GraphStatsServices } from './userProfile/graph_stats_service';
 import '../style/app.css';
 const mainSong = require('../public/music/Main.ogg');
 
@@ -59,6 +60,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
 
+
     $urlRouterProvider.otherwise('/');
   })
   .directive('app', app)
@@ -69,6 +71,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('UserServices', UserServices)
   .service('UserStatsService', UserStatsService)
   .service('UserProfileServices', UserProfileServices)
+  .service('GraphStatsServices', GraphStatsServices)
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
   .controller('AppCtrl', AppCtrl)
