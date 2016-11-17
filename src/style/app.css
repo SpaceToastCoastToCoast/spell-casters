@@ -153,11 +153,12 @@ button:active {
   margin: 0px;
 }
 
-.loginContainer {
-  margin: auto;
-}
-
 .login {
+  z-index: 999;
+  position: relative;
+  background-color: #db9864;
+  top: 48px;
+  margin: auto;
   box-shadow: 2px 2px 2px #644749, -1px -1px 2px #e3bb88;
   border-radius: 4px;
   padding: 8px;
@@ -238,6 +239,10 @@ button:active {
   /*
   background-image: url("http://localhost:8080/img/splash.png");
   */
+}
+
+#display {
+  min-height: 96px;
 }
 
 #gameInfo {
