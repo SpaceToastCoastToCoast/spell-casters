@@ -5,6 +5,7 @@ const sample_password = 'password'; //change this in production!
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
+      let salt = bcrypt.genSaltSync(10);
       return queryInterface.bulkInsert('Users', [{
         username: 'John',
         password: bcrypt.hashSync(sample_password, salt),
