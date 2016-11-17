@@ -15,6 +15,18 @@
   <div id="gameCanvas" class="splashImage">
     <!-- Splash image goes here -->
   </div>
+  <button ng-click="openModal('custom-modal-2')">Open Modal 2</button>
   <p>{{ user }}</p>
   <button ng-if="visible" ng-click="goToUserProfile()">userprofile</button>
 </div>
+
+<modal id="custom-modal-2">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>A Custom Modal!</h1>
+            <p></p>
+            <button ng-click="closeModal('custom-modal-2');">Close</button>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>

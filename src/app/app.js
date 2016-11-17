@@ -17,6 +17,9 @@ import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from '.
 import { LocalStorageService } from './services/localStorage_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
+import { modalDirective } from './directives/modal_directive';
+import { ModalService } from './services/modal_service';
+
 import '../style/app.css';
 const mainSong = require('../public/music/Main.ogg');
 
@@ -63,6 +66,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   })
   .directive('app', app)
   .directive('focusMe', focusMe)
+  .directive('modalDirective', modalDirective)
   .constant('numberToString', numberToString)
   .service('WordsService', WordsService)
   .service('TimerService', TimerService)
@@ -71,6 +75,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('UserProfileServices', UserProfileServices)
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
+  .service('ModalService', ModalService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope) => {
     $rootScope.user = "Guest";

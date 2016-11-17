@@ -53,6 +53,16 @@ export const DefaultCtrl = [
         console.log('food: ');
         $state.go('userProfile')
       }
+
+      $scope.openModal = (id) => {
+          ModalService.Open(id);
+      }
+
+      $scope.closeModal = (id) => {
+          ModalService.Close(id);
+      }
+
+
     }
   }
 ]
