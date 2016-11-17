@@ -15,6 +15,6 @@
   <div id="gameCanvas" class="splashImage">
     <!-- Splash image goes here -->
   </div>
-  <p>{{ user }}</p>
-  <button ng-if="visible" ng-click="goToUserProfile()">userprofile</button>
+  <p ng-if= "!visible">{{ user }}</p>
+  <a ng-if="visible" ng-click="goToUserProfile()">{{ user }}</a>
 </div>
