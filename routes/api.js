@@ -174,5 +174,60 @@ app.get('/game-stats/:username',(req,res) => {
   })
 })
 
+app.get('/leaderboard',(req,res) => {
+  gamestats.findAll({
+    order: '"UserId" DESC',
+  })
+  .then((stats) => {
+    //score is generated with formula...
+    // %of game completed * 200 - # of misspelled words - total time spent * 0.01
+    let allScores = stats.reduce((scores,stat) => {
 
+      let totalTime = stat.dataValues.timeElapsed.reduce((sum,next) => {
+        sum += next
+        return sum;
+      }, 0)
+      console.log('totalTime',totalTime);
+      let subscore = Math.round((stat.dataValues.percentCompleted *200) - (stat.dataValues.misspelledWords.length) - (totalTime * 0.01))
+      console.log('subscores',subscore + ' ' + stat.dataValues.UserId);
+      if (scores[stat.dataValues.UserId]) {
+        if (scores[stat.dataValues.UserId] < subscore) {
+          scores[stat.dataValues.UserId] = subscore
+        }
+      } else {
+        scores[stat.dataValues.UserId] = subscore;
+      }
+      return scores;
+    }, {})
+    console.log('allScores',allScores);
+    res.json({
+      temp: 'temp'
+    })
+  })
+  // .then((allScores) => {
+  //   let leaderboard = [];
+  //   console.log('allScores',allScores)
+
+  //   // for (var userId in allScores) {
+  //   //   userId = parseInt(userId);
+  //   //   users.findOne({
+  //   //     where: {id: userId}
+  //   //   })
+  //   //   .then((user) => {
+  //   //     let username = Object.keys(allScores).map(score => {
+  //   //       return user.dataValues.username
+  //   //     })
+  //   //     username = username[0]
+  //   //     console.log('username',username)
+  //   //     console.log('allScores',allScores)
+  //   //     leaderboard.push({
+  //   //       username
+  //   //     })
+  //   //   })
+  //   // }
+  //   res.json({
+  //     temp: 'temp'
+  //   })
+  // })
+})
 module.exports = app;
