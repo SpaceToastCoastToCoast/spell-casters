@@ -683,3 +683,26 @@ button:active {
   from {background-position: 0px 0px;}
   to {background-position: -1024px 0px;}
 }
+
+/* MODAL */
+modal {
+  /*display: none;*/
+}
+modal .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+modal .modal .modal-body {
+  padding: 20px;
+  background: #fff;
+  margin: 40px;
+}
+
+modal .modal .modal-body h1 {
+    display: block;
+  }
+

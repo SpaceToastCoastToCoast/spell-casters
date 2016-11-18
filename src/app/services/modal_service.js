@@ -5,45 +5,27 @@ export const ModalService = [
       this.modals = [];
     }
 
-    add (modal) {
+    addModal (modal) {
       this.modals.push(modal);
       return this.modals;
     }
 
-    remove (id) {
-      let removeIndex = this.modals.findIndex(id);
-      if ( removeIndex === -1) {
-        throw new Error('model id not in modals');
-      } else {
-        this.modals = this.modals.filter((modal) => {
-          return modal !== id;
-        })
-      }
+    openModal (id) {
+      this.modals[0].open();
+     }
+
+    closeModal (id) {
+      this.modals[0].close();
+    }
+
+    removeModal (id) {
+      this.modals = this.modals.filter((data) => {
+        return data.id !== id;
+      })
+    }
+
+    getModal () {
       return this.modals;
-    }
-
-    Open (id) {
-      let openIndex = this.modals.findIndex(id);
-      if ( openIndex === -1) {
-        throw new Error('model id not in modals');
-      } else {
-        let modalOpen = this.modals.filter((modal) => {
-          return modalOpen === id;
-        })
-        modalOpen.open();
-      }
-    }
-
-    Close (id) {
-      let closeIndex = this.modals.findIndex(id);
-      if ( closeIndex === -1) {
-        throw new Error('model id not in modals');
-      } else {
-        let modalClose = this.modals.filter((modal) => {
-          return modalClose === id;
-        })
-        modalClose.close();
-      }
     }
 
   }

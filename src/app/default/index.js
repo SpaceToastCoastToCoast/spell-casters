@@ -18,10 +18,10 @@ export const DefaultCtrl = [
   '$state',
   '$stateParams',
   '$rootScope',
-  'LocalStorageService',
+  'ModalService',
   class DefaultCtrl {
     constructor($scope,$state,$stateParams,
-      $rootScope,LocalStorageService) {
+      $rootScope,ModalService) {
       if($rootScope.currentSong === undefined) {
         $rootScope.setCurrentSong(mainSong);
       } else if ($rootScope.currentSong._src !== mainSong) {
@@ -41,27 +41,13 @@ export const DefaultCtrl = [
         $state.go('login')
       }
 
-      $scope.LogOut = () => {
-
-        LocalStorageService.resetData('user');
-        $rootScope.user = 'Guest';
-        $rootScope.visible = false;
-        $state.go('splash')
+      $scope.goLogOut = () => {
+        ModalService.openModal('logout')
       };
 
       $scope.goToUserProfile = () => {
-        console.log('food: ');
         $state.go('userProfile')
       }
-
-      $scope.openModal = (id) => {
-          ModalService.Open(id);
-      }
-
-      $scope.closeModal = (id) => {
-          ModalService.Close(id);
-      }
-
 
     }
   }

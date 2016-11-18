@@ -1,56 +1,52 @@
-export const modalDirective = [
+export const modal = [
   'ModalService',
-  (ModalService) => {
+  'LogoutService',
+  (ModalService, LogoutService) => {
   return {
     link: function (scope, element, attrs) {
-      console.log('attrs', attrs);
+      scope.view = false;
       if (!attrs.id) {
         console.error('modal have no id');
         return;
       }
 
-      element.appendTo('body');
-
       element.on('click', function (e) {
-        let target = $(e.target);
-        if (!target.closest('.modal-body').length) {
-          scope.$evalAsync(Close);
+        switch (e.target.innerText) {
+          case 'Logout':
+            ModalService.closeModal(attrs.id);
+            LogoutService.userOut('user', 'Guest', false, 'splash');
+          break;
+          case 'Cancel':
+            ModalService.closeModal(attrs.id);
+            scope.$digest()
+          break;
+          default:
+            ModalService.closeModal(attrs.id);
+            scope.$digest()
         }
       });
 
-      // add self (this modal instance) to the modal service so it's accessible from controllers
-      var modal = {
+      let modal = {
         id: attrs.id,
-        open: Open,
-        close: Close
+        open: viewOn,
+        close: viewOff
       };
-      ModalService.Add(modal);
+      ModalService.addModal(modal);
 
-      // remove self from modal service when directive is destroyed
+      function viewOn() {
+        scope.view = true;
+      }
+
+      function viewOff() {
+        scope.view = false;
+      }
+
       scope.$on('$destroy', function() {
-        ModalService.Remove(attrs.id);
+        ModalService.removeModal(attrs.id);
         element.remove();
       });
 
-
-      // open modal
-      function Open() {
-        element.show();
-        $('body').addClass('modal-open');
-      }
-
-      // close modal
-      function Close() {
-        element.hide();
-        $('body').removeClass('modal-open');
-      }
-
-
-    }//eof link
-
-  } // eof return
-
+    }
+  }
 }
-
-
 ];
