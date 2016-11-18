@@ -136,11 +136,19 @@ app.post('/post-stats', (req,res) => {
   .then((user) => {
     const misspelledWordsArr = req.body.misspelledWords.split(',');
     const timeElapsedArr = req.body.timeElapsed.split(',').map(time => {return parseInt(time)})
+    const totalTime = timeElapsedArr.reduce((sum,next) => {
+      sum += next
+      return sum;
+    }, 0)
+    //score is generated with formula...
+    // %of game completed * 200 - # of misspelled words - total time spent * 0.01
+    const score = Math.round((parseFloat(req.body.percentCompleted) *200) - (misspelledWordsArr.length) - (totalTime * 0.01))
     gamestats.create({
       percentCompleted: parseFloat(req.body.percentCompleted),
       totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
       misspelledWords: misspelledWordsArr,
       timeElapsed: timeElapsedArr,
+      score,
       UserId: user.dataValues.id
     })
     .then(_ => {
@@ -179,21 +187,13 @@ app.get('/leaderboard',(req,res) => {
     order: '"UserId" DESC',
   })
   .then((stats) => {
-    //score is generated with formula...
-    // %of game completed * 200 - # of misspelled words - total time spent * 0.01
     let allScores = stats.reduce((scores,stat) => {
-
-      let totalTime = stat.dataValues.timeElapsed.reduce((sum,next) => {
-        sum += next
-        return sum;
-      }, 0)
-      let subscore = Math.round((stat.dataValues.percentCompleted *200) - (stat.dataValues.misspelledWords.length) - (totalTime * 0.01))
       if (scores[stat.dataValues.UserId]) {
-        if (scores[stat.dataValues.UserId] < subscore) {
-          scores[stat.dataValues.UserId] = subscore
+        if (scores[stat.dataValues.UserId] < stat.dataValues.score) {
+          scores[stat.dataValues.UserId] = stat.dataValues.score
         }
       } else {
-        scores[stat.dataValues.UserId] = subscore;
+        scores[stat.dataValues.UserId] = stat.dataValues.score;
       }
       return scores;
     }, {})
