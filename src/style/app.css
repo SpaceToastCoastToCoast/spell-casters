@@ -242,6 +242,7 @@ button:active {
 }
 
 #display {
+  height: 96px;
   min-height: 96px;
 }
 
@@ -487,6 +488,15 @@ button:active {
 }
 
 #gatorBar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 16px;
+  background: url("/img/ui_sprites_heart.png") repeat-x center right;
+  transition: width 0.5s ease;
+}
+
+#bossBar {
   position: absolute;
   top: 8px;
   right: 8px;
