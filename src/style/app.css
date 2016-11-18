@@ -651,7 +651,7 @@ button:active {
   right: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("/img/alphagator-static.png");
+  background-image: url("/img/gator-hit.png");
 }
  /*
 .gatorIdle {
@@ -663,6 +663,15 @@ button:active {
   to {background-position: -1024px 0px;}
 }
 */
+
+.gatorHit {
+  animation: gatorHit steps(4) 0.32s 1;
+}
+
+@keyframes gatorHit {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
 
 .gatorDie {
   /*Debug*/

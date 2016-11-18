@@ -135,9 +135,10 @@ class WordsDatasetCtrl {
       $scope.showBeam = true;
       $scope.shakeCanvas = "shake";
       $rootScope.playSoundEffect(alephaSpell)
-      $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"}, 500)
+      $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"; $scope.enemyAnimState = "gatorIdle";}, 500)
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
+        $scope.enemyAnimState = "gatorHit";
       } else {
         //if is boss
         if(hits >= 4) {
@@ -262,7 +263,7 @@ class WordsDatasetCtrl {
 
       if(!$scope.isBoss) {
         //load a new enemy if this is not the boss
-        $scope.enemyAnimState = "gatorDie";
+        //$scope.enemyAnimState = "gatorDie";
         $timeout(() => {
           this.enemyHearts = maxHearts;
           $scope.enemyHealth = "fiveHearts";
