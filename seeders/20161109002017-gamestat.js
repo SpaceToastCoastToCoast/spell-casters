@@ -187,7 +187,7 @@ module.exports = {
         totalWordsCompleted: 250,
         misspelledWords: ['accommodate','a lot','occurrence'],
         timeElapsed: [15, 100, 12, 11],
-        score : -1
+        score : 180,
         createdAt : new Date(),
         updatedAt : new Date(),
         UserId: 2,
