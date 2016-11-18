@@ -136,11 +136,17 @@ app.post('/post-stats', (req,res) => {
   .then((user) => {
     const misspelledWordsArr = req.body.misspelledWords.split(',');
     const timeElapsedArr = req.body.timeElapsed.split(',').map(time => {return parseInt(time)})
+    const totalTime = timeElapsedArr.reduce((sum,next) => {
+      sum += next
+      return sum;
+    }, 0)
+    const score = Math.round((parseFloat(req.body.percentCompleted) *200) - (misspelledWordsArr.length) - (totalTime * 0.01))
     gamestats.create({
       percentCompleted: parseFloat(req.body.percentCompleted),
       totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
       misspelledWords: misspelledWordsArr,
       timeElapsed: timeElapsedArr,
+      score,
       UserId: user.dataValues.id
     })
     .then(_ => {
