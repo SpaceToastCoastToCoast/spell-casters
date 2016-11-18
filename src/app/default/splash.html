@@ -4,6 +4,7 @@
     <button ng-click="goToInstructions()">Instructions</button>
     <button ng-click="goToActiveGame()">Start</button>
     <button ng-click="goToAbout()">About</button>
+    <button ng-click="goToLeaderboard()">Leaderboard</button>
     <button ng-Show="!visible" ng-click="goToLogIn()">Log In</button>
     <button ng-Show="visible" ng-click="goLogOut()">Log Out</button>
   </div>
@@ -15,8 +16,8 @@
   <div id="gameCanvas" class="splashImage">
     <!-- Splash image goes here -->
   </div>
-  <p>{{ user }}</p>
-  <button ng-if="visible" ng-click="goToUserProfile()">userprofile</button>
+  <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
+
 </div>
 
 <modal ng-show="view" id="logout">
@@ -30,3 +31,4 @@
     </div>
     <div class="modal-background"></div>
 </modal>
+

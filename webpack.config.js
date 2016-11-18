@@ -110,7 +110,7 @@ module.exports = function makeWebpackConfig () {
       //
       // Reference: https://github.com/webpack/style-loader
       // Use style-loader in development.
-      loader: isTest ? 'null' : ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
     }, {
       // ASSET LOADER
       // Reference: https://github.com/webpack/file-loader
@@ -171,7 +171,7 @@ module.exports = function makeWebpackConfig () {
     // Render index.html
     config.plugins.push(
       new HtmlWebpackPlugin({
-        template: './src/public/index.html',
+        template: './index.tpl.html',
         inject: 'body',
         filename: 'index.html'
       }),

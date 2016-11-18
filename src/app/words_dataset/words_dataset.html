@@ -1,4 +1,4 @@
-<div id="gameInfo">
+<div id="display">
   <div ng-show="showBossText" class="dialogBox">
     <p>{{bossMessage}}</p>
     <div class="portraitContainer">
@@ -21,6 +21,7 @@
   </div>
   <div id="alephaHealthbar" ng-class="[playerHealth, playerHealthShake]"></div>
   <div id="gatorBar" ng-class="enemyHealth" ng-show="isGator"></div>
+  <div id="bossBar" ng-class="enemyHealth" ng-show="isBoss"></div>
   <div class="glow" id="playerSpell" ng-class="chargeLevel"></div>
   <div class="alepha" ng-class="playerAnimState"></div>
   <div class="alphagator" ng-class="enemyAnimState" ng-show="isGator"></div>

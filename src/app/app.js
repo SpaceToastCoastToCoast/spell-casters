@@ -5,7 +5,7 @@ import { WordsService } from './words_dataset/words_service';
 import { TimerService } from './words_dataset/timer_service';
 import { focusMe } from './words_dataset/autoFocus';
 import { numberToString } from './constants/numberToString';
-import { UserStatsService } from './gameOver/game_over_service';
+import { UserStatsService } from './gameOver/user_stats_service';
 import { RegistrationServices } from './registration/registration_service';
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
@@ -17,6 +17,9 @@ import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from '.
 import { LocalStorageService } from './services/localStorage_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
+import { GraphStatsServices } from './userProfile/graph_stats_service';
+import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
+import { LeaderboardService } from './leaderboard/leaderboard_service';
 import { modal } from './directives/modal_directive';
 import { ModalService } from './services/modal_service';
 import { LogoutService } from './services/logout_service';
@@ -62,6 +65,8 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('login', LoginCtrlState)
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
+      .state('leaderboard', LeaderboardCtrlState)
+
 
     $urlRouterProvider.otherwise('/');
   })
@@ -74,8 +79,10 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('UserServices', UserServices)
   .service('UserStatsService', UserStatsService)
   .service('UserProfileServices', UserProfileServices)
+  .service('GraphStatsServices', GraphStatsServices)
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
+  .service('LeaderboardService', LeaderboardService)
   .service('ModalService', ModalService)
   .service('LogoutService', LogoutService)
   .controller('AppCtrl', AppCtrl)
@@ -99,7 +106,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       }
       $rootScope.currentSong = new Howl({
         src: [songPath],
-        autoplay: true,
+        // autoplay: true,
         loop: true
       })
     }
@@ -113,7 +120,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(WonCtrlName, WonCtrl)
   .controller(LoginCtrlName, LoginCtrl)
   .controller(RegistrationCtrlName, RegistrationCtrl)
-  .controller(UserProfileCtrlName, UserProfileCtrl);
+  .controller(UserProfileCtrlName, UserProfileCtrl)
+  .controller(LeaderboardCtrlName, LeaderboardCtrl);
 
 
 export default MODULE_NAME;

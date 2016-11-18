@@ -22,7 +22,6 @@ export const UserServices = [
       this.$http = $http;
       this.$state = $state;
       this.users = users;
-
     }
 
     getUsers (userData) {

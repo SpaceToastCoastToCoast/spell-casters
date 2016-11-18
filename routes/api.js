@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const db = require('../models');
+const bcrypt = require('bcrypt');
 const spells = db.Spell;
 const users = db.User;
 const gamestats = db.GameStat;
@@ -35,6 +36,7 @@ app.get('/spells', (req, res) => {
     });
   }));
 });
+
 //login route
 app.post('/login', (req,res) => {
    if (req.body.username === '') {
@@ -48,36 +50,37 @@ app.post('/login', (req,res) => {
       errorMessage: 'Please enter a password, it was empty'
     });
   } else {
-      users.findAll({
-        limit: 1,
-        where: {username: req.body.username}
-      })
-      .then((data) =>{
-        if(data.length === 0){
+    users.findAll({
+      limit: 1,
+      where: {username: req.body.username}
+    })
+    .then((data) => {
+      if(data.length === 0){
+        res.json({
+          success: false,
+          errorMessage: 'Please enter a valid username'
+        });
+      } else {
+        let pwCheck = bcrypt.compareSync(req.body.password, data[0].dataValues.password);
+        if(!pwCheck) {
           res.json({
             success: false,
-            errorMessage: 'Please enter a valid username'
+            errorMessage: 'Please enter a valid password'
           });
         } else {
-          if(data[0].dataValues.password !== req.body.password){
-            res.json({
-              success: false,
-              errorMessage: 'Please enter a valid password'
-            });
-          }else{
-            res.json({
-              success: true,
-              userid: data[0].dataValues.id,
-              username: data[0].dataValues.username
-            });
-          }
+          res.json({
+            success: true,
+            userid: data[0].dataValues.id,
+            username: data[0].dataValues.username
+          });
         }
-      });
+      }
+    });
   }
 });
 
 //registration route
-app.post('/register', (req, res) =>{
+app.post('/register', (req, res) => {
   if (req.body.username === '') {
     res.json({
       success: false,
@@ -89,36 +92,39 @@ app.post('/register', (req, res) =>{
       errorMessage: 'Please enter a password, it was empty'
     });
   } else {
-    users.findAll({
-      where: {username: req.body.username}
-    })
-    .then((data)=>{
-      console.log('data', data);
-      if (data.length !== 0) {
-        res.json({
-          success: false,
-          errorMessage: 'Please select another username, it is already exist'
-        });
-      } else {
-          users.create({
-            username: req.body.username,
-            password: req.body.password
-          })
-          .then(() =>{
-            users.findAll({
-              where: {username: req.body.username}
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
+        users.findAll({
+          where: {username: req.body.username}
+        })
+        .then((data)=>{
+          if (data.length !== 0) {
+            res.json({
+              success: false,
+              errorMessage: 'Please select another username, it is already exist'
+            });
+          } else {
+            users.create({
+              username: req.body.username,
+              password: hash,
+              role: 'student'
             })
-            .then((data) =>{
-              res.json({
-                success: true,
-                userid: data[0].dataValues.id,
-                username: data[0].dataValues.username
-
+            .then(() => {
+              users.findAll({
+                where: {username: req.body.username}
+              })
+              .then((data) => {
+                res.json({
+                  success: true,
+                  userid: data[0].dataValues.id,
+                  username: data[0].dataValues.username
+                });
               });
             });
-          });
-      }
-    });
+          }
+        });
+      })
+    })
   }
 });
 
@@ -130,11 +136,19 @@ app.post('/post-stats', (req,res) => {
   .then((user) => {
     const misspelledWordsArr = req.body.misspelledWords.split(',');
     const timeElapsedArr = req.body.timeElapsed.split(',').map(time => {return parseInt(time)})
+    const totalTime = timeElapsedArr.reduce((sum,next) => {
+      sum += next
+      return sum;
+    }, 0)
+    //score is generated with formula...
+    // %of game completed * 200 - # of misspelled words - total time spent * 0.01
+    const score = Math.round((parseFloat(req.body.percentCompleted) *200) - (misspelledWordsArr.length) - (totalTime * 0.01))
     gamestats.create({
       percentCompleted: parseFloat(req.body.percentCompleted),
       totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
       misspelledWords: misspelledWordsArr,
       timeElapsed: timeElapsedArr,
+      score: score,
       UserId: user.dataValues.id
     })
     .then(_ => {
@@ -168,5 +182,48 @@ app.get('/game-stats/:username',(req,res) => {
   })
 })
 
+app.get('/leaderboard',(req,res) => {
+  gamestats.findAll({
+    order: '"UserId" DESC',
+  })
+  .then((stats) => {
+    let allScores = stats.reduce((scores,stat) => {
+      if (scores[stat.dataValues.UserId]) {
+        if (scores[stat.dataValues.UserId] < stat.dataValues.score) {
+          scores[stat.dataValues.UserId] = stat.dataValues.score
+        }
+      } else {
+        scores[stat.dataValues.UserId] = stat.dataValues.score;
+      }
+      return scores;
+    }, {})
 
+    return allScores;
+  })
+  .then((allScores) => {
+    users.findAll({
+      attributes: ['id','username']
+    })
+    .then(allUsers => {
+      let highScores = Object.keys(allScores).map(playerId =>{
+        let username = allUsers.find(user => {
+          return parseInt(user.dataValues.id) === parseInt(playerId)
+        })
+        username = username.username;
+        let score = allScores[playerId];
+        return {
+          username,
+          score
+        }
+      })
+      //sort highscores in order of highest to lowest
+      highScores.sort((a,b) => {
+        return b.score - a.score
+      })
+      res.json({
+        highScores
+      })
+    })
+  })
+})
 module.exports = app;

@@ -14,14 +14,12 @@ export const DefaultCtrlState = {
 };
 
 export const DefaultCtrl = [
-  '$scope',
-  '$state',
-  '$stateParams',
-  '$rootScope',
-  'ModalService',
+  '$scope','$state','$stateParams','$rootScope','ModalService', 'TimerService',
+
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,
-      $rootScope,ModalService) {
+    constructor($scope,$state,$stateParams,$rootScope,ModalService, TimerService) {
+      TimerService.resetGame();
+
       if($rootScope.currentSong === undefined) {
         $rootScope.setCurrentSong(mainSong);
       } else if ($rootScope.currentSong._src !== mainSong) {
@@ -36,6 +34,9 @@ export const DefaultCtrl = [
       };
       $scope.goToAbout = () => {
         $state.go('about');
+      };
+      $scope.goToLeaderboard = () => {
+        $state.go('leaderboard')
       };
       $scope.goToLogIn = () => {
         $state.go('login')
