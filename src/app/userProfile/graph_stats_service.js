@@ -1,18 +1,20 @@
 export const GraphStatsServices = [
 
-'$http', '$rootScope', 'UserProfileServices',
+'$http', '$rootScope',
 
 class GraphStatsServices {
-  constuctor($http, $rootScope, UserProfileServices){
+  constructor($http, $rootScope){
     this.$http = $http;
     this.$rootScope = $rootScope;
-    this.UserProfileServices = UserProfileServices;
+
+
+
   }
 
-graphData(){
-  console.log('UserProfileServices.: ', UserProfileServices.highestPercentComplete);
-}
+graphData(foo){
 
+  console.log('foo: ', foo);
+}
 }];
 
 

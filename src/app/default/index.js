@@ -45,7 +45,6 @@ export const DefaultCtrl = [
       };
 
       $scope.goToUserProfile = () => {
-        console.log('food: ');
         $state.go('userProfile')
       }
     }

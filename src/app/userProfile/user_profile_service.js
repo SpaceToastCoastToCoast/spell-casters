@@ -1,9 +1,11 @@
+import { GraphStatsServices } from './graph_stats_service';
+
 export const UserProfileServices = [
 
-'$http', '$rootScope',
+'$http', '$rootScope', 'GraphStatsServices',
 
 class UserProfileServices {
-  constructor ($http, $rootScope) {
+  constructor ($http, $rootScope, GraphStatsServices) {
     this.$http = $http;
     this.$rootScope = $rootScope;
     this.userDataQuery = this.userDataQuery.bind(this);
@@ -23,6 +25,7 @@ class UserProfileServices {
     this.totalTimePlayed = null;
     this.averageGameTime = null;
     this.topMissedWords = [];
+    this.GraphStatsServices = GraphStatsServices;
   }
 
   userDataQuery() {
@@ -116,7 +119,6 @@ class UserProfileServices {
          //Trim out the white spacing from data set
         let trimmedWordSet = word.map(entry => entry.trim());
 
-        console.log('trimmedWordSet: ', trimmedWordSet);
 
         let count = {};
 
@@ -127,12 +129,9 @@ class UserProfileServices {
           count[word] += 1;
         });
 
-        console.log('count: ', count);
 
         let highestCount = 0;
         for (let word in count) {
-          console.log('word: ', word);
-          console.log('count[x]: ', count[word]);
           if ( count[word] > highestCount ){
             this.topMissedWords = [];
             highestCount = count[word];
@@ -141,7 +140,8 @@ class UserProfileServices {
             this.topMissedWords.push(word);
           }
         }
-        console.log('this.topMissedWords: ', this.topMissedWords);
+        //call the graph function to update the value
+        this.GraphStatsServices.graphData(this.highestPercentComplete);
     });
   }
 }];
