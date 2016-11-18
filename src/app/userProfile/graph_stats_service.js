@@ -11,9 +11,9 @@ class GraphStatsServices {
 
   }
 
-graphData(foo){
+graphData(foo, foo2){
 
-  console.log('foo: ', foo);
+  console.log('foo: ', foo , foo2);
 }
 }];
 

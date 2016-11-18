@@ -25,6 +25,7 @@ class UserProfileServices {
     this.totalTimePlayed = null;
     this.averageGameTime = null;
     this.topMissedWords = [];
+    this.recentPercentComplete = [];
     this.GraphStatsServices = GraphStatsServices;
   }
 
@@ -140,8 +141,23 @@ class UserProfileServices {
             this.topMissedWords.push(word);
           }
         }
-        //call the graph function to update the value
-        this.GraphStatsServices.graphData(this.highestPercentComplete);
+
+        //Grab the last 5 games and their total words put them in an array send it to graph stats.
+        let backPercent = [];
+        let numberOfGames = 0;
+        //Reverse the array of Percentages
+        for(let percents in percentArr){
+          backPercent.unshift(percentArr[percents]);
+        }
+        //Grab the last 20 games in the array
+        for(let x = 0; x<20; x++){
+          if(backPercent[x] === 'undefined'){
+          x = numberOfGames;
+          this.recentPercentComplete.push(backPercent[x]);
+          }
+        }
+        //call the graph function in graph_stats_service to update the value
+        this.GraphStatsServices.graphData(this.recentPercentComplete, numberOfGames);
     });
   }
 }];
