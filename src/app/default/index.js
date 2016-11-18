@@ -33,6 +33,9 @@ export const DefaultCtrl = [
       $scope.goToAbout = () => {
         $state.go('about');
       };
+      $scope.goToLeaderboard = () => {
+        $state.go('leaderboard')
+      };
       $scope.goToLogIn = () => {
         $state.go('login')
       }
