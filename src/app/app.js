@@ -5,7 +5,7 @@ import { WordsService } from './words_dataset/words_service';
 import { TimerService } from './words_dataset/timer_service';
 import { focusMe } from './words_dataset/autoFocus';
 import { numberToString } from './constants/numberToString';
-import { UserStatsService } from './gameOver/game_over_service';
+import { UserStatsService } from './gameOver/user_stats_service';
 import { RegistrationServices } from './registration/registration_service';
 import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from './instructions';
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
@@ -99,7 +99,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       }
       $rootScope.currentSong = new Howl({
         src: [songPath],
-        autoplay: true,
+        // autoplay: true,
         loop: true
       })
     }
