@@ -11,10 +11,12 @@ export const WonCtrlState = {
 };
 
 export const WonCtrl = [
-  '$scope','$state', '$rootScope', 'UserStatsService',
+  '$scope','$state', '$rootScope', 'UserStatsService', 'TimerService',
 
   class WonCtrl {
-    constructor($scope,$state,$rootScope, UserStatsService) {
+    constructor($scope,$state,$rootScope, UserStatsService, TimerService) {
+      TimerService.resetGame();
+
       if ($rootScope.currentSong._src !== mainSong) {
         $rootScope.setCurrentSong(mainSong);
       }

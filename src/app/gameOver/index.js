@@ -12,10 +12,12 @@ export const GameOverCtrlState = {
 
 
 export const GameOverCtrl = [
-  '$scope','$state', '$rootScope', 'UserStatsService',
+  '$scope','$state', '$rootScope', 'UserStatsService', 'TimerService',
 
   class GameOverCtrl {
-    constructor($scope,$state,$rootScope, UserStatsService) {
+    constructor($scope,$state,$rootScope, UserStatsService, TimerService) {
+      TimerService.resetGame();
+
       if ($rootScope.currentSong._src !== mainSong) {
         $rootScope.setCurrentSong(mainSong);
       }
