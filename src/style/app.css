@@ -232,12 +232,12 @@ button:active {
   width: 640px;
   height: 360px;
   display: block;
-  background: url("http://localhost:8080/img/bg1.PNG");
+  background: url("/img/bg1.PNG");
 }
 
 .splashImage {
   /*
-  background-image: url("http://localhost:8080/img/splash.png");
+  background-image: url("/img/splash.png");
   */
 }
 
@@ -472,7 +472,7 @@ button:active {
   margin: auto;
   width: 64px;
   height: 64px;
-  background: url("http://localhost:8080/img/zett-talk.png");
+  background: url("/img/zett-talk.png");
 }
 
 /* UI Sprites */
@@ -482,7 +482,7 @@ button:active {
   top: 8px;
   left: 8px;
   height: 16px;
-  background: url("http://localhost:8080/img/ui_sprites_heart.png") repeat-x top left;
+  background: url("/img/ui_sprites_heart.png") repeat-x top left;
   transition: width 0.5s ease;
 }
 
@@ -491,7 +491,7 @@ button:active {
   top: 8px;
   right: 8px;
   height: 16px;
-  background: url("http://localhost:8080/img/ui_sprites_heart.png") repeat-x bottom right;
+  background: url("/img/ui_sprites_heart.png") repeat-x bottom right;
   transition: width 0.5s ease;
 }
 
@@ -527,7 +527,7 @@ button:active {
   left: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("http://localhost:8080/img/alepha_idle_final.png");
+  background-image: url("/img/alepha_idle_final.png");
 }
 
 .alephaIdle {
@@ -557,7 +557,7 @@ button:active {
   position: absolute;
   width: 32px;
   height: 32px;
-  background-image: url("http://localhost:8080/img/spell-sprites-alpha.png");
+  background-image: url("/img/spell-sprites-alpha.png");
 }
 
 .noCharge {
@@ -615,7 +615,7 @@ button:active {
 }
 
 .swipe {
-  background-image: url("http://localhost:8080/img/swipe.png");
+  background-image: url("/img/swipe.png");
   animation: swipe steps(4) 0.16s infinite;
 }
 
@@ -634,7 +634,7 @@ button:active {
 }
 
 .beamBlast {
-  background-image: url("http://localhost:8080/img/beam_placeholder.png");
+  background-image: url("/img/beam_placeholder.png");
   animation: beamBlast steps(2) 0.1s infinite;
 }
 
@@ -651,7 +651,7 @@ button:active {
   right: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("http://localhost:8080/img/alphagator-static.png");
+  background-image: url("/img/alphagator-static.png");
 }
  /*
 .gatorIdle {
@@ -677,7 +677,7 @@ button:active {
   right: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("http://localhost:8080/img/zett_idle_final.png");
+  background-image: url("/img/zett_idle_final.png");
 }
 
 .zettIdle {

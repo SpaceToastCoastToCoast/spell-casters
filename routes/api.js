@@ -174,5 +174,56 @@ app.get('/game-stats/:username',(req,res) => {
   })
 })
 
+app.get('/leaderboard',(req,res) => {
+  gamestats.findAll({
+    order: '"UserId" DESC',
+  })
+  .then((stats) => {
+    //score is generated with formula...
+    // %of game completed * 200 - # of misspelled words - total time spent * 0.01
+    let allScores = stats.reduce((scores,stat) => {
 
+      let totalTime = stat.dataValues.timeElapsed.reduce((sum,next) => {
+        sum += next
+        return sum;
+      }, 0)
+      let subscore = Math.round((stat.dataValues.percentCompleted *200) - (stat.dataValues.misspelledWords.length) - (totalTime * 0.01))
+      if (scores[stat.dataValues.UserId]) {
+        if (scores[stat.dataValues.UserId] < subscore) {
+          scores[stat.dataValues.UserId] = subscore
+        }
+      } else {
+        scores[stat.dataValues.UserId] = subscore;
+      }
+      return scores;
+    }, {})
+
+    return allScores;
+  })
+  .then((allScores) => {
+    users.findAll({
+      attributes: ['id','username']
+    })
+    .then(allUsers => {
+      let highScores = Object.keys(allScores).map(playerId =>{
+        let username = allUsers.find(user => {
+          return parseInt(user.dataValues.id) === parseInt(playerId)
+        })
+        username = username.username;
+        let score = allScores[playerId];
+        return {
+          username,
+          score
+        }
+      })
+      //sort highscores in order of highest to lowest
+      highScores.sort((a,b) => {
+        return b.score - a.score
+      })
+      res.json({
+        highScores
+      })
+    })
+  })
+})
 module.exports = app;
