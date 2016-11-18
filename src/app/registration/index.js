@@ -20,8 +20,11 @@ export const RegistrationCtrl = [
   'RegistrationServices',
   '$rootScope',
   '$timeout',
+  'TimerService',
   class RegistrationCtrl {
-    constructor($scope, $state, $stateParams, RegistrationServices, $rootScope, $timeout) {
+    constructor($scope, $state, $stateParams, RegistrationServices, $rootScope, $timeout, TimerService) {
+      TimerService.resetGame();
+
       this.registerData ={
         username: '',
         password: ''

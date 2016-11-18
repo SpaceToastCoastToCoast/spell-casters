@@ -15,14 +15,14 @@ export const LoginCtrlState = {
 
 export const UserServices = [
 
- '$http', '$state',
+ '$http', '$state', 'TimerService',
 
   class UserServices {
-    constructor ($http, $state, users) {
+    constructor ($http, $state, users, TimerService) {
       this.$http = $http;
       this.$state = $state;
       this.users = users;
-
+      TimerService.resetGame();
     }
 
     getUsers (userData) {

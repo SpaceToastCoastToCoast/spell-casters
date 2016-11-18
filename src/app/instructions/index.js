@@ -12,9 +12,11 @@ export const InstructionsCtrlState = {
 };
 
 export const InstructionsCtrl = [
-'$scope', '$state', '$rootScope',
+'$scope', '$state', '$rootScope', 'TimerService',
 class InstructionsCtrl {
-  constructor($scope,$state,$rootScope) {
+  constructor($scope,$state,$rootScope, TimerService) {
+    TimerService.resetGame();
+
     this.testWords = [
       {
       "word": "a lot",

@@ -14,10 +14,12 @@ export const DefaultCtrlState = {
 };
 
 export const DefaultCtrl = [
-  '$scope','$state','$stateParams','$rootScope','LocalStorageService',
+  '$scope','$state','$stateParams','$rootScope','LocalStorageService', 'TimerService',
 
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,$rootScope,LocalStorageService) {
+    constructor($scope,$state,$stateParams,$rootScope,LocalStorageService, TimerService) {
+      TimerService.resetGame();
+
       if($rootScope.currentSong === undefined) {
         $rootScope.setCurrentSong(mainSong);
       } else if ($rootScope.currentSong._src !== mainSong) {

@@ -12,10 +12,12 @@ export const LeaderboardCtrlState = {
 
 
 export const LeaderboardCtrl = [
-  '$scope','$state', '$rootScope', 'LeaderboardService',
+  '$scope','$state', '$rootScope', 'LeaderboardService', 'TimerService',
 
   class LeaderboardCtrl {
-    constructor($scope,$state,$rootScope, LeaderboardService) {
+    constructor($scope,$state,$rootScope, LeaderboardService, TimerService) {
+      TimerService.resetGame();
+
       if ($rootScope.currentSong._src !== mainSong) {
         $rootScope.setCurrentSong(mainSong);
       }
