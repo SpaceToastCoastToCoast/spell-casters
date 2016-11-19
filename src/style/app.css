@@ -258,7 +258,7 @@ button:active {
   box-sizing: border-box;
 }
 
-#gameStats .buttonDiv button {
+#singleButton button {
   margin-left: 12px;
   margin-right: 16px;
   margin-bottom: 20px;
