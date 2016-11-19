@@ -7,29 +7,28 @@ export const GameChartsCtrlState = {
   url: '/game-charts',
   template,
   controller: GameChartsCtrlName,
-  controllerAs: 'game-charts',
-  params: {
-    visible: false
-  }
+  controllerAs: 'gameCharts',
 };
 
 export const GameChartsCtrl = [
-  '$scope','$state','$stateParams','$rootScope','TimerService',
+  '$scope',
+  '$state',
+  '$stateParams',
+  '$rootScope',
+  'TimerService',
+  'GameChartsServices',
 
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,$rootScope, TimerService) {
-
-      if($rootScope.currentSong === undefined) {
-        $rootScope.setCurrentSong(mainSong);
-      } else if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
-      }
+    constructor($scope,$state,
+      $stateParams,$rootScope,
+      TimerService, GameChartsServices ) {
 
 
-
-
-
+      GameChartsServices.userDataQuery();
 
     }
+
+
+
   }
 ]
