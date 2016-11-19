@@ -6,4 +6,27 @@
   <p>Top missed Words: {{ UserProfileServices.topMissedWords}} </p>
   <p>Highest Precentage of Game Completed: {{UserProfileServices.highestPercentComplete}} </p>
   <p>Average of Game Completed: {{UserProfileServices.averagePercentComplete}} </p>
+  <div id="chart">
+  </div>
+  <style> /* set the CSS */
+
+    body { font: 12px Arial;}
+
+    path {
+        stroke: steelblue;
+        stroke-width: 2;
+        fill: none;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+
+</style>
+  <div class="totalGamesPlayed">
+  </div>
 </div>
