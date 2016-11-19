@@ -27,6 +27,7 @@ export const WonCtrl = [
       TimerService,
       SoundService) {
       TimerService.resetGame();
+      $rootScope.canNavToGameOver = false;
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
