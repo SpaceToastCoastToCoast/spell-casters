@@ -21,7 +21,6 @@ import { UserProfileServices } from './userProfile/user_profile_service';
 import { GraphStatsServices } from './userProfile/graph_stats_service';
 import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
 import { LeaderboardService } from './leaderboard/leaderboard_service';
-import { SettingsCtrlState, SettingsCtrlName, SettingsCtrl } from './settings';
 import { modal } from './directives/modal_directive';
 import { ModalService } from './services/modal_service';
 import { LogoutService } from './services/logout_service';
@@ -39,11 +38,36 @@ let app = () => {
 };
 
 export const AppCtrl = [
-  '$scope', '$rootScope', '$state',
+  '$scope',
+  '$rootScope',
+  '$state',
+  'SoundService',
+
   class AppCtrl {
-    constructor($scope, $rootScope, $state) {
-      $scope.goToSettings = () => {
-        $state.go('settings');
+    constructor(
+      $scope,
+      $rootScope,
+      $state,
+      SoundService) {
+
+      $scope.music = SoundService.musicOn
+      $scope.sound = SoundService.soundEffectsOn;
+
+      $scope.turnOnMusic = () => {
+        SoundService.turnMusicOn()
+        $scope.music = true;
+      }
+      $scope.turnOffMusic = () => {
+        SoundService.turnMusicOff();
+        $scope.music = false;
+      }
+      $scope.turnOnSoundEffects = () => {
+        SoundService.soundEffectsOn = true;
+        $scope.sound = true;
+      }
+      $scope.turnOffSoundEffects = () => {
+        SoundService.soundEffectsOn = false;
+        $scope.sound = false;
       }
     }
   }
@@ -65,9 +89,6 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
       .state('leaderboard', LeaderboardCtrlState)
-      .state('settings', SettingsCtrlState)
-      .state('game-charts', GameChartsCtrlState)
-
 
     $urlRouterProvider.otherwise('/');
   })
@@ -102,9 +123,6 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(RegistrationCtrlName, RegistrationCtrl)
   .controller(UserProfileCtrlName, UserProfileCtrl)
   .controller(LeaderboardCtrlName, LeaderboardCtrl)
-  .controller(LeaderboardCtrlName, LeaderboardCtrl)
-  .controller(SettingsCtrlName, SettingsCtrl)
-  .controller(GameChartsCtrlName, GameChartsCtrl)
 
 
 

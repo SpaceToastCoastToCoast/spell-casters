@@ -1,4 +1,5 @@
 const template = require('./userProfile.html');
+const mainSong = require('../../public/music/Main.ogg');
 
 export const UserProfileCtrlName = 'UserProfileCtrl';
 
