@@ -11,14 +11,25 @@ export const WonCtrlState = {
 };
 
 export const WonCtrl = [
-  '$scope','$state', '$rootScope', 'UserStatsService', 'TimerService',
+  '$scope',
+  '$state',
+  '$rootScope',
+  'UserStatsService',
+  'TimerService',
+  'SoundService',
 
   class WonCtrl {
-    constructor($scope,$state,$rootScope, UserStatsService, TimerService) {
+    constructor(
+      $scope,
+      $state,
+      $rootScope,
+      UserStatsService,
+      TimerService,
+      SoundService) {
       TimerService.resetGame();
 
-      if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
+      if (SoundService.currentSong._src !== mainSong) {
+        SoundService.setCurrentSong(mainSong);
       }
 
       $scope.goToSplash = () => {

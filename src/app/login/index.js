@@ -48,19 +48,31 @@ export const UserServices = [
 ];
 
 export const LoginCtrl = [
-  '$scope', 'UserServices', '$state', '$stateParams',
-  '$rootScope', 'LocalStorageService', '$q',
+  '$scope',
+  'UserServices',
+  '$state',
+  '$stateParams',
+  '$rootScope',
+  'LocalStorageService',
+  '$q',
+  'SoundService',
 
   class LoginCtrl {
-    constructor($scope, UserServices, $state, $stateParams,
-      $rootScope, LocalStorageService, $q) {
+    constructor($scope,
+      UserServices,
+      $state,
+      $stateParams,
+      $rootScope,
+      LocalStorageService,
+      $q,
+      SoundService) {
       this.userData = {
         username: '',
         password: ''
       };
 
-      if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
+      if (SoundService.currentSong._src !== mainSong) {
+        SoundService.setCurrentSong(mainSong);
       }
 
 

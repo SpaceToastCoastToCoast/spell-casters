@@ -13,6 +13,7 @@ class GraphStatsServices {
 
 
 
+
   graphData(recentPercentComplete){
 
     var margin = {top: 30, right: 20, bottom: 30, left: 50},
