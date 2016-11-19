@@ -32,21 +32,21 @@ class GraphStatsServices {
     height = 270 - margin.top - margin.bottom;
 
     // Set the ranges
-    var x = d3.scale.linear().range([0, width]);
-    var y = d3.scale.linear().range([height, 0]);
+    var x = d3.scaleLinear().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
 
     if(recentPercentComplete){
       // var p = d3.select(".totalGamesPlayed").selectAll("p")
 
       // Define the axes
-      var xAxis = d3.svg.axis().scale(x)
-        .orient("bottom").ticks(5);
+      var xAxis = d3.axisBottom().scale(x)
+        .ticks(5);
 
-      var yAxis = d3.svg.axis().scale(y)
-        .orient("left").ticks(5);
+      var yAxis = d3.axisLeft().scale(y)
+        .ticks(5);
 
       // Define the line
-      var valueline = d3.svg.line()
+      var valueline = d3.line()
         .x(function(d, i) {return  x(i)})
         .y(function(d) { return y(d); });
 
