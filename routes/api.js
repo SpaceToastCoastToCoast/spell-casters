@@ -136,19 +136,11 @@ app.post('/post-stats', (req,res) => {
   .then((user) => {
     const misspelledWordsArr = req.body.misspelledWords.split(',');
     const timeElapsedArr = req.body.timeElapsed.split(',').map(time => {return parseInt(time)})
-    const totalTime = timeElapsedArr.reduce((sum,next) => {
-      sum += next
-      return sum;
-    }, 0)
-    //score is generated with formula...
-    // %of game completed * 200 - # of misspelled words - total time spent * 0.01
-    const score = Math.round((parseFloat(req.body.percentCompleted) *200) - (misspelledWordsArr.length) - (totalTime * 0.01))
     gamestats.create({
       percentCompleted: parseFloat(req.body.percentCompleted),
       totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
       misspelledWords: misspelledWordsArr,
       timeElapsed: timeElapsedArr,
-      score: score,
       UserId: user.dataValues.id
     })
     .then(_ => {
@@ -170,13 +162,23 @@ app.get('/game-stats/:username',(req,res) => {
       order: '"createdAt" DESC',
     })
     .then((stats) => {
-      //node-postgres returns decimal datatypes as strings
-      //parse value back to a decimal before serving it on the api
+      let recentGames = [];
+      if(stats.length > 20){
+        stats.reverse();
+        for(var x = 0; x<20; x++){
+          recentGames.push(stats[x]);
+        }
+      }else{
+        stats.reverse();
+        recentGames.push(stats);
+      }
       stats.forEach(stat => {
         stat.percentCompleted = parseFloat(stat.percentCompleted);
       })
+
       res.json({
-        stats
+        stats,
+        recentGames,
       })
     })
   })
@@ -187,13 +189,21 @@ app.get('/leaderboard',(req,res) => {
     order: '"UserId" DESC',
   })
   .then((stats) => {
+    //score is generated with formula...
+    // %of game completed * 200 - # of misspelled words - total time spent * 0.01
     let allScores = stats.reduce((scores,stat) => {
+
+      let totalTime = stat.dataValues.timeElapsed.reduce((sum,next) => {
+        sum += next
+        return sum;
+      }, 0)
+      let subscore = Math.round((stat.dataValues.percentCompleted *200) - (stat.dataValues.misspelledWords.length) - (totalTime * 0.01))
       if (scores[stat.dataValues.UserId]) {
-        if (scores[stat.dataValues.UserId] < stat.dataValues.score) {
-          scores[stat.dataValues.UserId] = stat.dataValues.score
+        if (scores[stat.dataValues.UserId] < subscore) {
+          scores[stat.dataValues.UserId] = subscore
         }
       } else {
-        scores[stat.dataValues.UserId] = stat.dataValues.score;
+        scores[stat.dataValues.UserId] = subscore;
       }
       return scores;
     }, {})
