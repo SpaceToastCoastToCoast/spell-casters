@@ -33,31 +33,26 @@ class GraphStatsServices {
     var parseDate = d3.time.format("%d-%b-%y").parse;
 
     // Set the ranges
-    var x = d3.time.scale().range([0, width]);
-    var y = d3.scale.linear().range([height, 0]);
+    var y = d3.time.scale().range([0, width]);
+    var x = d3.scale.linear().range([height, 0]);
 
-    // // Define the axes
-    // var xAxis = d3.svg.axis().scale(x)
-    //     .orient("bottom").ticks(5);
 
-    // var yAxis = d3.svg.axis().scale(y)
-    //     .orient("left").ticks(5);
     if(foo){
       // var p = d3.select(".totalGamesPlayed").selectAll("p")
+
+
       // Define the axes
-      var xAxis = d3.svg.axis().scale(y)
+      var xAxis = d3.svg.axis().scale(x)
           .orient("bottom").ticks(5);
 
-      var yAxis = d3.svg.axis().scale(x)
-          .orient("left").ticks(5);
+      var yAxis = d3.svg.axis().scale(y)
+          .orient("right").ticks(5);
 
       // Define the line
       var valueline = d3.svg.line()
         .y(function(d) {return  x(d)})
         .x(function(d, i) { return y(i); });
 
-        console.log('x: ', x);
-        console.log('y: ', y);
 
       // Adds the svg canvas
       var svg = d3.select(".totalGamesPlayed")
