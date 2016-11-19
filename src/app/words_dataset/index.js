@@ -27,6 +27,7 @@ export const WordsDatasetCtrl = [
 '$state',
 '$interval',
 '$timeout',
+'SoundService',
 class WordsDatasetCtrl {
   constructor(
     WordsService,
@@ -36,7 +37,8 @@ class WordsDatasetCtrl {
     $rootScope,
     $state,
     $interval,
-    $timeout) {
+    $timeout,
+    SoundService) {
 
     //Init variables
     this.newWords = [];
@@ -45,7 +47,7 @@ class WordsDatasetCtrl {
     this.misspelledWords = '';
 
     //set current song to short theme
-    $rootScope.setCurrentSong(shortTheme);
+    SoundService.setCurrentSong(shortTheme);
 
     //debug
     $scope.lvl = 3;
@@ -191,8 +193,8 @@ class WordsDatasetCtrl {
       $scope.bossMessage = "I should congratulate you, young sorceror, for having lasted this long against my Alphagators. But I shall personally see to it that your journey ends here.";
       $scope.showBossText = true;
       //set boss music
-      if ($rootScope.currentSong._src !== bossTheme) {
-        $rootScope.setCurrentSong(bossTheme);
+      if (SoundService.currentSong._src !== bossTheme) {
+        SoundService.setCurrentSong(bossTheme);
       }
 
       $timeout(() => {

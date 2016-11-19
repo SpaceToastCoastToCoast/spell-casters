@@ -15,6 +15,7 @@ import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import { LocalStorageService } from './services/localStorage_service';
+import { SoundService } from './services/sound_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import { GraphStatsServices } from './userProfile/graph_stats_service';
@@ -78,32 +79,12 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
+  .service('SoundService', SoundService)
   .controller('AppCtrl', AppCtrl)
-  .run(($rootScope) => {
+  .run(($rootScope, SoundService) => {
     $rootScope.user = "Guest";
-    $rootScope.playSoundEffect = (soundPath) => {
-      if($rootScope.currentSound) {
-        $rootScope.currentSound.pause();
-      }
-      $rootScope.currentSound = new Howl({
-        src: [soundPath],
-        autoplay: true
-      })
-    }
-    $rootScope.currentSong = new Howl({
-      src: [mainSong]
-    })
-    $rootScope.setCurrentSong = (songPath) => {
-      if ($rootScope.currentSong) {
-        $rootScope.currentSong.pause();
-      }
-      $rootScope.currentSong = new Howl({
-        src: [songPath],
-        // autoplay: true,
-        loop: true
-      })
-    }
 
+    SoundService.setCurrentSong(mainSong);
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)

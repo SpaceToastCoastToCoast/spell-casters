@@ -12,14 +12,25 @@ export const GameOverCtrlState = {
 
 
 export const GameOverCtrl = [
-  '$scope','$state', '$rootScope', 'UserStatsService', 'TimerService',
+  '$scope',
+  '$state',
+  '$rootScope',
+  'UserStatsService',
+  'TimerService',
+  'SoundService',
 
   class GameOverCtrl {
-    constructor($scope,$state,$rootScope, UserStatsService, TimerService) {
+    constructor(
+      $scope,
+      $state,
+      $rootScope,
+      UserStatsService,
+      TimerService,
+      SoundService) {
       TimerService.resetGame();
 
-      if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
+      if (SoundService.currentSong._src !== mainSong) {
+        SoundService.setCurrentSong(mainSong);
       }
 
       $scope.goToSplash = () => {

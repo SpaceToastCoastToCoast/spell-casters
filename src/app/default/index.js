@@ -14,16 +14,29 @@ export const DefaultCtrlState = {
 };
 
 export const DefaultCtrl = [
-  '$scope','$state','$stateParams','$rootScope','LocalStorageService', 'TimerService',
+  '$scope',
+  '$state',
+  '$stateParams',
+  '$rootScope',
+  'LocalStorageService',
+  'TimerService',
+  'SoundService',
 
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,$rootScope,LocalStorageService, TimerService) {
+    constructor(
+      $scope,
+      $state,
+      $stateParams,
+      $rootScope,
+      LocalStorageService,
+      TimerService,
+      SoundService) {
       TimerService.resetGame();
 
-      if($rootScope.currentSong === undefined) {
-        $rootScope.setCurrentSong(mainSong);
-      } else if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
+      if(SoundService.currentSong === undefined) {
+        SoundService.setCurrentSong(mainSong);
+      } else if (SoundService.currentSong._src !== mainSong) {
+        SoundService.setCurrentSong(mainSong);
       }
 
       $scope.goToInstructions = () => {
