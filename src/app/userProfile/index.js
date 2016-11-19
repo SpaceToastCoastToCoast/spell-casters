@@ -40,6 +40,7 @@ export const UserProfileCtrl = [
       UserProfileServices.userDataQuery();
       $scope.GraphStatsServices = GraphStatsServices;
       GraphStatsServices.graphData();
+      GraphStatsServices.totalWordsGraph();
 
       if($rootScope.user === 'Guest'){
         $state.go('splash');
