@@ -120,12 +120,6 @@ export const WordsService = [
       const totalWordsCompleted = this.calculateTotalWordsCompleted(lvl, currentIndex);
       const percentCompleted = this.calculatePercentCompleted(totalWordsCompleted);
 
-      //save stats to rootScope for access in gameOver page
-      this.$rootScope.totalWordsCompleted = totalWordsCompleted;
-      this.$rootScope.percentCompleted = percentCompleted
-      this.$rootScope.totalTimeElapsed = this.calculateTotalTime(times);
-      this.$rootScope.misspelledWords = misspelledWords;
-
       if (this.$rootScope.user !== 'Guest') {
         const req = {
           method: 'POST',
@@ -136,8 +130,10 @@ export const WordsService = [
           data: `percentCompleted=${percentCompleted}&totalWordsCompleted=${totalWordsCompleted}&misspelledWords=${misspelledWords}&timeElapsed=${timeElapsed}&username=${this.$rootScope.user}`
         }
         return this.$http(req)
+      } else {
+        return false;
       }
-      this.resetGame();
+
     }
 
     calculateTotalTime(times) {

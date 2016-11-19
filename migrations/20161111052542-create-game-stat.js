@@ -20,6 +20,9 @@ module.exports = {
       timeElapsed: {
         type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
+      score: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

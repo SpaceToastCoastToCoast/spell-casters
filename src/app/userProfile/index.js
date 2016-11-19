@@ -11,10 +11,13 @@ export const UserProfileCtrlState ={
 
 
 export const UserProfileCtrl = [
-  '$scope', '$state', '$rootScope', 'UserProfileServices', 'GraphStatsServices',
+  '$scope', '$state', '$rootScope', 'UserProfileServices', 'GraphStatsServices', 'TimerService',
 
   class UserProfileCtrl {
-    constructor($scope, $state, $rootScope, UserProfileServices, GraphStatsServices) {
+    constructor($scope, $state, $rootScope, UserProfileServices, GraphStatsServices, TimerService) {
+      TimerService.resetGame();
+
+
       $scope.state = $state;
       $scope.UserProfileServices = UserProfileServices;
       UserProfileServices.userDataQuery();
