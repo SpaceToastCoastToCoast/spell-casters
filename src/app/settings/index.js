@@ -11,65 +11,48 @@ export const SettingsCtrlState = {
 };
 
 export const SettingsCtrl = [
-  '$scope','$state','$rootScope', 'TimerService',
+  '$scope',
+  '$state',
+  '$rootScope',
+  'TimerService',
+  'SoundService',
 
   class SettingsCtrl {
-    constructor($scope,$state,$rootScope,TimerService) {
+    constructor(
+      $scope,
+      $state,
+      $rootScope,
+      TimerService,
+      SoundService) {
       //should be able to pause game to go to settings and shut off music
       TimerService.resetGame();
 
       // if ($rootScope.currentSong._src !== mainSong) {
       //   $rootScope.setCurrentSong(mainSong);
       // }
-      if($rootScope.currentSong.playing) {
-        $scope.music = true;
-      } else {
-        $scope.music = false;
-      }
 
-      $scope.sound = true;
-
+      $scope.music = SoundService.musicOn
+      $scope.sound = SoundService.soundEffectsOn;
 
       $scope.turnOnMusic = () => {
+        SoundService.turnMusicOn()
         $scope.music = true;
-        $rootScope.setCurrentSong = (songPath) => {
-          if ($rootScope.currentSong) {
-            $rootScope.currentSong.pause();
-          }
-          $rootScope.currentSong = new Howl({
-            src: [songPath],
-            autoplay: true,
-            loop: true
-          })
-        }
-        $rootScope.currentSong.play();
       }
 
       $scope.turnOffMusic = () => {
-        $rootScope.currentSong.pause();
-        $rootScope.setCurrentSong = (songPath) => {
-          //reset function to not play any music
-        }
+        SoundService.turnMusicOff();
         $scope.music = false;
       }
+
       $scope.turnOnSoundEffects = () => {
-        $rootScope.playSoundEffect = (soundPath) => {
-          if($rootScope.currentSound) {
-            $rootScope.currentSound.pause();
-          }
-          $rootScope.currentSound = new Howl({
-            src: [soundPath],
-            autoplay: true
-          })
-        }
+        SoundService.soundEffectsOn = true;
         $scope.sound = true;
       }
       $scope.turnOffSoundEffects = () => {
-        $rootScope.playSoundEffect = (soundPath) => {
-          //reset function to not play any sound effects
-        }
+        SoundService.soundEffectsOn = false;
         $scope.sound = false;
       }
+
       $scope.goToSplash = () => {
         $state.go('splash')
       }

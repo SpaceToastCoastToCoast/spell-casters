@@ -21,8 +21,17 @@ export const RegistrationCtrl = [
   '$rootScope',
   '$timeout',
   'TimerService',
+  'SoundService',
   class RegistrationCtrl {
-    constructor($scope, $state, $stateParams, RegistrationServices, $rootScope, $timeout, TimerService) {
+    constructor(
+      $scope,
+      $state,
+      $stateParams,
+      RegistrationServices,
+      $rootScope,
+      $timeout,
+      TimerService,
+      SoundService) {
       TimerService.resetGame();
 
       this.registerData ={
@@ -32,8 +41,8 @@ export const RegistrationCtrl = [
       this.$state = $state;
       this.timeD = false;
 
-      if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
+      if (SoundService.currentSong._src !== mainSong) {
+        SoundService.setCurrentSong(mainSong);
       }
 
       $scope.userName = '';
