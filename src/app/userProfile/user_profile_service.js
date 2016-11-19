@@ -144,20 +144,18 @@ class UserProfileServices {
 
         //Grab the last 5 games and their total words put them in an array send it to graph stats.
         let backPercent = [];
-        let numberOfGames = 0;
         //Reverse the array of Percentages
         for(let percents in percentArr){
           backPercent.unshift(percentArr[percents]);
         }
         //Grab the last 20 games in the array
         for(let x = 0; x<20; x++){
-          if(backPercent[x] === 'undefined'){
-          x = numberOfGames;
-          this.recentPercentComplete.push(backPercent[x]);
-          }
+           this.recentPercentComplete.push(backPercent[x]);
+
         }
+        console.log('this.recentPercentComplete: ', this.recentPercentComplete);
         //call the graph function in graph_stats_service to update the value
-        this.GraphStatsServices.graphData(this.recentPercentComplete, numberOfGames);
+        this.GraphStatsServices.graphData(this.recentPercentComplete);
     });
   }
 }];
