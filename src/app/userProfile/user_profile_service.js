@@ -152,7 +152,7 @@ class UserProfileServices {
 
         //call the graph function in graph_stats_service to update the value
         this.GraphStatsServices.graphData(this.recentPercentComplete);
-        this.GraphStatsServices.c3Chart(this.recentPercentComplete);
+
     });
   }
 }];
