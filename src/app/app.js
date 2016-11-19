@@ -26,6 +26,7 @@ import { modal } from './directives/modal_directive';
 import { ModalService } from './services/modal_service';
 import { LogoutService } from './services/logout_service';
 import { GameChartsCtrlState, GameChartsCtrlName, GameChartsCtrl } from './gameCharts';
+import { GameChartsServices } from './gameCharts/game_charts_service';
 
 import '../style/app.css';
 const mainSong = require('../public/music/Main.ogg');
@@ -87,6 +88,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('SoundService', SoundService)
   .service('ModalService', ModalService)
   .service('LogoutService', LogoutService)
+  .service('GameChartsServices', GameChartsServices)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope, SoundService) => {
     $rootScope.user = "Guest";

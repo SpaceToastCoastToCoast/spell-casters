@@ -1,6 +1,8 @@
 export const GameChartsServices = [
 
-'$http', '$rootScope', 'UserProfileServices',
+'$http',
+'$rootScope',
+'UserProfileServices',
 
 class GameChartsServices {
   constuctor($http, $rootScope, UserProfileServices){
@@ -10,14 +12,21 @@ class GameChartsServices {
     this.UserProfileServices = UserProfileServices;
   }
 
-userDataQuery() {
-    const req ={
-      method: 'GET',
-      url: `/api/game-stats/${this.$rootScope.user}`,
-    };
-    return this.$http(req).success(response => {
-      console.log('response.stats', response.stats)
-    })
+
+  userDataQuery() {
+    if ($rootScope.visible !== true) {
+      console.log('no user logged in')
+      $state.go('splash');
+    } else {
+      const req ={
+        method: 'GET',
+        url: `/api/game-stats/${this.$rootScope.user}`,
+      };
+      return this.$http(req).success(response => {
+        console.log('response.stats', response.stats)
+      })
+    }
+
   }
 
 }];

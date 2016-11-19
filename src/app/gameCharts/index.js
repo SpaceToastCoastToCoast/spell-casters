@@ -1,5 +1,4 @@
 const template = require('./gameCharts.html');
-const mainSong = require('../../public/music/Main.ogg');
 
 export const GameChartsCtrlName = 'GameChartsCtrl';
 
@@ -13,18 +12,27 @@ export const GameChartsCtrlState = {
 export const GameChartsCtrl = [
   '$scope',
   '$state',
-  '$stateParams',
   '$rootScope',
+  'UserProfileServices',
   'TimerService',
   'GameChartsServices',
 
   class DefaultCtrl {
-    constructor($scope,$state,
-      $stateParams,$rootScope,
-      TimerService, GameChartsServices ) {
+    constructor($scope,
+      $state,
+      $rootScope,
+      UserProfileServices,
+      TimerService,
+      GameChartsServices ) {
+      TimerService.resetGame();
 
+      $scope.GameChartsServices = GameChartsServices;
 
-      GameChartsServices.userDataQuery();
+      if($rootScope.user === 'Guest'){
+        $state.go('splash');
+      }
+
+      // GameChartsServices.userDataQuery();
 
     }
 
