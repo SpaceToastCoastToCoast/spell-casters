@@ -65,6 +65,44 @@ p {
   }
 }
 
+/* Header elements */
+
+#svgLogo {
+  width: 420px;
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-340px);
+  cursor: pointer;
+}
+
+#musicControls {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+  background-color: #db9864;
+  background: linear-gradient(#db9864, #b1695a);
+  box-sizing: border-box;
+  padding: 8px;
+  width: 224px;
+  position: absolute;
+  top: 32px;
+  right: 50%;
+  transform: translateX(320px);
+  z-index: -1;
+}
+
+#musicControls button {
+  font-size: 14px;
+  height: 48px;
+  padding-top: 4px;
+  padding-bottom: 20px;
+  margin-left: 2px;
+  margin-right: 6px;
+}
+
+/* Body elements */
+
 #main {
   z-index: 99;
   border-top: 1px solid #e3bb88;
@@ -137,6 +175,8 @@ button:active {
   align-items: center;
   justify-content: space-between;
 }
+
+/* User accounts */
 
 .loggedInAs {
   margin: 0px;
@@ -212,6 +252,74 @@ button:active {
 .login .buttonDiv {
   width: 100%;
 }
+
+#leaderboard {
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+#gameStats .buttonDiv button {
+  margin-left: 12px;
+  margin-right: 16px;
+  margin-bottom: 20px;
+}
+
+.highScore {
+  padding-top: 4px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.highScore h3 {
+  margin: 4px;
+  margin-top: 0px;
+}
+
+/*$lightest-color: #e3bb88;
+$light-color: #db9864;
+$medium-color: #b1695a;
+$dark-color: #644749;
+$darkest-color: #222222;*/
+
+.firstPlace {
+  background-color: rgba(227, 187, 136, 1);
+}
+
+.secondPlace {
+  background-color: rgba(227, 187, 136, 0.8);
+}
+
+.thirdPlace {
+  background-color: rgba(227, 187, 136, 0.6);
+}
+
+.fourthPlace {
+  background-color: rgba(227, 187, 136, 0.4);
+}
+
+.fifthPlace {
+  background-color: rgba(227, 187, 136, 0.2);
+}
+
+.firstPlace h3 {
+  font-size: 24px;
+}
+.secondPlace h3 {
+  font-size: 22px;
+}
+.thirdPlace h3 {
+  font-size: 20px;
+}
+.fourthPlace h3 {
+  font-size: 18px;
+}
+.fifthPlace h3 {
+  font-size: 16px;
+}
+
+/* Tutorial */
 
 #instructionsDiv {
   padding-left: 8px;
@@ -374,42 +482,6 @@ button:active {
 #gameStats p, h3 {
   margin-top: 4px;
   margin-bottom: 12px;
-}
-
-/* Header elements */
-
-#svgLogo {
-  width: 420px;
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-340px);
-  cursor: pointer;
-}
-
-#musicControls {
-  border-top: 1px solid #e3bb88;
-  border-radius: 2px;
-  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
-  background-color: #db9864;
-  background: linear-gradient(#db9864, #b1695a);
-  box-sizing: border-box;
-  padding: 8px;
-  width: 224px;
-  position: absolute;
-  top: 32px;
-  right: 50%;
-  transform: translateX(320px);
-  z-index: -1;
-}
-
-#musicControls button {
-  font-size: 14px;
-  height: 48px;
-  padding-top: 4px;
-  padding-bottom: 20px;
-  margin-left: 2px;
-  margin-right: 6px;
 }
 
 /* Misc. Animation */
