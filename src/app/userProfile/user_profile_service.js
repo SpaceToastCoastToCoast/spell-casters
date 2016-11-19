@@ -35,7 +35,6 @@ class UserProfileServices {
       url: `/api/game-stats/${this.$rootScope.user}`,
     };
     return this.$http(req).success(response => {
-
         //HighestPercentCompleted
         let percentArr = [];
 
@@ -142,17 +141,17 @@ class UserProfileServices {
           }
         }
 
-        //Grab the last 5 games and their total words put them in an array send it to graph stats.
-        let backPercent = [];
-        //Reverse the array of Percentages
-        for(let percents in percentArr){
-          backPercent.unshift(percentArr[percents]);
-        }
-        //Grab the last 20 games in the array
-        for(let x = 0; x<20; x++){
-           this.recentPercentComplete.push(backPercent[x]);
+        let percentArrLatestGames = [];
 
+        console.log('response.recentGames: ', response.recentGames);
+        console.log('response.recentGames: ', response.recentGames[0]);
+
+        let recentGamesSimplified = response.recentGames[0];
+
+        for(let x = 0; x<response.stats.length; x++){
+          this.recentPercentComplete.push(recentGamesSimplified[x].percentCompleted);
         }
+
         console.log('this.recentPercentComplete: ', this.recentPercentComplete);
         //call the graph function in graph_stats_service to update the value
         this.GraphStatsServices.graphData(this.recentPercentComplete);
