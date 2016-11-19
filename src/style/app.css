@@ -6,9 +6,19 @@ $medium-color: #b1695a;
 $dark-color: #644749;
 $darkest-color: #222222;*/
 
-/*
-  Minimum width is 700px before showing "no mobile devices" page
-*/
+html, body, div, span, object, iframe, h1, h2, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul,
+li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
 
 body {
   background-color: #222222;
@@ -16,7 +26,49 @@ body {
   font-size: 16px;
 }
 
+p {
+  margin-bottom: 8px;
+}
+
+.sizing {
+  display: none;
+  margin: auto;
+  margin-top: 24px;
+  width: 288px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  background-color: #db9864;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+}
+
+.sizing h3 {
+  text-align: center;
+}
+
+@media (max-width:719px) {
+  .container {
+    display: none;
+  }
+  .sizing {
+    display: block;
+  }
+}
+
+@media (orientation:portrait) {
+  .container {
+    display: none;
+  }
+  .sizing {
+    display: block;
+  }
+}
+
 #main {
+  z-index: 99;
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
   background-color: #db9864;
   width: 680px;
   margin: auto;
@@ -38,12 +90,221 @@ h1 {
   text-shadow: 1px 2px 2px #644749, 2px 4px 4px #111;
 }
 
-canvas {
+h2 {
+  color: #b1695a;
+  margin: auto;
+  margin-bottom: 8px;
+  font-family: 'Ruslan Display', cursive;
+  font-size: 40px;
+  text-align: center;
+  font-weight: lighter;
+  text-shadow: 1px 2px 2px #644749, 2px 4px 4px #111;
+}
+
+button {
+  flex-grow: 1;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  color: #db9864;
+  text-shadow: 1px 1px 1px #644749, 2px 2px 2px #111, 0px 0px 2px #e3bb88;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: none;
+  border-top: 1px solid #e3bb88;
+  border-left: 1px solid #e3bb88;
+  background-color: #db9864;
+  background: linear-gradient(#b1695a, #644749);
+  box-sizing: border-box;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+}
+
+button:active {
+  background: linear-gradient(#644749, #b1695a);
+}
+
+.buttonDiv {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loggedInAs {
+  margin: 0px;
+  padding: 12px;
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  transform: translateX(320px);
+  color: #e3bb88;
+  font-size: 12px;
+}
+
+.registrationMsg {
+  margin: 0px;
+}
+
+.login {
+  z-index: 999;
+  position: relative;
+  background-color: #db9864;
+  top: 48px;
+  margin: auto;
+  box-shadow: 2px 2px 2px #644749, -1px -1px 2px #e3bb88;
+  border-radius: 4px;
+  padding: 8px;
+  width: 288px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+.login p {
+  margin: 0px;
+  margin-left: 2px;
+}
+
+.login .userName {
+  margin-left: 2px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.login input {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+  padding: 2px;
+  padding-top: 4px;
+  padding-left: 4px;
+  flex-shrink: 1;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e3bb88;
+  border: none;
+  box-shadow: 0px 2px 4px #b1695a inset;
+  width: 100%;
+}
+
+.login h2 {
+  text-align: left;
+  margin-left: 0px;
+  font-size: 36px;
+}
+
+.login button {
+  margin-top: 8px;
+  margin-left: 0px;
+  margin-right: 8px;
+}
+
+.login .buttonDiv {
+  width: 100%;
+}
+
+#instructionsDiv {
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+
+#instructions {
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#gameCanvas {
   position: relative;
   background-color: #222;
+  width: 640px;
+  height: 360px;
+  display: block;
+  background: url("/img/bg1.PNG");
+}
+
+.splashImage {
+  /*
+  background-image: url("/img/splash.png");
+  */
+}
+
+#display {
+  height: 96px;
+  min-height: 96px;
+}
+
+#gameInfo {
+  height: 96px;
+  width: 640px;
+  position: absolute;
+  top: 220px;
+  z-index: 786;
+}
+
+#gameInfo h2 {
+  color: #db9864;
+  margin-bottom: 0px;
+}
+
+#gameInfo .buttonDiv {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+#info {
+  margin-top: 0px;
+}
+
+.tutorialInfo p {
+  margin-top: 0px;
+}
+.tutorialInfo h4 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.tutorialInfo {
+  min-height: 128px;
+}
+
+#exampleInput {
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#exampleInput p {
+  text-align: center;
+  margin-top: 0px;
+}
+#exampleInput h4 {
+  text-align: center;
+  margin-top: 0px;
+}
+
+#exampleInput input {
+  margin: auto;
+  margin-top: 0px;
 }
 
 #playerInput {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
   box-sizing: border-box;
   margin: auto;
   display: flex;
@@ -51,11 +312,9 @@ canvas {
   align-items: center;
   padding: 8px;
   z-index: 999;
-  position: absolute;
+  position: relative;
+  top: 8px;
   width: 320px;
-  top: 104px;
-  left: 50%;
-  transform: translateX(-50%);
   background-color: #db9864;
   box-shadow: 1px 2px 2px #b1695a;
 }
@@ -78,10 +337,396 @@ canvas {
   box-shadow: 0px 2px 4px #b1695a inset;
 }
 
+#playerInput #feedback {
+  margin: 8px;
+  margin-top: 0px;
+}
+
+#playerInput .good {
+  background-color: #e3bb88;
+}
+
+#playerInput .wrong {
+  background-color: #b1695a;
+}
+
+#gameStats {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 8px;
+  z-index: 999;
+  position: relative;
+  top: 8px;
+  width: 320px;
+  background-color: #db9864;
+  box-shadow: 1px 2px 2px #b1695a;
+}
+
+#gameStats div {
+  width: 100%;
+}
+
+#gameStats p, h3 {
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+/* Header elements */
+
 #svgLogo {
   width: 420px;
   position: absolute;
   top: 16px;
   left: 50%;
   transform: translateX(-340px);
+  cursor: pointer;
 }
+
+#musicControls {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+  background-color: #db9864;
+  background: linear-gradient(#db9864, #b1695a);
+  box-sizing: border-box;
+  padding: 8px;
+  width: 224px;
+  position: absolute;
+  top: 32px;
+  right: 50%;
+  transform: translateX(320px);
+  z-index: -1;
+}
+
+#musicControls button {
+  font-size: 14px;
+  height: 48px;
+  padding-top: 4px;
+  padding-bottom: 20px;
+  margin-left: 2px;
+  margin-right: 6px;
+}
+
+/* Misc. Animation */
+
+.shake {
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+/* Character sprites */
+
+/* Portrait sprites */
+
+.dialogBox {
+  width: 640px;
+  height: 96px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.dialogBox p {
+  width: 480px;
+}
+
+.portraitContainer {
+  flex-grow: 0;
+  box-sizing: border-box;
+  width: 72px;
+  height: 72px;
+  padding: 4px;
+  background-color: #db9864;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  margin-right: 4px;
+}
+
+.bossPortrait {
+  box-sizing: border-box;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+  background: url("/img/zett-talk.png");
+}
+
+/* UI Sprites */
+
+#alephaHealthbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  height: 16px;
+  background: url("/img/ui_sprites_heart.png") repeat-x top left;
+  transition: width 0.5s ease;
+}
+
+#gatorBar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 16px;
+  background: url("/img/ui_sprites_heart.png") repeat-x center right;
+  transition: width 0.5s ease;
+}
+
+#bossBar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 16px;
+  background: url("/img/ui_sprites_heart.png") repeat-x bottom right;
+  transition: width 0.5s ease;
+}
+
+.fiveHearts {
+  width: 80px;
+}
+
+.fourHearts {
+  width: 64px;
+}
+
+.threeHearts {
+  width: 48px;
+}
+
+.twoHearts {
+  width: 32px;
+}
+
+.oneHearts {
+  width: 16px;
+}
+
+.noHearts {
+  width: 0px;
+}
+
+/* Alepha */
+
+.alepha {
+  position: absolute;
+  top: 144px;
+  left: 96px;
+  width: 128px;
+  height: 128px;
+  background-image: url("/img/alepha_idle_final.png");
+}
+
+.alephaIdle {
+  animation: alephaIdle steps(8) 0.64s infinite;
+}
+
+@keyframes alephaIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+
+/* Magic effects */
+
+#playerSpell {
+  position: absolute;
+  top: 192px;
+  left: 172px;
+}
+
+#bossSpell {
+  position: absolute;
+  top: 168px;
+  right: 180px;
+}
+
+.glow {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("/img/spell-sprites-alpha.png");
+}
+
+.noCharge {
+  animation: noCharge steps(4) 0.32s infinite;
+}
+
+@keyframes noCharge {
+  from {background-position: 0px -32px;}
+  to {background-position: -128px -32px;}
+}
+
+.oneCharge {
+  animation: oneCharge steps(4) 0.32s infinite;
+}
+
+@keyframes oneCharge {
+  from {background-position: 0px -64px;}
+  to {background-position: -128px -64px;}
+}
+
+.twoCharge {
+  animation: twoCharge steps(4) 0.32s infinite;
+}
+
+@keyframes twoCharge {
+  from {background-position: 0px -96px;}
+  to {background-position: -128px -96px;}
+}
+
+.threeCharge {
+  animation: threeCharge steps(4) 0.32s infinite;
+}
+
+@keyframes threeCharge {
+  from {background-position: 0px -128px;}
+  to {background-position: -128px -128px;}
+}
+
+.fourCharge {
+  animation: fourCharge steps(4) 0.32s infinite;
+}
+
+@keyframes fourCharge {
+  from {background-position: 0px -160px;}
+  to {background-position: -128px -160px;}
+}
+
+.fiveCharge {
+  animation: fiveCharge steps(4) 0.32s infinite;
+}
+
+@keyframes fiveCharge {
+  from {background-position: 0px -192px;}
+  to {background-position: -128px -192px;}
+}
+
+.swipe {
+  background-image: url("/img/swipe.png");
+  animation: swipe steps(4) 0.16s infinite;
+}
+
+@keyframes swipe {
+  from {background-position: 0px 0px;}
+  to {background-position: 0px -256px;}
+}
+
+.beam {
+  position: absolute;
+  z-index: 999;
+  top: 176px;
+  left: 184px;
+  width: 288px;
+  height: 64px;
+}
+
+.beamBlast {
+  background-image: url("/img/beam_placeholder.png");
+  animation: beamBlast steps(2) 0.1s infinite;
+}
+
+@keyframes beamBlast {
+  from {background-position: 0px 0px;}
+  to {background-position: 0px -128px;}
+}
+
+/* Alphagator */
+
+.alphagator {
+  position: absolute;
+  top: 144px;
+  right: 96px;
+  width: 128px;
+  height: 128px;
+  background-image: url("/img/gator-hit.png");
+}
+ /*
+.gatorIdle {
+  animation: gatorIdle steps(8) 0.64s infinite;
+}
+
+@keyframes gatorIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+*/
+
+.gatorHit {
+  animation: gatorHit steps(4) 0.32s 1;
+}
+
+@keyframes gatorHit {
+  from {background-position: 0px 0px;}
+  to {background-position: -512px 0px;}
+}
+
+.gatorDie {
+  /*Debug*/
+  display: none;
+}
+
+/* Lord Zett */
+
+.lordZett {
+  position: absolute;
+  top: 144px;
+  right: 96px;
+  width: 128px;
+  height: 128px;
+  background-image: url("/img/zett_idle_final.png");
+}
+
+.zettIdle {
+  animation: zettIdle steps(8) 0.64s infinite;
+}
+
+@keyframes zettIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+
+/* MODAL */
+modal {
+  /*display: none;*/
+}
+modal .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+modal .modal .modal-body {
+  padding: 20px;
+  background: #fff;
+  margin: 40px;
+}
+
+modal .modal .modal-body h1 {
+    display: block;
+  }
+

@@ -1,8 +1,33 @@
-<div id="playerInput">
-  <h4 class="targetWord">{{ wordsDataset.newWords[1].prompt }}</h4>
-  <p>{{ test }}</p>
-  <input ng-model="test" type="text" name="spellWord">
+<div id="display">
+  <div ng-show="showBossText" class="dialogBox">
+    <p>{{bossMessage}}</p>
+    <div class="portraitContainer">
+      <div class="bossPortrait"></div>
+    </div>
+  </div>
+  <div ng-hide="showBossText">
+    <p id="info">Spell the word in the box to charge your spell!</p>
+    <h4 class="hint">HINT: {{ wordsDataset.newWords[wordsDataset.currentWord].hint }}</h4>
+  </div>
+
+
+  <!-- <p ng-show="showLevel">You made it to lvl: {{wordsDataset.lvl}}</p> -->
 </div>
-<p>Spell the word in the box to charge your spell!</p>
-<h4 class="hint">HINT: {{ wordsDataset.newWords[1].hint }}</h4>
-<p>When you know something is true.</p>
+<div id="gameCanvas" ng-class="[shakeCanvas, levelBackground]">
+  <div id="playerInput" ng-hide="hidePlayerInput">
+    <h4 class="targetWord">{{ wordsDataset.newWords[wordsDataset.currentWord].prompt }}</h4>
+    <p id="timer">Time Remaining: {{ minutes }}:{{ zero }}{{ seconds }}</p>
+    <input focus-me="focusOnInput" ng-model="test" ng-class="feedback" type="text" name="spellWord" ng-paste="preventPaste($event)" ng-change="compare()" placeholder="Spell the word!">
+  </div>
+  <div id="alephaHealthbar" ng-class="[playerHealth, playerHealthShake]"></div>
+  <div id="gatorBar" ng-class="enemyHealth" ng-show="isGator"></div>
+  <div id="bossBar" ng-class="enemyHealth" ng-show="isBoss"></div>
+  <div class="glow" id="playerSpell" ng-class="chargeLevel"></div>
+  <div class="alepha" ng-class="playerAnimState"></div>
+  <div class="alphagator" ng-class="enemyAnimState" ng-show="isGator"></div>
+  <div class="glow noCharge" id="bossSpell" ng-show="isBoss"></div>
+  <div class="lordZett" ng-class="bossAnimState" ng-show="isBoss"></div>
+  <div class="swipe beam" ng-show="showSwipe"></div>
+  <div class="beam beamBlast" ng-show="showBeam"></div>
+</div>
+<p class="loggedInAs">Hello, {{ user }}</p>
