@@ -90,6 +90,8 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
       .state('leaderboard', LeaderboardCtrlState)
+      .state('gamecharts', GameChartsCtrlState);
+
 
     $urlRouterProvider.otherwise('/');
   })
@@ -125,6 +127,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(RegistrationCtrlName, RegistrationCtrl)
   .controller(UserProfileCtrlName, UserProfileCtrl)
   .controller(LeaderboardCtrlName, LeaderboardCtrl)
+  .controller(GameChartsCtrlName, GameChartsCtrl)
 
 
 

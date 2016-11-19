@@ -3,36 +3,34 @@ const template = require('./gameCharts.html');
 export const GameChartsCtrlName = 'GameChartsCtrl';
 
 export const GameChartsCtrlState = {
-  url: '/game-charts',
+  url: '/gamecharts',
   template,
   controller: GameChartsCtrlName,
-  controllerAs: 'gameCharts',
+  controllerAs: 'gamecharts',
 };
 
 export const GameChartsCtrl = [
   '$scope',
   '$state',
   '$rootScope',
-  'UserProfileServices',
-  'TimerService',
   'GameChartsServices',
 
-  class DefaultCtrl {
-    constructor($scope,
+  class GameChartsCtrl {
+    constructor(
+      $scope,
       $state,
       $rootScope,
-      UserProfileServices,
-      TimerService,
       GameChartsServices ) {
-      TimerService.resetGame();
+      // TimerService.resetGame();
 
       $scope.GameChartsServices = GameChartsServices;
 
-      if($rootScope.user === 'Guest'){
-        $state.go('splash');
-      }
 
-      // GameChartsServices.userDataQuery();
+      $scope.data = GameChartsServices.getUserStats()
+
+      console.log('$scope.data', $scope.data)
+
+
 
     }
 

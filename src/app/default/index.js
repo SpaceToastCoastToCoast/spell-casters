@@ -66,6 +66,12 @@ export const DefaultCtrl = [
         $state.go('userProfile')
       }
 
+      $scope.goToGameCharts = () => {
+        $state.go('gamecharts')
+      }
+
+
+
     }
   }
 ]
