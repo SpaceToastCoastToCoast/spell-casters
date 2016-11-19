@@ -11,6 +11,13 @@
   <a ui-sref="splash"><img src="/img/spellcasters_titletext.svg" id="svgLogo"></a>
 
   <div id="musicControls" class="buttonDiv">
-    <button id="settings" ng-click="goToSettings()">⚙</button>
+    <div id='musicSettings'>
+      <button ng-click="turnOnMusic()" ng-show="!music">Music 🔊</button>
+      <button ng-click="turnOffMusic()" ng-show="music">Music 🔇</button>
+    </div>
+    <div id='soundEffectSettings'>
+      <button ng-click="turnOnSoundEffects()" ng-show="!sound">Effects 🔊</button>
+      <button ng-click="turnOffSoundEffects()" ng-show="sound">Effects 🔇</button>
+    </div>
   </div>
 </main>
