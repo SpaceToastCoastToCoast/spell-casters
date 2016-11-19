@@ -6,17 +6,23 @@ class GraphStatsServices {
   constructor($http, $rootScope){
     this.$http = $http;
     this.$rootScope = $rootScope;
-    this.recentPercentComplete = [];
   }
 
-  setCurrentData(dataSet){
+  setCurrentData(recentGames, allstats){
 
-    //Set data for graphData
-    for(let x = 0; x<dataSet.length; x++){
-      this.recentPercentComplete.push(dataSet[x].percentCompleted);
+    //Set data for graphs
+    let recentPercentComplete = [];
+    let totalWords = [];
+
+    for(let x = 0; x<recentGames.length; x++){
+      recentPercentComplete.push(recentGames[x].percentCompleted);
     }
 
-    return this.graphData(this.recentPercentComplete);
+    for(let x = 0; x<allstats.length; x++){
+      totalWords.push(allstats[x].totalWordsCompleted);
+    }
+
+    return this.graphData(recentPercentComplete);
   }
 
   graphData(recentPercentComplete){
