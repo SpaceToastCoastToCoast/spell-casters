@@ -6,13 +6,18 @@ class GraphStatsServices {
   constructor($http, $rootScope){
     this.$http = $http;
     this.$rootScope = $rootScope;
-
-
-
+    this.recentPercentComplete = [];
   }
 
+  setCurrentData(dataSet){
 
+    //Set data for graphData
+    for(let x = 0; x<dataSet.length; x++){
+      this.recentPercentComplete.push(dataSet[x].percentCompleted);
+    }
 
+    return this.graphData(this.recentPercentComplete);
+  }
 
   graphData(recentPercentComplete){
 
@@ -67,6 +72,10 @@ class GraphStatsServices {
       .attr("class", "y axis")
       .call(yAxis);
     }
+  }
+
+  totalWordsGraph(){
+
   }
 }];
 
