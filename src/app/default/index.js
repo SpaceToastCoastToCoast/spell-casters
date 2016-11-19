@@ -21,6 +21,7 @@ export const DefaultCtrl = [
   'LocalStorageService',
   'TimerService',
   'SoundService',
+  'ModalService',
 
   class DefaultCtrl {
     constructor(
@@ -30,7 +31,8 @@ export const DefaultCtrl = [
       $rootScope,
       LocalStorageService,
       TimerService,
-      SoundService) {
+      SoundService,
+      ModalService) {
 
       TimerService.resetGame();
 
