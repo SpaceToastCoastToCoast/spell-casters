@@ -87,13 +87,13 @@ export const LoginCtrl = [
       this.userData.password = $scope.password;
       UserServices.getUsers(this.userData)
         .success(response =>{
-          console.log('response', response);
+          //console.log('response', response);
           $rootScope.user = response.username;
           $rootScope.visible = true;
           LocalStorageService.setData('user', {userId: response.userid, userName: response.username});
         })
         .then(()=> {
-          console.log('what is in the localStorage', LocalStorageService.getData('user'));
+          //console.log('what is in the localStorage', LocalStorageService.getData('user'));
         })
     };
     $scope.errorMessage = $stateParams.errorMessage;

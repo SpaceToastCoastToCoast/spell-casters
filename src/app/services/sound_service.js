@@ -21,23 +21,23 @@ export const SoundService = [
       if (this.currentSong) {
         this.currentSong.pause();
       }
-      if (this.musicOn) { //only set and play music if musicOn is true
-        this.currentSong = new Howl({
-          src: [songPath],
-          autoplay: true,
-          loop: true
-        })
+      this.currentSong = new Howl({
+        src: [songPath],
+        loop: true
+      })
+      if (this.musicOn) { //only play music if user has music on in settings
+        this.currentSong.play();
       }
     }
 
     turnMusicOff() {
       this.musicOn = false;
-      this.setCurrentSong();
+      this.currentSong.pause();
     }
 
-    turnMusicOn(songpath) {
+    turnMusicOn() {
       this.musicOn = true;
-      this.setCurrentSong(songPath);
+      this.currentSong.play();
     }
 
 
@@ -48,8 +48,10 @@ export const SoundService = [
         }
         this.currentSound = new Howl({
           src: [soundPath],
-          autoplay: true
         })
+        if (this.soundEffectsOn) {
+          this.currentSound.play();
+        }
       }
     }
   }

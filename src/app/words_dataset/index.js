@@ -114,9 +114,9 @@ class WordsDatasetCtrl {
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
       if ($scope.isBoss) {
-        $rootScope.playSoundEffect(zettSpell);
+        SoundService.playSoundEffect(zettSpell);
       } else {
-        $rootScope.playSoundEffect(incorrectSpell)
+        SoundService.playSoundEffect(incorrectSpell)
       }
       if (this.hearts <= 0) {
         TimerService.saveTime((30 - $scope.timer),$scope.lvl)
@@ -146,7 +146,7 @@ class WordsDatasetCtrl {
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
       $scope.shakeCanvas = "shake";
-      $rootScope.playSoundEffect(alephaSpell)
+      SoundService.playSoundEffect(alephaSpell)
       $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"; $scope.enemyAnimState = "gatorIdle";}, 500)
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
@@ -326,7 +326,7 @@ class WordsDatasetCtrl {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
         $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
-        $rootScope.playSoundEffect(correctSpell)
+        SoundService.playSoundEffect(correctSpell)
         if($scope.spellsCast >= 5) {
           TimerService.resetTimer();
           $scope.giveDamage($scope.spellsCast);

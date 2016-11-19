@@ -21,6 +21,10 @@ import { UserProfileServices } from './userProfile/user_profile_service';
 import { GraphStatsServices } from './userProfile/graph_stats_service';
 import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
 import { LeaderboardService } from './leaderboard/leaderboard_service';
+import { SettingsCtrlState, SettingsCtrlName, SettingsCtrl } from './settings';
+import { modal } from './directives/modal_directive';
+import { ModalService } from './services/modal_service';
+import { LogoutService } from './services/logout_service';
 import '../style/app.css';
 const mainSong = require('../public/music/Main.ogg');
 
@@ -33,15 +37,11 @@ let app = () => {
 };
 
 export const AppCtrl = [
-  '$scope', '$rootScope',
+  '$scope', '$rootScope', '$state',
   class AppCtrl {
-    constructor($scope, $rootScope) {
-
-      $scope.playMusic = () => {
-        $rootScope.currentSong.play();
-      }
-      $scope.pauseMusic = () => {
-        $rootScope.currentSong.pause();
+    constructor($scope, $rootScope, $state) {
+      $scope.goToSettings = () => {
+        $state.go('settings');
       }
     }
   }
@@ -63,12 +63,14 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
       .state('leaderboard', LeaderboardCtrlState)
+      .state('settings', SettingsCtrlState)
 
 
     $urlRouterProvider.otherwise('/');
   })
   .directive('app', app)
   .directive('focusMe', focusMe)
+  .directive('modal', modal)
   .constant('numberToString', numberToString)
   .service('WordsService', WordsService)
   .service('TimerService', TimerService)
@@ -80,10 +82,11 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
   .service('SoundService', SoundService)
+  .service('ModalService', ModalService)
+  .service('LogoutService', LogoutService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope, SoundService) => {
     $rootScope.user = "Guest";
-
     SoundService.setCurrentSong(mainSong);
   })
   .controller(DefaultCtrlName, DefaultCtrl)
@@ -95,7 +98,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(LoginCtrlName, LoginCtrl)
   .controller(RegistrationCtrlName, RegistrationCtrl)
   .controller(UserProfileCtrlName, UserProfileCtrl)
-  .controller(LeaderboardCtrlName, LeaderboardCtrl);
+  .controller(LeaderboardCtrlName, LeaderboardCtrl)
+  .controller(SettingsCtrlName, SettingsCtrl);
 
 
 export default MODULE_NAME;

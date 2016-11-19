@@ -31,6 +31,7 @@ export const DefaultCtrl = [
       LocalStorageService,
       TimerService,
       SoundService) {
+
       TimerService.resetGame();
 
       if(SoundService.currentSong === undefined) {
@@ -55,17 +56,14 @@ export const DefaultCtrl = [
         $state.go('login')
       }
 
-      $scope.LogOut = () => {
-        LocalStorageService.resetData('user');
-        $rootScope.user = 'Guest';
-        $rootScope.visible = false;
-        $state.go('splash')
+      $scope.goLogOut = () => {
+        ModalService.openModal('logout')
       };
 
       $scope.goToUserProfile = () => {
-        console.log('food: ');
         $state.go('userProfile')
       }
+
     }
   }
 ]
