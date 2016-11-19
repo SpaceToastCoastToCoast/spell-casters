@@ -26,32 +26,34 @@ class GraphStatsServices {
 
   graphData(foo){
 
-    var margin = {top: 30, right: 20, bottom: 30, left: 50},
-      width = 600 - margin.left - margin.right,
-      height = 270 - margin.top - margin.bottom;
-    // Parse the date / time
-    var parseDate = d3.time.format("%d-%b-%y").parse;
 
-    // Set the ranges
-    var y = d3.time.scale().range([0, width]);
-    var x = d3.scale.linear().range([height, 0]);
+    // Parse the date / time
+    // var parseDate = d3.time.format("%d-%b-%y").parse;
+
+
 
 
     if(foo){
       // var p = d3.select(".totalGamesPlayed").selectAll("p")
 
+      var margin = {top: 30, right: 20, bottom: 30, left: 50},
+      width = 600 - margin.left - margin.right,
+      height = 270 - margin.top - margin.bottom;
+      // Set the ranges
+      var y = d3.time.scale().range([0, width]);
+      var x = d3.scale.linear().range([height, 0]);
 
       // Define the axes
-      var xAxis = d3.svg.axis().scale(x)
-          .orient("bottom").ticks(5);
+      var xAxis = d3.svg.axis().scale(y)
+          .orient("bottom").ticks(10);
 
-      var yAxis = d3.svg.axis().scale(y)
-          .orient("right").ticks(5);
+      var yAxis = d3.svg.axis().scale(x)
+          .orient("right").ticks(10);
 
       // Define the line
       var valueline = d3.svg.line()
         .y(function(d) {return  x(d)})
-        .x(function(d, i) { return y(i); });
+        .x(function(d, i) { return y(i)});
 
 
       // Adds the svg canvas
