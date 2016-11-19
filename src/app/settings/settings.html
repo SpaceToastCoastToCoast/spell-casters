@@ -1,0 +1,16 @@
+<div>
+  <div class="buttonDiv">
+    <div id='musicSettings'>
+      Music
+      <button ng-click="turnOnMusic()" ng-show="!music">🔊</button>
+      <button ng-click="turnOffMusic()" ng-show="music">🔇</button>
+    </div>
+    <div id='soundEffectSettings'>
+      Sound Effects
+      <button ng-click="turnOnSoundEffects()" ng-show="!sound">🔊</button>
+      <button ng-click="turnOffSoundEffects()" ng-show="sound">🔇</button>
+    </div>
+    <button ng-click="goToSplash()">Back</button>
+  </div>
+  <p class="loggedInAs">Hello, {{ user }}</p>
+</div>
