@@ -12,9 +12,21 @@ export const InstructionsCtrlState = {
 };
 
 export const InstructionsCtrl = [
-'$scope', '$state', '$rootScope',
+'$scope',
+'$state',
+'$rootScope',
+'TimerService',
+'SoundService',
+
 class InstructionsCtrl {
-  constructor($scope,$state,$rootScope) {
+  constructor(
+    $scope,
+    $state,
+    $rootScope,
+    TimerService,
+    SoundService) {
+    TimerService.resetGame();
+
     this.testWords = [
       {
       "word": "a lot",
@@ -37,8 +49,8 @@ class InstructionsCtrl {
     $scope.input = "";
     $scope.feedback = 'good';
 
-    if ($rootScope.currentSong._src !== mainSong) {
-      $rootScope.setCurrentSong(mainSong);
+    if (SoundService.currentSong._src !== mainSong) {
+      SoundService.setCurrentSong(mainSong);
     }
     //disable pasting into textbox
     $scope.preventPaste = (e) => {

@@ -11,12 +11,23 @@ export const AboutCtrlState = {
 };
 
 export const AboutCtrl = [
-  '$scope','$state','$rootScope',
+  '$scope',
+  '$state',
+  '$rootScope',
+  'TimerService',
+  'SoundService',
 
   class AboutCtrl {
-    constructor($scope,$state,$rootScope) {
-      if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
+    constructor(
+      $scope,
+      $state,
+      $rootScope,
+      TimerService,
+      SoundService) {
+      TimerService.resetGame();
+
+      if (SoundService.currentSong._src !== mainSong) {
+        SoundService.setCurrentSong(mainSong);
       }
       $scope.goToInstructions = () => {
         $state.go('instructions')

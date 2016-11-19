@@ -27,6 +27,7 @@ export const WordsDatasetCtrl = [
 '$state',
 '$interval',
 '$timeout',
+'SoundService',
 class WordsDatasetCtrl {
   constructor(
     WordsService,
@@ -36,19 +37,20 @@ class WordsDatasetCtrl {
     $rootScope,
     $state,
     $interval,
-    $timeout) {
+    $timeout,
+    SoundService) {
 
     //Init variables
     this.newWords = [];
     this.currentWord = 0;
-    $scope.lvl = 1;
+    // $scope.lvl = 1;
     this.misspelledWords = '';
 
     //set current song to short theme
-    $rootScope.setCurrentSong(shortTheme);
+    SoundService.setCurrentSong(shortTheme);
 
     //debug
-    //$scope.lvl = 3;
+    $scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
@@ -112,16 +114,26 @@ class WordsDatasetCtrl {
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
       if ($scope.isBoss) {
-        $rootScope.playSoundEffect(zettSpell);
+        SoundService.playSoundEffect(zettSpell);
       } else {
-        $rootScope.playSoundEffect(incorrectSpell)
+        SoundService.playSoundEffect(incorrectSpell)
       }
       if (this.hearts <= 0) {
         TimerService.saveTime((30 - $scope.timer),$scope.lvl)
-        WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times);
-        TimerService.killTimer();
-        $scope.resetGame();
-        $state.go('game-over')
+        if ($rootScope.user !== 'Guest') {
+          WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
+          .then(_ => {
+            TimerService.killTimer();
+            $scope.resetGame();
+            $state.go('game-over')
+          })
+        } else {
+          $rootScope.totalWordsCompleted = WordsService.calculateTotalWordsCompleted($scope.lvl,this.currentWord)
+          $rootScope.percentCompleted = WordsService.calculatePercentCompleted($rootScope.totalWordsCompleted)
+          $rootScope.totalTimeElapsed = WordsService.calculateTotalTime(TimerService.times);
+          $rootScope.misspelledWords = this.misspelledWords.substring(0,this.misspelledWords.length-2)
+          $state.go('game-over');
+        }
       } else {
         $scope.playerHealthShake = "shake";
         $timeout(() => {
@@ -134,7 +146,7 @@ class WordsDatasetCtrl {
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
       $scope.shakeCanvas = "shake";
-      $rootScope.playSoundEffect(alephaSpell)
+      SoundService.playSoundEffect(alephaSpell)
       $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"; $scope.enemyAnimState = "gatorIdle";}, 500)
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
@@ -164,6 +176,7 @@ class WordsDatasetCtrl {
       this.newWords = WordsService.getWords($scope.lvl);
     })
 
+
     //start timer on load
     TimerService.startTimer();
 
@@ -180,8 +193,8 @@ class WordsDatasetCtrl {
       $scope.bossMessage = "I should congratulate you, young sorceror, for having lasted this long against my Alphagators. But I shall personally see to it that your journey ends here.";
       $scope.showBossText = true;
       //set boss music
-      if ($rootScope.currentSong._src !== bossTheme) {
-        $rootScope.setCurrentSong(bossTheme);
+      if (SoundService.currentSong._src !== bossTheme) {
+        SoundService.setCurrentSong(bossTheme);
       }
 
       $timeout(() => {
@@ -219,10 +232,11 @@ class WordsDatasetCtrl {
     //Change game logic for each level
     const increaseLvl = () => {
       $scope.lvl++;
-      TimerService.saveTime((30 - $scope.timer),$scope.lvl)
-      TimerService.resetTimer();
+
       if ($scope.lvl <= 4) {
         this.newWords = WordsService.getWords($scope.lvl);
+        TimerService.saveTime((30 - $scope.timer),$scope.lvl)
+        TimerService.resetTimer();
       }
       this.currentWord = 0;
       this.hearts = maxHearts;
@@ -232,8 +246,18 @@ class WordsDatasetCtrl {
       }
       if ($scope.lvl === 5) {
         TimerService.killTimer();
-        WordsService.postStatistics(5,0,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
-        $state.go('won');
+        if ($rootScope.user !== 'Guest') {
+          WordsService.postStatistics($scope.lvl,0,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
+            .then(_ => {
+              $state.go('won');
+            })
+        } else {
+          $rootScope.totalWordsCompleted = WordsService.calculateTotalWordsCompleted(5,0)
+          $rootScope.percentCompleted = WordsService.calculatePercentCompleted($rootScope.totalWordsCompleted)
+          $rootScope.totalTimeElapsed = WordsService.calculateTotalTime(TimerService.times);
+          $rootScope.misspelledWords = this.misspelledWords.substring(0,this.misspelledWords.length-2)
+          $state.go('won');
+        }
         $scope.showLevel = false;
       }
     }
@@ -302,7 +326,7 @@ class WordsDatasetCtrl {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
         $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
-        $rootScope.playSoundEffect(correctSpell)
+        SoundService.playSoundEffect(correctSpell)
         if($scope.spellsCast >= 5) {
           TimerService.resetTimer();
           $scope.giveDamage($scope.spellsCast);

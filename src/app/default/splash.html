@@ -4,8 +4,9 @@
     <button ng-click="goToInstructions()">Instructions</button>
     <button ng-click="goToActiveGame()">Start</button>
     <button ng-click="goToAbout()">About</button>
+    <button ng-click="goToLeaderboard()">Leaderboard</button>
     <button ng-Show="!visible" ng-click="goToLogIn()">Log In</button>
-    <button ng-Show="visible" ng-click="LogOut()">Log Out</button>
+    <button ng-Show="visible" ng-click="goLogOut()">Log Out</button>
   </div>
 </div>
 <div class="musicPlayer">
@@ -18,3 +19,16 @@
   <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
 
 </div>
+
+<modal ng-show="view" id="logout">
+    <div class="modal">
+        <div class="modal-body">
+            <h3>Are you sure you want to Logout?</h3>
+            <p></p>
+            <button ng-click="closeModal('logout');">Cancel</button>
+            <button ng-click="closeModal('logout');">Logout</button>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>
+

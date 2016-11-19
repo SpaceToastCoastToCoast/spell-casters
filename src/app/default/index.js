@@ -14,14 +14,32 @@ export const DefaultCtrlState = {
 };
 
 export const DefaultCtrl = [
-  '$scope','$state','$stateParams','$rootScope','LocalStorageService',
+  '$scope',
+  '$state',
+  '$stateParams',
+  '$rootScope',
+  'LocalStorageService',
+  'TimerService',
+  'SoundService',
+  'ModalService',
 
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,$rootScope,LocalStorageService) {
-      if($rootScope.currentSong === undefined) {
-        $rootScope.setCurrentSong(mainSong);
-      } else if ($rootScope.currentSong._src !== mainSong) {
-        $rootScope.setCurrentSong(mainSong);
+    constructor(
+      $scope,
+      $state,
+      $stateParams,
+      $rootScope,
+      LocalStorageService,
+      TimerService,
+      SoundService,
+      ModalService) {
+
+      TimerService.resetGame();
+
+      if(SoundService.currentSong === undefined) {
+        SoundService.setCurrentSong(mainSong);
+      } else if (SoundService.currentSong._src !== mainSong) {
+        SoundService.setCurrentSong(mainSong);
       }
 
       $scope.goToInstructions = () => {
@@ -33,21 +51,21 @@ export const DefaultCtrl = [
       $scope.goToAbout = () => {
         $state.go('about');
       };
+      $scope.goToLeaderboard = () => {
+        $state.go('leaderboard')
+      };
       $scope.goToLogIn = () => {
         $state.go('login')
       }
 
-      $scope.LogOut = () => {
-        LocalStorageService.resetData('user');
-        $rootScope.user = 'Guest';
-        $rootScope.visible = false;
-        $state.go('splash')
+      $scope.goLogOut = () => {
+        ModalService.openModal('logout')
       };
 
       $scope.goToUserProfile = () => {
-        console.log('food: ');
         $state.go('userProfile')
       }
+
     }
   }
 ]
