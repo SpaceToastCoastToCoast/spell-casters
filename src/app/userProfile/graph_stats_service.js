@@ -11,6 +11,19 @@ class GraphStatsServices {
 
   }
 
+  c3Chart(percentComplete){
+    console.log('percentComplete: ', percentComplete);
+    var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+        columns: [
+            ['data1', 30, 200, 100, 400, 150, 250],
+            [percentComplete]
+        ]
+    }
+    });
+  }
+
   graphData(foo){
 
     var margin = {top: 30, right: 20, bottom: 30, left: 50},
@@ -23,20 +36,28 @@ class GraphStatsServices {
     var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
 
-    // Define the axes
-    var xAxis = d3.svg.axis().scale(x)
-        .orient("bottom").ticks(5);
+    // // Define the axes
+    // var xAxis = d3.svg.axis().scale(x)
+    //     .orient("bottom").ticks(5);
 
-    var yAxis = d3.svg.axis().scale(y)
-        .orient("left").ticks(5);
+    // var yAxis = d3.svg.axis().scale(y)
+    //     .orient("left").ticks(5);
     if(foo){
       // var p = d3.select(".totalGamesPlayed").selectAll("p")
+      // Define the axes
+      var xAxis = d3.svg.axis().scale(y)
+          .orient("bottom").ticks(5);
 
+      var yAxis = d3.svg.axis().scale(x)
+          .orient("left").ticks(5);
 
       // Define the line
       var valueline = d3.svg.line()
         .y(function(d) {return  x(d)})
         .x(function(d, i) { return y(i); });
+
+        console.log('x: ', x);
+        console.log('y: ', y);
 
       // Adds the svg canvas
       var svg = d3.select(".totalGamesPlayed")
@@ -46,8 +67,8 @@ class GraphStatsServices {
         .append("g")
             .attr("transform",
                   "translate(" + margin.left + "," + margin.top + ")");
-      y.domain(d3.extent(foo, function(d) { return d; }));
-      x.domain([0, d3.max(foo, function(d, i) { return i; })]);
+      x.domain(d3.extent(foo, function(d) { return d; }));
+      y.domain([0, d3.max(foo, function(d, i) { return i; })]);
 
       // Add the valueline path.
       svg.append("path")

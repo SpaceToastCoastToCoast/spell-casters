@@ -3,9 +3,9 @@
     <h2>Log In</h2>
     <h5 class="userName">You are logged in as {{ user }}.</h5>
     <p>Username</p>
-    <input value='John' ng-model='userName' type="text" name="User name">
+    <input ng-model='userName' type="text" name="User name">
     <p>Password</p>
-    <input value='password' ng-model='password' type="password" name="Password" placeholder="Type your password">
+    <input ng-model='password' type="password" name="Password" placeholder="Type your password">
     <div class="buttonDiv">
       <button ng-click='checkCredentials()'>Login</button>
       <button ng-click='goToRegistration()'>Register</button>

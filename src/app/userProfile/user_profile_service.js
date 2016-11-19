@@ -143,8 +143,6 @@ class UserProfileServices {
 
         let percentArrLatestGames = [];
 
-        console.log('response.recentGames: ', response.recentGames);
-        console.log('response.recentGames: ', response.recentGames[0]);
 
         let recentGamesSimplified = response.recentGames[0];
 
@@ -152,9 +150,9 @@ class UserProfileServices {
           this.recentPercentComplete.push(recentGamesSimplified[x].percentCompleted);
         }
 
-        console.log('this.recentPercentComplete: ', this.recentPercentComplete);
         //call the graph function in graph_stats_service to update the value
         this.GraphStatsServices.graphData(this.recentPercentComplete);
+        this.GraphStatsServices.c3Chart(this.recentPercentComplete);
     });
   }
 }];

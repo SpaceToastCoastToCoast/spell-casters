@@ -17,7 +17,7 @@ export const UserProfileCtrl = [
     constructor($scope, $state, $rootScope, UserProfileServices, GraphStatsServices, TimerService) {
       TimerService.resetGame();
 
-
+      GraphStatsServices.c3Chart();
       $scope.state = $state;
       $scope.UserProfileServices = UserProfileServices;
       UserProfileServices.userDataQuery();
