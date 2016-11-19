@@ -15,11 +15,13 @@ import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { UserServices, LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
 import { LocalStorageService } from './services/localStorage_service';
+import { SoundService } from './services/sound_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import { GraphStatsServices } from './userProfile/graph_stats_service';
 import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
 import { LeaderboardService } from './leaderboard/leaderboard_service';
+import { SettingsCtrlState, SettingsCtrlName, SettingsCtrl } from './settings';
 import { modal } from './directives/modal_directive';
 import { ModalService } from './services/modal_service';
 import { LogoutService } from './services/logout_service';
@@ -37,15 +39,11 @@ let app = () => {
 };
 
 export const AppCtrl = [
-  '$scope', '$rootScope',
+  '$scope', '$rootScope', '$state',
   class AppCtrl {
-    constructor($scope, $rootScope) {
-
-      $scope.playMusic = () => {
-        $rootScope.currentSong.play();
-      }
-      $scope.pauseMusic = () => {
-        $rootScope.currentSong.pause();
+    constructor($scope, $rootScope, $state) {
+      $scope.goToSettings = () => {
+        $state.go('settings');
       }
     }
   }
@@ -67,6 +65,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
       .state('leaderboard', LeaderboardCtrlState)
+      .state('settings', SettingsCtrlState)
       .state('game-charts', GameChartsCtrlState)
 
 
@@ -85,34 +84,13 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
+  .service('SoundService', SoundService)
   .service('ModalService', ModalService)
   .service('LogoutService', LogoutService)
   .controller('AppCtrl', AppCtrl)
-  .run(($rootScope) => {
+  .run(($rootScope, SoundService) => {
     $rootScope.user = "Guest";
-    $rootScope.playSoundEffect = (soundPath) => {
-      if($rootScope.currentSound) {
-        $rootScope.currentSound.pause();
-      }
-      $rootScope.currentSound = new Howl({
-        src: [soundPath],
-        autoplay: true
-      })
-    }
-    $rootScope.currentSong = new Howl({
-      src: [mainSong]
-    })
-    $rootScope.setCurrentSong = (songPath) => {
-      if ($rootScope.currentSong) {
-        $rootScope.currentSong.pause();
-      }
-      $rootScope.currentSong = new Howl({
-        src: [songPath],
-        // autoplay: true,
-        loop: true
-      })
-    }
-
+    SoundService.setCurrentSong(mainSong);
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
@@ -123,8 +101,11 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(LoginCtrlName, LoginCtrl)
   .controller(RegistrationCtrlName, RegistrationCtrl)
   .controller(UserProfileCtrlName, UserProfileCtrl)
-  .controller(LeaderboardCtrlName, LeaderboardCtrl);
-  .controller(GameChartsCtrlName, GameChartsCtrl);
+  .controller(LeaderboardCtrlName, LeaderboardCtrl)
+  .controller(LeaderboardCtrlName, LeaderboardCtrl)
+  .controller(SettingsCtrlName, SettingsCtrl)
+  .controller(GameChartsCtrlName, GameChartsCtrl)
+
 
 
 export default MODULE_NAME;

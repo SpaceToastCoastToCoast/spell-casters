@@ -27,6 +27,7 @@ export const WordsDatasetCtrl = [
 '$state',
 '$interval',
 '$timeout',
+'SoundService',
 class WordsDatasetCtrl {
   constructor(
     WordsService,
@@ -36,7 +37,8 @@ class WordsDatasetCtrl {
     $rootScope,
     $state,
     $interval,
-    $timeout) {
+    $timeout,
+    SoundService) {
 
     //Init variables
     this.newWords = [];
@@ -45,7 +47,7 @@ class WordsDatasetCtrl {
     this.misspelledWords = '';
 
     //set current song to short theme
-    $rootScope.setCurrentSong(shortTheme);
+    SoundService.setCurrentSong(shortTheme);
 
     //debug
     $scope.lvl = 3;
@@ -112,9 +114,9 @@ class WordsDatasetCtrl {
       this.hearts--;
       $scope.playerHealth = `${numberToString[this.hearts]}Hearts`;
       if ($scope.isBoss) {
-        $rootScope.playSoundEffect(zettSpell);
+        SoundService.playSoundEffect(zettSpell);
       } else {
-        $rootScope.playSoundEffect(incorrectSpell)
+        SoundService.playSoundEffect(incorrectSpell)
       }
       if (this.hearts <= 0) {
         TimerService.saveTime((30 - $scope.timer),$scope.lvl)
@@ -144,7 +146,7 @@ class WordsDatasetCtrl {
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
       $scope.shakeCanvas = "shake";
-      $rootScope.playSoundEffect(alephaSpell)
+      SoundService.playSoundEffect(alephaSpell)
       $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"; $scope.enemyAnimState = "gatorIdle";}, 500)
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
@@ -191,8 +193,8 @@ class WordsDatasetCtrl {
       $scope.bossMessage = "I should congratulate you, young sorceror, for having lasted this long against my Alphagators. But I shall personally see to it that your journey ends here.";
       $scope.showBossText = true;
       //set boss music
-      if ($rootScope.currentSong._src !== bossTheme) {
-        $rootScope.setCurrentSong(bossTheme);
+      if (SoundService.currentSong._src !== bossTheme) {
+        SoundService.setCurrentSong(bossTheme);
       }
 
       $timeout(() => {
@@ -324,7 +326,7 @@ class WordsDatasetCtrl {
         //successful spell, enemy takes damage
         $scope.spellsCast++;
         $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
-        $rootScope.playSoundEffect(correctSpell)
+        SoundService.playSoundEffect(correctSpell)
         if($scope.spellsCast >= 5) {
           TimerService.resetTimer();
           $scope.giveDamage($scope.spellsCast);
