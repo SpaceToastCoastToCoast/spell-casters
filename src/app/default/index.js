@@ -14,10 +14,10 @@ export const DefaultCtrlState = {
 };
 
 export const DefaultCtrl = [
-  '$scope','$state','$stateParams','$rootScope','LocalStorageService', 'TimerService',
+  '$scope','$state','$stateParams','$rootScope','ModalService', 'TimerService',
 
   class DefaultCtrl {
-    constructor($scope,$state,$stateParams,$rootScope,LocalStorageService, TimerService) {
+    constructor($scope,$state,$stateParams,$rootScope,ModalService, TimerService) {
       TimerService.resetGame();
 
       if($rootScope.currentSong === undefined) {
@@ -42,17 +42,14 @@ export const DefaultCtrl = [
         $state.go('login')
       }
 
-      $scope.LogOut = () => {
-        LocalStorageService.resetData('user');
-        $rootScope.user = 'Guest';
-        $rootScope.visible = false;
-        $state.go('splash')
+      $scope.goLogOut = () => {
+        ModalService.openModal('logout')
       };
 
       $scope.goToUserProfile = () => {
-        console.log('food: ');
         $state.go('userProfile')
       }
+
     }
   }
 ]
