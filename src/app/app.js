@@ -23,6 +23,7 @@ import { LeaderboardService } from './leaderboard/leaderboard_service';
 import { modal } from './directives/modal_directive';
 import { ModalService } from './services/modal_service';
 import { LogoutService } from './services/logout_service';
+import { GameChartsCtrlState, GameChartsCtrlName, GameChartsCtrl } from './gameCharts';
 
 import '../style/app.css';
 const mainSong = require('../public/music/Main.ogg');
@@ -66,6 +67,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
       .state('leaderboard', LeaderboardCtrlState)
+      .state('game-charts', GameChartsCtrlState)
 
 
     $urlRouterProvider.otherwise('/');
@@ -122,6 +124,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(RegistrationCtrlName, RegistrationCtrl)
   .controller(UserProfileCtrlName, UserProfileCtrl)
   .controller(LeaderboardCtrlName, LeaderboardCtrl);
+  .controller(GameChartsCtrlName, GameChartsCtrl);
 
 
 export default MODULE_NAME;

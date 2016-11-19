@@ -31,7 +31,7 @@ class UserProfileServices {
       url: `/api/game-stats/${this.$rootScope.user}`,
     };
     return this.$http(req).success(response => {
-
+        console.log('response.stats', response.stats)
         //HighestPercentCompleted
         let percentArr = [];
 
