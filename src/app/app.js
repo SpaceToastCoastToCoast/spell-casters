@@ -88,6 +88,13 @@ angular.module(MODULE_NAME, ['ui.router'])
   .run(($rootScope, SoundService) => {
     $rootScope.user = "Guest";
     SoundService.setCurrentSong(mainSong);
+    $rootScope.$on('$stateChangeSuccess',function(event,to,toParams,from,fromParams) {
+      if (from.name) {
+        $rootScope.$previousState = from.name;
+      } else {
+        $rootScope.$previousState = 'splash';
+      }
+    })
   })
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)

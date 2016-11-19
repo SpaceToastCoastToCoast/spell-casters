@@ -27,10 +27,6 @@ export const SettingsCtrl = [
       //should be able to pause game to go to settings and shut off music
       TimerService.resetGame();
 
-      // if ($rootScope.currentSong._src !== mainSong) {
-      //   $rootScope.setCurrentSong(mainSong);
-      // }
-
       $scope.music = SoundService.musicOn
       $scope.sound = SoundService.soundEffectsOn;
 
@@ -53,8 +49,8 @@ export const SettingsCtrl = [
         $scope.sound = false;
       }
 
-      $scope.goToSplash = () => {
-        $state.go('splash')
+      $scope.goBack = () => {
+        $state.go($rootScope.$previousState);
       }
     }
   }
