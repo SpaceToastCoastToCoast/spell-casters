@@ -116,6 +116,10 @@ angular.module(MODULE_NAME, ['ui.router'])
         event.preventDefault();
         $state.go('splash')
       }
+      if (toState.name === 'userProfile' && $rootScope.user === 'Guest') {
+        event.preventDefault();
+        $state.go('splash')
+      }
       return;
     })
     SoundService.setCurrentSong(mainSong);
