@@ -42,6 +42,9 @@ export const WonCtrl = [
       $scope.goToLeaderboard = () => {
         $state.go('leaderboard')
       }
+      $scope.goToUserProfile = () => {
+        $state.go('userProfile')
+      }
 
       if($rootScope.user !== 'Guest') {
         UserStatsService.getLatestStats()
