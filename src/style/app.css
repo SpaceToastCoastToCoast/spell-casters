@@ -789,6 +789,7 @@ $darkest-color: #222222;*/
 /* MODAL */
 modal {
   /*display: none;*/
+
 }
 modal .modal {
   position: fixed;
@@ -796,15 +797,24 @@ modal .modal {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 modal .modal .modal-body {
+  background-color: #e3bb88;
+  box-shadow: 2px 8px 8px #222222;
   padding: 20px;
-  background: #fff;
-  margin: 40px;
+  width: 720px;
+  margin: auto;
+  margin-top: 216px;
 }
 
-modal .modal .modal-body h1 {
+modal .modal .modal-body h3 {
     display: block;
+    margin: auto;
+    text-align: center;
   }
 
+modal .modal .modal-body .buttonDiv {
+  margin: auto;
+  width: 360px;
+}
