@@ -57,12 +57,14 @@ export const WonCtrl = [
           $scope.totalWordsCompleted = response.data.stats[response.data.stats.length-1].totalWordsCompleted
           $scope.percentCompleted = Math.round(response.data.stats[response.data.stats.length-1].percentCompleted * 100) + '%'
           $scope.misspelledWords = response.data.stats[response.data.stats.length-1].misspelledWords.join(', ');
+          $scope.score = response.data.stats[response.data.stats.length-1].score;
         })
       } else {
         $scope.username = $rootScope.user;
         $scope.totalTime = $rootScope.totalTimeElapsed + ' seconds'
         $scope.totalWordsCompleted = $rootScope.totalWordsCompleted;
         $scope.percentCompleted = Math.round($rootScope.percentCompleted*100) + '%';
+        $scope.score = $rootScope.score
       }
     }
   }
