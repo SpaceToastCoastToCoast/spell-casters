@@ -17,6 +17,8 @@ import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from '.
 import { LocalStorageService } from './services/localStorage_service';
 import { SoundService } from './services/sound_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
+import { HttpServices } from './userProfile/http_service';
+import { StatisticServices } from './userProfile/statistic_service';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import { GraphStatsServices } from './userProfile/graph_stats_service';
 import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
@@ -86,7 +88,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('login', LoginCtrlState)
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
-      .state('leaderboard', LeaderboardCtrlState)
+      .state('leaderboard', LeaderboardCtrlState);
 
     $urlRouterProvider.otherwise('/');
   })
@@ -98,6 +100,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('TimerService', TimerService)
   .service('UserServices', UserServices)
   .service('UserStatsService', UserStatsService)
+  .service('HttpServices', HttpServices)
+  .service('StatisticServices', StatisticServices)
   .service('UserProfileServices', UserProfileServices)
   .service('GraphStatsServices', GraphStatsServices)
   .service('RegistrationServices', RegistrationServices)

@@ -102,16 +102,8 @@ var g = svg.append("g")
 
 if (totalWords) {
 
-  x.domain(totalWords.map(function(d, i) {
-
-    console.log('i.freq: ', i);
-    return i;
-  }));
-  y.domain([0, d3.max(totalWords, function(d) {
-
-    console.log('d.totalWords: ', d);
-    return d;
-  })]);
+  x.domain(totalWords.map(function(d, i) { return i; }));
+  y.domain([0, d3.max(totalWords, function(d) { return d; })]);
 
   g.append("g")
     .attr("class", "axis axis--x")
@@ -132,24 +124,10 @@ if (totalWords) {
     .data(totalWords)
     .enter().append("rect")
     .attr("class", "bar")
-    .attr("x", function(d, i) {
-      //54
-      console.log('i: ', i);
-      console.log('x(i): ', x(i));
-      return x(i);
-    })
-    .attr("y", function(d) {
-
-      console.log('d: ', d);
-      console.log('y(d): ', y(d));
-      return y(d);
-    })
+    .attr("x", function(d, i) { return x(i); })
+    .attr("y", function(d) { return y(d); })
     .attr("width", x.bandwidth())
-    .attr("height", function(d) {
-
-      console.log('heigh - y(d): ', height + y(d));
-      return height - y(d);
-    });
+    .attr("height", function(d) { return height - y(d); });
 }
   }
 }];

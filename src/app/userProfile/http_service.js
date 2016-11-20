@@ -1,24 +1,26 @@
-// import { StatisticServcies } from './statistic_service';
+import { StatisticServices } from './statistic_service';
 
 export const HttpServices = [
 
-'$http', '$rootScope',
+'$http', '$rootScope', 'StatisticServices',
 
   class HttpServices {
-    constructor ($http, $rootScope) {
+    constructor ($http, $rootScope, StatisticServices) {
       this.$http = $http;
       this.$rootScope = $rootScope;
-      this.userDataQuery = this.userDataQuery.bind(this);
+      this.userDataQueryzz = this.userDataQueryzz.bind(this);
+      this.StatisticServices = StatisticServices;
     }
 
-    userDataQuery(){
+    userDataQueryzz(){
       const req ={
         method: 'GET',
         url: `/api/game-stats/${this.$rootScope.user}`,
       };
       return this.$http(req).success(response => {
         console.log('response.stats: ', response.stats);
-        console.log('reponse.recentGames: ', reponse.recentGames);
+        console.log('response.recentGames: ', response.recentGames);
+        this.StatisticServices.gameSummary(response.stats);
       });
     }
   }
