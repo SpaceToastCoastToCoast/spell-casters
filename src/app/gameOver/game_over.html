@@ -9,9 +9,10 @@
       <p id="misspelledWords" class="stats">Misspelled Words: {{misspelledWords}}</p>
       <div class="buttonDiv">
         <button ng-click="goToSplash()">Home</button>
+        <button ng-click="goToLeaderboard()">Leaderboard</button>
         <button ng-click="goToActiveGame()">Try Again</button>
       </div>
     </div>
   </div>
-  <p class="loggedInAs">Hello, {{ user }}</p>
+  <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
 </div>

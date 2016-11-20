@@ -43,14 +43,15 @@ class WordsDatasetCtrl {
     //Init variables
     this.newWords = [];
     this.currentWord = 0;
-    // $scope.lvl = 1;
+    $scope.lvl = 1;
     this.misspelledWords = '';
+    $rootScope.canNavToGameOver = false;
 
     //set current song to short theme
     SoundService.setCurrentSong(shortTheme);
 
     //debug
-    $scope.lvl = 3;
+    // $scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
@@ -125,6 +126,7 @@ class WordsDatasetCtrl {
           .then(_ => {
             TimerService.killTimer();
             $scope.resetGame();
+            $rootScope.canNavToGameOver = true;
             $state.go('game-over')
           })
         } else {
@@ -132,6 +134,7 @@ class WordsDatasetCtrl {
           $rootScope.percentCompleted = WordsService.calculatePercentCompleted($rootScope.totalWordsCompleted)
           $rootScope.totalTimeElapsed = WordsService.calculateTotalTime(TimerService.times);
           $rootScope.misspelledWords = this.misspelledWords.substring(0,this.misspelledWords.length-2)
+          $rootScope.canNavToGameOver = true;
           $state.go('game-over');
         }
       } else {
@@ -249,6 +252,7 @@ class WordsDatasetCtrl {
         if ($rootScope.user !== 'Guest') {
           WordsService.postStatistics($scope.lvl,0,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
             .then(_ => {
+              $rootScope.canNavToGameOver = true;
               $state.go('won');
             })
         } else {
@@ -256,6 +260,7 @@ class WordsDatasetCtrl {
           $rootScope.percentCompleted = WordsService.calculatePercentCompleted($rootScope.totalWordsCompleted)
           $rootScope.totalTimeElapsed = WordsService.calculateTotalTime(TimerService.times);
           $rootScope.misspelledWords = this.misspelledWords.substring(0,this.misspelledWords.length-2)
+          $rootScope.canNavToGameOver = true;
           $state.go('won');
         }
         $scope.showLevel = false;

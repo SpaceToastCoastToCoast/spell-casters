@@ -27,6 +27,7 @@ export const WonCtrl = [
       TimerService,
       SoundService) {
       TimerService.resetGame();
+      $rootScope.canNavToGameOver = false;
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
@@ -38,18 +39,24 @@ export const WonCtrl = [
       $scope.goToActiveGame = () => {
         $state.go('active-game')
       }
+      $scope.goToLeaderboard = () => {
+        $state.go('leaderboard')
+      }
+      $scope.goToUserProfile = () => {
+        $state.go('userProfile')
+      }
 
       if($rootScope.user !== 'Guest') {
         UserStatsService.getLatestStats()
         .then(response => {
           $scope.username = $rootScope.user;
-          $scope.totalTime = response.data.stats[0].timeElapsed.reduce((sum,next) => {
+          $scope.totalTime = response.data.stats[response.data.stats.length-1].timeElapsed.reduce((sum,next) => {
             sum += next;
             return sum;
           },0) + ' seconds'
-          $scope.totalWordsCompleted = response.data.stats[0].totalWordsCompleted
-          $scope.percentCompleted = Math.round(response.data.stats[0].percentCompleted * 100) + '%'
-          $scope.misspelledWords = response.data.stats[0].misspelledWords.join(', ');
+          $scope.totalWordsCompleted = response.data.stats[response.data.stats.length-1].totalWordsCompleted
+          $scope.percentCompleted = Math.round(response.data.stats[response.data.stats.length-1].percentCompleted * 100) + '%'
+          $scope.misspelledWords = response.data.stats[response.data.stats.length-1].misspelledWords.join(', ');
         })
       } else {
         $scope.username = $rootScope.user;
