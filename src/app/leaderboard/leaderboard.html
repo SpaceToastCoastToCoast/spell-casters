@@ -3,16 +3,16 @@
   <div id="gameCanvas">
     <div id="gameStats">
       <div id="leaderboard">
-        <p>#1 {{firstUsername}} {{firstScore}}</p>
-        <p>#2 {{secondUsername}} {{secondScore}}</p>
-        <p>#3 {{thirdUsername}} {{thirdScore}}</p>
-        <p>#4 {{fourthUsername}} {{fourthScore}}</p>
-        <p>#5 {{fifthUsername}} {{fifthScore}}</p>
+        <div class="highScore firstPlace"><h3>#1</h3><p>{{firstUsername}}</p><h3>{{firstScore}}</h3></div>
+        <div class="highScore secondPlace"><h3>#2</h3><p>{{secondUsername}}</p><h3>{{secondScore}}</h3></div>
+        <div class="highScore thirdPlace"><h3>#3</h3><p>{{thirdUsername}}</p><h3>{{thirdScore}}</h3></div>
+        <div class="highScore fourthPlace"><h3>#4</h3><p>{{fourthUsername}}</p><h3>{{fourthScore}}</h3></div>
+        <div class="highScore fifthPlace"><h3>#5</h3><p>{{fifthUsername}}</p><h3>{{fifthScore}}</h3></div>
       </div>
-      <div class="buttonDiv">
+      <div class="buttonDiv" id="singleButton">
         <button ng-click="goToSplash()">Home</button>
       </div>
     </div>
   </div>
-  <p class="loggedInAs">Hello, {{ user }}</p>
+  <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
 </div>

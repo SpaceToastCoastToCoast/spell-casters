@@ -17,6 +17,7 @@ export const InstructionsCtrl = [
 '$rootScope',
 'TimerService',
 'SoundService',
+'$timeout',
 
 class InstructionsCtrl {
   constructor(
@@ -24,30 +25,35 @@ class InstructionsCtrl {
     $state,
     $rootScope,
     TimerService,
-    SoundService) {
+    SoundService,
+    $timeout) {
     TimerService.resetGame();
 
     this.testWords = [
-      {
-      "word": "a lot",
-      "prompt": "A__OT",
-      "hint": "When you have many of something, you have..."
-    },
     {
       "word": "accommodate",
       "prompt": "AC______ATE",
       "hint": "When you go out of your way to make someone comfortable."
+    },
+      {
+      "word": "a lot",
+      "prompt": "A__OT",
+      "hint": "When you have many of something, you have..."
     }
     ];
     this.currentWord = 0;
 
-    $scope.start = true;
+    $scope.base = true;
     $scope.example = false;
     $scope.finished = false;
     $scope.finishedMessage = false;
     $scope.focusOnInput = false;
+    $scope.showHint = false;
+    $scope.tutorialText = true;
+    $scope.showPlayerInput = false;
     $scope.input = "";
     $scope.feedback = 'good';
+    $scope.correct = true;
 
     if (SoundService.currentSong._src !== mainSong) {
       SoundService.setCurrentSong(mainSong);
@@ -59,16 +65,23 @@ class InstructionsCtrl {
     }
 
     $scope.startTutorial = () => {
+      $scope.base = false;
       $scope.example = true;
-      $scope.start = false;
       $scope.focusOnInput = true;
+      $timeout(() => {
+        $scope.showHint = true;
+        $scope.tutorialText = false;
+        $scope.showTargetWord = true;
+      },7000);
     }
 
     $scope.compare = () => {
       if(this.testWords[this.currentWord].word.toLowerCase().includes($scope.input.toLowerCase())) {
-        $scope.feedback = 'good'
+        $scope.feedback = 'good';
+        $scope.correct = true
       } else {
         $scope.feedback = 'wrong'
+        $scope.correct = false;
       }
       if (this.testWords[this.currentWord].word.toLowerCase() === $scope.input.toLowerCase()) {
         $scope.input = "";
@@ -82,8 +95,12 @@ class InstructionsCtrl {
     $scope.back = () => {
       $state.go('splash')
     }
+    $scope.goToUserProfile = () => {
+      $state.go('userProfile')
+    }
 
     $scope.finished = () => {
+      $scope.base = false;
       $scope.example = false;
       $scope.finishedMessage = true;
     }

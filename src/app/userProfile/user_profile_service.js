@@ -141,17 +141,17 @@ class UserProfileServices {
           }
         }
 
+        //Data for latest games played
         let percentArrLatestGames = [];
 
-
         let recentGamesSimplified = response.recentGames[0];
+
 
         for(let x = 0; x<response.stats.length; x++){
           this.recentPercentComplete.push(recentGamesSimplified[x].percentCompleted);
         }
 
-        //call the graph function in graph_stats_service to update the value
-        this.GraphStatsServices.graphData(this.recentPercentComplete);
+        this.GraphStatsServices.setCurrentData(response.recentGames[0], response.stats);
 
     });
   }

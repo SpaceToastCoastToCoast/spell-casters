@@ -38,6 +38,9 @@ export const AboutCtrl = [
       $scope.goToSplash = () => {
         $state.go('splash')
       }
+      $scope.goToUserProfile = () => {
+        $state.go('userProfile')
+      }
     }
   }
 ]

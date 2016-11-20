@@ -1,7 +1,7 @@
 <div>
   <h2>The Team</h2>
   <div>
-    Alan
+    Alan has been making pixel art for almost ten years and is the chief concept artist, background artist, UI/UX designer and sprite artist for SpellCasters. The look and feel of the game and site are his creation.
   </div>
   <div>
     BB
@@ -14,12 +14,12 @@
     For Spellcasters, Renee created the soundtrack, integrated music and sound effects, and assisted with game logic. She also created the APIs for the spells database, individual user statistics, and leaderboard statistics.
   </div>
   <div>
-    Megan
+    Megan is a professional animator who provided additional concept art as well as roughs for the motion design of SpellCasters' character animations.
   </div>
   <div class="buttonDiv">
     <button ng-click="goToSplash()">Back</button>
     <button ng-click="goToActiveGame()">Start</button>
     <button ng-click="goToInstructions()">Tutorial</button>
   </div>
-  <p class="loggedInAs">Hello, {{ user }}</p>
+  <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
 </div>
