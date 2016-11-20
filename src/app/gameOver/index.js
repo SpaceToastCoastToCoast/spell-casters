@@ -28,6 +28,7 @@ export const GameOverCtrl = [
       TimerService,
       SoundService) {
       TimerService.resetGame();
+      $rootScope.canNavToGameOver = false;
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
@@ -41,6 +42,9 @@ export const GameOverCtrl = [
       }
       $scope.goToLeaderboard = () => {
         $state.go('leaderboard')
+      }
+      $scope.goToUserProfile = () => {
+        $state.go('userProfile')
       }
 
       if ($rootScope.user !== 'Guest') {

@@ -95,6 +95,9 @@ class InstructionsCtrl {
     $scope.back = () => {
       $state.go('splash')
     }
+    $scope.goToUserProfile = () => {
+      $state.go('userProfile')
+    }
 
     $scope.finished = () => {
       $scope.base = false;

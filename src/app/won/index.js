@@ -27,6 +27,7 @@ export const WonCtrl = [
       TimerService,
       SoundService) {
       TimerService.resetGame();
+      $rootScope.canNavToGameOver = false;
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
@@ -40,6 +41,9 @@ export const WonCtrl = [
       }
       $scope.goToLeaderboard = () => {
         $state.go('leaderboard')
+      }
+      $scope.goToUserProfile = () => {
+        $state.go('userProfile')
       }
 
       if($rootScope.user !== 'Guest') {
