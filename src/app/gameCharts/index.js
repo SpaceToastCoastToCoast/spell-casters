@@ -26,9 +26,7 @@ export const GameChartsCtrl = [
       $scope.GameChartsServices = GameChartsServices;
 
 
-      $scope.data = GameChartsServices.getUserStats()
-
-      console.log('$scope.data', $scope.data)
+      $scope.data = GameChartsServices.userDataQuery()
 
 
 

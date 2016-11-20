@@ -31,8 +31,10 @@ class GraphStatsServices {
       var xAxis = d3.svg.axis().scale(x)
         .orient("bottom").ticks(5);
 
-      var yAxis = d3.svg.axis().scale(y)
-        .orient("left").ticks(5);
+      var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(5)
 
       // Define the line
       var valueline = d3.svg.line()
@@ -54,7 +56,10 @@ class GraphStatsServices {
      // Add the valueline path.
      svg.append("path")
       .attr("class", "line")
-      .attr("d", valueline(recentPercentComplete));
+      .attr("d", valueline(recentPercentComplete))
+      .style('stroke-width', '3')
+      .style('stroke', '#feedba')
+
 
      // Add the X Axis
      svg.append("g")
@@ -63,10 +68,31 @@ class GraphStatsServices {
       .call(xAxis);
 
      // Add the Y Axis
-     svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
+      var gy = svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+      gy.selectAll('g').filter((d) => {
+        return d;
+      })
+        .classed('minor', true)
+
+      gy.selectAll('text')
+        .attr('x',-20)
+        .attr('y', 0)
+        .style('fill', '#cc33ff')
+
+      gy.selectAll('path')
+        .style('stroke', '#cc33ff')
+        .style('stroke-width', '2')
+
+
     }
+
+
+
+
+
   }
 }];
 
