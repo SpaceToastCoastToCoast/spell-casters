@@ -113,8 +113,21 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('LogoutService', LogoutService)
   .service('GameChartsServices', GameChartsServices)
   .controller('AppCtrl', AppCtrl)
-  .run(($rootScope, SoundService) => {
+  .run(($rootScope, SoundService,$state) => {
     $rootScope.user = "Guest";
+    $rootScope.canNavToGameOver = false;
+    $rootScope.$on('$stateChangeStart', function(event,toState,toParams,fromState,fromParams) {
+      if((toState.name === 'won' || toState.name === 'game-over')
+        && !$rootScope.canNavToGameOver) {
+        event.preventDefault();
+        $state.go('splash')
+      }
+      if (toState.name === 'userProfile' && $rootScope.user === 'Guest') {
+        event.preventDefault();
+        $state.go('splash')
+      }
+      return;
+    })
     SoundService.setCurrentSong(mainSong);
   })
   .controller(DefaultCtrlName, DefaultCtrl)

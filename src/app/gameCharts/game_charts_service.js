@@ -162,21 +162,6 @@ class GameChartsServices {
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return;
     });
 

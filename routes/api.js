@@ -141,6 +141,7 @@ app.post('/post-stats', (req,res) => {
       totalWordsCompleted: parseInt(req.body.totalWordsCompleted),
       misspelledWords: misspelledWordsArr,
       timeElapsed: timeElapsedArr,
+      score: parseInt(req.body.score),
       UserId: user.dataValues.id
     })
     .then(_ => {

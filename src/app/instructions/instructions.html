@@ -1,34 +1,37 @@
-<div ng-show="example">
-  <div class="tutorialInfo">
-    <h3>TUTORIAL</h3>
-    <p class="tutorial">Some letters from the word you must spell are provided below. Type the entire word in the input box.</p>
-    <p class="tutorial">Use the hint below to figure out which word to spell</p>
-    <h4 class="hint">HINT: {{ instructions.testWords[instructions.currentWord].hint }}</h4>
-  </div>
-</div>
-<div id="gameCanvas">
-  <div id="playerInput">
-    <div ng-show="start" id="instructionsDiv">
-      <p id="instructions">
-        Instructions: Defeat Lord Zett and the Alphagators by casting spells! Read the hint and the prompt in order to figure out what word you must spell. You have a total of 5 lives and a time limit on each level.  Each time you make a mistake, you will lose a life. Click START to begin the tutorial or BACK to return to the home page
-      </p>
+<h2>Instructions</h2>
+  <div ng-show="base" id="instructionsDiv">
+    <div id="gameCanvas">
+    <div id="playerInput">
+      <p>Defeat Lord Zett and the Alphagators by casting spells as Alepha, a Spellcaster in training!</p>
+      <p>Click START to begin the tutorial or BACK to return to the home page</p>
       <div class="buttonDiv">
         <button ng-click="startTutorial()">START</button>
         <button ng-click="back()">BACK</button>
       </div>
-
     </div>
-    <div ng-show="example" id="exampleInput">
-      <h4 class="targetWord">{{ instructions.testWords[instructions.currentWord].prompt }}</h4>
-      <p id="feedback">{{ feedback }}</p>
-      <input focus-me="focusOnInput" ng-class="feedback" ng-model="input" type="text" name="spellWord" ng-paste="preventPaste($event)" ng-change="compare()" placeholder={{instructions.testWords[instructions.currentWord].word}} autofocus>
-    </div>
-    <div ng-show="finishedMessage">
-      <h4>You Have Completed the Tutorial!</h4>
-      <button ng-click="back()">BACK</button>
     </div>
   </div>
-  <div ng-show="example" id="playerSpell" class="glow noCharge"></div>
-  <div ng-show="example" class="alepha alephaIdle"></div>
+  <div ng-show="example" id="exampleInput">
+    <p class="tutorialText" ng-show="tutorialText">Use the hint to figure out which word to spell</p>
+    <h4 class="hint" ng-show="showHint">HINT: {{ instructions.testWords[instructions.currentWord].hint }}</h4>
+    <div id="gameCanvas">
+      <div id="playerInput">
+        <p class="tutorialText" ng-show="tutorialText">Use letters provided here to guess the correct word to spell</p>
+        <div ng-show="showTargetWord">
+          <h4 class="targetWord">{{ instructions.testWords[instructions.currentWord].prompt }}</h4>
+          <input focus-me="focusOnInput" ng-class="feedback" ng-model="input" type="text" name="spellWord" ng-paste="preventPaste($event)" ng-change="compare()" placeholder={{instructions.testWords[instructions.currentWord].word}} autofocus>
+        </div>
+        <h4 ng-show="!correct">
+          You are spelling the word wrong. Hit the delete key until the text box is no longer red
+        </h4>
+      </div>
+      <div id="playerSpell" class="glow noCharge"></div>
+      <div class="alepha alephaIdle"></div>
+    </div>
+  </div>
+  <div ng-show="finishedMessage">
+    <h4>You Have Completed the Tutorial!</h4>
+    <button ng-click="back()">BACK</button>
+  </div>
 </div>
-<p class="loggedInAs">Hello, {{ user }}</p>
+<a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
