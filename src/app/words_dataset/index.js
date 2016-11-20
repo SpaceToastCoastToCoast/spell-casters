@@ -305,12 +305,14 @@ class WordsDatasetCtrl {
 
       if(!$scope.isBoss) {
         //load a new enemy if this is not the boss
-        //$scope.enemyAnimState = "gatorDie";
+        TimerService.killTimer();
+        $scope.enemyAnimState = "gatorDie";
         $timeout(() => {
+          TimerService.resumeTimer();
           this.enemyHearts = maxHearts;
           $scope.enemyHealth = "fiveHearts";
           $scope.enemyAnimState = "gatorIdle";
-        }, 500);
+        }, 640);
       } else {
         //killed boss
         killBoss();

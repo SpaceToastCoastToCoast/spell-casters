@@ -146,12 +146,12 @@ class UserProfileServices {
 
         let recentGamesSimplified = response.recentGames[0];
 
-        console.log('response.recentGames[0]: ', response.recentGames[0]);
 
         for(let x = 0; x<response.stats.length; x++){
           this.recentPercentComplete.push(recentGamesSimplified[x].percentCompleted);
         }
-        this.GraphStatsServices.setCurrentData(response.recentGames[0]);
+
+        this.GraphStatsServices.setCurrentData(response.recentGames[0], response.stats);
 
     });
   }
