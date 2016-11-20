@@ -733,7 +733,7 @@ $darkest-color: #222222;*/
   right: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("/img/gator-hit.png");
+  background-image: url("/img/gator-hurt-die.png");
 }
  /*
 .gatorIdle {
@@ -756,8 +756,14 @@ $darkest-color: #222222;*/
 }
 
 .gatorDie {
-  /*Debug*/
-  display: none;
+  background-position: 0px -128px;
+  animation: gatorDie steps(9) 0.64s 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes gatorDie {
+  from {background-position: -128px -128px;}
+  to {background-position: -1280px -128px;}
 }
 
 /* Lord Zett */
