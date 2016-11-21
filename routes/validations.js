@@ -21,11 +21,11 @@ function fieldsFilled(req,res,next) {
 }
 
 function userExists(req,res,next) {
-  users.findAll({
+  users.findOne({
       where: {username: req.body.username}
     })
     .then((data) => {
-      if(data.length === 0){
+      if(data === null || data.length === 0){
         res.json({
           success: false,
           errorMessage: 'Invalid username'
@@ -58,7 +58,7 @@ function newUser(req,res,next) {
         if (data.length !== 0) {
           res.json({
             success: false,
-            errorMessage: `Username ${req.body.username} is already in use, please select another username`
+            errorMessage: `${req.body.username} is already in use, please select another username`
           });
         } else {
           users.create({
@@ -66,7 +66,7 @@ function newUser(req,res,next) {
             password: hash,
             role: 'student'
           })
-          .then(() => {
+          .then(_ => {
             users.findOne({
               where: {username: req.body.username}
             })
