@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const spells = db.Spell;
 const users = db.User;
 const gamestats = db.GameStat;
+const validate = require('./middleware');
 
 //DB call for Spells table
 app.get('/spells', (req, res) => {
@@ -38,45 +39,12 @@ app.get('/spells', (req, res) => {
 });
 
 //login route
-app.post('/login', (req,res) => {
-   if (req.body.username === '') {
-    res.json({
-      success: false,
-      errorMessage: 'Please enter a username, it was empty'
-    });
-  } else if (req.body.password === '') {
-      res.json({
-      success: false,
-      errorMessage: 'Please enter a password, it was empty'
-    });
-  } else {
-    users.findAll({
-      limit: 1,
-      where: {username: req.body.username}
-    })
-    .then((data) => {
-      if(data.length === 0){
-        res.json({
-          success: false,
-          errorMessage: 'Please enter a valid username'
-        });
-      } else {
-        let pwCheck = bcrypt.compareSync(req.body.password, data[0].dataValues.password);
-        if(!pwCheck) {
-          res.json({
-            success: false,
-            errorMessage: 'Please enter a valid password'
-          });
-        } else {
-          res.json({
-            success: true,
-            userid: data[0].dataValues.id,
-            username: data[0].dataValues.username
-          });
-        }
-      }
-    });
-  }
+app.post('/login', validate.loginFilled, validate.userExists, (req,res) => {
+  res.json({
+    success: req.body.validUser.success,
+    userid: req.body.validUser.userid,
+    username: req.body.validUser.username
+  })
 });
 
 //registration route
