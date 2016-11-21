@@ -2,11 +2,8 @@ const mainSong = require('../../public/music/Main.ogg');
 
 export const SoundService = [
 
-  '$rootScope',
-
   class SoundService {
-    constructor ($rootScope) {
-      this.$rootScope = $rootScope;
+    constructor () {
       this.setCurrentSong = this.setCurrentSong.bind(this);
       this.playSoundEffect = this.playSoundEffect.bind(this);
       this.currentSong;

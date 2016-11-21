@@ -37,7 +37,6 @@ let app = () => {
 
 export const AppCtrl = [
   '$scope',
-  '$rootScope',
   '$state',
   'SoundService',
 
