@@ -1,4 +1,3 @@
-
 const spellWords = {
   lvl1Words: null,
   lvl2Words: null,
@@ -6,13 +5,10 @@ const spellWords = {
   lvl4Words: null
 }
 
-const randomDatasetLength = 5;
-const secondsPerRound = 120;
-
 export const WordsService = [
-  '$http', '$q', '$rootScope',
+  '$http', '$q', '$rootScope', 'TimerService',
   class WordsService {
-    constructor ($http, $q, $rootScope) {
+    constructor ($http, $q, $rootScope, TimerService) {
       this.wordsData = [];
       this.bossSpells = {};
       this.baseSpells = {};
@@ -27,9 +23,11 @@ export const WordsService = [
       this.calculateTotalTime = this.calculateTotalTime.bind(this)
       this.calculatePercentCompleted = this.calculatePercentCompleted.bind(this)
       this.calculateTotalWordsCompleted = this.calculateTotalWordsCompleted.bind(this)
+      this.calculateScore = this.calculateScore.bind(this)
       this.totalWords = null;
       this.$rootScope = $rootScope;
       this.resetGame = this.resetGame.bind(this)
+      this.TimerService = TimerService;
     }
     resetGame() {
       this.wordsData = [];
@@ -54,7 +52,7 @@ export const WordsService = [
       })
     }
     getBossSpells() {
-      return this.bossSpells
+      return this.bossSpells;
     }
     getBaseSpells() {
       return this.baseSpells;
@@ -92,7 +90,8 @@ export const WordsService = [
           prompt: wordObj.prompt,
           hint: wordObj.hint
         }
-      })
+      });
+
       while(currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         --currentIndex;
@@ -117,8 +116,10 @@ export const WordsService = [
         timeElapsed += `${times[time]},`
       }
       timeElapsed = timeElapsed.substring(0,timeElapsed.length - 1);
+      const totalTime = this.calculateTotalTime(this.TimerService.times)
       const totalWordsCompleted = this.calculateTotalWordsCompleted(lvl, currentIndex);
       const percentCompleted = this.calculatePercentCompleted(totalWordsCompleted);
+      const score = this.calculateScore(percentCompleted, misspelledWords.length, totalTime)
 
       if (this.$rootScope.user !== 'Guest') {
         const req = {
@@ -127,11 +128,16 @@ export const WordsService = [
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          data: `percentCompleted=${percentCompleted}&totalWordsCompleted=${totalWordsCompleted}&misspelledWords=${misspelledWords}&timeElapsed=${timeElapsed}&username=${this.$rootScope.user}`
+          data: `percentCompleted=${percentCompleted}&totalWordsCompleted=${totalWordsCompleted}&misspelledWords=${misspelledWords.join(',')}&timeElapsed=${timeElapsed}&username=${this.$rootScope.user}&score=${score}`
         }
-        return this.$http(req)
+        return this.$http(req);
       } else {
-        return false;
+        return {
+          totalTime,
+          totalWordsCompleted,
+          percentCompleted,
+          score
+        }
       }
 
     }
@@ -166,6 +172,9 @@ export const WordsService = [
           return this.easy.length + this.medium.length + this.hard.length + this.boss.length;
           break;
       }
+    }
+    calculateScore(percentCompleted,misspelledWordsAmt,totalTime) {
+      return Math.round((percentCompleted * 200) - misspelledWordsAmt - (totalTime * 0.01))
     }
   }
 

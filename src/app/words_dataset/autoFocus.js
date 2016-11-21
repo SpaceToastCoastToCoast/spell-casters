@@ -9,8 +9,8 @@ export const focusMe = [
             element[0].focus();
             scope.trigger = false;
           }
-        })
+        });
       }
-    }
+    };
   }
 ]

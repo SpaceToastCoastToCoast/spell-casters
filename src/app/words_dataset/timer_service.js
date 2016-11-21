@@ -1,4 +1,3 @@
-
 const minuteLimit = 0.5;
 
 export const TimerService = [

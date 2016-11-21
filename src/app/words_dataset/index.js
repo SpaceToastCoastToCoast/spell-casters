@@ -43,15 +43,15 @@ class WordsDatasetCtrl {
     //Init variables
     this.newWords = [];
     this.currentWord = 0;
-    $scope.lvl = 1;
-    this.misspelledWords = '';
+    // $scope.lvl = 1;
+    this.misspelledWords = [];
     $rootScope.canNavToGameOver = false;
 
     //set current song to short theme
     SoundService.setCurrentSong(shortTheme);
 
     //debug
-    // $scope.lvl = 3;
+    $scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
@@ -70,7 +70,7 @@ class WordsDatasetCtrl {
       $scope.seconds = TimerService.seconds;
       $scope.zero = TimerService.zero;
       if ($scope.timer < 0) {
-        TimerService.saveTime(30,$scope.lvl);
+        TimerService.saveTime(30, $scope.lvl);
         if($scope.spellsCast === 0) {
           $scope.takeDamage();
         } else {
@@ -90,6 +90,7 @@ class WordsDatasetCtrl {
     $scope.showSwipe = false;
     $scope.hidePlayerInput = false;
     $scope.focusOnInput = true;
+    $scope.enemyIdleTimeout;
 
     //animation variables
     $scope.playerAnimState = "alephaIdle";
@@ -122,7 +123,7 @@ class WordsDatasetCtrl {
       if (this.hearts <= 0) {
         TimerService.saveTime((30 - $scope.timer),$scope.lvl)
         if ($rootScope.user !== 'Guest') {
-          WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
+          WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords,TimerService.times)
           .then(_ => {
             TimerService.killTimer();
             $scope.resetGame();
@@ -130,10 +131,16 @@ class WordsDatasetCtrl {
             $state.go('game-over')
           })
         } else {
-          $rootScope.totalWordsCompleted = WordsService.calculateTotalWordsCompleted($scope.lvl,this.currentWord)
-          $rootScope.percentCompleted = WordsService.calculatePercentCompleted($rootScope.totalWordsCompleted)
-          $rootScope.totalTimeElapsed = WordsService.calculateTotalTime(TimerService.times);
-          $rootScope.misspelledWords = this.misspelledWords.substring(0,this.misspelledWords.length-2)
+          const stats = WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords,TimerService.times)
+
+          $rootScope.totalWordsCompleted = stats.totalWordsCompleted
+          $rootScope.percentCompleted = stats.percentCompleted
+          $rootScope.totalTimeElapsed = stats.totalTime
+          $rootScope.score = stats.score
+
+          let misspelledWordsString = this.misspelledWords.join(', ')
+          misspelledWordsString.length - 2;
+          $rootScope.misspelledWords = misspelledWordsString
           $rootScope.canNavToGameOver = true;
           $state.go('game-over');
         }
@@ -149,8 +156,16 @@ class WordsDatasetCtrl {
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
       $scope.shakeCanvas = "shake";
-      SoundService.playSoundEffect(alephaSpell)
-      $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"; $scope.enemyAnimState = "gatorIdle";}, 500)
+      SoundService.playSoundEffect(alephaSpell);
+      $timeout(() => {
+        $scope.showBeam = false;
+        $scope.shakeCanvas = "noShake";
+      }, 300);
+
+      $scope.enemyIdleTimeout = $timeout(() => {
+        $scope.enemyAnimState = "gatorIdle";
+      }, 500);
+
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
         $scope.enemyAnimState = "gatorHit";
@@ -250,17 +265,24 @@ class WordsDatasetCtrl {
       if ($scope.lvl === 5) {
         TimerService.killTimer();
         if ($rootScope.user !== 'Guest') {
-          WordsService.postStatistics($scope.lvl,0,this.misspelledWords.substring(0,this.misspelledWords.length-2),TimerService.times)
+          WordsService.postStatistics($scope.lvl,0,this.misspelledWords,TimerService.times)
             .then(_ => {
               $rootScope.canNavToGameOver = true;
               $state.go('won');
             })
         } else {
-          $rootScope.totalWordsCompleted = WordsService.calculateTotalWordsCompleted(5,0)
-          $rootScope.percentCompleted = WordsService.calculatePercentCompleted($rootScope.totalWordsCompleted)
-          $rootScope.totalTimeElapsed = WordsService.calculateTotalTime(TimerService.times);
-          $rootScope.misspelledWords = this.misspelledWords.substring(0,this.misspelledWords.length-2)
+          const stats = WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords,TimerService.times)
+
+          $rootScope.totalWordsCompleted = stats.totalWordsCompleted
+          $rootScope.percentCompleted = stats.percentCompleted
+          $rootScope.totalTimeElapsed = stats.totalTime
+          $rootScope.score = stats.score
+
+          let misspelledWordsString = this.misspelledWords.join(', ')
+          misspelledWordsString.length - 2;
+          $rootScope.misspelledWords = misspelledWordsString
           $rootScope.canNavToGameOver = true;
+
           $state.go('won');
         }
         $scope.showLevel = false;
@@ -284,10 +306,11 @@ class WordsDatasetCtrl {
     }
 
     const killEnemy = () => {
+      $timeout.cancel($scope.enemyIdleTimeout);
       $scope.spellsCast = 0;
       $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
 
-      TimerService.saveTime((30-$scope.timer),$scope.lvl);
+      TimerService.saveTime((30 - $scope.timer), $scope.lvl);
       TimerService.resetTimer();
 
       if(!$scope.isBoss) {
@@ -299,7 +322,7 @@ class WordsDatasetCtrl {
           this.enemyHearts = maxHearts;
           $scope.enemyHealth = "fiveHearts";
           $scope.enemyAnimState = "gatorIdle";
-        }, 640);
+        }, 960);
       } else {
         //killed boss
         killBoss();
@@ -319,7 +342,7 @@ class WordsDatasetCtrl {
       $scope.test = "";
       $scope.feedback = 'good';
       $scope.showLevel = false;
-      this.misspelledWords = '';
+      this.misspelledWords = [];
     }
 
 
@@ -352,7 +375,7 @@ class WordsDatasetCtrl {
         $scope.feedback = 'good'
       } else if($scope.feedback === 'good') {
         if (this.misspelledWords.indexOf(this.newWords[this.currentWord].word.toLowerCase()) === -1) {
-          this.misspelledWords += `${this.newWords[this.currentWord].word.toLowerCase()}, `
+          this.misspelledWords.push(this.newWords[this.currentWord].word.toLowerCase())
         }
         //subtract hearts from healthbar
         $scope.takeDamage();
