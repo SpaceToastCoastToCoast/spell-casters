@@ -20,6 +20,7 @@ import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './us
 import { HttpServices } from './userProfile/http_service';
 import { StatisticServices } from './userProfile/statistic_service';
 import { HighPercentGraphServices } from './userProfile/highestPercentGraph_service';
+import { totalWordsGraphServices } from './userProfile/totalWordsGraph_service';
 import { UserProfileServices } from './userProfile/user_profile_service';
 import { GraphStatsServices } from './userProfile/graph_stats_service';
 import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
@@ -104,6 +105,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('HttpServices', HttpServices)
   .service('StatisticServices', StatisticServices)
   .service('HighPercentGraphServices', HighPercentGraphServices)
+  .service('totalWordsGraphServices', totalWordsGraphServices)
   .service('UserProfileServices', UserProfileServices)
   .service('GraphStatsServices', GraphStatsServices)
   .service('RegistrationServices', RegistrationServices)

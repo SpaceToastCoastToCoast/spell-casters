@@ -2,12 +2,10 @@ import { HttpServices } from './http_service';
 
 export const StatisticServices = [
 
-'$http', '$rootScope', '$q', 'HttpServices',
+ '$q', 'HttpServices',
 
   class StatisticServices {
-    constructor ($http, $rootScope, $q, HttpServices) {
-      this.$http = $http;
-      this.$rootScope = $rootScope;
+    constructor ($q, HttpServices) {
       this.$q = $q;
       this.getGameStatsData = this.getGameStatsData.bind(this);
       this.HttpServices = HttpServices;

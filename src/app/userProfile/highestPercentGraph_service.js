@@ -2,13 +2,12 @@ import { HttpServices } from './http_service';
 
 export const HighPercentGraphServices = [
 
-'$http', '$rootScope', 'HttpServices',
+ 'HttpServices', '$q',
 
   class HighPercentGraphServices {
-    constructor ($http, $rootScope, HttpServices) {
-      this.$http = $http;
-      this.$rootScope = $rootScope;
+    constructor (HttpServices, $q) {
       this.HttpServices = HttpServices;
+      this.$q = $q;
     }
 
     getGraphData(){

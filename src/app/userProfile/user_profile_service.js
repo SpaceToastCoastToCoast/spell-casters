@@ -31,7 +31,7 @@ class UserProfileServices {
           this.recentPercentComplete.push(recentGamesSimplified[x].percentCompleted);
         }
 
-        this.GraphStatsServices.setCurrentData(response.recentGames[0], response.stats);
+        // this.GraphStatsServices.setCurrentData(response.recentGames[0], response.stats);
 
     });
   }
