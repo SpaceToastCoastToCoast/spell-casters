@@ -41,7 +41,7 @@ export const UserProfileCtrl = [
 
       $scope.state = $state;
       $scope.StatisticServices = StatisticServices;
-      StatisticServices.gameSummary();
+      StatisticServices.getGameStatsData();
       $scope.UserProfileServices = UserProfileServices;
       UserProfileServices.userDataQuery();
       $scope.GraphStatsServices = GraphStatsServices;
