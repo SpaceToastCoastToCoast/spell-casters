@@ -22,7 +22,7 @@ class GraphStatsServices {
       totalWords.push(allstats[x].totalWordsCompleted);
     }
 
-    return this.graphData(recentPercentComplete), this.totalWordsGraph(totalWords);
+    return this.totalWordsGraph(totalWords);
   }
 
   graphData(recentPercentComplete){

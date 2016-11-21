@@ -32,14 +32,12 @@ export const StatisticServices = [
     getGameStatsData(){
       this.HttpServices.userDataQueryzz()
       .success(({stats}) =>{
-
         //HighestPercentCompleted
         let percentArr = [];
 
         for(let x = 0; x<stats.length; x++){
           percentArr.push(stats[x].percentCompleted);
         }
-        console.log('percentArr: ', percentArr);
         //TotalGamesPlayed
         this.totalGamesPlayed = percentArr.length;
 

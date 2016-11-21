@@ -16,6 +16,7 @@ export const UserProfileCtrl = [
   '$state',
   '$rootScope',
   'StatisticServices',
+  'HighPercentGraphServices',
   'UserProfileServices',
   'GraphStatsServices',
   'HttpServices',
@@ -28,6 +29,7 @@ export const UserProfileCtrl = [
       $state,
       $rootScope,
       StatisticServices,
+      HighPercentGraphServices,
       UserProfileServices,
       GraphStatsServices,
       HttpServices,
@@ -43,9 +45,10 @@ export const UserProfileCtrl = [
       $scope.StatisticServices = StatisticServices;
       StatisticServices.getGameStatsData();
       $scope.UserProfileServices = UserProfileServices;
+      $scope.HighPercentGraphServices = HighPercentGraphServices;
+      HighPercentGraphServices.getGraphData();
       UserProfileServices.userDataQuery();
       $scope.GraphStatsServices = GraphStatsServices;
-      GraphStatsServices.graphData();
       GraphStatsServices.totalWordsGraph();
       $scope.HttpServices = HttpServices;
       HttpServices.userDataQueryzz();
