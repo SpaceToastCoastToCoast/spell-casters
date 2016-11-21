@@ -44,15 +44,14 @@ export const AppCtrl = [
   class AppCtrl {
     constructor(
       $scope,
-      $rootScope,
       $state,
       SoundService) {
 
-      $scope.music = SoundService.musicOn
+      $scope.music = SoundService.musicOn;
       $scope.sound = SoundService.soundEffectsOn;
 
       $scope.turnOnMusic = () => {
-        SoundService.turnMusicOn()
+        SoundService.turnMusicOn();
         $scope.music = true;
       }
       $scope.turnOffMusic = () => {

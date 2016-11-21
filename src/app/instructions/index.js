@@ -1,7 +1,6 @@
 const template = require('./instructions.html');
 const mainSong = require('../../public/music/Main.ogg');
 
-
 export const InstructionsCtrlName = 'InstructionsCtrl';
 
 export const InstructionsCtrlState = {
@@ -27,19 +26,19 @@ class InstructionsCtrl {
     TimerService,
     SoundService,
     $timeout) {
+
     TimerService.resetGame();
 
     this.testWords = [
-    {
-      "word": "accommodate",
-      "prompt": "AC______ATE",
-      "hint": "When you go out of your way to make someone comfortable."
-    },
       {
-      "word": "a lot",
-      "prompt": "A__OT",
-      "hint": "When you have many of something, you have..."
-    }
+        "word": "accommodate",
+        "prompt": "AC______ATE",
+        "hint": "When you go out of your way to make someone comfortable."
+      }, {
+        "word": "a lot",
+        "prompt": "A__OT",
+        "hint": "When you have many of something, you have..."
+      }
     ];
     this.currentWord = 0;
 
@@ -58,7 +57,7 @@ class InstructionsCtrl {
     if (SoundService.currentSong._src !== mainSong) {
       SoundService.setCurrentSong(mainSong);
     }
-    //disable pasting into textbox
+
     $scope.preventPaste = (e) => {
       e.preventDefault();
       return false;
@@ -72,7 +71,7 @@ class InstructionsCtrl {
         $scope.showHint = true;
         $scope.tutorialText = false;
         $scope.showTargetWord = true;
-      },7000);
+      }, 7000);
     }
 
     $scope.compare = () => {
@@ -93,10 +92,10 @@ class InstructionsCtrl {
     }
 
     $scope.back = () => {
-      $state.go('splash')
+      $state.go('splash');
     }
     $scope.goToUserProfile = () => {
-      $state.go('userProfile')
+      $state.go('userProfile');
     }
 
     $scope.finished = () => {
