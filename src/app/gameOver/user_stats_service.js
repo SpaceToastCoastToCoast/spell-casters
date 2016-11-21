@@ -12,12 +12,12 @@ export const UserStatsService = [
     //this is not working possibly due to api not updating before this
     //http request is made
     getLatestStats () {
-      const req ={
+      const req = {
         method: 'GET',
         url: `/api/game-stats/${this.$rootScope.user}`
       };
 
-      return this.$http(req)
+      return this.$http(req);
     }
   }
 ];

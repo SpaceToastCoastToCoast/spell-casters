@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro|Ruslan+Display');
 
-/*$lightest-color: #e3bb88;
-$light-color: #db9864;
-$medium-color: #b1695a;
-$dark-color: #644749;
-$darkest-color: #222222;*/
-
 html, body, div, span, object, iframe, h1, h2, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul,
 li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th,
@@ -334,15 +328,6 @@ $darkest-color: #222222;*/
   margin-bottom: 8px;
 }
 
-#gameCanvas {
-  position: relative;
-  background-color: #222;
-  width: 640px;
-  height: 360px;
-  display: block;
-  background: url("/img/bg1.PNG");
-}
-
 .splashImage {
   /*
   background-image: url("/img/splash.png");
@@ -386,6 +371,17 @@ $darkest-color: #222222;*/
 
 .tutorialInfo {
   min-height: 128px;
+}
+
+/* User interaction */
+
+#gameCanvas {
+  position: relative;
+  background-color: #222;
+  width: 640px;
+  height: 360px;
+  display: block;
+  background: url("/img/bg1.PNG");
 }
 
 #exampleInput {
@@ -457,6 +453,8 @@ $darkest-color: #222222;*/
 #playerInput .wrong {
   background-color: #b1695a;
 }
+
+/* Results */
 
 #gameStats {
   border-top: 1px solid #e3bb88;
@@ -733,13 +731,14 @@ $darkest-color: #222222;*/
   right: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("/img/gator-hurt-die.png");
-}
- /*
-.gatorIdle {
-  animation: gatorIdle steps(8) 0.64s infinite;
 }
 
+.gatorIdle {
+  background-image: url("/img/gator-hurt-die.png");
+  /*animation: gatorIdle steps(4) 0.32s infinite;*/
+}
+
+/*
 @keyframes gatorIdle {
   from {background-position: 0px 0px;}
   to {background-position: -1024px 0px;}
@@ -747,6 +746,8 @@ $darkest-color: #222222;*/
 */
 
 .gatorHit {
+  background-image: url("/img/gator-hurt-die.png");
+  background-position: 0px 0px;
   animation: gatorHit steps(4) 0.32s 1;
 }
 
@@ -756,14 +757,13 @@ $darkest-color: #222222;*/
 }
 
 .gatorDie {
+  background: url("/img/gator-hurt-die.png") no-repeat;
   background-position: 0px -128px;
-  animation: gatorDie steps(9) 0.64s 1;
-  animation-fill-mode: forwards;
+  animation: gatorDie steps(9, start) 0.64s forwards;
 }
 
 @keyframes gatorDie {
-  from {background-position: -128px -128px;}
-  to {background-position: -1280px -128px;}
+  to {background-position: -1152px -128px;}
 }
 
 /* Lord Zett */
@@ -789,8 +789,8 @@ $darkest-color: #222222;*/
 /* MODAL */
 modal {
   /*display: none;*/
-
 }
+
 modal .modal {
   position: fixed;
   top: 0;

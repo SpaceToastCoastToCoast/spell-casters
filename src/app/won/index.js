@@ -26,6 +26,7 @@ export const WonCtrl = [
       UserStatsService,
       TimerService,
       SoundService) {
+
       TimerService.resetGame();
       $rootScope.canNavToGameOver = false;
 
@@ -34,37 +35,37 @@ export const WonCtrl = [
       }
 
       $scope.goToSplash = () => {
-        $state.go('splash')
+        $state.go('splash');
       }
       $scope.goToActiveGame = () => {
-        $state.go('active-game')
+        $state.go('active-game');
       }
       $scope.goToLeaderboard = () => {
-        $state.go('leaderboard')
+        $state.go('leaderboard');
       }
       $scope.goToUserProfile = () => {
-        $state.go('userProfile')
+        $state.go('userProfile');
       }
 
       if($rootScope.user !== 'Guest') {
         UserStatsService.getLatestStats()
         .then(response => {
           $scope.username = $rootScope.user;
-          $scope.totalTime = response.data.stats[response.data.stats.length-1].timeElapsed.reduce((sum,next) => {
+          $scope.totalTime = response.data.stats[response.data.stats.length - 1].timeElapsed.reduce((sum,next) => {
             sum += next;
             return sum;
           },0) + ' seconds'
-          $scope.totalWordsCompleted = response.data.stats[response.data.stats.length-1].totalWordsCompleted
-          $scope.percentCompleted = Math.round(response.data.stats[response.data.stats.length-1].percentCompleted * 100) + '%'
-          $scope.misspelledWords = response.data.stats[response.data.stats.length-1].misspelledWords.join(', ');
-          $scope.score = response.data.stats[response.data.stats.length-1].score;
+          $scope.totalWordsCompleted = response.data.stats[response.data.stats.length - 1].totalWordsCompleted;
+          $scope.percentCompleted = Math.round(response.data.stats[response.data.stats.length - 1].percentCompleted * 100) + '%';
+          $scope.misspelledWords = response.data.stats[response.data.stats.length - 1].misspelledWords.join(', ');
+          $scope.score = response.data.stats[response.data.stats.length - 1].score;
         })
       } else {
         $scope.username = $rootScope.user;
-        $scope.totalTime = $rootScope.totalTimeElapsed + ' seconds'
+        $scope.totalTime = $rootScope.totalTimeElapsed + ' seconds';
         $scope.totalWordsCompleted = $rootScope.totalWordsCompleted;
-        $scope.percentCompleted = Math.round($rootScope.percentCompleted*100) + '%';
-        $scope.score = $rootScope.score
+        $scope.percentCompleted = Math.round($rootScope.percentCompleted * 100) + '%';
+        $scope.score = $rootScope.score;
       }
     }
   }

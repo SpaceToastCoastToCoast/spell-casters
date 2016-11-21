@@ -34,12 +34,13 @@ export const LeaderboardCtrl = [
       }
 
       $scope.goToSplash = () => {
-        $state.go('splash')
+        $state.go('splash');
       }
       $scope.goToUserProfile = () => {
-        $state.go('userProfile')
+        $state.go('userProfile');
       }
-      this.places = ['first','second','third','fourth','fifth']
+
+      this.places = ['first','second','third','fourth','fifth'];
       this.places.forEach(place => {
         $scope[place + 'Username']
         $scope[place + 'Score'];
@@ -47,8 +48,8 @@ export const LeaderboardCtrl = [
 
       LeaderboardService.getLeaderboard().then(response => {
         response.data.highScores.forEach((data,index) => {
-          $scope[this.places[index] + 'Username'] = data.username
-          $scope[this.places[index] + 'Score'] = data.score
+          $scope[this.places[index] + 'Username'] = data.username;
+          $scope[this.places[index] + 'Score'] = data.score;
         })
       })
 

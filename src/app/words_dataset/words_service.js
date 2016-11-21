@@ -1,13 +1,9 @@
-
 const spellWords = {
   lvl1Words: null,
   lvl2Words: null,
   lvl3Words: null,
   lvl4Words: null
 }
-
-const randomDatasetLength = 5;
-const secondsPerRound = 120;
 
 export const WordsService = [
   '$http', '$q', '$rootScope', 'TimerService',
@@ -56,7 +52,7 @@ export const WordsService = [
       })
     }
     getBossSpells() {
-      return this.bossSpells
+      return this.bossSpells;
     }
     getBaseSpells() {
       return this.baseSpells;
@@ -94,7 +90,8 @@ export const WordsService = [
           prompt: wordObj.prompt,
           hint: wordObj.hint
         }
-      })
+      });
+
       while(currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         --currentIndex;
@@ -123,6 +120,7 @@ export const WordsService = [
       const totalWordsCompleted = this.calculateTotalWordsCompleted(lvl, currentIndex);
       const percentCompleted = this.calculatePercentCompleted(totalWordsCompleted);
       const score = this.calculateScore(percentCompleted, misspelledWords.length, totalTime)
+
       if (this.$rootScope.user !== 'Guest') {
         const req = {
           method: 'POST',
@@ -132,7 +130,7 @@ export const WordsService = [
           },
           data: `percentCompleted=${percentCompleted}&totalWordsCompleted=${totalWordsCompleted}&misspelledWords=${misspelledWords.join(',')}&timeElapsed=${timeElapsed}&username=${this.$rootScope.user}&score=${score}`
         }
-        return this.$http(req)
+        return this.$http(req);
       } else {
         return {
           totalTime,
