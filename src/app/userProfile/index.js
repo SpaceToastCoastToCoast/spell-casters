@@ -18,8 +18,6 @@ export const UserProfileCtrl = [
   'StatisticServices',
   'HighPercentGraphServices',
   'totalWordsGraphServices',
-  'UserProfileServices',
-  'GraphStatsServices',
   'HttpServices',
   'TimerService',
   'SoundService',
@@ -32,8 +30,6 @@ export const UserProfileCtrl = [
       StatisticServices,
       HighPercentGraphServices,
       totalWordsGraphServices,
-      UserProfileServices,
-      GraphStatsServices,
       HttpServices,
       TimerService,
       SoundService) {
@@ -46,14 +42,10 @@ export const UserProfileCtrl = [
       $scope.state = $state;
       $scope.StatisticServices = StatisticServices;
       StatisticServices.getGameStatsData();
-      $scope.UserProfileServices = UserProfileServices;
       $scope.HighPercentGraphServices = HighPercentGraphServices;
       HighPercentGraphServices.getGraphData();
       $scope.totalWordsGraphServices = totalWordsGraphServices;
       totalWordsGraphServices.getGraphData();
-      UserProfileServices.userDataQuery();
-      $scope.GraphStatsServices = GraphStatsServices;
-      // GraphStatsServices.totalWordsGraph();
       $scope.HttpServices = HttpServices;
       HttpServices.userDataQueryzz();
 

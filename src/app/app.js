@@ -21,8 +21,6 @@ import { HttpServices } from './userProfile/http_service';
 import { StatisticServices } from './userProfile/statistic_service';
 import { HighPercentGraphServices } from './userProfile/highestPercentGraph_service';
 import { totalWordsGraphServices } from './userProfile/totalWordsGraph_service';
-import { UserProfileServices } from './userProfile/user_profile_service';
-import { GraphStatsServices } from './userProfile/graph_stats_service';
 import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
 import { LeaderboardService } from './leaderboard/leaderboard_service';
 import { modal } from './directives/modal_directive';
@@ -106,8 +104,6 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('StatisticServices', StatisticServices)
   .service('HighPercentGraphServices', HighPercentGraphServices)
   .service('totalWordsGraphServices', totalWordsGraphServices)
-  .service('UserProfileServices', UserProfileServices)
-  .service('GraphStatsServices', GraphStatsServices)
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
