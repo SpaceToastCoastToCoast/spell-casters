@@ -9,51 +9,29 @@ const validate = require('./validations');
 const format = require('./formater');
 
 //DB call for Spells table
-app.get('/spells', (req, res) => {
-  spells.findAll()
-  .then((data => {
-    let boss_spells = {};
-    let base_spells = {};
-
-    data.forEach((dataSet) => {
-      if (dataSet.dataValues.type === 'boss') {
-        boss_spells[dataSet.dataValues.key_word] = {
-          word: dataSet.dataValues.word,
-          prompt: dataSet.dataValues.prompt,
-          hint: dataSet.dataValues.hint,
-        };
-      } else {
-        base_spells[dataSet.dataValues.key_word] = {
-          word: dataSet.dataValues.word,
-          prompt: dataSet.dataValues.prompt,
-          hint: dataSet.dataValues.hint,
-        };
-      }
-    });
-
-    res.json({
-      success: true,
-      boss_spells,
-      base_spells
-    });
-  }));
+app.get('/spells', format.listSpells, (req, res) => {
+  res.json({
+    success: true,
+    boss_spells: req.bossSpells,
+    base_spells: req.baseSpells
+  });
 });
 
 //login route
 app.post('/login', validate.fieldsFilled, validate.userExists, (req,res) => {
   res.json({
-    success: req.body.validUser.success,
-    userid: req.body.validUser.userid,
-    username: req.body.validUser.username
+    success: true,
+    userid: req.validUser.userid,
+    username: req.validUser.username
   })
 });
 
 //registration route
 app.post('/register', validate.fieldsFilled, validate.newUser, (req, res) => {
   res.json({
-    success: req.body.newUser.success,
-    userid: req.body.newUser.userid,
-    username: req.body.newUser.username,
+    success: true,
+    userid: req.newUser.userid,
+    username: req.newUser.username,
   })
 });
 

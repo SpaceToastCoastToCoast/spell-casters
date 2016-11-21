@@ -1,6 +1,7 @@
 const db = require('../models');
 const users = db.User;
 const gamestats = db.GameStat;
+const spells = db.Spell;
 
 
 function listHighscores(req,res,next) {
@@ -34,30 +35,58 @@ function listHighscores(req,res,next) {
 
 function orderHighscores(req,res,next) {
   users.findAll({
-      attributes: ['id','username']
-    })
-    .then(allUsers => {
-      let highScores = Object.keys(req.allScores).map(playerId =>{
-        let username = allUsers.find(user => {
-          return parseInt(user.dataValues.id) === parseInt(playerId)
-        })
-        username = username.username;
-        let score = req.allScores[playerId];
-        return {
-          username,
-          score
-        }
+    attributes: ['id','username']
+  })
+  .then(allUsers => {
+    let highScores = Object.keys(req.allScores).map(playerId =>{
+      let username = allUsers.find(user => {
+        return parseInt(user.dataValues.id) === parseInt(playerId)
       })
-      //sort highscores in order of highest to lowest
-      highScores.sort((a,b) => {
-        return b.score - a.score
-      })
-      req.orderedHighscores = highScores
-      next();
+      username = username.username;
+      let score = req.allScores[playerId];
+      return {
+        username,
+        score
+      }
     })
+    //sort highscores in order of highest to lowest
+    highScores.sort((a,b) => {
+      return b.score - a.score
+    })
+    req.orderedHighscores = highScores
+    next();
+  })
+}
+
+function listSpells(req,res,next) {
+  spells.findAll()
+  .then(data => {
+    let boss_spells = {};
+    let base_spells = {};
+
+    data.forEach((dataSet) => {
+      if (dataSet.dataValues.type === 'boss') {
+        boss_spells[dataSet.dataValues.key_word] = {
+          word: dataSet.dataValues.word,
+          prompt: dataSet.dataValues.prompt,
+          hint: dataSet.dataValues.hint,
+        };
+      } else {
+        base_spells[dataSet.dataValues.key_word] = {
+          word: dataSet.dataValues.word,
+          prompt: dataSet.dataValues.prompt,
+          hint: dataSet.dataValues.hint,
+        };
+      }
+    });
+    req.bossSpells = boss_spells
+    req.baseSpells = base_spells
+    next();
+  });
 }
 
 module.exports = {
   listHighscores,
-  orderHighscores
+  orderHighscores,
+  listSpells
 }

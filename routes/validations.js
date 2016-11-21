@@ -38,8 +38,7 @@ function userExists(req,res,next) {
             errorMessage: 'Invalid password'
           });
         } else {
-          req.body.validUser = {
-            success: true,
+          req.validUser = {
             userid: data.dataValues.id,
             username: data.dataValues.username
           }
@@ -72,8 +71,7 @@ function newUser(req,res,next) {
               where: {username: req.body.username}
             })
             .then((data) => {
-              req.body.newUser = {
-                success: true,
+              req.newUser = {
                 userid: data.dataValues.id,
                 username: data.dataValues.username
               }
@@ -86,13 +84,9 @@ function newUser(req,res,next) {
   })
 }
 
-function leaderboard(req,res,next) {
-
-}
 
 module.exports = {
   fieldsFilled,
   userExists,
   newUser,
-  leaderboard
 }
