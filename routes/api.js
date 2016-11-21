@@ -39,7 +39,7 @@ app.get('/spells', (req, res) => {
 });
 
 //login route
-app.post('/login', validate.loginFilled, validate.userExists, (req,res) => {
+app.post('/login', validate.fieldsFilled, validate.userExists, (req,res) => {
   res.json({
     success: req.body.validUser.success,
     userid: req.body.validUser.userid,
@@ -48,52 +48,12 @@ app.post('/login', validate.loginFilled, validate.userExists, (req,res) => {
 });
 
 //registration route
-app.post('/register', (req, res) => {
-  if (req.body.username === '') {
-    res.json({
-      success: false,
-      errorMessage: 'Please enter a username, it was empty'
-    });
-  } else if (req.body.password === '') {
-      res.json({
-      success: false,
-      errorMessage: 'Please enter a password, it was empty'
-    });
-  } else {
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(req.body.password, salt, (err, hash) => {
-        users.findAll({
-          where: {username: req.body.username}
-        })
-        .then((data)=>{
-          if (data.length !== 0) {
-            res.json({
-              success: false,
-              errorMessage: 'Please select another username, it is already exist'
-            });
-          } else {
-            users.create({
-              username: req.body.username,
-              password: hash,
-              role: 'student'
-            })
-            .then(() => {
-              users.findAll({
-                where: {username: req.body.username}
-              })
-              .then((data) => {
-                res.json({
-                  success: true,
-                  userid: data[0].dataValues.id,
-                  username: data[0].dataValues.username
-                });
-              });
-            });
-          }
-        });
-      })
-    })
-  }
+app.post('/register', validate.fieldsFilled, validate.newUser, (req, res) => {
+  res.json({
+    success: req.body.newUser.success,
+    userid: req.body.newUser.userid,
+    username: req.body.newUser.username,
+  })
 });
 
 //Post game statistics

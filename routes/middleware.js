@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const users = db.User;
 
 
-function loginFilled(req,res,next) {
+function fieldsFilled(req,res,next) {
   if (req.body.username === '') {
     res.json({
       success: false,
@@ -21,11 +21,11 @@ function loginFilled(req,res,next) {
 }
 
 function userExists(req,res,next) {
-  users.findOne({
+  users.findAll({
       where: {username: req.body.username}
     })
     .then((data) => {
-      if(data ===null || data.length === 0){
+      if(data.length === 0){
         res.json({
           success: false,
           errorMessage: 'Invalid username'
@@ -49,8 +49,41 @@ function userExists(req,res,next) {
     })
 }
 
-function userRegistration(req,res,next) {
-
+function newUser(req,res,next) {
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(req.body.password, salt, (err, hash) => {
+      users.findAll({
+        where: {username: req.body.username}
+      })
+      .then((data)=>{
+        if (data.length !== 0) {
+          res.json({
+            success: false,
+            errorMessage: `Username ${req.body.username} is already in use, please select another username`
+          });
+        } else {
+          users.create({
+            username: req.body.username,
+            password: hash,
+            role: 'student'
+          })
+          .then(() => {
+            users.findOne({
+              where: {username: req.body.username}
+            })
+            .then((data) => {
+              req.body.newUser = {
+                success: true,
+                userid: data.dataValues.id,
+                username: data.dataValues.username
+              }
+              next();
+            });
+          });
+        }
+      });
+    })
+  })
 }
 
 function leaderboard(req,res,next) {
@@ -58,8 +91,8 @@ function leaderboard(req,res,next) {
 }
 
 module.exports = {
-  loginFilled,
+  fieldsFilled,
   userExists,
-  userRegistration,
+  newUser,
   leaderboard
 }
