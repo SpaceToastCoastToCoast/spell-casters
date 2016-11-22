@@ -85,8 +85,122 @@ function listSpells(req,res,next) {
   });
 }
 
+
+function recentGameData(req,res,next) {
+  users.findOne({
+    where: {username: req.params.username}
+  })
+  .then((user) => {
+    gamestats.findAll({
+      where: { UserId: user.dataValues.id},
+      order: '"createdAt" ASC',
+    })
+    .then((stats) => {
+      let recentGamesPercent = stats.map((stat) => {
+          return parseFloat(stat.percentCompleted);
+      }).filter((stat,index) => {
+        if (index < 20) {
+          return stat
+        }
+      })
+
+      let recentGamesTotalWords = stats.map((stat) => {
+        return parseInt(stat.totalWordsCompleted)
+      }).filter((stat,index) => {
+        if (index < 20) {
+          return stat
+        }
+      })
+
+      req.recentGames = {
+        recentGamesPercent,
+        recentGamesTotalWords
+      };
+
+      req.stats = stats;
+
+      next();
+    })
+  });
+}
+
+function gameSummaryData(req,res,next) {
+  let stats = req.stats
+  let totalTime = stats.reduce((prev,stat) => {
+    prev = prev.concat(stat.timeElapsed)
+    return prev
+  },[])
+  .reduce((prev,next) => {
+    prev+= next
+    return prev;
+  }, 0)
+
+  req.totalTime = totalTime
+
+  let totalWords = stats.reduce((prev,stat) => {
+    prev+= stat.totalWordsCompleted
+    return prev;
+  }, 0);
+
+  req.totalWords = totalWords;
+
+  next();
+}
+
+function misspelledWordsData(req,res,next) {
+  let stats = req.stats;
+
+  let misspelledWords = stats.reduce((prev,stat) => {
+    stat.misspelledWords = stat.misspelledWords.map(word => {
+      return word.trim();
+    })
+    prev = prev.concat(stat.misspelledWords)
+    return prev
+  }, [])
+  .reduce((prev,word) => {
+    if(prev.hasOwnProperty(word)) {
+      prev[word]++;
+    } else {
+      prev[word] = 1;
+    }
+    return prev
+  }, {})
+
+  let misspelledWordsArr = Object.keys(misspelledWords).map(word => {
+    return {
+      word,
+      count: misspelledWords[word]
+    }
+  })
+  let topMisspelledWords = qSort(misspelledWordsArr).filter((wordObj,index) => {
+    if (index < 10) {
+      return wordObj
+    }
+  })
+
+  req.misspelledWords = topMisspelledWords
+  next();
+}
+
+function qSort(array){
+  if (array.length <= 1) {
+    return array;
+  }
+  let pivot = array.shift();
+  let left = array.filter(element => {
+    return element.count >= pivot.count;
+  });
+  let right = array.filter(element => {
+    return element.count < pivot.count;
+  });
+  return qSort(left).concat(pivot, qSort(right));
+}
+
 module.exports = {
   listHighscores,
   orderHighscores,
-  listSpells
+  listSpells,
+  recentGameData,
+  gameSummaryData,
+  misspelledWordsData
 }

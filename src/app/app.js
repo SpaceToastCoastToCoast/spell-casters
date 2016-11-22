@@ -17,8 +17,9 @@ import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from '.
 import { LocalStorageService } from './services/localStorage_service';
 import { SoundService } from './services/sound_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
-import { UserProfileServices } from './userProfile/user_profile_service';
-import { GraphStatsServices } from './userProfile/graph_stats_service';
+import { HttpServices } from './userProfile/http_service';
+import { HighPercentGraphServices } from './userProfile/highestPercentGraph_service';
+import { totalWordsGraphServices } from './userProfile/totalWordsGraph_service';
 import { LeaderboardCtrlState, LeaderboardCtrlName, LeaderboardCtrl } from './leaderboard';
 import { LeaderboardService } from './leaderboard/leaderboard_service';
 import { modal } from './directives/modal_directive';
@@ -92,7 +93,6 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('leaderboard', LeaderboardCtrlState)
       .state('gamecharts', GameChartsCtrlState);
 
-
     $urlRouterProvider.otherwise('/');
   })
   .directive('app', app)
@@ -103,8 +103,9 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('TimerService', TimerService)
   .service('UserServices', UserServices)
   .service('UserStatsService', UserStatsService)
-  .service('UserProfileServices', UserProfileServices)
-  .service('GraphStatsServices', GraphStatsServices)
+  .service('HttpServices', HttpServices)
+  .service('HighPercentGraphServices', HighPercentGraphServices)
+  .service('totalWordsGraphServices', totalWordsGraphServices)
   .service('RegistrationServices', RegistrationServices)
   .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
