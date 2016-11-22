@@ -171,7 +171,7 @@ class WordsDatasetCtrl {
         $scope.enemyAnimState = "gatorHit";
       } else {
         //if is boss
-        if(hits >= 4) {
+        if(hits >= 3) {
           this.enemyHearts--;
         }
       }
