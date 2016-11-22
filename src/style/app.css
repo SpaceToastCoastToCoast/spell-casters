@@ -25,8 +25,9 @@ p {
 }
 
 @-moz-document url-prefix() {
-  h3, h4, h5, p, button {
+  h3, h4, h5, p, button, input {
     letter-spacing: -1px;
+    word-spacing: -1px;
   }
 }
 
