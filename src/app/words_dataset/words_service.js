@@ -118,8 +118,8 @@ export const WordsService = [
       timeElapsed = timeElapsed.substring(0,timeElapsed.length - 1);
       const totalTime = this.calculateTotalTime(this.TimerService.times)
       const totalWordsCompleted = this.calculateTotalWordsCompleted(lvl, currentIndex);
-      const percentCompleted = this.calculatePercentCompleted(totalWordsCompleted);
-      const score = this.calculateScore(percentCompleted, misspelledWords.length, totalTime)
+      const percentCompleted = this.calculatePercentCompleted(lvl, totalWordsCompleted);
+      const score = this.calculateScore(totalWordsCompleted, misspelledWords.length, totalTime, lvl)
 
       if (this.$rootScope.user !== 'Guest') {
         const req = {
@@ -139,7 +139,6 @@ export const WordsService = [
           score
         }
       }
-
     }
 
     calculateTotalTime(times) {
@@ -150,8 +149,12 @@ export const WordsService = [
       return totalTime;
     }
 
-    calculatePercentCompleted(totalWordsCompleted) {
-      return Math.round((totalWordsCompleted / (this.totalWords))*100)/100;
+    calculatePercentCompleted(lvl, totalWordsCompleted) {
+      if(lvl === 5) {
+        return 1
+      } else {
+        return Math.round((totalWordsCompleted / (this.totalWords))*100)/100;
+      }
     }
 
     calculateTotalWordsCompleted(lvl,currentIndex) {
@@ -165,16 +168,40 @@ export const WordsService = [
         case 3:
           return this.easy.length + this.medium.length + currentIndex;
           break;
-        case 4:
-          return this.easy.length + this.medium.length + this.hard.length + currentIndex;
-          break;
         default:
-          return this.easy.length + this.medium.length + this.hard.length + this.boss.length;
+          return this.easy.length + this.medium.length + this.hard.length + currentIndex;
           break;
       }
     }
-    calculateScore(percentCompleted,misspelledWordsAmt,totalTime) {
-      return Math.round((percentCompleted * 200) - misspelledWordsAmt - (totalTime * 0.01))
+
+    calculateScore(totalWordsCompleted,misspelledWordsAmt,totalTime,lvl) {
+      let bossWordsCompleted = 0;
+      let totalBaseSpells = Object.keys(this.baseSpells).length
+      let totalBossSpells = Object.keys(this.bossSpells).length
+      if (totalWordsCompleted > totalBaseSpells) {
+        bossWordsCompleted = totalWordsCompleted - totalBaseSpells
+      }
+      //score algorithm
+
+      //if you do not complete the game:
+      //+ total base words completed * 2
+      //+ total boss words completed
+      //- misspelled words amount
+      //- total time in game * 0.01
+
+      //if you complete the game:
+      //+ total base words completed * 2
+      //+ amount of boss spells in the database * 3 - boss words it took to complete the game
+      //- misspelled words amount
+      //- total time in game * 0.01
+
+      if (lvl === 4) {
+        return Math.round((totalBaseSpells * 2) + bossWordsCompleted - misspelledWordsAmt - (totalTime * 0.01))
+      } else if (lvl === 5) {
+        return Math.round((totalBaseSpells * 2) + ((totalBossSpells * 3) - bossWordsCompleted) - misspelledWordsAmt - (totalTime * 0.01))
+      } else {
+        return Math.round((totalWordsCompleted * 2) - misspelledWordsAmt - (totalTime * 0.01))
+      }
     }
   }
 
