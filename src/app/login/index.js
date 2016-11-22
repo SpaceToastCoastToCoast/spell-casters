@@ -13,40 +13,6 @@ export const LoginCtrlState = {
   }
 };
 
-export const UserServices = [
- '$http',
- '$state',
-
-  class UserServices {
-    constructor ($http, $state, users) {
-      this.$http = $http;
-      this.$state = $state;
-      this.users = users;
-    }
-
-    getUsers (userData) {
-      this.data = userData;
-      const req ={
-       method: 'POST',
-       url: `/api/login`,
-       headers: {
-         'Content-Type': 'application/x-www-form-urlencoded'
-       },
-       data: `username=${userData.username}&password=${userData.password}&=`
-      };
-      return this.$http(req)
-        .success(response => {
-          if(response.success === true){
-            this.$state.go('splash');
-          } else {
-            this.$state.go('login', {errorMessage: response.errorMessage});
-          }
-          return;
-        });
-    }
-  }
-];
-
 export const LoginCtrl = [
   '$scope',
   'UserServices',
