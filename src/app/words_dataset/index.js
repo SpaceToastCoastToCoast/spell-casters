@@ -43,7 +43,7 @@ class WordsDatasetCtrl {
     //Init variables
     this.newWords = [];
     this.currentWord = 0;
-    $scope.lvl = 1;
+    // $scope.lvl = 1;
     this.misspelledWords = [];
     $rootScope.canNavToGameOver = false;
 
@@ -51,7 +51,7 @@ class WordsDatasetCtrl {
     SoundService.setCurrentSong(shortTheme);
 
     //debug
-    //$scope.lvl = 3;
+    $scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
