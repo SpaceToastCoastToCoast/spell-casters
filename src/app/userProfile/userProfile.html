@@ -42,9 +42,11 @@
     }
 
 </style>
-  <div class="totalGamesPlayed">
+  <div class="totalGamesPlayed" ng-show="percentCompletedGraph">
   </div>
-  <div class = 'totalWords'></div>
-<!--   <svg width="640" height="500" class="totalWords">
-  </svg> -->
+  <div class = 'totalWords' ng-show="totalWordsCompletedGraph"></div>
+  <div id ='bubble-chart' ng-show="bubbleChartGraph"></div>
+  <button ng-click="showGraph('percent')">Percent Completed Chart</button>
+  <button ng-click="showGraph('totalWords')">Total Words Completed Chart</button>
+  <button ng-click="showGraph('misspelledWords')">Misspelled Words Chart</button>
 </div>

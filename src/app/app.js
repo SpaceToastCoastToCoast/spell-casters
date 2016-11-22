@@ -27,7 +27,7 @@ import { ModalService } from './services/modal_service';
 import { LogoutService } from './services/logout_service';
 import { GameChartsCtrlState, GameChartsCtrlName, GameChartsCtrl } from './gameCharts';
 import { GameChartsServices } from './gameCharts/game_charts_service';
-import { BubbleChartDataServices } from './gameCharts/bubble_data_service';
+import { BubbleGraphService } from './userProfile/bubble_graph_service';
 import { HttpGameStatsServices } from './gameCharts/http_gamestats_service';
 
 import '../style/app.css';
@@ -112,9 +112,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('SoundService', SoundService)
   .service('ModalService', ModalService)
   .service('LogoutService', LogoutService)
-  .service('GameChartsServices', GameChartsServices)
-  .service('BubbleChartDataServices', BubbleChartDataServices)
   .service('HttpGameStatsServices', HttpGameStatsServices)
+  .service('BubbleGraphService', BubbleGraphService)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope, SoundService,$state) => {
     $rootScope.user = "Guest";
