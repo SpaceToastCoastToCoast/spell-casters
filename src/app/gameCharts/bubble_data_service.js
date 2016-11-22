@@ -65,7 +65,6 @@ class BubbleChartDataServices {
     }
 
     this.sortedWords = sortingWords(count)
-    console.log('this.sortedWords', this.sortedWords)
 
     return this.$q((resolve,reject) => {
       resolve(this.sortedWords)
