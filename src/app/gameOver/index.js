@@ -27,6 +27,7 @@ export const GameOverCtrl = [
       UserStatsService,
       TimerService,
       SoundService) {
+
       TimerService.resetGame();
       $rootScope.canNavToGameOver = false;
 
@@ -35,16 +36,16 @@ export const GameOverCtrl = [
       }
 
       $scope.goToSplash = () => {
-        $state.go('splash')
+        $state.go('splash');
       }
       $scope.goToActiveGame = () => {
-        $state.go('active-game')
+        $state.go('active-game');
       }
       $scope.goToLeaderboard = () => {
-        $state.go('leaderboard')
+        $state.go('leaderboard');
       }
       $scope.goToUserProfile = () => {
-        $state.go('userProfile')
+        $state.go('userProfile');
       }
 
       if ($rootScope.user !== 'Guest') {

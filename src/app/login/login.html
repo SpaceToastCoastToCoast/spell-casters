@@ -6,12 +6,12 @@
     <input ng-model='userName' type="text" name="User name">
     <p>Password</p>
     <input ng-model='password' type="password" name="Password" placeholder="Type your password">
-    <div class="buttonDiv">
+    <div class="buttonDiv fullWidth">
       <button ng-click='checkCredentials()'>Login</button>
       <button ng-click='goToRegistration()'>Register</button>
     </div>
     <p>{{ errorMessage }}</p>
   </div>
-  <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
 </div>
+<a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
 

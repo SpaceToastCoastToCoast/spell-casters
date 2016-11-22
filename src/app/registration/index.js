@@ -4,7 +4,7 @@ const mainSong = require('../../public/music/Main.ogg');
 export const RegistrationCtrlName = 'RegistrationCtrl';
 
 export const RegistrationCtrlState ={
-  url:'/registration',
+  url: '/registration',
   template,
   controller: RegistrationCtrlName,
   controllerAs: 'registration',
@@ -53,17 +53,17 @@ export const RegistrationCtrl = [
         this.registerData.username = $scope.userName;
         this.registerData.password = $scope.password;
         RegistrationServices.registerUser(this.registerData)
-          .success(response =>{
-            if (response.success === true) {
-              $rootScope.user = response.username;
-              $rootScope.visible = true;
-              if (this.timeD) {
-                $timeout.cancel(timer)
-              }
-              this.timeD = $timeout(() => {
-                this.$state.go('splash');
-              }, 3000);
+        .success(response => {
+          if (response.success === true) {
+            $rootScope.user = response.username;
+            $rootScope.visible = true;
+            if (this.timeD) {
+              $timeout.cancel(timer)
             }
+            this.timeD = $timeout(() => {
+              this.$state.go('splash');
+            }, 3000);
+          }
         })
       };
       $scope.errorMessage = $stateParams.errorMessage;

@@ -18,11 +18,11 @@ export const modal = [
           break;
           case 'Cancel':
             ModalService.closeModal(attrs.id);
-            scope.$digest()
+            scope.$digest();
           break;
           default:
             ModalService.closeModal(attrs.id);
-            scope.$digest()
+            scope.$digest();
         }
       });
 
@@ -48,5 +48,4 @@ export const modal = [
 
     }
   }
-}
-];
+}];

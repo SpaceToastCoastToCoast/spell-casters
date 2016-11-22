@@ -43,7 +43,7 @@ class WordsDatasetCtrl {
     //Init variables
     this.newWords = [];
     this.currentWord = 0;
-    // $scope.lvl = 1;
+    $scope.lvl = 1;
     this.misspelledWords = [];
     $rootScope.canNavToGameOver = false;
 
@@ -51,7 +51,7 @@ class WordsDatasetCtrl {
     SoundService.setCurrentSong(shortTheme);
 
     //debug
-    $scope.lvl = 3;
+    //$scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
@@ -70,7 +70,7 @@ class WordsDatasetCtrl {
       $scope.seconds = TimerService.seconds;
       $scope.zero = TimerService.zero;
       if ($scope.timer < 0) {
-        TimerService.saveTime(30,$scope.lvl);
+        TimerService.saveTime(30, $scope.lvl);
         if($scope.spellsCast === 0) {
           $scope.takeDamage();
         } else {
@@ -90,6 +90,7 @@ class WordsDatasetCtrl {
     $scope.showSwipe = false;
     $scope.hidePlayerInput = false;
     $scope.focusOnInput = true;
+    $scope.enemyIdleTimeout;
 
     //animation variables
     $scope.playerAnimState = "alephaIdle";
@@ -155,8 +156,16 @@ class WordsDatasetCtrl {
     $scope.giveDamage = (hits) => {
       $scope.showBeam = true;
       $scope.shakeCanvas = "shake";
-      SoundService.playSoundEffect(alephaSpell)
-      $timeout(() => {$scope.showBeam = false; $scope.shakeCanvas = "noShake"; $scope.enemyAnimState = "gatorIdle";}, 500)
+      SoundService.playSoundEffect(alephaSpell);
+      $timeout(() => {
+        $scope.showBeam = false;
+        $scope.shakeCanvas = "noShake";
+      }, 300);
+
+      $scope.enemyIdleTimeout = $timeout(() => {
+        $scope.enemyAnimState = "gatorIdle";
+      }, 500);
+
       if(!$scope.isBoss) {
         this.enemyHearts -= hits;
         $scope.enemyAnimState = "gatorHit";
@@ -297,10 +306,11 @@ class WordsDatasetCtrl {
     }
 
     const killEnemy = () => {
+      $timeout.cancel($scope.enemyIdleTimeout);
       $scope.spellsCast = 0;
       $scope.chargeLevel= `${numberToString[$scope.spellsCast]}Charge`;
 
-      TimerService.saveTime((30-$scope.timer),$scope.lvl);
+      TimerService.saveTime((30 - $scope.timer), $scope.lvl);
       TimerService.resetTimer();
 
       if(!$scope.isBoss) {
@@ -312,7 +322,7 @@ class WordsDatasetCtrl {
           this.enemyHearts = maxHearts;
           $scope.enemyHealth = "fiveHearts";
           $scope.enemyAnimState = "gatorIdle";
-        }, 640);
+        }, 960);
       } else {
         //killed boss
         killBoss();

@@ -9,9 +9,6 @@
     <p id="info">Spell the word in the box to charge your spell!</p>
     <h4 class="hint">HINT: {{ wordsDataset.newWords[wordsDataset.currentWord].hint }}</h4>
   </div>
-
-
-  <!-- <p ng-show="showLevel">You made it to lvl: {{wordsDataset.lvl}}</p> -->
 </div>
 <div id="gameCanvas" ng-class="[shakeCanvas, levelBackground]">
   <div id="playerInput" ng-hide="hidePlayerInput">
@@ -29,5 +26,6 @@
   <div class="lordZett" ng-class="bossAnimState" ng-show="isBoss"></div>
   <div class="swipe beam" ng-show="showSwipe"></div>
   <div class="beam beamBlast" ng-show="showBeam"></div>
+  <p class="splashItems levelMarker" ng-show="showLevel">You made it to lvl: {{wordsDataset.lvl}}</p>
 </div>
 <p class="loggedInAs">Hello, {{ user }}</p>

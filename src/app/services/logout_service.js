@@ -15,7 +15,7 @@ export const LogoutService = [
       this.$rootScope.user = userName;
       this.$rootScope.visible = isVisibleBln;
       this.$rootScope.$digest();
-      this.$state.go(stateGo)
+      this.$state.go(stateGo);
     }
 
   }
