@@ -2,11 +2,13 @@
   <div class="login">
     <h2>Register</h2>
     <h5 class="userName">Create an account here.</h5>
-    <p>Please create a username</p>
-    <input ng-model='userName' type="text" name="Username">
-    <p>Please create a password</p>
-    <input ng-model='password' type="password" name="Password">
-    <button ng-click='registerUser()'>Register</button>
+    <form ng-submit="registerUser()">
+      <label>Please create a username</label>
+        <input ng-model="userName" type="text" name="Username">
+      <label>Please create a password</label>
+        <input ng-model="password" type="password" name="Password">
+      <button type="submit">Register</button>
+    </form>
     <p>{{ errorMessage }}</p>
   </div>
 </div>

@@ -32,14 +32,11 @@ export const RegistrationCtrl = [
       $timeout,
       TimerService,
       SoundService) {
-      TimerService.resetGame();
 
-      this.registerData ={
-        username: '',
-        password: ''
-      };
-      this.$state = $state;
       this.timeD = false;
+      this.RegistrationServices = RegistrationServices;
+
+      TimerService.resetGame();
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
@@ -47,24 +44,24 @@ export const RegistrationCtrl = [
 
       $scope.userName = '';
       $scope.password = '';
-      $scope.RegistrationServices = RegistrationServices;
 
       $scope.registerUser = () => {
-        this.registerData.username = $scope.userName;
-        this.registerData.password = $scope.password;
-        RegistrationServices.registerUser(this.registerData)
-        .success(response => {
-          if (response.success === true) {
-            $rootScope.user = response.username;
-            $rootScope.visible = true;
-            if (this.timeD) {
-              $timeout.cancel(timer)
+        RegistrationServices.registerUser({username: $scope.userName, password: $scope.password})
+          .success(response => {
+            if (response.success === true) {
+              $rootScope.user = response.username;
+              $rootScope.visible = true;
+              if (this.timeD) {
+                $timeout.cancel(timer)
+              }
+              this.timeD = $timeout(() => {
+                $state.go('splash');
+              }, 3000);
+            } else {
+              $scope.userName = '';
+              $scope.password = '';
             }
-            this.timeD = $timeout(() => {
-              this.$state.go('splash');
-            }, 3000);
-          }
-        })
+          })
       };
       $scope.errorMessage = $stateParams.errorMessage;
     }
