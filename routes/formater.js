@@ -17,7 +17,7 @@ function listHighscores(req,res,next) {
         sum += next
         return sum;
       }, 0)
-      let subscore = Math.round((stat.dataValues.percentCompleted *200) - (stat.dataValues.misspelledWords.length) - (totalTime * 0.01))
+      let subscore = stat.dataValues.score
       if (scores[stat.dataValues.UserId]) {
         if (scores[stat.dataValues.UserId] < subscore) {
           scores[stat.dataValues.UserId] = subscore
@@ -27,7 +27,7 @@ function listHighscores(req,res,next) {
       }
       return scores;
     }, {})
-
+    console.log('allScores',allScores)
     req.allScores = allScores;
     next();
   })

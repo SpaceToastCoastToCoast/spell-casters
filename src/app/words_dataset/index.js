@@ -256,16 +256,13 @@ class WordsDatasetCtrl {
         TimerService.saveTime((30 - $scope.timer),$scope.lvl)
         TimerService.resetTimer();
       }
-      this.currentWord = 0;
-      this.hearts = maxHearts;
-      $scope.playerHealth = 'fiveHearts';
       if ($scope.lvl === 4) {
         showBoss();
       }
       if ($scope.lvl === 5) {
         TimerService.killTimer();
         if ($rootScope.user !== 'Guest') {
-          WordsService.postStatistics($scope.lvl,0,this.misspelledWords,TimerService.times)
+          WordsService.postStatistics($scope.lvl,this.currentWord,this.misspelledWords,TimerService.times)
             .then(_ => {
               $rootScope.canNavToGameOver = true;
               $state.go('won');
@@ -287,6 +284,11 @@ class WordsDatasetCtrl {
         }
         $scope.showLevel = false;
       }
+
+      //reset currentWord index to starting point and reset hearts to max hearts
+      this.currentWord = 0;
+      this.hearts = maxHearts;
+      $scope.playerHealth = 'fiveHearts';
     }
 
     const killBoss = () => {

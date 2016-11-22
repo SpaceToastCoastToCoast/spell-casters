@@ -47,7 +47,7 @@ export const LeaderboardCtrl = [
       })
 
       LeaderboardService.getLeaderboard().then(response => {
-        response.data.highScores.forEach((data,index) => {
+        response.data.highscores.forEach((data,index) => {
           $scope[this.places[index] + 'Username'] = data.username;
           $scope[this.places[index] + 'Score'] = data.score;
         })
