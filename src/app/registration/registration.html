@@ -7,7 +7,10 @@
         <input ng-model="userName" type="text" name="Username">
       <label>Please create a password</label>
         <input ng-model="password" type="password" name="Password">
-      <button type="submit">Register</button>
+        <div class="buttonDiv">
+          <button type="submit">Register</button>
+          <button ng-click='goToSplash()'>Back</button>
+        </div>
     </form>
     <p>{{ errorMessage }}</p>
   </div>
