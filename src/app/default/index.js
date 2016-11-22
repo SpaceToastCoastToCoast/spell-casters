@@ -42,27 +42,9 @@ export const DefaultCtrl = [
         SoundService.setCurrentSong(mainSong);
       }
 
-      $scope.goToInstructions = () => {
-        $state.go('instructions');
-      };
-      $scope.goToActiveGame = () => {
-        $state.go('active-game');
-      };
-      $scope.goToAbout = () => {
-        $state.go('about');
-      };
-      $scope.goToLeaderboard = () => {
-        $state.go('leaderboard');
-      };
-      $scope.goToLogIn = () => {
-        $state.go('login');
-      }
       $scope.goLogOut = () => {
         ModalService.openModal('logout');
       };
-      $scope.goToUserProfile = () => {
-        $state.go('userProfile');
-      }
     }
   }
 ]

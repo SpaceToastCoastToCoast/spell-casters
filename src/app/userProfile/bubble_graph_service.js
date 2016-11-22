@@ -10,9 +10,9 @@ class BubbleGraphService {
   drawingBubbleChart (sortedWords) {
     //bubble chart
     const diameter = 400 //max size of the bubbles
-    const colorArr = [ '#f9d5e5', '#eeac99', '#e06377',
-                  '#c83349', '#5b9aa0', '#d6d4e0',
-                  '#b8a9c9', '#622569', '#ffcc5c', '#ff6f69']
+    const colorArr = [ '#9CCBC5', '#64A39A', '#3F897F',
+                  '#247267', '#105A50', '#904A19',
+                  '#B66D3A', '#FFC59C', '#FFDCC4', '#b1695a']
     const scaler = 5;
     const textColor = 'black'
     const textFont = 'monospace';

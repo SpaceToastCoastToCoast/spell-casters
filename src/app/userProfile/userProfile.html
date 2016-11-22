@@ -1,17 +1,23 @@
-<p>User Profile</p>
-<p>{{ user }}</p>
+<h2>User Profile</h2>
+<h3 id="thisUser">{{ user }}</h3>
 <div>
-  <p>Total Games Played: {{totalGames}}</p>
-  <p>Total Time Played: {{totalTime}}</p>
-  <p>Total Words Spelled: {{totalWords}}</p>
+  <ul>
+    <li>Total Games Played: {{totalGames}}</li>
+    <li>Total Time Played: {{totalTime}} seconds</li>
+    <li>Total Words Spelled: {{totalWords}}</li>
+  </ul>
+  <div class="buttonDiv padBottom">
+    <button ng-click="showGraph('percent')">Percent Completed</button>
+    <button ng-click="showGraph('totalWords')">Total Words Completed</button>
+    <button ng-click="showGraph('misspelledWords')">Misspelled Words</button>
+  </div>
 
   <style> /* set the CSS */
 
     /* Line Graph */
-    body { font: 12px Arial;}
 
     path {
-        stroke: steelblue;
+        stroke: #3F897F;
         stroke-width: 2;
         fill: none;
     }
@@ -19,18 +25,18 @@
     .axis path,
     .axis line {
         fill: none;
-        stroke: grey;
+        stroke: #904A19;
         stroke-width: 1;
         shape-rendering: crispEdges;
     }
 
     /* Bar Graph */
     .bar {
-      fill: steelblue;
+      fill: #3F897F;
     }
 
     .bar:hover {
-      fill: brown;
+      fill: #b1695a;
     }
 
     .axis--x path {
@@ -46,7 +52,4 @@
   </div>
   <div class = 'totalWords' ng-show="totalWordsCompletedGraph"></div>
   <div id ='bubble-chart' ng-show="bubbleChartGraph"></div>
-  <button ng-click="showGraph('percent')">Percent Completed Chart</button>
-  <button ng-click="showGraph('totalWords')">Total Words Completed Chart</button>
-  <button ng-click="showGraph('misspelledWords')">Misspelled Words Chart</button>
 </div>

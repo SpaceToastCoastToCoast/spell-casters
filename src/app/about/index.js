@@ -31,18 +31,6 @@ export const AboutCtrl = [
         SoundService.setCurrentSong(mainSong);
       }
 
-      $scope.goToInstructions = () => {
-        $state.go('instructions');
-      }
-      $scope.goToActiveGame = () => {
-        $state.go('active-game');
-      }
-      $scope.goToSplash = () => {
-        $state.go('splash');
-      }
-      $scope.goToUserProfile = () => {
-        $state.go('userProfile');
-      }
     }
   }
 ]

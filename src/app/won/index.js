@@ -34,19 +34,6 @@ export const WonCtrl = [
         SoundService.setCurrentSong(mainSong);
       }
 
-      $scope.goToSplash = () => {
-        $state.go('splash');
-      }
-      $scope.goToActiveGame = () => {
-        $state.go('active-game');
-      }
-      $scope.goToLeaderboard = () => {
-        $state.go('leaderboard');
-      }
-      $scope.goToUserProfile = () => {
-        $state.go('userProfile');
-      }
-
       if($rootScope.user !== 'Guest') {
         UserStatsService.getLatestStats()
         .then(response => {

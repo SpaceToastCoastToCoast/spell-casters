@@ -45,10 +45,6 @@ export const RegistrationCtrl = [
       $scope.userName = '';
       $scope.password = '';
 
-      $scope.goToSplash = () => {
-        $state.go('splash');
-      };
-
       $scope.registerUser = () => {
         RegistrationServices.registerUser({username: $scope.userName, password: $scope.password})
           .success(response => {

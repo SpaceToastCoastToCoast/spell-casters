@@ -14,8 +14,9 @@ export const HighPercentGraphServices = [
       .success(({recentGames}) =>{
 
         //Set data for graphs
-        let recentPercentComplete = recentGames.recentGamesPercent;
-
+        let recentPercentComplete = recentGames.recentGamesPercent.map((pct) => {
+          return pct * 100;
+        });
 
         var margin = {top: 30, right: 20, bottom: 30, left: 50},
           width = 600 - margin.left - margin.right,
@@ -28,10 +29,15 @@ export const HighPercentGraphServices = [
         if(recentPercentComplete){
           // var p = d3.select(".totalGamesPlayed").selectAll("p")
 
+          let tix = recentPercentComplete.length - 1;
+          if(tix > 5) {
+            tix = 5;
+          }
+
           // Define the axes
           var xAxis = d3.svg.axis().scale(x)
             .orient('bottom')
-            .ticks(5);
+            .ticks(tix);
 
           var yAxis = d3.svg.axis().scale(y)
             .orient('left')
