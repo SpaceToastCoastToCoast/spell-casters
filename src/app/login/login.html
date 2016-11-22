@@ -2,14 +2,17 @@
   <div class="login">
     <h2>Log In</h2>
     <h5 class="userName">You are logged in as {{ user }}.</h5>
-    <p>Username</p>
-    <input ng-model='userName' type="text" name="User name">
-    <p>Password</p>
-    <input ng-model='password' type="password" name="Password" placeholder="Type your password">
-    <div class="buttonDiv fullWidth">
-      <button ng-click='checkCredentials()'>Login</button>
-      <button ng-click='goToRegistration()'>Register</button>
-    </div>
+    <form id="loginForm" ng-submit="checkCredentials()">
+      <label>Username</label>
+        <input ng-model='userName' type="text" name="Username">
+      <label>Password</label>
+        <input ng-model='password' type="password" name="Password">
+      <div class="buttonDiv fullWidth">
+        <button type="submit">Login</button>
+        <button ng-click='goToRegistration()'>Register</button>
+        <button ng-click='goToSplash()'>Back</button>
+      </div>
+    </form>
     <p>{{ errorMessage }}</p>
   </div>
 </div>
