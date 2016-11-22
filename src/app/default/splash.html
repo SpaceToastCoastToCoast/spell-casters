@@ -1,4 +1,4 @@
-<div id="gameInfo">
+<div id="gameInfo" class="splashItems">
   <h2>Welcome to Spellcasters!</h2>
   <div class="buttonDiv">
     <button ng-click="goToInstructions()">Instructions</button>
@@ -14,7 +14,7 @@
     <!-- Splash image goes here -->
   </div>
   <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
-
+  <button ng-Show="visible" ng-click="goToGameCharts()">Game Charts</button>
 </div>
 
 <modal ng-show="view" id="logout">

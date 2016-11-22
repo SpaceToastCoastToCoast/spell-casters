@@ -14,21 +14,33 @@ export const totalWordsGraphServices =[
 
         let totalWords = recentGames.recentGamesTotalWords
 
-        var svg = d3.select(".totalWords"),
-            margin = {
+        var margin = {
               top: 20,
               right: 20,
               bottom: 30,
               left: 40
             },
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom;
+            width = 600 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
 
         // Set the ranges
-        var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-          y = d3.scaleLinear().rangeRound([height, 0]);
+        var x = d3.scale.ordinal().rangeRoundBands([0, width],0.1),
+          y = d3.scale.linear().range([height, 0]);
 
-        var g = svg.append("g")
+        var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient('bottom')
+          .ticks(10)
+        var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient('left')
+          .ticks(10);
+
+        var svg = d3.select(".totalWords")
+          .append("svg")
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
+          .append('g')
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         if (totalWords) {
@@ -36,28 +48,29 @@ export const totalWordsGraphServices =[
           x.domain(totalWords.map(function(d, i) { return i; }));
           y.domain([0, d3.max(totalWords, function(d) { return d; })]);
 
-          g.append("g")
-            .attr("class", "axis axis--x")
+          svg.append("g")
+            .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(xAxis)
 
-          g.append("g")
-            .attr("class", "axis axis--y")
-            .call(d3.axisLeft(y).ticks(20))
+
+          svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
             .append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 7)
             .attr("dy","0.71em")
             .attr("text-anchor", "end")
-            .text("Frequency");
+            .text("Words Completed");
 
-          g.selectAll(".bar")
+          svg.selectAll(".bar")
             .data(totalWords)
             .enter().append("rect")
             .attr("class", "bar")
             .attr("x", function(d, i) { return x(i); })
             .attr("y", function(d) { return y(d); })
-            .attr("width", x.bandwidth())
+            .attr("width", x.rangeBand())
             .attr("height", function(d) { return height - y(d); });
         }
       });

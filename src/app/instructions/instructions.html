@@ -1,19 +1,26 @@
-<h2>Instructions</h2>
-  <div ng-show="base" id="instructionsDiv">
+<div ng-show="base" id="instructionsDiv">
+  <div id="display">
+    <h2>Instructions</h2>
+  </div>
     <div id="gameCanvas">
-    <div id="playerInput">
-      <p>Defeat Lord Zett and the Alphagators by casting spells as Alepha, a Spellcaster in training!</p>
-      <p>Click START to begin the tutorial or BACK to return to the home page.</p>
-      <div class="buttonDiv">
-        <button ng-click="startTutorial()">START</button>
-        <button ng-click="back()">BACK</button>
+      <div id="playerInput">
+        <div class="padMe">
+          <p>Defeat Lord Zett and the Alphagators by casting spells as Alepha, a Spellcaster in training!</p>
+          <p>Click START to begin the tutorial or BACK to return to the home page.</p>
+        </div>
+        <div class="buttonDiv fullWidth">
+          <button ng-click="startTutorial()">START</button>
+          <button ng-click="back()">BACK</button>
+        </div>
       </div>
-    </div>
     </div>
   </div>
   <div ng-show="example" id="exampleInput">
-    <p class="tutorialText" ng-show="tutorialText">Use the hint to figure out which word to spell.</p>
-    <h4 class="hint" ng-show="showHint">HINT: {{ instructions.testWords[instructions.currentWord].hint }}</h4>
+    <div id="display">
+      <h2>Instructions</h2>
+      <p class="tutorialText" ng-show="tutorialText">Use the hint to figure out which word to spell.</p>
+      <h4 class="hint" ng-show="showHint">HINT: {{ instructions.testWords[instructions.currentWord].hint }}</h4>
+    </div>
     <div id="gameCanvas">
       <div id="playerInput">
         <p class="tutorialText" ng-show="tutorialText">Use letters provided here to guess the correct word to spell.</p>

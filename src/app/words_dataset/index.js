@@ -51,7 +51,7 @@ class WordsDatasetCtrl {
     SoundService.setCurrentSong(shortTheme);
 
     //debug
-    // $scope.lvl = 3;
+    //$scope.lvl = 3;
     //end debug
 
     //Timer incorporation and init
@@ -367,6 +367,9 @@ class WordsDatasetCtrl {
         this.currentWord++;
         if (this.currentWord === this.newWords.length) {
           $scope.showLevel = true;
+          $timeout(() => {
+            $scope.showLevel = false;
+          }, 5000);
           increaseLvl();
         }
       }

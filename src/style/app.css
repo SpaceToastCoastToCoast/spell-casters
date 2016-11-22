@@ -24,6 +24,12 @@ p {
   margin-bottom: 8px;
 }
 
+@-moz-document url-prefix() {
+  h3, h4, h5, p, button {
+    letter-spacing: -1px;
+  }
+}
+
 .sizing {
   display: none;
   margin: auto;
@@ -87,7 +93,8 @@ p {
 }
 
 #musicControls button {
-  font-size: 14px;
+  width: 96px;
+  font-size: 12px;
   height: 48px;
   padding-top: 4px;
   padding-bottom: 20px;
@@ -145,7 +152,6 @@ button {
   padding-left: 16px;
   padding-right: 16px;
   line-height: 1;
-  letter-spacing: -1px;
   margin-left: 4px;
   margin-right: 4px;
   margin-bottom: 8px;
@@ -243,7 +249,7 @@ button:active {
   margin-right: 8px;
 }
 
-.login .buttonDiv {
+.fullWidth {
   width: 100%;
 }
 
@@ -270,12 +276,6 @@ button:active {
   margin: 4px;
   margin-top: 0px;
 }
-
-/*$lightest-color: #e3bb88;
-$light-color: #db9864;
-$medium-color: #b1695a;
-$dark-color: #644749;
-$darkest-color: #222222;*/
 
 .firstPlace {
   background-color: rgba(227, 187, 136, 1);
@@ -315,12 +315,6 @@ $darkest-color: #222222;*/
 
 /* Tutorial */
 
-#instructionsDiv {
-  padding-left: 8px;
-  padding-right: 8px;
-  box-sizing: border-box;
-}
-
 #instructions {
   margin-left: 4px;
   margin-right: 4px;
@@ -337,6 +331,11 @@ $darkest-color: #222222;*/
 #display {
   height: 96px;
   min-height: 96px;
+}
+
+.padMe {
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 #gameInfo {
@@ -454,6 +453,13 @@ $darkest-color: #222222;*/
   background-color: #b1695a;
 }
 
+.levelMarker {
+  color: #e3bb88;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
 /* Results */
 
 #gameStats {
@@ -473,16 +479,32 @@ $darkest-color: #222222;*/
   box-shadow: 1px 2px 2px #b1695a;
 }
 
-#gameStats div {
-  width: 100%;
-}
-
 #gameStats p, h3 {
   margin-top: 4px;
   margin-bottom: 12px;
 }
 
 /* Misc. Animation */
+
+.splashItems {
+  animation: grow 1.5s ease-in-out;
+}
+
+@keyframes grow {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 .shake {
   animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
@@ -818,3 +840,4 @@ modal .modal .modal-body .buttonDiv {
   margin: auto;
   width: 360px;
 }
+
