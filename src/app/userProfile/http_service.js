@@ -6,10 +6,10 @@ export const HttpServices = [
     constructor ($http, $rootScope) {
       this.$http = $http;
       this.$rootScope = $rootScope;
-      this.userDataQueryzz = this.userDataQueryzz.bind(this);
+      this.userDataQuery = this.userDataQuery.bind(this);
     }
 
-    userDataQueryzz(){
+    userDataQuery(){
       const req ={
         method: 'GET',
         url: `/api/game-stats/${this.$rootScope.user}`,

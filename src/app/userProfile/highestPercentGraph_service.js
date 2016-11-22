@@ -2,25 +2,20 @@ import { HttpServices } from './http_service';
 
 export const HighPercentGraphServices = [
 
- 'HttpServices', '$q',
+ 'HttpServices',
 
   class HighPercentGraphServices {
-    constructor (HttpServices, $q) {
+    constructor (HttpServices) {
       this.HttpServices = HttpServices;
-      this.$q = $q;
     }
 
     getGraphData(){
-      this.HttpServices.userDataQueryzz()
+      this.HttpServices.userDataQuery()
       .success(({recentGames}) =>{
-        let latestGames = recentGames[0];
-        console.log('recentGames: ', recentGames);
-        //Set data for graphs
-        let recentPercentComplete = [];
 
-        for(let x = 0; x<latestGames.length; x++){
-          recentPercentComplete.push(latestGames[x].percentCompleted);
-        }
+        //Set data for graphs
+        let recentPercentComplete = recentGames.recentGamesPercent;
+
 
         var margin = {top: 30, right: 20, bottom: 30, left: 50},
           width = 600 - margin.left - margin.right,

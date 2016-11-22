@@ -9,15 +9,10 @@ export const totalWordsGraphServices =[
     }
 
     getGraphData(){
-      this.HttpServices.userDataQueryzz()
-      .success(({stats}) =>{
+      this.HttpServices.userDataQuery()
+      .success(({recentGames}) =>{
 
-        let totalWords = [];
-
-        for(let x = 0; x<stats.length; x++){
-          totalWords.push(stats[x].totalWordsCompleted);
-        }
-        console.log('totalWords: ', totalWords);
+        let totalWords = recentGames.recentGamesTotalWords
 
         var svg = d3.select(".totalWords"),
             margin = {
