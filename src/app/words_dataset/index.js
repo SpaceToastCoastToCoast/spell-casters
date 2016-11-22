@@ -367,6 +367,9 @@ class WordsDatasetCtrl {
         this.currentWord++;
         if (this.currentWord === this.newWords.length) {
           $scope.showLevel = true;
+          $timeout(() => {
+            $scope.showLevel = false;
+          }, 5000);
           increaseLvl();
         }
       }
