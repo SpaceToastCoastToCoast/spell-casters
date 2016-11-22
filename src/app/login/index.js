@@ -14,8 +14,8 @@ export const LoginCtrlState = {
 };
 
 export const UserServices = [
-
- '$http', '$state',
+ '$http',
+ '$state',
 
   class UserServices {
     constructor ($http, $state, users) {
@@ -54,7 +54,6 @@ export const LoginCtrl = [
   '$stateParams',
   '$rootScope',
   'LocalStorageService',
-  '$q',
   'SoundService',
 
   class LoginCtrl {
@@ -64,43 +63,38 @@ export const LoginCtrl = [
       $stateParams,
       $rootScope,
       LocalStorageService,
-      $q,
       SoundService) {
-      this.userData = {
-        username: '',
-        password: ''
-      };
+
+      this.UserServices = UserServices;
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
       }
 
-
       $scope.userName = '';
       $scope.password = '';
-      $scope.UserServices = UserServices;
-
-
 
     $scope.checkCredentials = () =>{
-      this.userData.username = $scope.userName;
-      this.userData.password = $scope.password;
-      UserServices.getUsers(this.userData)
+      UserServices.getUsers({username: $scope.userName, password: $scope.password})
         .success(response =>{
           if (response.success) {
             $rootScope.user = response.username;
             $rootScope.visible = true;
             LocalStorageService.setData('user', {userId: response.userid, userName: response.username});
+          } else {
+            $scope.userName = '';
+            $scope.password = '';
           }
-        })
-        .then(()=> {
-          //console.log('what is in the localStorage', LocalStorageService.getData('user'));
         })
     };
     $scope.errorMessage = $stateParams.errorMessage;
 
     $scope.goToRegistration = () => {
       $state.go('registration');
+    };
+
+    $scope.goToSplash = () => {
+      $state.go('splash');
     };
   }
 }
