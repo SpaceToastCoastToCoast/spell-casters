@@ -85,8 +85,92 @@ function listSpells(req,res,next) {
   });
 }
 
+
+function recentGameData(req,res,next) {
+  users.findOne({
+    where: {username: req.params.username}
+  })
+  .then((user) => {
+    gamestats.findAll({
+      where: { UserId: user.dataValues.id},
+      order: '"createdAt" ASC',
+    })
+    .then((stats) => {
+      let recentGamesPercent = stats.map((stat,index) => {
+        if (index < 20) {
+          return parseFloat(stat.percentCompleted);
+        }
+      });
+
+      let recentGamesTotalWords = stats.map((stat,index) => {
+        if (index < 20) {
+          return parseInt(stat.totalWordsCompleted)
+        }
+      })
+
+      req.recentGames = {
+        recentGamesPercent,
+        recentGamesTotalWords
+      };
+
+      req.stats = stats;
+
+      next();
+    })
+  });
+}
+
+function gameSummaryData(req,res,next) {
+  let stats = req.stats
+  let totalTime = stats.reduce((prev,stat) => {
+    prev = prev.concat(stat.timeElapsed)
+    return prev
+  },[])
+  .reduce((prev,next) => {
+    prev+= next
+    return prev;
+  }, 0)
+
+  req.totalTime = totalTime
+
+  let totalWords = stats.reduce((prev,stat) => {
+    prev+= stat.totalWordsCompleted
+    return prev;
+  }, 0);
+
+  req.totalWords = totalWords;
+
+  let misspelledWords = stats.reduce((prev,stat) => {
+    stat.misspelledWords = stat.misspelledWords.map(word => {
+      return word.trim();
+    })
+    prev = prev.concat(stat.misspelledWords)
+    return prev
+  }, [])
+  .reduce((prev,word) => {
+    if(prev.hasOwnProperty(word)) {
+      prev[word]++;
+    } else {
+      prev[word] = 1;
+    }
+    return prev
+  }, {})
+
+  let misspelledWordsArr = Object.keys(misspelledWords).map(word => {
+    return {
+      word,
+      count: misspelledWords[word]
+    }
+  })
+
+  req.misspelledWords = misspelledWordsArr
+  next();
+}
+
 module.exports = {
   listHighscores,
   orderHighscores,
-  listSpells
+  listSpells,
+  recentGameData,
+  gameSummaryData
 }

@@ -60,36 +60,19 @@ app.post('/post-stats', (req,res) => {
 })
 
 //Get all past game statics by username
-app.get('/game-stats/:username',(req,res) => {
-  users.findOne({
-    where: {username: req.params.username}
-  })
-  .then((user) => {
-    gamestats.findAll({
-      where: { UserId: user.dataValues.id},
-      order: '"createdAt" DESC',
-    })
-    .then((stats) => {
-      let recentGames = [];
-      if(stats.length > 20){
-        stats.reverse();
-        for(var x = 0; x<20; x++){
-          recentGames.push(stats[x]);
-        }
-      }else{
-        stats.reverse();
-        recentGames.push(stats);
-      }
-      stats.forEach(stat => {
-        stat.percentCompleted = parseFloat(stat.percentCompleted);
-      })
+app.get('/game-stats/:username', format.recentGameData, format.gameSummaryData, (req,res) => {
 
-      res.json({
-        stats,
-        recentGames,
-      })
-    })
+  res.json({
+    gameSummary: {
+      totalTime: req.totalTime,
+      totalWords: req.totalWords,
+      totalGames: req.stats.length,
+      misspelledWords: req.misspelledWords
+    },
+    recentGames: req.recentGames,
+    stats: req.stats
   })
+
 })
 
 app.get('/leaderboard', format.listHighscores, format.orderHighscores, (req,res) => {
