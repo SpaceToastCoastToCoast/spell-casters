@@ -57,21 +57,12 @@ export const DefaultCtrl = [
       $scope.goToLogIn = () => {
         $state.go('login');
       }
-
       $scope.goLogOut = () => {
         ModalService.openModal('logout');
       };
-
       $scope.goToUserProfile = () => {
         $state.go('userProfile');
       }
-
-      $scope.goToGameCharts = () => {
-        $state.go('gamecharts')
-      }
-
-
-
     }
   }
 ]
