@@ -421,6 +421,7 @@ button:active {
   width: 320px;
   background-color: #db9864;
   box-shadow: 1px 2px 2px #b1695a;
+  transition: height 0.5s ease-in-out;
 }
 
 #playerInput h4 {
