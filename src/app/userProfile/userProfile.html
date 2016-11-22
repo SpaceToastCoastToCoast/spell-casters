@@ -1,12 +1,10 @@
 <p>User Profile</p>
 <p>{{ user }}</p>
 <div>
-  <p>Total Games Played: {{ UserProfileServices.totalGamesPlayed }}</p>
-  <p>Total Time Played: {{UserProfileServices.totalTimePlayed}}</p>
-  <p>Top missed Words: {{ UserProfileServices.topMissedWords}} </p>
-  <p>Highest Precentage of Game Completed: {{UserProfileServices.highestPercentComplete}} </p>
-  <p>Average of Game Completed: {{UserProfileServices.averagePercentComplete}} </p>
-  </div>
+  <p>Total Games Played: {{totalGames}}</p>
+  <p>Total Time Played: {{totalTime}}</p>
+  <p>Total Words Spelled: {{totalWords}}</p>
+
   <style> /* set the CSS */
 
     /* Line Graph */
@@ -46,6 +44,7 @@
 </style>
   <div class="totalGamesPlayed">
   </div>
-  <svg width="640" height="500" class="totalWords">
-  </svg>
+  <div class = 'totalWords'></div>
+<!--   <svg width="640" height="500" class="totalWords">
+  </svg> -->
 </div>

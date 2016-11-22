@@ -15,8 +15,9 @@ export const UserProfileCtrl = [
   '$scope',
   '$state',
   '$rootScope',
-  'UserProfileServices',
-  'GraphStatsServices',
+  'HighPercentGraphServices',
+  'totalWordsGraphServices',
+  'HttpServices',
   'TimerService',
   'SoundService',
 
@@ -25,8 +26,9 @@ export const UserProfileCtrl = [
       $scope,
       $state,
       $rootScope,
-      UserProfileServices,
-      GraphStatsServices,
+      HighPercentGraphServices,
+      totalWordsGraphServices,
+      HttpServices,
       TimerService,
       SoundService) {
       TimerService.resetGame();
@@ -36,11 +38,20 @@ export const UserProfileCtrl = [
       }
 
       $scope.state = $state;
-      $scope.UserProfileServices = UserProfileServices;
-      UserProfileServices.userDataQuery();
-      $scope.GraphStatsServices = GraphStatsServices;
-      GraphStatsServices.graphData();
-      GraphStatsServices.totalWordsGraph();
+
+
+      //get user's game stats
+      HttpServices.userDataQuery()
+      .then(response => {
+        $scope.totalTime = response.data.gameSummary.totalTime
+        $scope.totalWords = response.data.gameSummary.totalWords
+        $scope.totalGames = response.data.gameSummary.totalGames
+      })
+
+      //create user graphs
+      HighPercentGraphServices.getGraphData();
+      totalWordsGraphServices.getGraphData();
+
 
       if($rootScope.user === 'Guest'){
         $state.go('splash');
