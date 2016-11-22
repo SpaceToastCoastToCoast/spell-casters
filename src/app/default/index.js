@@ -52,18 +52,18 @@ export const DefaultCtrl = [
         $state.go('about');
       };
       $scope.goToLeaderboard = () => {
-        $state.go('leaderboard')
+        $state.go('leaderboard');
       };
       $scope.goToLogIn = () => {
-        $state.go('login')
+        $state.go('login');
       }
 
       $scope.goLogOut = () => {
-        ModalService.openModal('logout')
+        ModalService.openModal('logout');
       };
 
       $scope.goToUserProfile = () => {
-        $state.go('userProfile')
+        $state.go('userProfile');
       }
 
     }

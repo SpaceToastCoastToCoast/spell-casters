@@ -5,16 +5,15 @@ export const LeaderboardService = [
   class LeaderboardService {
     constructor ($http) {
       this.$http = $http;
-      this.getLeaderboard = this.getLeaderboard.bind(this)
+      this.getLeaderboard = this.getLeaderboard.bind(this);
     }
 
     getLeaderboard() {
-      const req ={
+      const req = {
         method: 'GET',
         url: `/api/leaderboard`
       };
-      return this.$http(req)
+      return this.$http(req);
     }
-
   }
 ];

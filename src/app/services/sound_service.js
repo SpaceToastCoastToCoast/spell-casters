@@ -2,19 +2,16 @@ const mainSong = require('../../public/music/Main.ogg');
 
 export const SoundService = [
 
-  '$rootScope',
-
   class SoundService {
-    constructor ($rootScope) {
-      this.$rootScope = $rootScope;
-      this.setCurrentSong = this.setCurrentSong.bind(this)
-      this.playSoundEffect = this.playSoundEffect.bind(this)
+    constructor () {
+      this.setCurrentSong = this.setCurrentSong.bind(this);
+      this.playSoundEffect = this.playSoundEffect.bind(this);
       this.currentSong;
       this.currentSound;
       this.musicOn = true;
       this.soundEffectsOn = true;
-      this.turnMusicOn = this.turnMusicOn.bind(this)
-      this.turnMusicOff = this.turnMusicOff.bind(this)
+      this.turnMusicOn = this.turnMusicOn.bind(this);
+      this.turnMusicOff = this.turnMusicOff.bind(this);
     }
 
     setCurrentSong(songPath) {
@@ -42,7 +39,7 @@ export const SoundService = [
 
 
     playSoundEffect(soundPath) {
-      if (this.soundEffectsOn) { //only set and play sound effects is soundEffectsOn is true
+      if (this.soundEffectsOn) { //only set and play sound effects if soundEffectsOn is true
         if(this.currentSound) {
           this.currentSound.pause();
         }

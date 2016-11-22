@@ -24,22 +24,24 @@ export const AboutCtrl = [
       $rootScope,
       TimerService,
       SoundService) {
+
       TimerService.resetGame();
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
       }
+
       $scope.goToInstructions = () => {
-        $state.go('instructions')
+        $state.go('instructions');
       }
       $scope.goToActiveGame = () => {
-        $state.go('active-game')
+        $state.go('active-game');
       }
       $scope.goToSplash = () => {
-        $state.go('splash')
+        $state.go('splash');
       }
       $scope.goToUserProfile = () => {
-        $state.go('userProfile')
+        $state.go('userProfile');
       }
     }
   }
