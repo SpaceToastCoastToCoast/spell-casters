@@ -77,24 +77,9 @@ class GraphStatsServices {
       .call(xAxis);
 
      // Add the Y Axis
-      var gy = svg.append("g")
+      svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
-
-      gy.selectAll('g').filter((d) => {
-        return d;
-      })
-        .classed('minor', true)
-
-      gy.selectAll('text')
-        .attr('x',-20)
-        .attr('y', 0)
-        .style('fill', '#cc33ff')
-
-      gy.selectAll('path')
-        .style('stroke', '#cc33ff')
-        .style('stroke-width', '2')
-
 
     }
 
