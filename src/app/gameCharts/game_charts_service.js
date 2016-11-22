@@ -1,172 +1,93 @@
 export const GameChartsServices = [
-
-'$http',
+'$q',
 
 class GameChartsServices {
-  constructor($http){
-    this.$http = $http;
-    this.userDataQuery = this.userDataQuery.bind(this);
-    this.sortedWords =[];
+  constructor($q){
 
+    this.$q = $q;
+    this.drawingBubbleChart = this.drawingBubbleChart.bind(this);
   }
 
-//url: `/api/game-stats/${this.$rootScope.user}`
-  userDataQuery() {
-    const req = {
-      method: 'GET',
-      url: `/api/game-stats/John`,
-    };
-    return this.$http(req)
-      .success(response => {
-        //console.log('response.stats', response.stats);
+  drawingBubbleChart (sortedWords) {
+    //bubble chart
+    const diameter = 400 //max size of the bubbles
+    const colorArr = [ '#f9d5e5', '#eeac99', '#e06377',
+                  '#c83349', '#5b9aa0', '#d6d4e0',
+                  '#b8a9c9', '#622569', '#ffcc5c', '#ff6f69']
+    const scaler = 5;
+    const textColor = 'black'
+    const textFont = 'monospace';
+    const textSize = '15px';
+    const legendColorBox = 20;
+    const spacingBetweenLegend = 30;
 
-        //Top missSpelled words
-        //Combines all the word Objects misspelled into a single array
-        let combinedMisspelledArr = [];
-        for(let x = 0; x<response.stats.length; x++){
-          combinedMisspelledArr.push(response.stats[x].misspelledWords);
-        }
+    var svg = d3.select('#bubble-chart').append('svg')
+      .attr('width',diameter+200)
+      .attr('height',diameter)
 
-        //breaks each object containing words into a single array
-        let word = [];
-        combinedMisspelledArr.forEach(function(x) {
-          word = word.concat(x);
-        });
+    var bubble = d3.layout.pack()
+      .size([diameter,diameter])
+      .value(function(d) {
+        return d.count;})
+      .padding(1.5);
 
-         //Trim out the white spacing from data set
-        let trimmedWordSet = word.map(entry => entry.trim());
+    var nodes = bubble.nodes(processData(sortedWords))
+      .filter(function(d) {return !d.children;});
 
-        let count = {};
+    var nodeLegend = bubble.nodes(processData(sortedWords))
+      .filter(function(d) {return !d.children});
 
-        trimmedWordSet.forEach((word) => {
-          if (!count.hasOwnProperty(word)){
-            count[word] = 0;
-          }
-          count[word] += 1;
-        });
+    var vis = svg.selectAll('circle')
+      .data(nodes)
+      .enter()
+      .append('circle')
+        .attr('class', 'circle')
+        .attr('transform', function(d) {
+        return `translate(${d.x},${d.y})`;
+        })
+        .attr('r', function(d) {return d.count * scaler})
+        .attr('class', function(d) {
+        return d.className;
+        })
+        .style('fill', function(d) {
+        return colorArr[d.colorIndex];
+        })
 
-        // eof BBs UserProfileService
+    var legend = d3.select('svg')
+      .append('g')
+        .attr('class', 'legend')
+      .selectAll('g')
+      .data(nodeLegend)
+      .enter()
+      .append('g')
+        .attr('transform', function(d) {
+          return `translate(${450},${spacingBetweenLegend*d.colorIndex})`
+        })
 
-        // transform count into sorted [{},{}...]
+    legend.append('rect')
+      .attr('width',legendColorBox)
+      .attr('height',legendColorBox)
+      .style('fill', function(d) {
+        return colorArr[d.colorIndex];
+      })
 
-        function sortingWords (objWord) {
-          let misspWords = []
-          let counter = 10;
-          for (var key in objWord) {
-            if (counter > 0) {
-              let oneWord = {};
-              oneWord.word = key ;
-              oneWord.count = objWord[key];
-              misspWords.push(oneWord)
-              counter --;
-            }
-          }
-          console.log('misspWords', misspWords)
-          // sorting misspWords2
-          function quickSort(array){
-            if (array.length <= 1) {
-              return array;
-            }
-            let pivot = array.shift();
-            let left = array.filter(element => {
-              return element.count >= pivot.count;
-            });
-            let right = array.filter(element => {
-              return element.count < pivot.count;
-            });
-            return quickSort(left).concat(pivot, quickSort(right));
-          }
-          return quickSort(misspWords);
-        }
-        this.sortedWords = sortingWords(count)
+    legend.append('text')
+      .attr('y','1em')
+      .attr('x', legendColorBox + 5)
+      .text(function(d) {
+        return `${d.count} ${d.word}`
+      })
+      .style('fill',textColor)
+      .style('font-family', textFont)
+      .style('font-size',textSize)
 
-        //bubble chart
-        const diameter = 400 //max size of the bubbles
-        const colorArr = [ '#f9d5e5', '#eeac99', '#e06377',
-                      '#c83349', '#5b9aa0', '#d6d4e0',
-                      '#b8a9c9', '#622569', '#ffcc5c', '#ff6f69']
-        const scaler = 5;
-        const textColor = 'black'
-        const textFont = 'monospace';
-        const textSize = '15px';
-        const legendColorBox = 20;
-        const spacingBetweenLegend = 30;
-
-        var svg = d3.select('#bubble-chart').append('svg')
-          .attr('width',diameter+200)
-          .attr('height',diameter)
-
-        var bubble = d3.layout.pack()
-          .size([diameter,diameter])
-          .value(function(d) {
-            return d.count;})
-          .padding(1.5);
-
-        var nodes = bubble.nodes(processData(this.sortedWords))
-          .filter(function(d) {return !d.children;});
-
-        var nodeLegend = bubble.nodes(processData(this.sortedWords))
-          .filter(function(d) {return !d.children});
-
-        var vis = svg.selectAll('circle')
-          .data(nodes)
-          .enter()
-          .append('circle')
-            .attr('transform', function(d) {
-            return `translate(${d.x},${d.y})`;
-            })
-            .attr('r', function(d) {return d.count * scaler})
-            .attr('class', function(d) {
-            return d.className;
-            })
-            .style('fill', function(d) {
-            return colorArr[d.colorIndex];
-            })
-
-        var legend = d3.select('svg')
-          .append('g')
-            .attr('class', 'legend')
-          .selectAll('g')
-          .data(nodeLegend)
-          .enter()
-          .append('g')
-            .attr('transform', function(d) {
-              return `translate(${450},${spacingBetweenLegend*d.colorIndex})`
-            })
-
-        legend.append('rect')
-          .attr('width',legendColorBox)
-          .attr('height',legendColorBox)
-          .style('fill', function(d) {
-            return colorArr[d.colorIndex];
-          })
-
-        legend.append('text')
-          .attr('y','1em')
-          .attr('x', legendColorBox + 5)
-          .text(function(d) {
-            return `${d.count} ${d.word}`
-          })
-          .style('fill',textColor)
-          .style('font-family', textFont)
-          .style('font-size',textSize)
-
-
-
-        function processData(data) {
-          data = data.map((wordObj, index) =>{
-            wordObj.colorIndex = index;
-            return wordObj;
-          })
-          return {children: data};
-        }
-
-
-        return;
-    });
-
+    function processData(data) {
+      data = data.map((wordObj, index) =>{
+        wordObj.colorIndex = index;
+        return wordObj;
+      })
+      return {children: data};
+    }
   }
 
-
-}
-];
+}];

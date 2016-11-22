@@ -26,6 +26,8 @@ import { ModalService } from './services/modal_service';
 import { LogoutService } from './services/logout_service';
 import { GameChartsCtrlState, GameChartsCtrlName, GameChartsCtrl } from './gameCharts';
 import { GameChartsServices } from './gameCharts/game_charts_service';
+import { BubbleChartDataServices } from './gameCharts/bubble_data_service';
+import { HttpGameStatsServices } from './gameCharts/http_gamestats_service';
 
 import '../style/app.css';
 const mainSong = require('../public/music/Main.ogg');
@@ -112,6 +114,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('ModalService', ModalService)
   .service('LogoutService', LogoutService)
   .service('GameChartsServices', GameChartsServices)
+  .service('BubbleChartDataServices', BubbleChartDataServices)
+  .service('HttpGameStatsServices', HttpGameStatsServices)
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope, SoundService,$state) => {
     $rootScope.user = "Guest";

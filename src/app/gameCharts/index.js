@@ -11,28 +11,29 @@ export const GameChartsCtrlState = {
 
 export const GameChartsCtrl = [
   '$scope',
-  '$state',
   '$rootScope',
   'GameChartsServices',
+  'BubbleChartDataServices',
+  'HttpGameStatsServices',
 
   class GameChartsCtrl {
     constructor(
       $scope,
-      $state,
       $rootScope,
-      GameChartsServices ) {
-      // TimerService.resetGame();
+      GameChartsServices,
+      BubbleChartDataServices,
+      HttpGameStatsServices) {
 
-      $scope.GameChartsServices = GameChartsServices;
+      this.GameChartsServices =GameChartsServices;
+      this.BubbleChartDataServices = BubbleChartDataServices;
 
-
-      $scope.data = GameChartsServices.userDataQuery()
-
-
-
+      HttpGameStatsServices.userDataQuery()
+      .then(
+        this.BubbleChartDataServices.makingDataSets
+        )
+      .then(
+        this.GameChartsServices.drawingBubbleChart
+        )
     }
 
-
-
-  }
-]
+  }];
