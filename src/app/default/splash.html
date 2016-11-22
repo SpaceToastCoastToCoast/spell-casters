@@ -14,7 +14,7 @@
     <!-- Splash image goes here -->
   </div>
   <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ user }}</p></a>
-
+  <button ng-Show="visible" ng-click="goToGameCharts()">Game Charts</button>
 </div>
 
 <modal ng-show="view" id="logout">

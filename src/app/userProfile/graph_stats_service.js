@@ -65,7 +65,10 @@ class GraphStatsServices {
      // Add the valueline path.
      svg.append("path")
       .attr("class", "line")
-      .attr("d", valueline(recentPercentComplete));
+      .attr("d", valueline(recentPercentComplete))
+      .style('stroke-width', '3')
+      .style('stroke', '#feedba')
+
 
      // Add the X Axis
      svg.append("g")
@@ -74,10 +77,16 @@ class GraphStatsServices {
       .call(xAxis);
 
      // Add the Y Axis
-     svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
     }
+
+
+
+
+
   }
 
   totalWordsGraph(totalWords){
