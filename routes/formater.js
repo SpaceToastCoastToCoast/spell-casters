@@ -96,15 +96,19 @@ function recentGameData(req,res,next) {
       order: '"createdAt" ASC',
     })
     .then((stats) => {
-      let recentGamesPercent = stats.map((stat,index) => {
-        if (index < 20) {
+      let recentGamesPercent = stats.map((stat) => {
           return parseFloat(stat.percentCompleted);
-        }
-      });
-
-      let recentGamesTotalWords = stats.map((stat,index) => {
+      }).filter((stat,index) => {
         if (index < 20) {
-          return parseInt(stat.totalWordsCompleted)
+          return stat
+        }
+      })
+
+      let recentGamesTotalWords = stats.map((stat) => {
+        return parseInt(stat.totalWordsCompleted)
+      }).filter((stat,index) => {
+        if (index < 20) {
+          return stat
         }
       })
 
@@ -140,6 +144,12 @@ function gameSummaryData(req,res,next) {
 
   req.totalWords = totalWords;
 
+  next();
+}
+
+function misspelledWordsData(req,res,next) {
+  let stats = req.stats;
+
   let misspelledWords = stats.reduce((prev,stat) => {
     stat.misspelledWords = stat.misspelledWords.map(word => {
       return word.trim();
@@ -162,9 +172,28 @@ function gameSummaryData(req,res,next) {
       count: misspelledWords[word]
     }
   })
+  let topMisspelledWords = qSort(misspelledWordsArr).filter((wordObj,index) => {
+    if (index < 10) {
+      return wordObj
+    }
+  })
 
-  req.misspelledWords = misspelledWordsArr
+  req.misspelledWords = topMisspelledWords
   next();
+}
+
+function qSort(array){
+  if (array.length <= 1) {
+    return array;
+  }
+  let pivot = array.shift();
+  let left = array.filter(element => {
+    return element.count >= pivot.count;
+  });
+  let right = array.filter(element => {
+    return element.count < pivot.count;
+  });
+  return qSort(left).concat(pivot, qSort(right));
 }
 
 module.exports = {
@@ -172,5 +201,6 @@ module.exports = {
   orderHighscores,
   listSpells,
   recentGameData,
-  gameSummaryData
+  gameSummaryData,
+  misspelledWordsData
 }

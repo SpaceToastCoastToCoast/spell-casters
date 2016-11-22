@@ -60,7 +60,7 @@ app.post('/post-stats', (req,res) => {
 })
 
 //Get all past game statics by username
-app.get('/game-stats/:username', format.recentGameData, format.gameSummaryData, (req,res) => {
+app.get('/game-stats/:username', format.recentGameData, format.gameSummaryData, format.misspelledWordsData, (req,res) => {
 
   res.json({
     gameSummary: {
