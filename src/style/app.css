@@ -670,6 +670,10 @@ ul li {
   width: 0px;
 }
 
+.character {
+  background-image: url("/img/characters.png");
+}
+
 /* Alepha */
 
 .alepha {
@@ -678,7 +682,6 @@ ul li {
   left: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("/img/alepha_idle_final.png");
 }
 
 .alephaIdle {
@@ -708,7 +711,7 @@ ul li {
   position: absolute;
   width: 32px;
   height: 32px;
-  background-image: url("/img/spell-sprites-alpha.png");
+  background-image: url("/img/attacks.png");
 }
 
 .noCharge {
@@ -716,8 +719,8 @@ ul li {
 }
 
 @keyframes noCharge {
-  from {background-position: 0px -32px;}
-  to {background-position: -128px -32px;}
+  from {background-position: -288px -32px;}
+  to {background-position: -416px -32px;}
 }
 
 .oneCharge {
@@ -725,8 +728,8 @@ ul li {
 }
 
 @keyframes oneCharge {
-  from {background-position: 0px -64px;}
-  to {background-position: -128px -64px;}
+  from {background-position: -288px -64px;}
+  to {background-position: -416px -64px;}
 }
 
 .twoCharge {
@@ -734,8 +737,8 @@ ul li {
 }
 
 @keyframes twoCharge {
-  from {background-position: 0px -96px;}
-  to {background-position: -128px -96px;}
+  from {background-position: -288px -96px;}
+  to {background-position: -416px -96px;}
 }
 
 .threeCharge {
@@ -743,8 +746,8 @@ ul li {
 }
 
 @keyframes threeCharge {
-  from {background-position: 0px -128px;}
-  to {background-position: -128px -128px;}
+  from {background-position: -288px -128px;}
+  to {background-position: -416px -128px;}
 }
 
 .fourCharge {
@@ -752,8 +755,8 @@ ul li {
 }
 
 @keyframes fourCharge {
-  from {background-position: 0px -160px;}
-  to {background-position: -128px -160px;}
+  from {background-position: -288px -160px;}
+  to {background-position: -416px -160px;}
 }
 
 .fiveCharge {
@@ -761,18 +764,17 @@ ul li {
 }
 
 @keyframes fiveCharge {
-  from {background-position: 0px -192px;}
-  to {background-position: -128px -192px;}
+  from {background-position: -288px -192px;}
+  to {background-position: -416px -192px;}
 }
 
 .swipe {
-  background-image: url("/img/swipe.png");
   animation: swipe steps(4) 0.16s infinite;
 }
 
 @keyframes swipe {
-  from {background-position: 0px 0px;}
-  to {background-position: 0px -256px;}
+  from {background-position: 0px -128px;}
+  to {background-position: 0px -384px;}
 }
 
 .beam {
@@ -782,10 +784,10 @@ ul li {
   left: 184px;
   width: 288px;
   height: 64px;
+  background-image: url("/img/attacks.png");
 }
 
 .beamBlast {
-  background-image: url("/img/beam_placeholder.png");
   animation: beamBlast steps(2) 0.1s infinite;
 }
 
@@ -802,10 +804,11 @@ ul li {
   right: 96px;
   width: 128px;
   height: 128px;
+
 }
 
 .gatorIdle {
-  background-image: url("/img/gator-hurt-die.png");
+  background-position: 0px -512px;
   /*animation: gatorIdle steps(4) 0.32s infinite;*/
 }
 
@@ -817,24 +820,23 @@ ul li {
 */
 
 .gatorHit {
-  background-image: url("/img/gator-hurt-die.png");
-  background-position: 0px 0px;
+  background-position: 0px -512px;
   animation: gatorHit steps(4) 0.32s 1;
 }
 
 @keyframes gatorHit {
-  from {background-position: 0px 0px;}
-  to {background-position: -512px 0px;}
+  from {background-position: 0px -512px;}
+  to {background-position: -512px -512px;}
 }
 
 .gatorDie {
-  background: url("/img/gator-hurt-die.png") no-repeat;
-  background-position: 0px -128px;
+  background-repeat: no-repeat;
+  background-position: 0px -640px;
   animation: gatorDie steps(9, start) 0.64s forwards;
 }
 
 @keyframes gatorDie {
-  to {background-position: -1152px -128px;}
+  to {background-position: -1152px -640px;}
 }
 
 /* Lord Zett */
@@ -853,8 +855,8 @@ ul li {
 }
 
 @keyframes zettIdle {
-  from {background-position: 0px 0px;}
-  to {background-position: -1024px 0px;}
+  from {background-position: 0px -768px;}
+  to {background-position: -1024px -768px;}
 }
 
 /* MODAL */

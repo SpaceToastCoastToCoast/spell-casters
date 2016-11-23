@@ -20,10 +20,10 @@
   <div id="gatorBar" ng-class="enemyHealth" ng-show="isGator"></div>
   <div id="bossBar" ng-class="enemyHealth" ng-show="isBoss"></div>
   <div class="glow" id="playerSpell" ng-class="chargeLevel"></div>
-  <div class="alepha" ng-class="playerAnimState"></div>
-  <div class="alphagator" ng-class="enemyAnimState" ng-show="isGator"></div>
+  <div class="character alepha" ng-class="playerAnimState"></div>
+  <div class="character alphagator" ng-class="enemyAnimState" ng-show="isGator"></div>
   <div class="glow noCharge" id="bossSpell" ng-show="isBoss"></div>
-  <div class="lordZett" ng-class="bossAnimState" ng-show="isBoss"></div>
+  <div class="character lordZett" ng-class="bossAnimState" ng-show="isBoss"></div>
   <div class="swipe beam" ng-show="showSwipe"></div>
   <div class="beam beamBlast" ng-show="showBeam"></div>
   <p class="splashItems levelMarker" ng-show="showLevel">You made it to level {{ lvl }}!</p>
