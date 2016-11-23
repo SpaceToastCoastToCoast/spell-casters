@@ -21,6 +21,7 @@ export const UserProfileCtrl = [
   'HttpServices',
   'TimerService',
   'SoundService',
+  'ModalService',
 
   class UserProfileCtrl {
     constructor(
@@ -32,7 +33,8 @@ export const UserProfileCtrl = [
       BubbleGraphService,
       HttpServices,
       TimerService,
-      SoundService) {
+      SoundService,
+      ModalService) {
       TimerService.resetGame();
 
       if (SoundService.currentSong._src !== mainSong) {
@@ -58,25 +60,23 @@ export const UserProfileCtrl = [
           $scope.totalWordsCompletedGraph = false;
           $scope.bubbleChartGraph = true;
         }
-
       }
-
-
 
       //get user's game stats
       HttpServices.userDataQuery()
       .then(response => {
-        $scope.totalTime = response.data.gameSummary.totalTime
-        $scope.totalWords = response.data.gameSummary.totalWords
-        $scope.totalGames = response.data.gameSummary.totalGames
-        BubbleGraphService.drawingBubbleChart(response.data.gameSummary.misspelledWords);
+        if (response.data.gameSummary.misspelledWords.length === 0 ) {
+          ModalService.openModal('noData');
+        } else {
+          BubbleGraphService.drawingBubbleChart(response.data.gameSummary.misspelledWords);
+          $scope.totalTime = response.data.gameSummary.totalTime
+          $scope.totalWords = response.data.gameSummary.totalWords
+          $scope.totalGames = response.data.gameSummary.totalGames
+        }
       })
-
       //create user graphs
       HighPercentGraphServices.getGraphData();
       totalWordsGraphServices.getGraphData();
-
-
 
       if($rootScope.user === 'Guest'){
         $state.go('splash');

@@ -1,14 +1,9 @@
 export const BubbleGraphService = [
-  'HttpServices',
 
 class BubbleGraphService {
-  constructor(HttpServices){
-
-    this.HttpServices = HttpServices
-  }
+  constructor(){}
 
   drawingBubbleChart (sortedWords) {
-    //bubble chart
     const diameter = 400 //max size of the bubbles
     const colorArr = [ '#9CCBC5', '#64A39A', '#3F897F',
                   '#247267', '#105A50', '#904A19',
@@ -59,6 +54,7 @@ class BubbleGraphService {
       .data(nodeLegend)
       .enter()
       .append('g')
+        .attr('class', 'legend')
         .attr('transform', function(d) {
           return `translate(${450},${spacingBetweenLegend*d.colorIndex})`
         })

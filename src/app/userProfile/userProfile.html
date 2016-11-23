@@ -11,7 +11,6 @@
     <button ng-click="showGraph('totalWords')">Total Words Completed</button>
     <button ng-click="showGraph('misspelledWords')">Misspelled Words</button>
   </div>
-
   <style> /* set the CSS */
 
     /* Line Graph */
@@ -53,3 +52,17 @@
   <div class = 'totalWords' ng-show="totalWordsCompletedGraph"></div>
   <div id ='bubble-chart' ng-show="bubbleChartGraph"></div>
 </div>
+
+<modal ng-show="view" id="noData">
+  <div class="modal">
+    <div class="modal-body">
+      <h3>No game data to show</h3>
+      <p></p>
+      <div class="buttonDiv">
+        <button ng-click="closeModal('noData');">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>
+
