@@ -103,6 +103,7 @@ p {
   padding-bottom: 20px;
   margin-left: 2px;
   margin-right: 6px;
+  word-spacing: -2px;
 }
 
 /* Body elements */
