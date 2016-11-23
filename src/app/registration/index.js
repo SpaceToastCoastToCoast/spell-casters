@@ -50,6 +50,7 @@ export const RegistrationCtrl = [
           .success(response => {
             if (response.success === true) {
               $rootScope.user = response.username;
+              $rootScope.userLink = `${response.username} | Profile`;
               $rootScope.visible = true;
               if (this.timeD) {
                 $timeout.cancel(timer)

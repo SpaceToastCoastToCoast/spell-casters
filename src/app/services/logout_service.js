@@ -13,6 +13,7 @@ export const LogoutService = [
     userOut (lstorageObj, userName, isVisibleBln, stateGo) {
       this.LocalStorageService.resetData(lstorageObj);
       this.$rootScope.user = userName;
+      this.$rootScope.userLink = userName;
       this.$rootScope.visible = isVisibleBln;
       this.$rootScope.$digest();
       this.$state.go(stateGo);
