@@ -201,6 +201,10 @@ ul li {
   margin-left: 16px;
 }
 
+#aboutPage .blurb {
+  margin-bottom: 16px;
+}
+
 /* User accounts */
 
 #thisUser {
@@ -847,7 +851,6 @@ ul li {
   right: 96px;
   width: 128px;
   height: 128px;
-  background-image: url("/img/zett_idle_final.png");
 }
 
 .zettIdle {
