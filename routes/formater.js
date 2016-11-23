@@ -27,7 +27,6 @@ function listHighscores(req,res,next) {
       }
       return scores;
     }, {})
-    console.log('allScores',allScores)
     req.allScores = allScores;
     next();
   })
