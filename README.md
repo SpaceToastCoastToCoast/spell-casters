@@ -2,6 +2,7 @@
 An educational game to teach proper spelling
 
 ![](https://github.com/SpaceToastCoastToCoast/spell-casters/blob/develop/src/public/img/sc_mainscr.png)
+![](https://github.com/SpaceToastCoastToCoast/spell-casters/blob/develop/src/public/img/sp_scr1.png)
 
 * [Game Information](https://github.com/SpaceToastCoastToCoast/spell-casters/wiki/Game-Information)
 
