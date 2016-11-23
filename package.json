@@ -1,19 +1,16 @@
 {
-  "name": "angular-webpack-workflow",
-  "version": "1.0.0",
-  "description": "A workflow for Angular made with Webpack",
+  "name": "spell-casters",
+  "version": "0.8.0",
+  "description": "A game to teach spelling",
+  "main": "server.js",
   "scripts": {
-    "build": "rimraf dist && webpack --bail --progress --profile",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress",
-    "test": "karma start",
-    "test-watch": "karma start --auto-watch --no-single-run",
-    "start": "npm run server"
+    "deploy": "NODE_ENV=production webpack -p",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SpaceToastCoastToCoast/spell-casters.git"
   },
-  "author": "Jesus Rodriguez",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SpaceToastCoastToCoast/spell-casters/issues"
