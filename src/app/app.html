@@ -1,20 +1,24 @@
-<main>
-  <h1 class="title">SpellCasters</h1>
-
-  <!-- Images (and assets) are parsed and loaded from within the public directory -->
-
+<div class="sizing">
+  <h3>Sorry!</h3>
+  <p>This game is not compatible with mobile devices. Please access this site from a computer.</p>
+</div>
+<a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>
+<main class="container">
   <div id="main">
-    <canvas id="gameCanvas" width="640" height="360"></canvas>
-    <!-- <div id="playerInput">
-      <h4 class="targetWord">BEL__VE</h4>
-      <input type="text" name="spellWord" value="BELIEVE">
-    </div> -->
     <section ui-view>
       <!-- all the states will be rendered in here -->
     </section>
-    <!-- <p>Spell the word in the box to charge your spell!</p>
-    <h4 class="hint">HINT:</h4>
-    <p>When you know something is true.</p> -->
   </div>
-  <img src="/img/spellcasters_titletext.svg" id="svgLogo">
+  <a ui-sref="splash"><img src="/img/spellcasters_titletext.svg" id="svgLogo"></a>
+
+  <div id="musicControls" class="buttonDiv">
+    <div id='musicSettings'>
+      <button ng-click="turnOnMusic()" ng-show="!music">Music 🔇&#xFE0E;</button>
+      <button ng-click="turnOffMusic()" ng-show="music">Music 🔊&#xFE0E;</button>
+    </div>
+    <div id='soundEffectSettings'>
+      <button ng-click="turnOnSoundEffects()" ng-show="!sound">Effects 🔇&#xFE0E;</button>
+      <button ng-click="turnOffSoundEffects()" ng-show="sound">Effects 🔊&#xFE0E;</button>
+    </div>
+  </div>
 </main>

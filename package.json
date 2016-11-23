@@ -1,19 +1,16 @@
 {
-  "name": "angular-webpack-workflow",
-  "version": "1.0.0",
-  "description": "A workflow for Angular made with Webpack",
+  "name": "spell-casters",
+  "version": "0.8.0",
+  "description": "A game to teach spelling",
+  "main": "server.js",
   "scripts": {
-    "build": "rimraf dist && webpack --bail --progress --profile",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress",
-    "test": "karma start",
-    "test-watch": "karma start --auto-watch --no-single-run",
-    "start": "npm run server"
+    "deploy": "NODE_ENV=production webpack -p",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SpaceToastCoastToCoast/spell-casters.git"
   },
-  "author": "Jesus Rodriguez",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SpaceToastCoastToCoast/spell-casters/issues"
@@ -22,8 +19,23 @@
   "dependencies": {
     "angular": "^1.5.0",
     "angular-ui-router": "^0.3.2",
+    "autoprefixer": "^6.5.2",
     "babel-loader": "^6.2.7",
-    "express": "^4.14.0"
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "copy-webpack-plugin": "^3.0.1",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "howler": "^2.0.1",
+    "html-webpack-plugin": "^2.24.1",
+    "json-loader": "^0.5.4",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.27.0",
+    "sequelize-cli": "^2.4.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",

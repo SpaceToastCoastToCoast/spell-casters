@@ -1,0 +1,68 @@
+<h2>User Profile</h2>
+<h3 id="thisUser">{{ user }}</h3>
+<div>
+  <ul>
+    <li>Total Games Played: {{totalGames}}</li>
+    <li>Total Time Played: {{totalTime}} seconds</li>
+    <li>Total Words Spelled: {{totalWords}}</li>
+  </ul>
+  <div class="buttonDiv padBottom">
+    <button ng-click="showGraph('percent')">Percent Completed</button>
+    <button ng-click="showGraph('totalWords')">Total Words Completed</button>
+    <button ng-click="showGraph('misspelledWords')">Misspelled Words</button>
+  </div>
+  <style> /* set the CSS */
+
+    /* Line Graph */
+
+    path {
+        stroke: #3F897F;
+        stroke-width: 2;
+        fill: none;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #904A19;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+
+    /* Bar Graph */
+    .bar {
+      fill: #3F897F;
+    }
+
+    .bar:hover {
+      fill: #b1695a;
+    }
+
+    .axis--x path {
+      display: none;
+    }
+    .totalWords{
+      width: 960;
+      height: 500;
+    }
+
+</style>
+  <div class="totalGamesPlayed" ng-show="percentCompletedGraph">
+  </div>
+  <div class = 'totalWords' ng-show="totalWordsCompletedGraph"></div>
+  <div id ='bubble-chart' ng-show="bubbleChartGraph"></div>
+</div>
+
+<modal ng-show="view" id="noData">
+  <div class="modal">
+    <div class="modal-body">
+      <h3>No game data to show</h3>
+      <p></p>
+      <div class="buttonDiv">
+        <button ng-click="closeModal('noData');">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>
+

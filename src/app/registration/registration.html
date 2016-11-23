@@ -1,0 +1,17 @@
+<div id="gameCanvas">
+  <div class="login">
+    <h2>Register</h2>
+    <h5 class="userName">Create an account here.</h5>
+    <form ng-submit="registerUser()">
+      <label>Please create a username</label>
+        <input ng-model="userName" type="text" name="Username">
+      <label>Please create a password</label>
+        <input ng-model="password" type="password" name="Password">
+        <div class="buttonDiv">
+          <button type="submit">Register</button>
+          <button ng-click='goToSplash()'>Back</button>
+        </div>
+    </form>
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div id="gameCanvas">
+  <div class="login">
+    <h2>Log In</h2>
+    <h5 class="userName">You are logged in as {{ user }}.</h5>
+    <form id="loginForm" ng-submit="checkCredentials()">
+      <label>Username</label>
+        <input ng-model='userName' type="text" name="Username">
+      <label>Password</label>
+        <input ng-model='password' type="password" name="Password">
+      <div class="buttonDiv fullWidth">
+        <button type="submit">Login</button>
+        <button ng-click='goToRegistration()'>Register</button>
+        <button ng-click='goToSplash()'>Back</button>
+      </div>
+    </form>
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
+<a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>
+

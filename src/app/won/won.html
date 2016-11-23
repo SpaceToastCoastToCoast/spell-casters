@@ -1,0 +1,19 @@
+<div>
+  <h2>Congratulations!</h2>
+  <div id="gameCanvas">
+    <div id="gameStats">
+      <h3 id="username" class="stats">{{username}}</h3>
+      <p id="score" class="stats">Score: {{score}}</p>
+      <p id="totalTime" class="stats">Total Time: {{totalTime}}</p>
+      <p id="totalWordsCompleted" class="stats">Total Words Completed: {{totalWordsCompleted}}</p>
+      <p id="percentCompleted" class="stats">Percent Completed: {{percentCompleted}}</p>
+      <p id="misspelledWords" class="stats">Misspelled Words: {{misspelledWords}}</p>
+      <div class="buttonDiv fullWidth">
+        <button ng-click="goToSplash()">Home</button>
+        <button ng-click="goToLeaderboard()">Leaderboard</button>
+        <button ng-click="goToActiveGame()">Replay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
