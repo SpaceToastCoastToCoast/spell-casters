@@ -1,7 +1,9 @@
 export const modal = [
   'ModalService',
   'LogoutService',
-  (ModalService, LogoutService) => {
+  '$state',
+
+  (ModalService, LogoutService, $state) => {
   return {
     link: function (scope, element, attrs) {
       scope.view = false;
@@ -19,6 +21,7 @@ export const modal = [
           case 'Cancel':
             ModalService.closeModal(attrs.id);
             scope.$digest();
+            if (attrs.id === 'noData') {$state.go('splash')}
           break;
           default:
             ModalService.closeModal(attrs.id);

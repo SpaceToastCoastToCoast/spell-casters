@@ -11,11 +11,17 @@ export const ModalService = [
     }
 
     openModal (id) {
-      this.modals[0].open();
+      let index = this.modals.findIndex((data) => {
+        return data.id === id;
+      })
+      this.modals[index].open();
      }
 
     closeModal (id) {
-      this.modals[0].close();
+      let index = this.modals.findIndex((data) => {
+        return data.id === id;
+      })
+      this.modals[index].close();
     }
 
     removeModal (id) {

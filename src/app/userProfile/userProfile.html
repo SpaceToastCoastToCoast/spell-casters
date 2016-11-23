@@ -2,7 +2,7 @@
 <p>{{ user }}</p>
 <div>
   <p>Total Games Played: {{totalGames}}</p>
-  <p>Total Time Played: {{totalTime}}</p>
+  <p>Total Time Played: {{totalTime}} seconds</p>
   <p>Total Words Spelled: {{totalWords}}</p>
 
   <style> /* set the CSS */
@@ -50,3 +50,16 @@
   <button ng-click="showGraph('totalWords')">Total Words Completed Chart</button>
   <button ng-click="showGraph('misspelledWords')">Misspelled Words Chart</button>
 </div>
+
+<modal ng-show="view" id="noData">
+  <div class="modal">
+    <div class="modal-body">
+      <h3>No game data to show</h3>
+      <p></p>
+      <div class="buttonDiv">
+        <button ng-click="closeModal('noData');">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>
