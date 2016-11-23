@@ -33,13 +33,6 @@ export const LeaderboardCtrl = [
         SoundService.setCurrentSong(mainSong);
       }
 
-      $scope.goToSplash = () => {
-        $state.go('splash');
-      }
-      $scope.goToUserProfile = () => {
-        $state.go('userProfile');
-      }
-
       this.places = ['first','second','third','fourth','fifth'];
       this.places.forEach(place => {
         $scope[place + 'Username']

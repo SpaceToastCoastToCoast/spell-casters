@@ -22,6 +22,8 @@ body {
 
 p {
   margin-bottom: 8px;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
 }
 
 @-moz-document url-prefix() {
@@ -85,7 +87,7 @@ p {
   background: linear-gradient(#db9864, #b1695a);
   box-sizing: border-box;
   padding: 8px;
-  width: 224px;
+  width: 228px;
   position: absolute;
   top: 32px;
   right: 50%;
@@ -94,7 +96,7 @@ p {
 }
 
 #musicControls button {
-  width: 96px;
+  width: 98px;
   font-size: 12px;
   height: 48px;
   padding-top: 4px;
@@ -177,7 +179,33 @@ button:active {
   justify-content: space-between;
 }
 
+.padBottom {
+  margin-bottom: 24px;
+}
+
+ul {
+  font-size: 12px;
+  box-sizing: border-box;
+  padding: 8px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+ul li {
+  text-align: center;
+  margin: 8px;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
 /* User accounts */
+
+#thisUser {
+  text-align: center;
+  margin: auto;
+}
 
 .loggedInAs {
   margin: 0px;

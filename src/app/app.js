@@ -53,6 +53,31 @@ export const AppCtrl = [
       $scope.music = SoundService.musicOn;
       $scope.sound = SoundService.soundEffectsOn;
 
+      $scope.goToSplash = () => {
+        $state.go('splash');
+      }
+      $scope.goToInstructions = () => {
+        $state.go('instructions');
+      };
+      $scope.goToAbout = () => {
+        $state.go('about');
+      };
+      $scope.goToLogIn = () => {
+        $state.go('login');
+      }
+      $scope.goToActiveGame = () => {
+        $state.go('active-game');
+      }
+      $scope.goToRegistration = () => {
+        $state.go('registration');
+      };
+      $scope.goToLeaderboard = () => {
+        $state.go('leaderboard');
+      }
+      $scope.goToUserProfile = () => {
+        $state.go('userProfile');
+      }
+
       $scope.turnOnMusic = () => {
         SoundService.turnMusicOn();
         $scope.music = true;
@@ -113,6 +138,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller('AppCtrl', AppCtrl)
   .run(($rootScope, SoundService,$state) => {
     $rootScope.user = "Guest";
+    $rootScope.userLink = "Guest";
     $rootScope.canNavToGameOver = false;
     $rootScope.$on('$stateChangeStart', function(event,toState,toParams,fromState,fromParams) {
       if((toState.name === 'won' || toState.name === 'game-over')

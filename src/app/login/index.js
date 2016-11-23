@@ -45,6 +45,7 @@ export const LoginCtrl = [
         .success(response =>{
           if (response.success) {
             $rootScope.user = response.username;
+            $rootScope.userLink = `${response.username} | Profile`;
             $rootScope.visible = true;
             LocalStorageService.setData('user', {userId: response.userid, userName: response.username});
           } else {
@@ -55,13 +56,6 @@ export const LoginCtrl = [
     };
     $scope.errorMessage = $stateParams.errorMessage;
 
-    $scope.goToRegistration = () => {
-      $state.go('registration');
-    };
-
-    $scope.goToSplash = () => {
-      $state.go('splash');
-    };
   }
 }
 ];
