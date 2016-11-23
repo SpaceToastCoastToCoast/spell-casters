@@ -2,6 +2,7 @@
   <h3>Sorry!</h3>
   <p>This game is not compatible with mobile devices. Please access this site from a computer.</p>
 </div>
+<a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>
 <main class="container">
   <div id="main">
     <section ui-view>
@@ -12,12 +13,12 @@
 
   <div id="musicControls" class="buttonDiv">
     <div id='musicSettings'>
-      <button ng-click="turnOnMusic()" ng-show="!music">Music 🔊</button>
-      <button ng-click="turnOffMusic()" ng-show="music">Music 🔇</button>
+      <button ng-click="turnOnMusic()" ng-show="!music">Music 🔇&#xFE0E;</button>
+      <button ng-click="turnOffMusic()" ng-show="music">Music 🔊&#xFE0E;</button>
     </div>
     <div id='soundEffectSettings'>
-      <button ng-click="turnOnSoundEffects()" ng-show="!sound">Effects 🔊</button>
-      <button ng-click="turnOffSoundEffects()" ng-show="sound">Effects 🔇</button>
+      <button ng-click="turnOnSoundEffects()" ng-show="!sound">Effects 🔇&#xFE0E;</button>
+      <button ng-click="turnOffSoundEffects()" ng-show="sound">Effects 🔊&#xFE0E;</button>
     </div>
   </div>
 </main>
