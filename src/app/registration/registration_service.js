@@ -3,12 +3,14 @@ export const RegistrationServices = [
  '$http', '$state',
 
  class RegistrationServices {
-  constructor ($http, $state) {
+  constructor ($http, $state, registeruser) {
     this.$http = $http;
     this.$state = $state;
+    this.register = registeruser;
   }
 
   registerUser (registerData) {
+    this.data = registerData;
     const req = {
       method: 'POST',
       url: `/api/register`,
