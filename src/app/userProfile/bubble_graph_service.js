@@ -4,7 +4,7 @@ class BubbleGraphService {
   constructor(){}
 
   drawingBubbleChart (sortedWords) {
-    const diameter = 400 //max size of the bubbles
+    const diameter = 400
     const colorArr = [ '#9CCBC5', '#64A39A', '#3F897F',
                   '#247267', '#105A50', '#904A19',
                   '#B66D3A', '#FFC59C', '#FFDCC4', '#b1695a']
@@ -46,6 +46,13 @@ class BubbleGraphService {
         .style('fill', function(d) {
         return colorArr[d.colorIndex];
         })
+        .append("svg:title")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .text(function(d) { return d.word; })
+        .on("mouseover", function(){return title.style("visibility", "visible");})
+        .on("mouseout", function(){return title.style("visibility", "hidden");})
 
     var legend = d3.select('svg')
       .append('g')
@@ -84,5 +91,4 @@ class BubbleGraphService {
       return {children: data};
     }
   }
-
 }];
