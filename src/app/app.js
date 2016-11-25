@@ -11,6 +11,7 @@ import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from '.
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
 import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
+import { GameInfoCtrlState, GameInfoCtrlName, GameInfoCtrl } from './gameInfo';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { UserServices } from './login/user_service';
@@ -62,6 +63,9 @@ export const AppCtrl = [
       $scope.goToAbout = () => {
         $state.go('about');
       };
+      $scope.goToGameInfo = () => {
+        $state.go('gameInfo');
+      };
       $scope.goToLogIn = () => {
         $state.go('login');
       }
@@ -105,11 +109,12 @@ angular.module(MODULE_NAME, ['ui.router'])
   .config(($stateProvider,$urlRouterProvider) => {
     $stateProvider
       .state('active-game', WordsDatasetCtrlState)
-      .state('splash',DefaultCtrlState)
-      .state('instructions',InstructionsCtrlState)
-      .state('game-over',GameOverCtrlState)
-      .state('about',AboutCtrlState)
-      .state('won',WonCtrlState)
+      .state('splash', DefaultCtrlState)
+      .state('instructions', InstructionsCtrlState)
+      .state('game-over', GameOverCtrlState)
+      .state('gameInfo', GameInfoCtrlState)
+      .state('about', AboutCtrlState)
+      .state('won', WonCtrlState)
       .state('login', LoginCtrlState)
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
@@ -158,6 +163,7 @@ angular.module(MODULE_NAME, ['ui.router'])
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
   .controller(InstructionsCtrlName, InstructionsCtrl)
   .controller(GameOverCtrlName, GameOverCtrl)
+  .controller(GameInfoCtrlName, GameInfoCtrl)
   .controller(AboutCtrlName, AboutCtrl)
   .controller(WonCtrlName, WonCtrl)
   .controller(LoginCtrlName, LoginCtrl)
