@@ -14,10 +14,19 @@ td {
     vertical-align: baseline;
 }
 
-body {
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+html, body {
   background-color: #222222;
   font-family: 'Anonymous Pro', monospace;
   font-size: 16px;
+}
+
+body {
+  margin-bottom: 96px;
 }
 
 p {
@@ -66,6 +75,10 @@ p {
   .sizing {
     display: block;
   }
+}
+
+.push {
+  height: 96px;
 }
 
 /* Header elements */
@@ -203,6 +216,78 @@ ul li {
 
 #aboutPage .blurb {
   margin-bottom: 16px;
+}
+#aboutPage h3 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+#footer {
+  font-size: 12px;
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 0px;
+  left: 0px;
+  margin: 0px;
+  margin-top: 96px;
+  height: 48px;
+  width: 100%;
+  background-color: #644749;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#footerCenter {
+  overflow: hidden;
+  width: 400px;
+  max-width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#footerCenter div {
+  flex-grow: 1;
+  max-width: 50%;
+  height: 32px;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.footerLink {
+  max-width: 33%;
+  font-weight: bold;
+  flex-shrink: 1;
+  min-width: 64px;
+  border-left: 1px solid #b1695a;
+}
+
+#footerCenter div a {
+  text-align: center;
+  line-height: 32px;
+}
+
+.footerLink a {
+  box-sizing: border-box;
+  height: 32px;
+  width: 100%;
+  padding: 8px;
+  margin: auto;
+  text-decoration: none;
+}
+
+.footerLink a:visited {
+  color: inherit;
+}
+.footerLink:hover {
+  transition: background-color 0.5s ease-in-out;
+  background-color: #b1695a;
 }
 
 /* User accounts */
