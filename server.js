@@ -13,9 +13,20 @@ const fs = require('fs');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 const config = require('./webpack.config.js');
+const SECRET = require('./secret.json');
 
 app.use(express.static('./src/public'));
+app.set('trust proxy', 1);
+app.use(session({
+  store: new RedisStore(),
+  secret: SECRET.secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 app.use(bp.urlencoded({extended : true}));
 
