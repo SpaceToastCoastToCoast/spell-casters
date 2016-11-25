@@ -939,6 +939,7 @@ ul li {
   right: 96px;
   width: 128px;
   height: 128px;
+  background-position: 0 -768px;
 }
 
 .zettIdle {
