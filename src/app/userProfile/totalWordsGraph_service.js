@@ -1,3 +1,4 @@
+const d3 = require('d3')
 import { HttpServices } from './http_service';
 
 export const totalWordsGraphServices =[
