@@ -13,26 +13,26 @@
 ##Installation
 
 - Open terminal and clone our repository
-... `git clone git@github.com:SpaceToastCoastToCoast/spell-casters.git`...
+⋅⋅⋅`git clone git@github.com:SpaceToastCoastToCoast/spell-casters.git`⋅⋅⋅
 - Enter the cloned repository
-... `cd spell-casters`...
+⋅⋅⋅`cd spell-casters`⋅⋅⋅
 - Install all dependencies for the repository
-... `npm install`...
+⋅⋅⋅`npm install`⋅⋅⋅
 - Run Postgres on your computer
 - Open `sample.config.json` in your preferred text editor
-... `subl config/sample.config.json`...
+⋅⋅⋅`subl config/sample.config.json`⋅⋅⋅
 - Copy the contents of `sample.config.json` and create a new file within the config directory called `config.json`
-... `touch config/config.json`...
+⋅⋅⋅`touch config/config.json`⋅⋅⋅
 - Paste the contents into `config.json` and edit the username value within development
 - In your terminal, enter into Postgres
-... `psql`...
+⋅⋅⋅`psql`⋅⋅⋅
 - Within Postgres, create a database named `spellcasters`
-... `create database spellcasters;`...
+⋅⋅⋅`create database spellcasters;`⋅⋅⋅
 - Sync the database
-... `node server.js`...
+⋅⋅⋅`node server.js`⋅⋅⋅
 - Once Webpack completes the build, kill the server process
 - In the terminal, seed all files
-... `sequelize db:seed:all`...
+⋅⋅⋅`sequelize db:seed:all`⋅⋅⋅
 - Once all files have been seeded, start the server again
-... `node server.js`...
+⋅⋅⋅`node server.js`⋅⋅⋅
 - Navigate to `localhost:8080` in your browser to begin using SpellCasters
