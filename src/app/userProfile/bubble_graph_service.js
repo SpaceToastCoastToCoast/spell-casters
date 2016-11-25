@@ -1,3 +1,5 @@
+const d3 = require('d3')
+
 export const BubbleGraphService = [
 
 class BubbleGraphService {
