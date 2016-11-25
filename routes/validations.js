@@ -49,39 +49,46 @@ function userExists(req,res,next) {
 }
 
 function newUser(req,res,next) {
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(req.body.password, salt, (err, hash) => {
-      users.findAll({
-        where: {username: req.body.username}
-      })
-      .then((data)=>{
-        if (data.length !== 0) {
-          res.json({
-            success: false,
-            errorMessage: `${req.body.username} is already in use, please select another username`
-          });
-        } else {
-          users.create({
-            username: req.body.username,
-            password: hash,
-            role: 'student'
-          })
-          .then(_ => {
-            users.findOne({
-              where: {username: req.body.username}
-            })
-            .then((data) => {
-              req.newUser = {
-                userid: data.dataValues.id,
-                username: data.dataValues.username
-              }
-              next();
-            });
-          });
-        }
-      });
+  if (req.body.username.length > 16) {
+    res.json({
+      success: false,
+      errorMessage: `username cannot exceed 16 characters`
     })
-  })
+  } else {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
+        users.findAll({
+          where: {username: req.body.username}
+        })
+        .then((data)=>{
+          if (data.length !== 0) {
+            res.json({
+              success: false,
+              errorMessage: `${req.body.username} is already in use, please select another username`
+            });
+          } else {
+            users.create({
+              username: req.body.username,
+              password: hash,
+              role: 'student'
+            })
+            .then(_ => {
+              users.findOne({
+                where: {username: req.body.username}
+              })
+              .then((data) => {
+                req.newUser = {
+                  userid: data.dataValues.id,
+                  username: data.dataValues.username
+                }
+                next();
+              });
+            });
+          }
+        });
+      })
+    })
+  }
 }
 
 
