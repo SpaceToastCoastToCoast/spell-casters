@@ -46,6 +46,7 @@ export const UserProfileCtrl = [
       $scope.totalWordsCompletedGraph = false;
       $scope.bubbleChartGraph = true;
 
+
       $scope.showGraph = (graph)  => {
         if (graph === 'percent') {
           $scope.percentCompletedGraph = true;
@@ -74,6 +75,19 @@ export const UserProfileCtrl = [
           $scope.totalGames = response.data.gameSummary.totalGames
         }
       })
+      //get user's highscore
+      HttpServices.userHighscoreQuery()
+      .then(response => {
+        let userHighScore = response.data.highscores.find((userScore,index) => {
+          userScore.rank = index+1
+          return userScore.username === $rootScope.user
+        })
+        if (userHighScore) {
+          $scope.rank = userHighScore.rank
+          $scope.highscore = userHighScore.score
+        }
+      })
+
       //create user graphs
       HighPercentGraphServices.getGraphData();
       totalWordsGraphServices.getGraphData();

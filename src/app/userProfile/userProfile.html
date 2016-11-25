@@ -1,10 +1,11 @@
 <h2>User Profile</h2>
-<h3 id="thisUser">{{ user }}</h3>
-<div>
+<h3 id="thisUser">#{{rank}} {{ user }}</h3>
+<div id="userStats">
   <ul>
-    <li>Total Games Played: {{totalGames}}</li>
-    <li>Total Time Played: {{totalTime}} seconds</li>
-    <li>Total Words Spelled: {{totalWords}}</li>
+    <li>Highscore: {{highscore}}</li>
+    <li>Games Played: {{totalGames}}</li>
+    <li>Game Time: {{totalTime}} seconds</li>
+    <li>Words Spelled: {{totalWords}}</li>
   </ul>
   <div class="buttonDiv padBottom">
     <button ng-click="showGraph('percent')">Percent Completed</button>
