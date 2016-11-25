@@ -2,8 +2,8 @@
   <h3>Sorry!</h3>
   <p>This game is not compatible with mobile devices. Please access this site from a computer.</p>
 </div>
+<main class="container gameContent">
 <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>
-<main class="container">
   <div id="main">
     <section ui-view>
       <!-- all the states will be rendered in here -->
@@ -22,3 +22,10 @@
     </div>
   </div>
 </main>
+<div id="footer" class="container">
+  <div id="footerCenter">
+    <div><a>©2016 SpellCasters </a></div>
+    <div class="footerLink"><a ui-sref="splash">Home</a></div>
+    <div class="footerLink"><a ui-sref="about">About Us</a></div>
+  </div>
+</div>
