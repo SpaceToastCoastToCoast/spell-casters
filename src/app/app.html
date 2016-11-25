@@ -2,7 +2,7 @@
   <h3>Sorry!</h3>
   <p>This game is not compatible with mobile devices. Please access this site from a computer.</p>
 </div>
-<main class="container">
+<main class="container gameContent">
 <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>
   <div id="main">
     <section ui-view>
@@ -21,13 +21,11 @@
       <button ng-click="turnOffSoundEffects()" ng-show="sound">Effects 🔊&#xFE0E;</button>
     </div>
   </div>
-
-  <div id="footer">
-    <ul>
-      <li>© SpellCasters 2016</li>
-      <li><a ui-sref="splash">Home</a></li>
-      <li><a ui-sref="about">About Us</a></li>
-    </ul>
-  </div>
-
 </main>
+<div id="footer" class="container">
+  <div id="footerCenter">
+    <div><a>©2016 SpellCasters </a></div>
+    <div class="footerLink"><a ui-sref="splash">Home</a></div>
+    <div class="footerLink"><a ui-sref="about">About Us</a></div>
+  </div>
+</div>
