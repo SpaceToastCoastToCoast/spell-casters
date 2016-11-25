@@ -1,3 +1,4 @@
+const Howl = require('howler').Howl
 const mainSong = require('../../public/music/Main.ogg');
 
 export const SoundService = [
