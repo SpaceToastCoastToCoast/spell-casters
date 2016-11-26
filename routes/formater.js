@@ -155,9 +155,6 @@ function misspelledWordsData(req,res,next) {
   let stats = req.stats;
 
   let misspelledWords = stats.reduce((prev,stat) => {
-    stat.misspelledWords = stat.misspelledWords.map(word => {
-      return word.trim();
-    })
     prev = prev.concat(stat.misspelledWords)
     return prev
   }, [])
