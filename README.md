@@ -19,7 +19,7 @@
   `npm install`
 4. Create a secret.json in the spell-casters directory
   `touch secret.json`
-5. Paste the following text into secret.json:
+5. Paste the following text into secret.json. The secret should be something difficult to guess--a long keysmash is ideal:
   `{"secret": "your secret here"}`
 6. Run Postgres on your computer
 7. Open `sample.config.json` in your preferred text editor
