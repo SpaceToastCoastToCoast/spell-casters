@@ -8,9 +8,6 @@ export const DefaultCtrlState = {
   template,
   controller: DefaultCtrlName,
   controllerAs: 'default',
-  params: {
-    visible: false
-  }
 };
 
 export const DefaultCtrl = [
@@ -18,7 +15,6 @@ export const DefaultCtrl = [
   '$state',
   '$stateParams',
   '$rootScope',
-  'LocalStorageService',
   'TimerService',
   'SoundService',
   'ModalService',
@@ -29,7 +25,6 @@ export const DefaultCtrl = [
       $state,
       $stateParams,
       $rootScope,
-      LocalStorageService,
       TimerService,
       SoundService,
       ModalService) {
