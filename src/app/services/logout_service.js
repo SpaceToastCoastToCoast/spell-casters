@@ -16,7 +16,6 @@ export const LogoutService = [
       this.LocalStorageService.resetData(lstorageObj);
       this.$http.get('/api/logout').success(() => {});
       this.$rootScope.user = userName;
-      this.$rootScope.userLink = userName;
       this.$rootScope.visible = isVisibleBln;
       this.$rootScope.$digest();
       this.$state.go(stateGo);

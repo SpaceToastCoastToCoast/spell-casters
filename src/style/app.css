@@ -298,14 +298,30 @@ ul li {
 }
 
 .loggedInAs {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  width: 228px;
+  text-align: right;
   margin: 0px;
   padding: 12px;
+  padding-right: 0px;
   position: absolute;
   top: 0px;
   right: 50%;
   transform: translateX(320px);
   color: #e3bb88;
   font-size: 12px;
+}
+
+.loggedInAs a {
+  margin-left: 8px;
+}
+
+.loggedInAs a:hover {
+  transition: color 0.5s ease-in-out;
+  color: #b1695a;
+  cursor: pointer;
 }
 
 .registrationMsg {
@@ -432,6 +448,9 @@ ul li {
   font-size: 16px;
 }
 
+#userStats ul {
+  list-style: none;
+}
 /* Tutorial */
 
 #instructions {
@@ -963,7 +982,7 @@ modal .modal {
 }
 modal .modal .modal-body {
   background-color: #e3bb88;
-  box-shadow: 2px 8px 8px #222222;
+  box-shadow: 2px 8px 16px rgba(34, 34, 34, 0.5);
   padding: 20px;
   width: 720px;
   margin: auto;
@@ -971,10 +990,10 @@ modal .modal .modal-body {
 }
 
 modal .modal .modal-body h3 {
-    display: block;
-    margin: auto;
-    text-align: center;
-  }
+  display: block;
+  margin: auto;
+  text-align: center;
+}
 
 modal .modal .modal-body .buttonDiv {
   margin: auto;

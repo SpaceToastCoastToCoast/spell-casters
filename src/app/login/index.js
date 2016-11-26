@@ -45,7 +45,6 @@ export const LoginCtrl = [
         .success(response =>{
           if (response.success) {
             $rootScope.user = response.username;
-            $rootScope.userLink = `${response.username} | Profile`;
             $rootScope.visible = true;
             LocalStorageService.setData('user', {userId: response.userid, userName: response.username});
           } else {

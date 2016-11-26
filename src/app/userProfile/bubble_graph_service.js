@@ -1,3 +1,5 @@
+const d3 = require('d3')
+
 export const BubbleGraphService = [
 
 class BubbleGraphService {
@@ -12,6 +14,7 @@ class BubbleGraphService {
     const textColor = 'black'
     const textFont = 'monospace';
     const textSize = '15px';
+    const smallerTextSize = '13px';
     const legendColorBox = 20;
     const spacingBetweenLegend = 30;
 
@@ -81,7 +84,13 @@ class BubbleGraphService {
       })
       .style('fill',textColor)
       .style('font-family', textFont)
-      .style('font-size',textSize)
+      .style('font-size',function(d) {
+        if (d.word.length > 12) {
+          return smallerTextSize;
+        } else {
+          return textSize
+        }
+      })
 
     function processData(data) {
       data = data.map((wordObj, index) =>{

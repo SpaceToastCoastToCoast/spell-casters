@@ -33,17 +33,11 @@ export const DefaultCtrl = [
 
       TimerService.resetGame();
 
-      $scope.visible = ($rootScope.user !== 'Guest');
-
       if(SoundService.currentSong === undefined) {
         SoundService.setCurrentSong(mainSong);
       } else if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
       }
-
-      $scope.goLogOut = () => {
-        ModalService.openModal('logout');
-      };
     }
   }
 ]

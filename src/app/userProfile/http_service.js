@@ -16,5 +16,13 @@ export const HttpServices = [
       };
       return this.$http(req);
     }
+
+    userHighscoreQuery() {
+      const req={
+        method: 'GET',
+        url: `/api/leaderboard`
+      }
+      return this.$http(req);
+    }
   }
 ];
