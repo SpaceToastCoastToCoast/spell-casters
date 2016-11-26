@@ -34,4 +34,4 @@
   `sequelize db:seed:all`
 13. Once all files have been seeded, start the server again
   `node server.js`
-14. Navigate to `localhost:8080` in your browser to begin using SpellCasters
+14. Navigate to `localhost:8080` in your browser to begin playing SpellCasters
