@@ -1,4 +1,5 @@
 //import webpack config but clear entry point
+var path = require('path');
 var webpackConfig = require('./webpack.config.js');
 webpackConfig.entry = {};
 
