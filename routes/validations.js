@@ -52,7 +52,12 @@ function newUser(req,res,next) {
   if (req.body.username.length > 16) {
     res.json({
       success: false,
-      errorMessage: `username cannot exceed 16 characters`
+      errorMessage: `Username cannot exceed 16 characters`
+    })
+  } else if(req.body.username.toLowerCase() === 'guest') {
+    res.json({
+      success: false,
+      errorMessage: `That username is restricted, please select another username`
     })
   } else {
     bcrypt.genSalt(10, (err, salt) => {
