@@ -1,0 +1,102 @@
+/* Magic effects */
+
+#playerSpell {
+  position: absolute;
+  top: 192px;
+  left: 172px;
+}
+
+#bossSpell {
+  position: absolute;
+  top: 168px;
+  right: 180px;
+}
+
+.glow {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("/img/attacks.png");
+}
+
+.noCharge {
+  animation: noCharge steps(4) 0.32s infinite;
+}
+
+@keyframes noCharge {
+  from {background-position: -288px -32px;}
+  to {background-position: -416px -32px;}
+}
+
+.oneCharge {
+  animation: oneCharge steps(4) 0.32s infinite;
+}
+
+@keyframes oneCharge {
+  from {background-position: -288px -64px;}
+  to {background-position: -416px -64px;}
+}
+
+.twoCharge {
+  animation: twoCharge steps(4) 0.32s infinite;
+}
+
+@keyframes twoCharge {
+  from {background-position: -288px -96px;}
+  to {background-position: -416px -96px;}
+}
+
+.threeCharge {
+  animation: threeCharge steps(4) 0.32s infinite;
+}
+
+@keyframes threeCharge {
+  from {background-position: -288px -128px;}
+  to {background-position: -416px -128px;}
+}
+
+.fourCharge {
+  animation: fourCharge steps(4) 0.32s infinite;
+}
+
+@keyframes fourCharge {
+  from {background-position: -288px -160px;}
+  to {background-position: -416px -160px;}
+}
+
+.fiveCharge {
+  animation: fiveCharge steps(4) 0.32s infinite;
+}
+
+@keyframes fiveCharge {
+  from {background-position: -288px -192px;}
+  to {background-position: -416px -192px;}
+}
+
+.swipe {
+  animation: swipe steps(4) 0.16s infinite;
+}
+
+@keyframes swipe {
+  from {background-position: 0px -128px;}
+  to {background-position: 0px -384px;}
+}
+
+.beam {
+  position: absolute;
+  z-index: 999;
+  top: 176px;
+  left: 184px;
+  width: 288px;
+  height: 64px;
+  background-image: url("/img/attacks.png");
+}
+
+.beamBlast {
+  animation: beamBlast steps(2) 0.1s infinite;
+}
+
+@keyframes beamBlast {
+  from {background-position: 0px 0px;}
+  to {background-position: 0px -128px;}
+}

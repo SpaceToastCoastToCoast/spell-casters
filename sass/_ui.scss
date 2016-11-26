@@ -1,0 +1,52 @@
+/* UI Sprites */
+
+#alephaHealthbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  height: 16px;
+  background: url("/img/ui_sprites_heart.png") repeat-x top left;
+  transition: width 0.5s ease;
+}
+
+#gatorBar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 16px;
+  background: url("/img/ui_sprites_heart.png") repeat-x center right;
+  transition: width 0.5s ease;
+}
+
+#bossBar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 16px;
+  background: url("/img/ui_sprites_heart.png") repeat-x bottom right;
+  transition: width 0.5s ease;
+}
+
+.fiveHearts {
+  width: 80px;
+}
+
+.fourHearts {
+  width: 64px;
+}
+
+.threeHearts {
+  width: 48px;
+}
+
+.twoHearts {
+  width: 32px;
+}
+
+.oneHearts {
+  width: 16px;
+}
+
+.noHearts {
+  width: 0px;
+}

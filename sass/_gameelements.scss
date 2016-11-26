@@ -1,0 +1,88 @@
+#gameCanvas {
+  position: relative;
+  background-color: #222;
+  width: 640px;
+  height: 360px;
+  display: block;
+  background: url("/img/bg1.PNG");
+}
+
+#exampleInput {
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#exampleInput p {
+  text-align: center;
+  margin-top: 0px;
+}
+#exampleInput h4 {
+  text-align: center;
+  margin-top: 0px;
+}
+
+#exampleInput input {
+  margin: auto;
+  margin-top: 0px;
+}
+
+#playerInput {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 8px;
+  z-index: 999;
+  position: relative;
+  top: 8px;
+  width: 320px;
+  background-color: #db9864;
+  box-shadow: 1px 2px 2px #b1695a;
+  min-height: 64px;
+  max-height: 300px;
+  transition: max-height 0.5s ease-in-out;
+}
+
+#playerInput h4 {
+  margin: 8px;
+  margin-top: 0px;
+}
+
+#playerInput input {
+  padding: 2px;
+  padding-top: 4px;
+  text-align: center;
+  flex-shrink: 1;
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e3bb88;
+  border: none;
+  box-shadow: 0px 2px 4px #b1695a inset;
+}
+
+#playerInput #feedback {
+  margin: 8px;
+  margin-top: 0px;
+}
+
+#playerInput .good {
+  background-color: #e3bb88;
+}
+
+#playerInput .wrong {
+  background-color: #b1695a;
+}
+
+.levelMarker {
+  color: #e3bb88;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
