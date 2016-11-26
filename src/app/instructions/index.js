@@ -16,7 +16,6 @@ export const InstructionsCtrl = [
 '$rootScope',
 'TimerService',
 'SoundService',
-'$timeout',
 
 class InstructionsCtrl {
   constructor(
@@ -24,8 +23,7 @@ class InstructionsCtrl {
     $state,
     $rootScope,
     TimerService,
-    SoundService,
-    $timeout) {
+    SoundService) {
     'ngInject';
 
     TimerService.resetGame();
@@ -68,11 +66,12 @@ class InstructionsCtrl {
       $scope.base = false;
       $scope.example = true;
       $scope.focusOnInput = true;
-      $timeout(() => {
-        $scope.showHint = true;
-        $scope.tutorialText = false;
-        $scope.showTargetWord = true;
-      }, 7000);
+    }
+
+    $scope.nextButton = () => {
+      $scope.showHint = true;
+      $scope.tutorialText = false;
+      $scope.showTargetWord = true;
     }
 
     $scope.compare = () => {

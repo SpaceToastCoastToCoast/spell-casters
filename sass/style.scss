@@ -195,6 +195,14 @@ ul {
 
 #aboutPage .blurb {
   margin-bottom: 16px;
+  a, a:visited {
+    font-weight: bold;
+    color: #644749;
+  }
+  a:hover {
+    transition: color 0.5s ease-in-out;
+    color: #b1695a;
+  }
 }
 #aboutPage h3 {
   margin-top: 16px;
