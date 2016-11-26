@@ -17,21 +17,24 @@
   `cd spell-casters`
 3. Install all dependencies for the repository
   `npm install`
-4. Run Postgres on your computer
-5. Open `sample.config.json` in your preferred text editor
+4. Create a secret.json in the spell-casters directory, and give it a property "secret" 
+  `touch secret.json`
+  `{"secret": "your secret here"}`
+5. Run Postgres on your computer
+6. Open `sample.config.json` in your preferred text editor
   `subl config/sample.config.json`
-6. Copy the contents of `sample.config.json` and create a new file within the config directory called `config.json`
+7. Copy the contents of `sample.config.json` and create a new file within the config directory called `config.json`
   `touch config/config.json`
-7. Paste the contents into `config.json` and edit the username value within development
-8. In your terminal, enter into Postgres
+8. Paste the contents into `config.json` and edit the username value within development
+9. In your terminal, enter into Postgres
   `psql`
-9. Within Postgres, create a database named `spellcasters`
+10. Within Postgres, create a database with a name matching that in your `config.json` e.g. `spellcasters`
   `create database spellcasters;`
-10. Sync the database
+11. Sync the database
   `node server.js`
-11. Once Webpack completes the build, kill the server process
-12. In the terminal, seed all files
+12. Once Webpack completes the build, kill the server process
+13. In the terminal, seed all files
   `sequelize db:seed:all`
-13. Once all files have been seeded, start the server again
+14. Once all files have been seeded, start the server again
   `node server.js`
-14. Navigate to `localhost:8080` in your browser to begin playing SpellCasters
+15. Navigate to `localhost:8080` in your browser to begin playing SpellCasters
