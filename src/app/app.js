@@ -16,7 +16,6 @@ import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { UserServices } from './login/user_service';
 import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
-import { LocalStorageService } from './services/localStorage_service';
 import { SoundService } from './services/sound_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { HttpServices } from './userProfile/http_service';
@@ -44,12 +43,14 @@ export const AppCtrl = [
   '$scope',
   '$state',
   'SoundService',
+  'ModalService',
 
   class AppCtrl {
     constructor(
       $scope,
       $state,
-      SoundService) {
+      SoundService,
+      ModalService) {
 
       $scope.music = SoundService.musicOn;
       $scope.sound = SoundService.soundEffectsOn;
@@ -69,6 +70,9 @@ export const AppCtrl = [
       $scope.goToLogIn = () => {
         $state.go('login');
       }
+      $scope.goLogOut = () => {
+        ModalService.openModal('logout');
+      };
       $scope.goToActiveGame = () => {
         $state.go('active-game');
       }
@@ -134,17 +138,21 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('HighPercentGraphServices', HighPercentGraphServices)
   .service('totalWordsGraphServices', totalWordsGraphServices)
   .service('RegistrationServices', RegistrationServices)
-  .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
   .service('SoundService', SoundService)
   .service('ModalService', ModalService)
   .service('LogoutService', LogoutService)
   .service('BubbleGraphService', BubbleGraphService)
   .controller('AppCtrl', AppCtrl)
-  .run(($rootScope, SoundService,$state) => {
+  .run(($rootScope, SoundService, $state, $http) => {
     $rootScope.user = "Guest";
-    $rootScope.userLink = "Guest";
     $rootScope.canNavToGameOver = false;
+    $http.get('/api/confirm-login')
+      .success(function (user) {
+        if (user.username && user.userid) {
+          $rootScope.user = user.username;
+        }
+      });
     $rootScope.$on('$stateChangeStart', function(event,toState,toParams,fromState,fromParams) {
       if((toState.name === 'won' || toState.name === 'game-over')
         && !$rootScope.canNavToGameOver) {

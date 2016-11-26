@@ -95,13 +95,18 @@ function recentGameData(req,res,next) {
       order: '"createdAt" ASC',
     })
     .then((stats) => {
+      stats = stats.map((stat) => {
+        stat.percentCompleted = parseFloat(stat.percentCompleted);
+        return stat
+      });
+
       let recentGamesPercent = stats.map((stat) => {
-          return parseFloat(stat.percentCompleted);
+        return parseFloat(stat.percentCompleted);
       }).filter((stat,index) => {
         if (index < 20) {
           return stat
         }
-      })
+      });
 
       let recentGamesTotalWords = stats.map((stat) => {
         return parseInt(stat.totalWordsCompleted)
@@ -109,7 +114,7 @@ function recentGameData(req,res,next) {
         if (index < 20) {
           return stat
         }
-      })
+      });
 
       req.recentGames = {
         recentGamesPercent,
@@ -150,9 +155,6 @@ function misspelledWordsData(req,res,next) {
   let stats = req.stats;
 
   let misspelledWords = stats.reduce((prev,stat) => {
-    stat.misspelledWords = stat.misspelledWords.map(word => {
-      return word.trim();
-    })
     prev = prev.concat(stat.misspelledWords)
     return prev
   }, [])

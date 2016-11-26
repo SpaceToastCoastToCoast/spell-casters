@@ -5,28 +5,13 @@
     <button ng-click="goToActiveGame()">Start</button>
     <button ng-click="goToGameInfo()">About</button>
     <button ng-click="goToLeaderboard()">Leaderboard</button>
-    <button ng-Show="!visible" ng-click="goToLogIn()">Log In</button>
-    <button ng-Show="visible" ng-click="goLogOut()">Log Out</button>
   </div>
 </div>
 <div class="musicPlayer">
   <div id="gameCanvas" class="splashImage">
     <!-- Splash image goes here -->
   </div>
-  <a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>
 </div>
 
-<modal ng-show="view" id="logout">
-  <div class="modal">
-    <div class="modal-body">
-      <h3>Are you sure you want to Logout?</h3>
-      <p></p>
-      <div class="buttonDiv">
-        <button ng-click="closeModal('logout');">Cancel</button>
-        <button ng-click="closeModal('logout');">Logout</button>
-      </div>
-    </div>
-  </div>
-  <div class="modal-background"></div>
-</modal>
+
 
