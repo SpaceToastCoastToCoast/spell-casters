@@ -20,6 +20,7 @@ export const LoginCtrl = [
   '$stateParams',
   '$rootScope',
   'SoundService',
+  'TimerService',
 
   class LoginCtrl {
     constructor($scope,
@@ -27,9 +28,12 @@ export const LoginCtrl = [
       $state,
       $stateParams,
       $rootScope,
-      SoundService) {
+      SoundService,
+      TimerService) {
 
       this.UserServices = UserServices;
+
+      TimerService.resetGame();
 
       if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
