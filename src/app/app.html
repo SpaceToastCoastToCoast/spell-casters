@@ -22,6 +22,21 @@
     </div>
   </div>
 </main>
+
+<modal ng-show="view" id="logout">
+  <div class="modal">
+    <div class="modal-body">
+      <h3>Are you sure you want to Logout?</h3>
+      <p></p>
+      <div class="buttonDiv">
+        <button ng-click="closeModal('logout');">Cancel</button>
+        <button ng-click="closeModal('logout');">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>
+
 <div id="footer" class="container">
   <div id="footerCenter">
     <div><a>©2016 SpellCasters </a></div>
