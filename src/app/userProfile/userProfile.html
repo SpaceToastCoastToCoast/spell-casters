@@ -7,10 +7,11 @@
     <li>Game Time: {{totalTime}} seconds</li>
     <li>Words Spelled: {{totalWords}}</li>
   </ul>
-  <div class="buttonDiv padBottom">
+  <div id="profileButtons" class="buttonDiv padBottom">
     <button ng-click="showGraph('percent')">Percent Completed</button>
     <button ng-click="showGraph('totalWords')">Total Words Completed</button>
     <button ng-click="showGraph('misspelledWords')">Misspelled Words</button>
+    <button ng-click="goToSplash()">Back</button>
   </div>
   <style> /* set the CSS */
 
