@@ -141,10 +141,19 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('LogoutService', LogoutService)
   .service('BubbleGraphService', BubbleGraphService)
   .controller('AppCtrl', AppCtrl)
-  .run(($rootScope, SoundService,$state) => {
+  .run(($rootScope, SoundService, $state, $http) => {
     $rootScope.user = "Guest";
     $rootScope.userLink = "Guest";
     $rootScope.canNavToGameOver = false;
+    console.log('$http', $http)
+    $http.get('/api/confirm-login')
+      .success(function (user) {
+        console.log('confirming login', user);
+        if (user.username && user.userid) {
+          $rootScope.user = user.username;
+          $rootScope.userLink = `${user.username} | Profile`;
+        }
+      });
     $rootScope.$on('$stateChangeStart', function(event,toState,toParams,fromState,fromParams) {
       if((toState.name === 'won' || toState.name === 'game-over')
         && !$rootScope.canNavToGameOver) {
