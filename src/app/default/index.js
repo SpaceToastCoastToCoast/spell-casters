@@ -41,10 +41,6 @@ export const DefaultCtrl = [
       } else if (SoundService.currentSong._src !== mainSong) {
         SoundService.setCurrentSong(mainSong);
       }
-
-      $scope.goLogOut = () => {
-        ModalService.openModal('logout');
-      };
     }
   }
 ]
