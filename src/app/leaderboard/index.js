@@ -27,6 +27,7 @@ export const LeaderboardCtrl = [
       LeaderboardService,
       TimerService,
       SoundService) {
+      'ngInject';
       TimerService.resetGame();
 
       if (SoundService.currentSong._src !== mainSong) {

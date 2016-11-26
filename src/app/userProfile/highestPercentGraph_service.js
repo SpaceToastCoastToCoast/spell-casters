@@ -7,6 +7,7 @@ export const HighPercentGraphServices = [
 
   class HighPercentGraphServices {
     constructor (HttpServices) {
+      'ngInject';
       this.HttpServices = HttpServices;
     }
 

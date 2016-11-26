@@ -4,6 +4,7 @@ export const RegistrationServices = [
 
  class RegistrationServices {
   constructor ($http, $state) {
+    'ngInject';
     this.$http = $http;
     this.$state = $state;
   }

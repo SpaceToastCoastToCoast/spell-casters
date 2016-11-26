@@ -9,6 +9,7 @@ export const WordsService = [
   '$http', '$q', '$rootScope', 'TimerService',
   class WordsService {
     constructor ($http, $q, $rootScope, TimerService) {
+      'ngInject';
       this.wordsData = [];
       this.bossSpells = {};
       this.baseSpells = {};

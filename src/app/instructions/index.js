@@ -26,6 +26,7 @@ class InstructionsCtrl {
     TimerService,
     SoundService,
     $timeout) {
+    'ngInject';
 
     TimerService.resetGame();
 

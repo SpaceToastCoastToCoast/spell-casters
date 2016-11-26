@@ -6,6 +6,7 @@ export const totalWordsGraphServices =[
 
   class totalWordsGraphServices {
     constructor(HttpServices) {
+      'ngInject';
       this.HttpServices = HttpServices;
     }
 

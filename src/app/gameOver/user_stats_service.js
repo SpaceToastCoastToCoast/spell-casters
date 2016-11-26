@@ -4,6 +4,7 @@ export const UserStatsService = [
 
   class UserStatsService {
     constructor ($http, $rootScope) {
+      'ngInject';
       this.$http = $http;
       this.$rootScope = $rootScope;
 

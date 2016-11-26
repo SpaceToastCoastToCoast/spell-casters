@@ -40,3 +40,6 @@ jspm_packages
 config/config.json
 secret.json
 gulpfile.js
+dist/*
+prodServer.js
+webpack.prod.config.js

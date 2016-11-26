@@ -35,6 +35,7 @@ export const UserProfileCtrl = [
       TimerService,
       SoundService,
       ModalService) {
+      'ngInject';
       TimerService.resetGame();
 
       if (SoundService.currentSong._src !== mainSong) {

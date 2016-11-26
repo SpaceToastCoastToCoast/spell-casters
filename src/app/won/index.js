@@ -26,6 +26,7 @@ export const WonCtrl = [
       UserStatsService,
       TimerService,
       SoundService) {
+      'ngInject';
 
       TimerService.resetGame();
       $rootScope.canNavToGameOver = false;

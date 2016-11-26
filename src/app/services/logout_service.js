@@ -5,6 +5,7 @@ export const LogoutService = [
   '$http',
   class LogoutService {
     constructor ($rootScope, $state, $http) {
+      'ngInject';
       this.$rootScope = $rootScope;
       this.$state = $state;
       this.$http = $http;
