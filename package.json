@@ -2,7 +2,7 @@
   "name": "spell-casters",
   "version": "0.8.0",
   "description": "A game to teach spelling",
-  "main": "server.js",
+  "main": "karma.conf.js",
   "scripts": {
     "deploy": "NODE_ENV=production webpack -p",
     "start": "node server.js"
@@ -23,8 +23,10 @@
     "babel-loader": "^6.2.7",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
+    "connect-redis": "^3.1.0",
     "copy-webpack-plugin": "^3.0.1",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "howler": "^2.0.1",
     "html-webpack-plugin": "^2.24.1",
@@ -66,6 +68,5 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
-  },
-  "main": "karma.conf.js"
+  }
 }

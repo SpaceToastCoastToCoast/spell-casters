@@ -17,11 +17,9 @@ app.use(session({
     host: '127.0.0.1',
     port: '6379'
   }),
-  ttl: 60,
   secret: SECRET.secret,
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: true
 }));
 
 //DB call for Spells table

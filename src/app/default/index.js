@@ -8,9 +8,6 @@ export const DefaultCtrlState = {
   template,
   controller: DefaultCtrlName,
   controllerAs: 'default',
-  params: {
-    visible: false
-  }
 };
 
 export const DefaultCtrl = [
@@ -35,6 +32,8 @@ export const DefaultCtrl = [
       ModalService) {
 
       TimerService.resetGame();
+
+      $scope.visible = ($rootScope.user !== 'Guest');
 
       if(SoundService.currentSong === undefined) {
         SoundService.setCurrentSong(mainSong);
