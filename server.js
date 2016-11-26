@@ -20,7 +20,7 @@ app.use(express.static('./src/public'));
 app.use(bp.urlencoded({extended : true}));
 
 
-app.use('/api',api);
+app.use('/api', api);
 
 
 // Check to see what dev environment we are in

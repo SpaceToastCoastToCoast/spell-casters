@@ -955,7 +955,7 @@ ul li {
   right: 96px;
   width: 128px;
   height: 128px;
-  background-position: 0 -768px;
+  background-position: 0px -768px;
 }
 
 .zettIdle {
@@ -982,7 +982,7 @@ modal .modal {
 }
 modal .modal .modal-body {
   background-color: #e3bb88;
-  box-shadow: 2px 8px 8px #222222;
+  box-shadow: 2px 8px 16px rgba(34, 34, 34, 0.5);
   padding: 20px;
   width: 720px;
   margin: auto;
@@ -990,10 +990,10 @@ modal .modal .modal-body {
 }
 
 modal .modal .modal-body h3 {
-    display: block;
-    margin: auto;
-    text-align: center;
-  }
+  display: block;
+  margin: auto;
+  text-align: center;
+}
 
 modal .modal .modal-body .buttonDiv {
   margin: auto;

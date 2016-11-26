@@ -7,6 +7,20 @@ const users = db.User;
 const gamestats = db.GameStat;
 const validate = require('./validations');
 const format = require('./formater');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+const SECRET = require('./../secret.json');
+
+app.set('trust proxy', 1);
+app.use(session({
+  store: new RedisStore({
+    host: '127.0.0.1',
+    port: '6379'
+  }),
+  secret: SECRET.secret,
+  resave: false,
+  saveUninitialized: true
+}));
 
 //DB call for Spells table
 app.get('/spells', format.listSpells, (req, res) => {
@@ -17,8 +31,31 @@ app.get('/spells', format.listSpells, (req, res) => {
   });
 });
 
+//check if there is a current session
+app.get('/confirm-login', (req, res) => {
+  console.log('confirm login', req.session);
+  res.json({
+    username: req.session.userName,
+    userid: req.session.userid
+  });
+})
+
+//logout route
+app.get('/logout', (req, res) => {
+  console.log('logout', req.session);
+  req.session.destroy(() => {
+    res.json({
+      success: true
+    })
+  })
+})
+
 //login route
 app.post('/login', validate.fieldsFilled, validate.userExists, (req,res) => {
+  req.session.userName = req.validUser.username;
+  req.session.userid = req.validUser.userid;
+  req.session.save();
+  console.log('login', req.session);
   res.json({
     success: true,
     userid: req.validUser.userid,
@@ -28,6 +65,9 @@ app.post('/login', validate.fieldsFilled, validate.userExists, (req,res) => {
 
 //registration route
 app.post('/register', validate.fieldsFilled, validate.newUser, (req, res) => {
+  req.session.userName = req.newUser.username;
+  req.session.userid = req.newUser.userid;
+  req.session.save();
   res.json({
     success: true,
     userid: req.newUser.userid,

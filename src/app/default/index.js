@@ -8,9 +8,6 @@ export const DefaultCtrlState = {
   template,
   controller: DefaultCtrlName,
   controllerAs: 'default',
-  params: {
-    visible: false
-  }
 };
 
 export const DefaultCtrl = [
