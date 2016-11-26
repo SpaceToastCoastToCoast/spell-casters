@@ -1,0 +1,85 @@
+.character {
+  background-image: url("/img/characters.png");
+}
+
+/* Alepha */
+
+.alepha {
+  position: absolute;
+  top: 144px;
+  left: 96px;
+  width: 128px;
+  height: 128px;
+}
+
+.alephaIdle {
+  animation: alephaIdle steps(8) 0.64s infinite;
+}
+
+@keyframes alephaIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+
+/* Alphagator */
+
+.alphagator {
+  position: absolute;
+  top: 144px;
+  right: 96px;
+  width: 128px;
+  height: 128px;
+
+}
+
+.gatorIdle {
+  background-position: 0px -512px;
+  /*animation: gatorIdle steps(4) 0.32s infinite;*/
+}
+
+/*
+@keyframes gatorIdle {
+  from {background-position: 0px 0px;}
+  to {background-position: -1024px 0px;}
+}
+*/
+
+.gatorHit {
+  background-position: 0px -512px;
+  animation: gatorHit steps(4) 0.32s 1;
+}
+
+@keyframes gatorHit {
+  from {background-position: 0px -512px;}
+  to {background-position: -512px -512px;}
+}
+
+.gatorDie {
+  background-repeat: no-repeat;
+  background-position: 0px -640px;
+  animation: gatorDie steps(9, start) 0.64s forwards;
+}
+
+@keyframes gatorDie {
+  to {background-position: -1152px -640px;}
+}
+
+/* Lord Zett */
+
+.lordZett {
+  position: absolute;
+  top: 144px;
+  right: 96px;
+  width: 128px;
+  height: 128px;
+  background-position: 0px -768px;
+}
+
+.zettIdle {
+  animation: zettIdle steps(8) 0.64s infinite;
+}
+
+@keyframes zettIdle {
+  from {background-position: 0px -768px;}
+  to {background-position: -1024px -768px;}
+}
