@@ -16,7 +16,6 @@ import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { UserServices } from './login/user_service';
 import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
-import { LocalStorageService } from './services/localStorage_service';
 import { SoundService } from './services/sound_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { HttpServices } from './userProfile/http_service';
@@ -139,7 +138,6 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('HighPercentGraphServices', HighPercentGraphServices)
   .service('totalWordsGraphServices', totalWordsGraphServices)
   .service('RegistrationServices', RegistrationServices)
-  .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
   .service('SoundService', SoundService)
   .service('ModalService', ModalService)

@@ -15,7 +15,6 @@ export const DefaultCtrl = [
   '$state',
   '$stateParams',
   '$rootScope',
-  'LocalStorageService',
   'TimerService',
   'SoundService',
   'ModalService',
@@ -26,7 +25,6 @@ export const DefaultCtrl = [
       $state,
       $stateParams,
       $rootScope,
-      LocalStorageService,
       TimerService,
       SoundService,
       ModalService) {

@@ -19,7 +19,6 @@ export const LoginCtrl = [
   '$state',
   '$stateParams',
   '$rootScope',
-  'LocalStorageService',
   'SoundService',
 
   class LoginCtrl {
@@ -28,7 +27,6 @@ export const LoginCtrl = [
       $state,
       $stateParams,
       $rootScope,
-      LocalStorageService,
       SoundService) {
 
       this.UserServices = UserServices;
@@ -42,16 +40,15 @@ export const LoginCtrl = [
 
     $scope.checkCredentials = () =>{
       UserServices.getUsers({username: $scope.userName, password: $scope.password})
-        .success(response =>{
-          if (response.success) {
-            $rootScope.user = response.username;
-            $rootScope.visible = true;
-            LocalStorageService.setData('user', {userId: response.userid, userName: response.username});
-          } else {
-            $scope.userName = '';
-            $scope.password = '';
-          }
-        })
+      .success(response => {
+        if (response.success) {
+          $rootScope.user = response.username;
+          $rootScope.visible = true;
+        } else {
+          $scope.userName = '';
+          $scope.password = '';
+        }
+      })
     };
     $scope.errorMessage = $stateParams.errorMessage;
 
