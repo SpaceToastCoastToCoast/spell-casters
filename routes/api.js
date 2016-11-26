@@ -33,7 +33,6 @@ app.get('/spells', format.listSpells, (req, res) => {
 
 //check if there is a current session
 app.get('/confirm-login', (req, res) => {
-  console.log('confirm login', req.session);
   res.json({
     username: req.session.userName,
     userid: req.session.userid
@@ -42,7 +41,6 @@ app.get('/confirm-login', (req, res) => {
 
 //logout route
 app.get('/logout', (req, res) => {
-  console.log('logout', req.session);
   req.session.destroy(() => {
     res.json({
       success: true
@@ -55,7 +53,6 @@ app.post('/login', validate.fieldsFilled, validate.userExists, (req,res) => {
   req.session.userName = req.validUser.username;
   req.session.userid = req.validUser.userid;
   req.session.save();
-  console.log('login', req.session);
   res.json({
     success: true,
     userid: req.validUser.userid,
