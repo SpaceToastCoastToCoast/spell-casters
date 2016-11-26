@@ -10,13 +10,14 @@ class BubbleGraphService {
     const colorArr = [ '#9CCBC5', '#64A39A', '#3F897F',
                   '#247267', '#105A50', '#904A19',
                   '#B66D3A', '#FFC59C', '#FFDCC4', '#b1695a']
-    const scaler = 5;
+    const maxBubbleRadius = 48;
     const textColor = 'black'
     const textFont = 'monospace';
     const textSize = '15px';
     const smallerTextSize = '13px';
     const legendColorBox = 20;
     const spacingBetweenLegend = 30;
+    const highestCount = sortedWords[0].count;
 
     var svg = d3.select('#bubble-chart').append('svg')
       .attr('width',diameter+200)
@@ -42,7 +43,13 @@ class BubbleGraphService {
         .attr('transform', function(d) {
         return `translate(${d.x},${d.y})`;
         })
-        .attr('r', function(d) {return d.count * scaler})
+        .attr('r', function(d) {
+          if (d.count === highestCount) {
+            return maxBubbleRadius;
+          } else {
+            return maxBubbleRadius*((d.count)/highestCount)
+          }
+        })
         .attr('class', function(d) {
         return d.className;
         })
@@ -85,7 +92,7 @@ class BubbleGraphService {
       .style('fill',textColor)
       .style('font-family', textFont)
       .style('font-size',function(d) {
-        if (d.word.length > 12) {
+        if (d.word.length > 11) {
           return smallerTextSize;
         } else {
           return textSize
