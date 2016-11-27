@@ -39,6 +39,7 @@ class WordsDatasetCtrl {
     $interval,
     $timeout,
     SoundService) {
+    'ngInject';
 
     //Init variables
     this.newWords = [];

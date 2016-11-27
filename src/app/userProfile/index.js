@@ -35,6 +35,7 @@ export const UserProfileCtrl = [
       TimerService,
       SoundService,
       ModalService) {
+      'ngInject';
       TimerService.resetGame();
 
       if (SoundService.currentSong._src !== mainSong) {
@@ -45,6 +46,7 @@ export const UserProfileCtrl = [
       $scope.percentCompletedGraph = false;
       $scope.totalWordsCompletedGraph = false;
       $scope.bubbleChartGraph = true;
+
 
       $scope.showGraph = (graph)  => {
         if (graph === 'percent') {
@@ -74,6 +76,19 @@ export const UserProfileCtrl = [
           $scope.totalGames = response.data.gameSummary.totalGames
         }
       })
+      //get user's highscore
+      HttpServices.userHighscoreQuery()
+      .then(response => {
+        let userHighScore = response.data.highscores.find((userScore,index) => {
+          userScore.rank = index+1
+          return userScore.username === $rootScope.user
+        })
+        if (userHighScore) {
+          $scope.rank = userHighScore.rank
+          $scope.highscore = userHighScore.score
+        }
+      })
+
       //create user graphs
       HighPercentGraphServices.getGraphData();
       totalWordsGraphServices.getGraphData();

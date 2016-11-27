@@ -2,8 +2,8 @@
   <h3>Sorry!</h3>
   <p>This game is not compatible with mobile devices. Please access this site from a computer.</p>
 </div>
-<a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>
-<main class="container">
+<main class="container gameContent">
+<p class="loggedInAs"><a ng-click="goToUserProfile()">Hello, {{ user }}</a><a ng-show="user !== 'Guest'" ng-click="goLogOut()">| Log Out</a><a ng-show="user === 'Guest'" ng-click="goToLogIn()">| Log In</a></p>
   <div id="main">
     <section ui-view>
       <!-- all the states will be rendered in here -->
@@ -22,3 +22,25 @@
     </div>
   </div>
 </main>
+
+<modal ng-show="view" id="logout">
+  <div class="modal">
+    <div class="modal-body">
+      <h3>Are you sure you want to Logout?</h3>
+      <p></p>
+      <div class="buttonDiv">
+        <button ng-click="closeModal('logout');">Cancel</button>
+        <button ng-click="closeModal('logout');">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>
+
+<div id="footer" class="container">
+  <div id="footerCenter">
+    <div><a>©2016 SpellCasters </a></div>
+    <div class="footerLink"><a ui-sref="splash">Home</a></div>
+    <div class="footerLink"><a ui-sref="about">About Us</a></div>
+  </div>
+</div>

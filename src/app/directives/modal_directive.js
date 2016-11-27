@@ -4,6 +4,7 @@ export const modal = [
   '$state',
 
   (ModalService, LogoutService, $state) => {
+  'ngInject';
   return {
     link: function (scope, element, attrs) {
       scope.view = false;
@@ -16,7 +17,7 @@ export const modal = [
         switch (e.target.innerText) {
           case 'Logout':
             ModalService.closeModal(attrs.id);
-            LogoutService.userOut('user', 'Guest', false, 'splash');
+            LogoutService.userOut('Guest', false, 'splash');
           break;
           case 'Cancel':
             ModalService.closeModal(attrs.id);

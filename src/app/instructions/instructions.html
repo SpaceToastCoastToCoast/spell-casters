@@ -1,16 +1,16 @@
 <div ng-show="base" id="instructionsDiv">
   <div id="display">
-    <h2>Instructions</h2>
+    <h2>How To Play</h2>
   </div>
     <div id="gameCanvas">
       <div id="playerInput">
         <div class="padMe">
           <p>Defeat Lord Zett and the Alphagators by casting spells as Alepha, a Spellcaster in training!</p>
-          <p>Click START to begin the tutorial or BACK to return to the home page.</p>
+          <p>Click <strong>Start</strong> to begin the tutorial or <strong>Back</strong> to return to the home page.</p>
         </div>
         <div class="buttonDiv fullWidth">
-          <button ng-click="startTutorial()">START</button>
-          <button ng-click="goToSplash()">BACK</button>
+          <button ng-click="startTutorial()">Start</button>
+          <button ng-click="goToSplash()">Back</button>
         </div>
       </div>
     </div>
@@ -18,8 +18,10 @@
   <div ng-show="example" id="exampleInput">
     <div id="display">
       <h2>Instructions</h2>
-      <p class="tutorialText" ng-show="tutorialText">Use the hint to figure out which word to spell.</p>
-      <h4 class="hint" ng-show="showHint">HINT: {{ instructions.testWords[instructions.currentWord].hint }}</h4>
+      <p class="tutorialText" ng-show="tutorialText">Use the hint here to figure out which word to spell.
+      <button ng-click="nextButton()">Next</button></p>
+      <h4 class="hint tutorialHint" ng-show="showHint">HINT: {{ instructions.testWords[instructions.currentWord].hint }}</h4>
+      <p class="hint tutorialHint" ng-show="showHint">Type your answer in the box below.</p>
     </div>
     <div id="gameCanvas">
       <div id="playerInput">
@@ -38,7 +40,6 @@
   </div>
   <div ng-show="finishedMessage">
     <h4>You Have Completed the Tutorial!</h4>
-    <button ng-click="goToSplash()">BACK</button>
+    <button ng-click="goToSplash()">Back</button>
   </div>
 </div>
-<a ng-click="goToUserProfile()"><p class="loggedInAs">Hello, {{ userLink }}</p></a>

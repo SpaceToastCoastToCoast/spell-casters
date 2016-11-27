@@ -1,0 +1,121 @@
+#thisUser {
+  text-align: center;
+  margin: auto;
+}
+
+.loggedInAs {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  width: 228px;
+  text-align: right;
+  margin: 0px;
+  padding: 12px;
+  padding-right: 0px;
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  transform: translateX(320px);
+  color: #e3bb88;
+  font-size: 12px;
+}
+
+.loggedInAs a {
+  margin-left: 8px;
+}
+
+.loggedInAs a:hover {
+  transition: color 0.5s ease-in-out;
+  color: #b1695a;
+  cursor: pointer;
+}
+
+
+
+#leaderboard {
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+#singleButton button {
+  margin-left: 12px;
+  margin-right: 16px;
+  margin-bottom: 20px;
+}
+
+.highScore {
+  padding-top: 4px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.highScore h3 {
+  margin: 4px;
+  margin-top: 0px;
+}
+
+.firstPlace {
+  background-color: rgba(227, 187, 136, 1);
+}
+
+.secondPlace {
+  background-color: rgba(227, 187, 136, 0.8);
+}
+
+.thirdPlace {
+  background-color: rgba(227, 187, 136, 0.6);
+}
+
+.fourthPlace {
+  background-color: rgba(227, 187, 136, 0.4);
+}
+
+.fifthPlace {
+  background-color: rgba(227, 187, 136, 0.2);
+}
+
+.firstPlace h3 {
+  font-size: 24px;
+}
+.secondPlace h3 {
+  font-size: 22px;
+}
+.thirdPlace h3 {
+  font-size: 20px;
+}
+.fourthPlace h3 {
+  font-size: 18px;
+}
+.fifthPlace h3 {
+  font-size: 16px;
+}
+
+#userStats ul {
+  list-style: none;
+}
+
+/* Results */
+
+#gameStats {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 8px;
+  z-index: 999;
+  position: relative;
+  top: 8px;
+  width: 320px;
+  background-color: #db9864;
+  box-shadow: 1px 2px 2px #b1695a;
+}
+
+#gameStats p, h3 {
+  margin-top: 4px;
+  margin-bottom: 12px;
+}

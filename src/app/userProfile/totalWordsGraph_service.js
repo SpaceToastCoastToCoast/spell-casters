@@ -1,3 +1,4 @@
+const d3 = require('d3')
 import { HttpServices } from './http_service';
 
 export const totalWordsGraphServices =[
@@ -5,6 +6,7 @@ export const totalWordsGraphServices =[
 
   class totalWordsGraphServices {
     constructor(HttpServices) {
+      'ngInject';
       this.HttpServices = HttpServices;
     }
 
@@ -15,13 +17,13 @@ export const totalWordsGraphServices =[
           let totalWords = recentGames.recentGamesTotalWords
 
           var margin = {
-                top: 20,
-                right: 20,
-                bottom: 30,
-                left: 40
-              },
-              width = 600 - margin.left - margin.right,
-              height = 300 - margin.top - margin.bottom;
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 60
+          },
+          width = 600 - margin.left - margin.right,
+          height = 300 - margin.top - margin.bottom;
 
           // Set the ranges
           var x = d3.scale.ordinal().rangeRoundBands([0, width],0.1),
@@ -31,6 +33,9 @@ export const totalWordsGraphServices =[
             .scale(x)
             .orient('bottom')
             .ticks(10)
+            .tickFormat(function(d) {
+              return d + 1
+            })
           var yAxis = d3.svg.axis()
             .scale(y)
             .orient('left')
@@ -53,15 +58,15 @@ export const totalWordsGraphServices =[
               .attr("transform", "translate(0," + height + ")")
               .call(xAxis)
 
-
             svg.append("g")
               .attr("class", "y axis")
               .call(yAxis)
               .append("text")
               .attr("transform", "rotate(-90)")
-              .attr("y", 7)
-              .attr("dy","0.71em")
-              .attr("text-anchor", "end")
+              .attr("y", 0 - margin.left)
+              .attr("x", 0 - (height/2))
+              .attr("dy","0.6em")
+              .attr("text-anchor", "start")
               .text("Words Completed");
 
             svg.selectAll(".bar")
@@ -71,7 +76,7 @@ export const totalWordsGraphServices =[
               .attr("x", function(d, i) { return x(i); })
               .attr("y", function(d) { return y(d); })
               .attr("width", x.rangeBand())
-              .attr("height", function(d) { return height - y(d); });
+              .attr("height", function(d) { return height - y(d); })
           }
         }
       });

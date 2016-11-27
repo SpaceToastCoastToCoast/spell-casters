@@ -1,9 +1,11 @@
+const Howl = require('howler').Howl
 const mainSong = require('../../public/music/Main.ogg');
 
 export const SoundService = [
 
   class SoundService {
     constructor () {
+      'ngInject';
       this.setCurrentSong = this.setCurrentSong.bind(this);
       this.playSoundEffect = this.playSoundEffect.bind(this);
       this.currentSong;

@@ -1,23 +1,23 @@
-const template = require('./about.html');
+const template = require('./gameInfo.html');
 const mainSong = require('../../public/music/Main.ogg');
 
-export const AboutCtrlName = 'AboutCtrl';
+export const GameInfoCtrlName = 'GameInfoCtrl';
 
-export const AboutCtrlState = {
-  url: '/about',
+export const GameInfoCtrlState = {
+  url: '/gameInfo',
   template,
-  controller: AboutCtrlName,
-  controllerAs: 'about'
+  controller: GameInfoCtrlName,
+  controllerAs: 'gameInfo'
 };
 
-export const AboutCtrl = [
+export const GameInfoCtrl = [
   '$scope',
   '$state',
   '$rootScope',
   'TimerService',
   'SoundService',
 
-  class AboutCtrl {
+  class GameInfoCtrl {
     constructor(
       $scope,
       $state,

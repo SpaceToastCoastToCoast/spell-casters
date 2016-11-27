@@ -1,23 +1,22 @@
 export const LogoutService = [
 
-  'LocalStorageService',
   '$rootScope',
   '$state',
+  '$http',
   class LogoutService {
-    constructor (LocalStorageService, $rootScope, $state) {
-      this.LocalStorageService = LocalStorageService;
+    constructor ($rootScope, $state, $http) {
+      'ngInject';
       this.$rootScope = $rootScope;
       this.$state = $state;
+      this.$http = $http;
     }
 
-    userOut (lstorageObj, userName, isVisibleBln, stateGo) {
-      this.LocalStorageService.resetData(lstorageObj);
+    userOut (userName, isVisibleBln, stateGo) {
+      this.$http.get('/api/logout').success(() => {});
       this.$rootScope.user = userName;
-      this.$rootScope.userLink = userName;
       this.$rootScope.visible = isVisibleBln;
       this.$rootScope.$digest();
       this.$state.go(stateGo);
     }
-
   }
 ];

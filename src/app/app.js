@@ -11,11 +11,11 @@ import { InstructionsCtrlState, InstructionsCtrl, InstructionsCtrlName } from '.
 import { DefaultCtrlState, DefaultCtrlName, DefaultCtrl } from './default';
 import { GameOverCtrlState, GameOverCtrlName, GameOverCtrl } from './gameOver';
 import { AboutCtrlState, AboutCtrlName, AboutCtrl } from './about';
+import { GameInfoCtrlState, GameInfoCtrlName, GameInfoCtrl } from './gameInfo';
 import { WonCtrlState, WonCtrlName, WonCtrl } from './won';
 import { LoginCtrlState, LoginCtrlName, LoginCtrl } from './login';
 import { UserServices } from './login/user_service';
 import { RegistrationCtrlState, RegistrationCtrlName, RegistrationCtrl } from './registration';
-import { LocalStorageService } from './services/localStorage_service';
 import { SoundService } from './services/sound_service';
 import { UserProfileCtrlState, UserProfileCtrlName, UserProfileCtrl } from './userProfile';
 import { HttpServices } from './userProfile/http_service';
@@ -43,12 +43,15 @@ export const AppCtrl = [
   '$scope',
   '$state',
   'SoundService',
+  'ModalService',
 
   class AppCtrl {
     constructor(
       $scope,
       $state,
-      SoundService) {
+      SoundService,
+      ModalService) {
+      'ngInject';
 
       $scope.music = SoundService.musicOn;
       $scope.sound = SoundService.soundEffectsOn;
@@ -62,9 +65,15 @@ export const AppCtrl = [
       $scope.goToAbout = () => {
         $state.go('about');
       };
+      $scope.goToGameInfo = () => {
+        $state.go('gameInfo');
+      };
       $scope.goToLogIn = () => {
         $state.go('login');
       }
+      $scope.goLogOut = () => {
+        ModalService.openModal('logout');
+      };
       $scope.goToActiveGame = () => {
         $state.go('active-game');
       }
@@ -102,21 +111,23 @@ export const AppCtrl = [
 const MODULE_NAME = 'app';
 
 angular.module(MODULE_NAME, ['ui.router'])
-  .config(($stateProvider,$urlRouterProvider) => {
+  .config(['$stateProvider', '$urlRouterProvider', ($stateProvider,$urlRouterProvider) => {
+    'ngInject';
     $stateProvider
       .state('active-game', WordsDatasetCtrlState)
-      .state('splash',DefaultCtrlState)
-      .state('instructions',InstructionsCtrlState)
-      .state('game-over',GameOverCtrlState)
-      .state('about',AboutCtrlState)
-      .state('won',WonCtrlState)
+      .state('splash', DefaultCtrlState)
+      .state('instructions', InstructionsCtrlState)
+      .state('game-over', GameOverCtrlState)
+      .state('gameInfo', GameInfoCtrlState)
+      .state('about', AboutCtrlState)
+      .state('won', WonCtrlState)
       .state('login', LoginCtrlState)
       .state('registration', RegistrationCtrlState)
       .state('userProfile', UserProfileCtrlState)
       .state('leaderboard', LeaderboardCtrlState)
 
     $urlRouterProvider.otherwise('/');
-  })
+  }])
   .directive('app', app)
   .directive('focusMe', focusMe)
   .directive('modal', modal)
@@ -129,17 +140,22 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('HighPercentGraphServices', HighPercentGraphServices)
   .service('totalWordsGraphServices', totalWordsGraphServices)
   .service('RegistrationServices', RegistrationServices)
-  .service('LocalStorageService', LocalStorageService)
   .service('LeaderboardService', LeaderboardService)
   .service('SoundService', SoundService)
   .service('ModalService', ModalService)
   .service('LogoutService', LogoutService)
   .service('BubbleGraphService', BubbleGraphService)
   .controller('AppCtrl', AppCtrl)
-  .run(($rootScope, SoundService,$state) => {
+  .run(['$rootScope', 'SoundService', '$state', '$http', ($rootScope, SoundService, $state, $http) => {
+    'ngInject';
     $rootScope.user = "Guest";
-    $rootScope.userLink = "Guest";
     $rootScope.canNavToGameOver = false;
+    $http.get('/api/confirm-login')
+      .success(function (user) {
+        if (user.username && user.userid) {
+          $rootScope.user = user.username;
+        }
+      });
     $rootScope.$on('$stateChangeStart', function(event,toState,toParams,fromState,fromParams) {
       if((toState.name === 'won' || toState.name === 'game-over')
         && !$rootScope.canNavToGameOver) {
@@ -153,11 +169,12 @@ angular.module(MODULE_NAME, ['ui.router'])
       return;
     })
     SoundService.setCurrentSong(mainSong);
-  })
+  }])
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
   .controller(InstructionsCtrlName, InstructionsCtrl)
   .controller(GameOverCtrlName, GameOverCtrl)
+  .controller(GameInfoCtrlName, GameInfoCtrl)
   .controller(AboutCtrlName, AboutCtrl)
   .controller(WonCtrlName, WonCtrl)
   .controller(LoginCtrlName, LoginCtrl)
