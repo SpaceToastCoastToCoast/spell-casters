@@ -20,11 +20,9 @@ module.exports = function(config) {
       './node_modules/angular/angular.js',
       './node_modules/angular-ui-router/release/angular-ui-router.js',
       './node_modules/angular-mocks/angular-mocks.js',
-      './node_modules/babel-polyfill/browser.js',
+      //'./node_modules/babel-polyfill/browser.js',
       //'./src/app/app.js',
-      './src/app/app.spec.js',
-      // './src/app/hello.js',
-      // './src/app/hello.spec.js'
+      './tests/app/**/*.spec.js',
     ],
 
     webpack: webpackConfig,
@@ -35,11 +33,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      //entry point
-      './src/app/app.js': ['babel' ,'webpack'],
-      './src/app/app.spec.js': ['babel', 'webpack'],
-      // './src/app/hello.js':  ['babel', 'webpack'],
-      // './src/app/hello.spec.js': ['babel', 'webpack']
+      './src/app/*.js': ['babel' ,'webpack'],
+      './tests/app/**/*.spec.js': ['babel', 'webpack'],
     },
 
     webpackMiddleware: {
@@ -77,18 +72,18 @@ module.exports = function(config) {
     concurrency: Infinity,
 
     // Babel preprocessor specific configuration
-    babelPreprocessor: {
-      options: {
-        presets: ['es2015'], // use the es2015 preset
-        sourceMap: 'inline' // inline source maps inside compiled files
-      },
-      filename: function (file) {
-        return file.originalPath.replace(/\.js$/, '.js');
-      },
-      sourceFileName: function (file) {
-        return file.originalPath;
-      }
-    }
+    // babelPreprocessor: {
+    //   options: {
+    //     presets: ['es2015'], // use the es2015 preset
+    //     sourceMap: 'inline' // inline source maps inside compiled files
+    //   },
+    //   filename: function (file) {
+    //     return file.originalPath.replace(/\.js$/, '.js');
+    //   },
+    //   sourceFileName: function (file) {
+    //     return file.originalPath;
+    //   }
+    // }
 
   });
 
