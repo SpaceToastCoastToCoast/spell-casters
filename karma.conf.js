@@ -4,7 +4,6 @@ var webpackConfig = require('./webpack.config.js');
 webpackConfig.entry = {};
 
 // Karma configuration
-// Generated on Fri Nov 25 2016 15:26:45 GMT-1000 (HST)
 module.exports = function(config) {
   config.set({
 
@@ -20,12 +19,11 @@ module.exports = function(config) {
       './node_modules/angular/angular.js',
       './node_modules/angular-ui-router/release/angular-ui-router.js',
       './node_modules/angular-mocks/angular-mocks.js',
-      //'./node_modules/babel-polyfill/browser.js',
-      //'./src/app/app.js',
       './tests/app/**/*.spec.js',
     ],
 
     webpack: webpackConfig,
+
     // list of files to exclude
     exclude: [
     ],
@@ -69,21 +67,7 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity,
-
-    // Babel preprocessor specific configuration
-    // babelPreprocessor: {
-    //   options: {
-    //     presets: ['es2015'], // use the es2015 preset
-    //     sourceMap: 'inline' // inline source maps inside compiled files
-    //   },
-    //   filename: function (file) {
-    //     return file.originalPath.replace(/\.js$/, '.js');
-    //   },
-    //   sourceFileName: function (file) {
-    //     return file.originalPath;
-    //   }
-    // }
+    concurrency: Infinity
 
   });
 
