@@ -2,6 +2,7 @@
 > SpellCasters is an educational spelling game. Defeat Lord Zett and his Alphagator minions by spelling words correctly.
 
 [Game Play Details](https://github.com/SpaceToastCoastToCoast/spell-casters/wiki/Game-Information)
+
 [License](https://github.com/SpaceToastCoastToCoast/spell-casters/blob/master/LICENSE)
 
 ![](https://github.com/SpaceToastCoastToCoast/spell-casters/blob/master/github_images/sc_mainscr.png)
