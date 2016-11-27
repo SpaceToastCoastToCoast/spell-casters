@@ -20,11 +20,14 @@ module.exports = function(config) {
       './node_modules/angular/angular.js',
       './node_modules/angular-ui-router/release/angular-ui-router.js',
       './node_modules/angular-mocks/angular-mocks.js',
-      './src/app/app.js',
+      './node_modules/babel-polyfill/browser.js',
+      //'./src/app/app.js',
       './src/app/app.spec.js',
-
+      // './src/app/hello.js',
+      // './src/app/hello.spec.js'
     ],
 
+    webpack: webpackConfig,
     // list of files to exclude
     exclude: [
     ],
@@ -33,11 +36,11 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       //entry point
-      './src/app/app.js': ['webpack'],
-      './src/app/app.spec.js': ['babel']
+      './src/app/app.js': ['babel' ,'webpack'],
+      './src/app/app.spec.js': ['babel', 'webpack'],
+      // './src/app/hello.js':  ['babel', 'webpack'],
+      // './src/app/hello.spec.js': ['babel', 'webpack']
     },
-
-    webpack: webpackConfig,
 
     webpackMiddleware: {
       noInfo: true
@@ -71,7 +74,22 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
-  })
+    concurrency: Infinity,
 
-}
+    // Babel preprocessor specific configuration
+    babelPreprocessor: {
+      options: {
+        presets: ['es2015'], // use the es2015 preset
+        sourceMap: 'inline' // inline source maps inside compiled files
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
+    }
+
+  });
+
+};
