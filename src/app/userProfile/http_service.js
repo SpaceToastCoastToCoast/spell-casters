@@ -4,6 +4,7 @@ export const HttpServices = [
 
   class HttpServices {
     constructor ($http, $rootScope) {
+      'ngInject';
       this.$http = $http;
       this.$rootScope = $rootScope;
       this.userDataQuery = this.userDataQuery.bind(this);

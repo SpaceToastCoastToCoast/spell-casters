@@ -2,6 +2,7 @@ export const ModalService = [
 
   class ModalService {
     constructor () {
+      'ngInject';
       this.modals = [];
     }
 

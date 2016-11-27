@@ -29,6 +29,8 @@ export const DefaultCtrl = [
       SoundService,
       ModalService) {
 
+      'ngInject';
+
       TimerService.resetGame();
 
       if(SoundService.currentSong === undefined) {

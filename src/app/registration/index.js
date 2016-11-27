@@ -32,6 +32,7 @@ export const RegistrationCtrl = [
       $timeout,
       TimerService,
       SoundService) {
+      'ngInject';
 
       this.timeD = false;
       this.RegistrationServices = RegistrationServices;

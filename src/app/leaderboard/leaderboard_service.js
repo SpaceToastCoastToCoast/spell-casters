@@ -4,6 +4,7 @@ export const LeaderboardService = [
 
   class LeaderboardService {
     constructor ($http) {
+      'ngInject';
       this.$http = $http;
       this.getLeaderboard = this.getLeaderboard.bind(this);
     }

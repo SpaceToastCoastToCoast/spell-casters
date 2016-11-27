@@ -7,6 +7,7 @@ export const HighPercentGraphServices = [
 
   class HighPercentGraphServices {
     constructor (HttpServices) {
+      'ngInject';
       this.HttpServices = HttpServices;
     }
 
@@ -15,20 +16,22 @@ export const HighPercentGraphServices = [
       .success(({recentGames}) =>{
         if (recentGames.recentGamesPercent.length !== 0) {
           //Set data for graphs
-          let recentPercentComplete = recentGames.recentGamesPercent.map((pct) => {
-            return pct * 100;
-          });
+          let recentPercentComplete = recentGames.recentGamesPercent
 
-          var margin = {top: 30, right: 20, bottom: 30, left: 50},
-            width = 600 - margin.left - margin.right,
-            height = 270 - margin.top - margin.bottom;
+          var margin = {
+            top: 10,
+            right: 20,
+            bottom: 30,
+            left: 60
+          },
+          width = 600 - margin.left - margin.right,
+          height = 300 - margin.top - margin.bottom;
 
           // Set the ranges
           var x = d3.scale.linear().range([0, width]);
           var y = d3.scale.linear().range([height, 0]);
 
           if(recentPercentComplete){
-            // var p = d3.select(".totalGamesPlayed").selectAll("p")
 
             let tix = recentPercentComplete.length - 1;
             if(tix > 5) {
@@ -36,13 +39,15 @@ export const HighPercentGraphServices = [
             }
 
             // Define the axes
-            var xAxis = d3.svg.axis().scale(x)
+            var xAxis = d3.svg.axis()
+              .scale(x)
               .orient('bottom')
               .ticks(tix);
 
-            var yAxis = d3.svg.axis().scale(y)
+            var yAxis = d3.svg.axis()
+              .scale(y)
               .orient('left')
-              .ticks(5);
+              .ticks(tix, "%");
 
             // Define the line
             var valueline = d3.svg.line()
@@ -52,10 +57,10 @@ export const HighPercentGraphServices = [
             // Adds the svg canvas
             var svg = d3.select(".totalGamesPlayed")
               .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
               .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
            // Scale the range of the data
            x.domain(d3.extent(recentPercentComplete, function(d, i) { return i; }));
@@ -75,9 +80,16 @@ export const HighPercentGraphServices = [
            // Add the Y Axis
            svg.append("g")
             .attr("class", "y axis")
-            .call(yAxis);
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left + 5)
+            .attr("x", 0 - (height/2) - 15)
+            .attr("dy","0.6em")
+            .attr("text-anchor", "start")
+            .text("Percent Completed")
           }
-        } //eof if
+        }
       });
     }
   }

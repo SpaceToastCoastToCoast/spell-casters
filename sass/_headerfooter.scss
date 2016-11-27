@@ -1,0 +1,103 @@
+#svgLogo {
+  width: 420px;
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-340px);
+  cursor: pointer;
+}
+
+#musicControls {
+  border-top: 1px solid #e3bb88;
+  border-radius: 2px;
+  box-shadow: 1px 2px 2px #b1695a, 2px 4px 4px #644749, 3px 6px 6px #111;
+  background-color: #db9864;
+  background: linear-gradient(#db9864, #b1695a);
+  box-sizing: border-box;
+  padding: 8px;
+  width: 228px;
+  position: absolute;
+  top: 32px;
+  right: 50%;
+  transform: translateX(320px);
+  z-index: -1;
+}
+
+#musicControls button {
+  width: 98px;
+  font-size: 12px;
+  height: 48px;
+  padding-top: 4px;
+  padding-bottom: 20px;
+  margin-left: 2px;
+  margin-right: 6px;
+  word-spacing: -2px;
+}
+
+#footer {
+  font-size: 12px;
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 0px;
+  left: 0px;
+  margin: 0px;
+  margin-top: 96px;
+  height: 48px;
+  width: 100%;
+  background-color: #644749;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#footerCenter {
+  overflow: hidden;
+  width: 400px;
+  max-width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#footerCenter div {
+  flex-grow: 1;
+  max-width: 50%;
+  height: 32px;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.footerLink {
+  max-width: 33%;
+  font-weight: bold;
+  flex-shrink: 1;
+  min-width: 64px;
+  border-left: 1px solid #b1695a;
+}
+
+#footerCenter div a {
+  text-align: center;
+  line-height: 32px;
+}
+
+.footerLink a {
+  box-sizing: border-box;
+  height: 32px;
+  width: 100%;
+  padding: 8px;
+  margin: auto;
+  text-decoration: none;
+}
+
+.footerLink a:visited {
+  color: inherit;
+}
+.footerLink:hover {
+  transition: background-color 0.5s ease-in-out;
+  background-color: #b1695a;
+}

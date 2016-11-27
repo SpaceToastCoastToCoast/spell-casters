@@ -1,0 +1,60 @@
+#instructions {
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.tutorialHint {
+  margin-bottom: 8px;
+}
+
+.splashImage {
+  /*
+  background-image: url("/img/splash.png");
+  */
+}
+
+#display {
+  height: 96px;
+  min-height: 96px;
+}
+
+.padMe {
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+#gameInfo {
+  height: 96px;
+  width: 640px;
+  position: absolute;
+  top: 220px;
+  z-index: 786;
+}
+
+#gameInfo h2 {
+  color: #db9864;
+  margin-bottom: 0px;
+}
+
+#gameInfo .buttonDiv {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+#info {
+  margin-top: 0px;
+}
+
+.tutorialInfo p {
+  margin-top: 0px;
+}
+.tutorialInfo h4 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.tutorialInfo {
+  min-height: 128px;
+}

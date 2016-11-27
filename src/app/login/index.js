@@ -30,6 +30,7 @@ export const LoginCtrl = [
       $rootScope,
       SoundService,
       TimerService) {
+      'ngInject';
 
       this.UserServices = UserServices;
 

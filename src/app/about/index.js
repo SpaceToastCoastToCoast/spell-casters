@@ -24,6 +24,7 @@ export const AboutCtrl = [
       $rootScope,
       TimerService,
       SoundService) {
+      'ngInject';
 
       TimerService.resetGame();
 

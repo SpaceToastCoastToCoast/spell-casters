@@ -20,13 +20,15 @@ class BubbleGraphService {
     const highestCount = sortedWords[0].count;
 
     var svg = d3.select('#bubble-chart').append('svg')
+      .attr("id", "bubble-svg")
       .attr('width',diameter+200)
       .attr('height',diameter)
 
     var bubble = d3.layout.pack()
       .size([diameter,diameter])
       .value(function(d) {
-        return d.count;})
+        return d.count
+      ;})
       .padding(1.5);
 
     var nodes = bubble.nodes(processData(sortedWords))
@@ -41,7 +43,7 @@ class BubbleGraphService {
       .append('circle')
         .attr('class', 'circle')
         .attr('transform', function(d) {
-        return `translate(${d.x},${d.y})`;
+          return `translate(${d.x},${d.y})`;
         })
         .attr('r', function(d) {
           if (d.count === highestCount) {
@@ -51,10 +53,10 @@ class BubbleGraphService {
           }
         })
         .attr('class', function(d) {
-        return d.className;
+          return d.className;
         })
         .style('fill', function(d) {
-        return colorArr[d.colorIndex];
+          return colorArr[d.colorIndex];
         })
         .append("svg:title")
         .style("position", "absolute")
@@ -64,7 +66,7 @@ class BubbleGraphService {
         .on("mouseover", function(){return title.style("visibility", "visible");})
         .on("mouseout", function(){return title.style("visibility", "hidden");})
 
-    var legend = d3.select('svg')
+    var legend = d3.select('svg#bubble-svg')
       .append('g')
         .attr('class', 'legend')
       .selectAll('g')

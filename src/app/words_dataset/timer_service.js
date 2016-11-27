@@ -2,9 +2,9 @@ const minuteLimit = 0.5;
 
 export const TimerService = [
   'numberToString',
-  '$interval',
   class TimerService {
     constructor(numberToString) {
+      'ngInject';
       //timer controls
       this.minutes = 0;
       this.seconds = '30';

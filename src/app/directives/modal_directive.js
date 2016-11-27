@@ -4,6 +4,7 @@ export const modal = [
   '$state',
 
   (ModalService, LogoutService, $state) => {
+  'ngInject';
   return {
     link: function (scope, element, attrs) {
       scope.view = false;

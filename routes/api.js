@@ -33,10 +33,16 @@ app.get('/spells', format.listSpells, (req, res) => {
 
 //check if there is a current session
 app.get('/confirm-login', (req, res) => {
-  res.json({
-    username: req.session.userName,
-    userid: req.session.userid
-  });
+  if(req.session) {
+    res.json({
+      username: req.session.userName,
+      userid: req.session.userid
+    });
+  } else {
+    res.json({
+      session: false
+    })
+  }
 })
 
 //logout route

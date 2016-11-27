@@ -6,6 +6,7 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 /**
  * Env
@@ -202,7 +203,14 @@ module.exports = function makeWebpackConfig () {
       // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([{
         from: __dirname + '/src/public'
-      }])
+      }]),
+      new CompressionPlugin({
+        asset: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8
+      })
     )
   }
 

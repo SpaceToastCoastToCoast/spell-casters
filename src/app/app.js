@@ -51,6 +51,7 @@ export const AppCtrl = [
       $state,
       SoundService,
       ModalService) {
+      'ngInject';
 
       $scope.music = SoundService.musicOn;
       $scope.sound = SoundService.soundEffectsOn;
@@ -110,7 +111,8 @@ export const AppCtrl = [
 const MODULE_NAME = 'app';
 
 angular.module(MODULE_NAME, ['ui.router'])
-  .config(($stateProvider,$urlRouterProvider) => {
+  .config(['$stateProvider', '$urlRouterProvider', ($stateProvider,$urlRouterProvider) => {
+    'ngInject';
     $stateProvider
       .state('active-game', WordsDatasetCtrlState)
       .state('splash', DefaultCtrlState)
@@ -125,7 +127,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       .state('leaderboard', LeaderboardCtrlState)
 
     $urlRouterProvider.otherwise('/');
-  })
+  }])
   .directive('app', app)
   .directive('focusMe', focusMe)
   .directive('modal', modal)
@@ -144,7 +146,8 @@ angular.module(MODULE_NAME, ['ui.router'])
   .service('LogoutService', LogoutService)
   .service('BubbleGraphService', BubbleGraphService)
   .controller('AppCtrl', AppCtrl)
-  .run(($rootScope, SoundService, $state, $http) => {
+  .run(['$rootScope', 'SoundService', '$state', '$http', ($rootScope, SoundService, $state, $http) => {
+    'ngInject';
     $rootScope.user = "Guest";
     $rootScope.canNavToGameOver = false;
     $http.get('/api/confirm-login')
@@ -166,7 +169,7 @@ angular.module(MODULE_NAME, ['ui.router'])
       return;
     })
     SoundService.setCurrentSong(mainSong);
-  })
+  }])
   .controller(DefaultCtrlName, DefaultCtrl)
   .controller(WordsDatasetCtrlName, WordsDatasetCtrl)
   .controller(InstructionsCtrlName, InstructionsCtrl)
